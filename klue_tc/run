@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# KLUE TC Benchmark Runner Script
+# Simple script to run the KLUE Topic Classification benchmark
+
+# Check if Python script exists
+if [ ! -f "klue_tc-gemini2_5flash.py" ]; then
+    echo "Error: klue_tc-gemini2_5flash.py not found in current directory"
+    exit 1
+fi
+
+# Check if GOOGLE_CLOUD_PROJECT is set
+if [ -z "$GOOGLE_CLOUD_PROJECT" ]; then
+    echo "Error: GOOGLE_CLOUD_PROJECT environment variable is not set"
+    echo "Please set it with: export GOOGLE_CLOUD_PROJECT='your-project-id'"
+    exit 1
+fi
+
+# Function to show usage
+show_help() {
+    echo "KLUE TC Benchmark Runner"
+    echo ""
+    echo "Usage: $0 [OPTION]"
+    echo ""
+    echo "Options:"
+    echo "  test     Run a small test with 10 samples"
+    echo "  full     Run the full benchmark (all test samples)"
+    echo "  custom N Run with N samples (e.g., custom 100)"
+    echo "  help     Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $0 test        # Run test with 10 samples"
+    echo "  $0 full        # Run full benchmark"
+    echo "  $0 custom 50   # Run with 50 samples"
+}
+
+# Main script logic
+case "${1:-help}" in
+    "test")
+        echo "Running small test with 10 samples..."
+        python klue_tc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples 10
+        ;;
+    "full")
+        echo "Running full benchmark..."
+        python klue_tc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT"
+        ;;
+    "custom")
+        if [ -z "$2" ]; then
+            echo "Error: Please specify the number of samples"
+            echo "Usage: $0 custom <number_of_samples>"
+            exit 1
+        fi
+        echo "Running custom benchmark with $2 samples..."
+        python klue_tc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples "$2"
+        ;;
+    "help"|"-h"|"--help")
+        show_help
+        ;;
+    *)
+        echo "Error: Unknown option '$1'"
+        echo ""
+        show_help
+        exit 1
+        ;;
+esac 
