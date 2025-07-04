@@ -1,1 +1,1 @@
-# llm_benchmarks_asian_langs
+# LLM Benchmarks for Asian Languages
