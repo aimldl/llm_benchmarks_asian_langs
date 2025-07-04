@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 class BenchmarkConfig:
     """Configuration for the benchmark."""
     model_name: str = "gemini-2.5-flash"
+    sleep_interval_between_api_calls: float = 0.04 # sec
     max_tokens: int = 1024
     temperature: float = 0.1
     top_p: float = 1.0
@@ -193,11 +194,11 @@ class KLUETopicClassificationBenchmark:
 
 사회: 사회적 문제 및 현상, 사건·사고, 법원, 검찰, 교육, 노동, 환경, 의료, 복지, 인권, 시민사회 등
 
-생활·문화: 예술, 대중문화(영화, 드라마, 음악), 연예, 패션, 음식, 여행, 건강, 취미, 종교, 도서 등 일상생활과 관련된 정보
+생활문화: 예술, 대중문화(영화, 드라마, 음악), 연예, 패션, 음식, 여행, 건강, 취미, 종교, 도서 등 일상생활과 관련된 정보
 
 세계: 국제 정세, 외교, 분쟁, 해외 주요 사건·사고, 국가 간 관계 등 한국 외 국가에서 발생한 소식
 
-IT·과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트웨어, 최신 과학 연구, 우주, 생명 공학 등
+IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트웨어, 최신 과학 연구, 우주, 생명 공학 등
 
 스포츠: 국내 및 해외 스포츠 경기, 선수, 구단, 대회 결과, e스포츠 등
 
@@ -205,7 +206,7 @@ IT·과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트
 
 주어진 텍스트 전체의 맥락을 종합적으로 고려하여 핵심 주제를 판단합니다.
 
-두 개 이상의 카테고리에 해당될 수 있는 내용일 경우, 텍스트에서 가장 비중 있게 다루는 주제를 우선적으로 선택합니다. 예를 들어, '정부의 IT 산업 육성 정책'에 대한 글이라면 '경제'나 'IT·과학'도 관련이 있지만, 정책 발표가 핵심이므로 '정치'로 분류합니다.
+두 개 이상의 카테고리에 해당될 수 있는 내용일 경우, 텍스트에서 가장 비중 있게 다루는 주제를 우선적으로 선택합니다. 예를 들어, '정부의 IT 산업 육성 정책'에 대한 글이라면 '경제'나 'IT과학'도 관련이 있지만, 정책 발표가 핵심이므로 '정치'로 분류합니다.
 
 답변은 지정된 카테고리명과 정확히 일치해야 합니다.
 
@@ -270,18 +271,18 @@ IT·과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트
             result = {
                 "id": item["id"],
                 "text": item["text"],
-                "true_label": item["label"],
-                "true_label_text": item["label_text"],
-                "predicted_label": prediction["predicted_label"],
-                "predicted_label_id": prediction["predicted_label_id"],
-                "prediction_text": prediction["prediction_text"],
                 "is_correct": is_correct,
+                "true_label_text": item["label_text"],
+                "prediction_text": prediction["prediction_text"],  
+                "true_label": item["label"],
+                "predicted_label": prediction["predicted_label"],
+                "predicted_label_id": prediction["predicted_label_id"],    
                 "error": prediction.get("error")
             }
             self.results.append(result)
             
             # Add small delay to avoid rate limiting
-            time.sleep(0.1)
+            time.sleep(self.config.sleep_interval_between_api_calls)
         
         end_time = time.time()
         total_time = end_time - start_time

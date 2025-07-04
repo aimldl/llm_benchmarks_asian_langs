@@ -2,6 +2,16 @@
 
 This repository contains a benchmark script for evaluating Gemini 2.5 Flash on the Korean Language Understanding Evaluation (KLUE) Topic Classification task using Google Cloud Vertex AI.
 
+## Summary
+In essence, run the following commands:
+```bash
+$ git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
+$ cd klue_tc
+$ ./setup.sh full
+$ ./run test
+```
+
+
 ## Overview
 
 The KLUE Topic Classification (TC) task involves classifying Korean news articles into 7 categories:
