@@ -46,17 +46,36 @@ def test_klue_dataset():
         print("\nTesting KLUE dataset loading...")
         
         # Try to load a small sample
-        dataset = load_dataset("klue", "tc")
-        print(f"✓ KLUE TC dataset loaded successfully")
+        dataset = load_dataset("klue", "ynat")
+        print(f"✓ KLUE ynat dataset for TC loaded successfully")
         print(f"  - Train samples: {len(dataset['train'])}")
         print(f"  - Validation samples: {len(dataset['validation'])}")
-        print(f"  - Test samples: {len(dataset['test'])}")
+        # Comment out because 'test' split is not available
+        #print(f"  - Test samples: {len(dataset['test'])}")
         
         # Show a sample
-        sample = dataset['test'][0]
-        print(f"  - Sample text: {sample['title']} {sample['text'][:100]}...")
-        print(f"  - Sample label: {sample['label']}")
-        
+        #sample = dataset['test'][0]
+        #print(f"  - Sample text: {sample['title']} {sample['text'][:100]}...")
+        #print(f"  - Sample label: {sample['label']}")
+
+        # Show a sample from the validation set, since 'test' is not available
+        if 'validation' in dataset and len(dataset['validation']) > 0:
+            sample = dataset['validation'][0]
+            print(f"  - Sample from validation set:")
+            print(f"    - Sample title: {sample.get('title', 'N/A')}")
+            print(f"    - Sample text: {sample.get('text', 'N/A')[:100]}...")
+            print(f"    - Sample label: {sample.get('label', 'N/A')}")
+        elif 'train' in dataset and len(dataset['train']) > 0:
+            sample = dataset['train'][0]
+            print(f"  - Sample from train set:")
+            print(f"    - Sample title: {sample.get('title', 'N/A')}")
+            print(f"    - Sample text: {sample.get('text', 'N/A')[:100]}...")
+            print(f"    - Sample label: {sample.get('label', 'N/A')}")
+        else:
+            print("  - No samples available in 'train' or 'validation' splits.")
+
+    except Exception as e:
+        print(f"✗ Failed to load KLUE dataset: {e}")
         return True
         
     except Exception as e:
