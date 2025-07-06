@@ -6,17 +6,8 @@ Install Anaconda. For details, see [INSTALL-CONDA.md](INSTALL-CONDA.md).
 ## Create a new conda environment `klue`
 ```bash
 conda create -n klue python=3 anaconda
-conda activate klue
-```
-For example,
-```bash
-(base) aimldl@tkim-glinux:~$ conda activate klue
-(klue) aimldl@tkim-glinux:~$
 ```
 
-To deactivate an active environment, run:                
-```bash                                                                                                            conda deactivate 
-```
 ## Activate the `klue` environment
 ```bash
 (base) $ conda activate klue
@@ -27,6 +18,21 @@ For example,
 ```bash
 (base) aimldl@tkim-glinux:~$ conda activate klue
 (klue) aimldl@tkim-glinux:~$
+```
+
+To deactivate an active environment, run:                
+```bash                                                                                                            conda deactivate 
+```
+
+## Initialize the `gcloud` SDK and authenticate into your account
+Install the `gcloud` SDK
+```bash
+$ gcloud init
+```
+
+And authenticate into your account
+```bash
+$ gcloud auth login
 ```
 
 ## Launch Jupyter Lab
