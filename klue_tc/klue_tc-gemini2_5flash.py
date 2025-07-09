@@ -11,8 +11,21 @@ import argparse
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
-from google.cloud import aiplatform
-from vertexai.generative_models import GenerativeModel, GenerationConfig
+#from google.cloud import aiplatform
+#from vertexai.generative_models import GenerativeModel, GenerationConfig
+from google import genai
+from google.genai.types import (
+    FunctionDeclaration,
+    GenerateContentConfig,
+    GoogleSearch,
+    HarmBlockThreshold,
+    HarmCategory,
+    Part,
+    SafetySetting,
+    ThinkingConfig,
+    Tool,
+    ToolCodeExecution,
+)
 from datasets import load_dataset   
 import pandas as pd
 from tqdm import tqdm
@@ -102,10 +115,11 @@ class KLUETopicClassificationBenchmark:
                 raise ValueError("Google Cloud project ID must be provided via config.project_id or GOOGLE_CLOUD_PROJECT environment variable")
             
             # Initialize Vertex AI
-            aiplatform.init(
-                project=project_id,
-                location=self.config.location
-            )
+            client = genai.Client(vertexai=True, project=project_id, location=self.config.location)
+            # aiplatform.init(
+            #     project=project_id,
+            #     location=self.config.location
+            # )
             logger.info(f"Initialized Vertex AI with project: {project_id}, location: {self.config.location}")
             
         except Exception as e:

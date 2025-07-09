@@ -53,4 +53,27 @@ For example,
 To cancel Jupyter Lab, press Ctrl+C twice.
 
 ## Run the KLUE benchmarks
-Open `run_klue.ipynb` and run the notebook.
+
+### Two options to run tasks for KLUE.
+- Option 1. Use a notebook.
+- Option 2. Use a terminal and follow the instructions in each sub-directory
+
+For example, 
+- Option 1. Open [run_klue.ipynb](run_klue.ipynb) and run the notebook.
+- Option 2. Open a terminal, `cd` into `klue_tc`, and follow instructions at `README.md`.
+
+Note: The sub-directory `klue_tc` is designed to run independetly. The notebook [run_klue.ipynb](run_klue.ipynb) was created laster ro run the same commands, but it's assumed that the following cells are executed in the `klue` environment. Running the commands in the following cell 
+
+```bash
+cd klue_tc
+./setup.sh full
+./run test
+```
+
+is identical to
+
+```bash
+(klue) $ cd klue_tc
+(klue) $ ./setup.sh full
+(klue) $ ./run test
+```
