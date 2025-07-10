@@ -20,7 +20,7 @@ fi
 show_help() {
     echo "KLUE NLI Benchmark Runner"
     echo ""
-    echo "Usage: $0 [OPTION]"
+    echo "Usage: $0 [OPTION] [SAVE_INTERVAL]"
     echo ""
     echo "Options:"
     echo "  test     Run a small test with 10 samples"
@@ -28,30 +28,47 @@ show_help() {
     echo "  custom N Run with N samples (e.g., custom 100)"
     echo "  help     Show this help message"
     echo ""
+    echo "Optional SAVE_INTERVAL:"
+    echo "  Add a second parameter to set save interval (default: 50)"
+    echo "  Example: $0 custom 100 25  # Run 100 samples, save every 25"
+    echo ""
     echo "Examples:"
     echo "  $0 test        # Run test with 10 samples"
     echo "  $0 full        # Run full benchmark"
     echo "  $0 custom 50   # Run with 50 samples"
+    echo "  $0 custom 100 25  # Run 100 samples, save every 25"
 }
 
 # Main script logic
 case "${1:-help}" in
     "test")
         echo "Running small test with 10 samples..."
-        python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples 10
+        if [ -n "$2" ]; then
+            python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples 10 --save-interval "$2"
+        else
+            python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples 10
+        fi
         ;;
     "full")
         echo "Running full benchmark..."
-        python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT"
+        if [ -n "$2" ]; then
+            python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --save-interval "$2"
+        else
+            python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT"
+        fi
         ;;
     "custom")
         if [ -z "$2" ]; then
             echo "Error: Please specify the number of samples"
-            echo "Usage: $0 custom <number_of_samples>"
+            echo "Usage: $0 custom <number_of_samples> [save_interval]"
             exit 1
         fi
         echo "Running custom benchmark with $2 samples..."
-        python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples "$2"
+        if [ -n "$3" ]; then
+            python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples "$2" --save-interval "$3"
+        else
+            python klue_nli-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples "$2"
+        fi
         ;;
     "help"|"-h"|"--help")
         show_help
