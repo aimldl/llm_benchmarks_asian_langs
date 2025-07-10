@@ -11,20 +11,12 @@ import argparse
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
-#from google.cloud import aiplatform
-#from vertexai.generative_models import GenerativeModel, GenerationConfig
 from google import genai
 from google.genai.types import (
-    FunctionDeclaration,
     GenerateContentConfig,
-    GoogleSearch,
-    HarmBlockThreshold,
-    HarmCategory,
-    Part,
     SafetySetting,
-    ThinkingConfig,
-    Tool,
-    ToolCodeExecution,
+    HarmCategory,
+    HarmBlockThreshold
 )
 from datasets import load_dataset   
 import pandas as pd
@@ -50,6 +42,7 @@ class BenchmarkConfig:
     max_samples: Optional[int] = None
     output_dir: str = "benchmark_results"
     save_predictions: bool = True
+    save_interval: int = 50  # Save intermediate results every N samples
     project_id: Optional[str] = None
     location: str = "us-central1"
 
@@ -106,20 +99,11 @@ class KLUETopicClassificationBenchmark:
             project_id = self.config.project_id or os.getenv("GOOGLE_CLOUD_PROJECT")
             if not project_id:
                 raise ValueError("Google Cloud project ID must be provided via the --project-id flag or by setting the GOOGLE_CLOUD_PROJECT environment variable.")
-    
-            # Get project ID from config or environment
-           #project_id = self.config.project_id or os.getenv("GOOGLE_CLOUD_PROJECT")  # Error: GOOGLE_CLOUD_PROJECT is not set
-            print(f"project_id: {project_id}")
 
-            if not project_id:
-                raise ValueError("Google Cloud project ID must be provided via config.project_id or GOOGLE_CLOUD_PROJECT environment variable")
+            print(f"project_id: {project_id}")
             
-            # Initialize Vertex AI
-            client = genai.Client(vertexai=True, project=project_id, location=self.config.location)
-            # aiplatform.init(
-            #     project=project_id,
-            #     location=self.config.location
-            # )
+            # Initialize genai client for Vertex AI
+            self.client = genai.Client(vertexai=True, project=project_id, location=self.config.location)
             logger.info(f"Initialized Vertex AI with project: {project_id}, location: {self.config.location}")
             
         except Exception as e:
@@ -129,18 +113,9 @@ class KLUETopicClassificationBenchmark:
     def _initialize_model(self):
         """Initialize the Gemini model on Vertex AI."""
         try:
-            generation_config = GenerationConfig(
-                max_output_tokens=self.config.max_tokens,
-                temperature=self.config.temperature,
-                top_p=self.config.top_p,
-                top_k=self.config.top_k,
-            )
-            
-            self.model = GenerativeModel(
-                model_name=self.config.model_name,
-                generation_config=generation_config
-            )
-            logger.info(f"Initialized model: {self.config.model_name}")
+            # Store model name for later use
+            self.model_name = self.config.model_name
+            logger.info(f"Model name set to: {self.model_name}")
         except Exception as e:
             logger.error(f"Failed to initialize model: {e}")
             raise
@@ -170,7 +145,7 @@ class KLUETopicClassificationBenchmark:
             for item in validation_dataset:
                 # If max_samples is set, break the loop once the limit is reached.
                 # This is much more efficient than building a full list and then slicing it.
-                if use_subset and len(processed_data) >= self.config.max_samples:
+                if use_subset and self.config.max_samples and len(processed_data) >= self.config.max_samples:
                     logger.info(f"Reached sample limit of {self.config.max_samples}. Halting data loading.")
                     break
                     
@@ -231,13 +206,61 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
 주제:"""
         return prompt
     
+    def configure_safety_settings(self, threshold=HarmBlockThreshold.BLOCK_NONE):
+        """Configure safety settings for the model.
+        
+        Args:
+            threshold: The blocking threshold for safety filters.
+                      Default is BLOCK_NONE to turn off all filters.
+        """
+        safety_settings = [
+            SafetySetting(
+                category=HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+                threshold=threshold,
+            ),
+            SafetySetting(
+                category=HarmCategory.HARM_CATEGORY_HARASSMENT,
+                threshold=threshold,
+            ),
+            SafetySetting(
+                category=HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+                threshold=threshold,
+            ),
+            SafetySetting(
+                category=HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+                threshold=threshold,
+            ),
+        ]
+        return safety_settings
+    
     def predict_single(self, text: str) -> Dict[str, Any]:
         """Make a single prediction using Vertex AI."""
         try:
             prompt = self.create_prompt(text)
             
-            response = self.model.generate_content(prompt)
-            prediction_text = response.text.strip()
+            # Configure safety settings with BLOCK_NONE to turn off all filters
+            safety_settings = self.configure_safety_settings(HarmBlockThreshold.BLOCK_NONE)
+            
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=prompt,
+                config=genai.types.GenerateContentConfig(
+                    temperature=self.config.temperature,
+                    top_p=self.config.top_p,
+                    top_k=self.config.top_k,
+                    max_output_tokens=self.config.max_tokens,
+                    safety_settings=safety_settings,
+                )
+            )
+            
+            # Handle None response (e.g., blocked by safety filters)
+            if response is None or response.text is None:
+                prediction_text = ""
+                finish_reason = "SAFETY" if response and hasattr(response, 'candidates') and response.candidates else "UNKNOWN"
+                logger.warning(f"Model returned None response for text: {text[:50]}... (Finish reason: {finish_reason})")
+            else:
+                prediction_text = response.text.strip()
+                finish_reason = response.candidates[0].finish_reason if response.candidates else "UNKNOWN"
             
             # Map prediction back to label
             predicted_label = None
@@ -252,7 +275,8 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
             return {
                 "prediction_text": prediction_text,
                 "predicted_label": predicted_label,
-                "predicted_label_id": predicted_label_id
+                "predicted_label_id": predicted_label_id,
+                "finish_reason": finish_reason
             }
             
         except Exception as e:
@@ -261,6 +285,7 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
                 "prediction_text": "",
                 "predicted_label": None,
                 "predicted_label_id": None,
+                "finish_reason": "ERROR",
                 "error": str(e)
             }
     
@@ -291,9 +316,14 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
                 "true_label": item["label"],
                 "predicted_label": prediction["predicted_label"],
                 "predicted_label_id": prediction["predicted_label_id"],    
+                "finish_reason": prediction.get("finish_reason", "UNKNOWN"),
                 "error": prediction.get("error")
             }
             self.results.append(result)
+            
+            # Save intermediate results periodically
+            if (i + 1) % self.config.save_interval == 0:
+                self.save_intermediate_results(i + 1, correct, start_time)
             
             # Add small delay to avoid rate limiting
             time.sleep(self.config.sleep_interval_between_api_calls)
@@ -340,8 +370,140 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
             # Save as CSV for easier analysis
             csv_file = os.path.join(self.config.output_dir, f"klue_tc_results_{timestamp}.csv")
             df = pd.DataFrame(self.results)
+            
+            # Reorder columns for better readability
+            column_order = [
+                'id', 'is_correct', 'true_label_text', 'prediction_text', 
+                'true_label', 'predicted_label', 'predicted_label_id', 'finish_reason', 'text', 'error'
+            ]
+            df = df[column_order]
+            
             df.to_csv(csv_file, index=False, encoding='utf-8')
             logger.info(f"Results saved as CSV: {csv_file}")
+            
+            # Save error analysis
+            self.save_error_analysis(timestamp)
+    
+    def save_intermediate_results(self, current_count: int, correct_count: int, start_time: float):
+        """Save intermediate results during benchmark execution."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        elapsed_time = time.time() - start_time
+        
+        # Calculate intermediate metrics
+        intermediate_accuracy = correct_count / current_count if current_count > 0 else 0
+        intermediate_metrics = {
+            "accuracy": intermediate_accuracy,
+            "correct_predictions": correct_count,
+            "total_samples": current_count,
+            "total_time_seconds": elapsed_time,
+            "average_time_per_sample": elapsed_time / current_count if current_count > 0 else 0,
+            "samples_per_second": current_count / elapsed_time if elapsed_time > 0 else 0,
+            "is_intermediate": True,
+            "timestamp": timestamp
+        }
+        
+        # Save intermediate metrics
+        metrics_file = os.path.join(self.config.output_dir, f"klue_tc_metrics_intermediate_{current_count:06d}_{timestamp}.json")
+        with open(metrics_file, 'w', encoding='utf-8') as f:
+            json.dump(intermediate_metrics, f, ensure_ascii=False, indent=2)
+        
+        # Save intermediate results
+        if self.config.save_predictions:
+            results_file = os.path.join(self.config.output_dir, f"klue_tc_results_intermediate_{current_count:06d}_{timestamp}.json")
+            with open(results_file, 'w', encoding='utf-8') as f:
+                json.dump(self.results, f, ensure_ascii=False, indent=2)
+            
+            # Save as CSV for easier analysis
+            csv_file = os.path.join(self.config.output_dir, f"klue_tc_results_intermediate_{current_count:06d}_{timestamp}.csv")
+            df = pd.DataFrame(self.results)
+            
+            # Reorder columns for better readability
+            column_order = [
+                'id', 'is_correct', 'true_label_text', 'prediction_text', 
+                'true_label', 'predicted_label', 'predicted_label_id', 'finish_reason', 'text', 'error'
+            ]
+            df = df[column_order]
+            
+            df.to_csv(csv_file, index=False, encoding='utf-8')
+            
+            # Save intermediate error analysis
+            self.save_intermediate_error_analysis(current_count, timestamp)
+        
+        logger.info(f"Intermediate results saved at sample {current_count} (accuracy: {intermediate_accuracy:.4f})")
+    
+    def save_intermediate_error_analysis(self, current_count: int, timestamp: str):
+        """Save intermediate error analysis."""
+        errors = [r for r in self.results if not r["is_correct"]]
+        
+        if errors:
+            error_file = os.path.join(self.config.output_dir, f"klue_tc_error_analysis_intermediate_{current_count:06d}_{timestamp}.txt")
+            with open(error_file, 'w', encoding='utf-8') as f:
+                f.write("KLUE Topic Classification Intermediate Error Analysis\n")
+                f.write("=" * 70 + "\n\n")
+                f.write(f"Model: {self.config.model_name}\n")
+                f.write(f"Platform: Google Cloud Vertex AI\n")
+                f.write(f"Project: {self.config.project_id or os.getenv('GOOGLE_CLOUD_PROJECT')}\n")
+                f.write(f"Location: {self.config.location}\n")
+                f.write(f"Current Sample Count: {current_count}\n")
+                f.write(f"Total Errors: {len(errors)}\n")
+                f.write(f"Error Rate: {len(errors)/current_count*100:.2f}%\n\n")
+                
+                f.write("Error Analysis:\n")
+                f.write("-" * 40 + "\n")
+                
+                for i, error in enumerate(errors, 1):
+                    f.write(f"{i}. True: {error['true_label_text']} | Predicted: {error['predicted_label']}\n")
+                    f.write(f"   Text: {error['text'][:100]}...\n")
+                    f.write(f"   Prediction: {error['prediction_text']}\n")
+                    if error.get('finish_reason'):
+                        f.write(f"   Finish Reason: {error['finish_reason']}\n")
+                    if error.get('error'):
+                        f.write(f"   Error: {error['error']}\n")
+                    f.write("\n")
+                    
+                    # Limit to first 30 errors for intermediate files
+                    if i >= 30:
+                        f.write(f"... and {len(errors) - 30} more errors\n")
+                        break
+    
+    def save_error_analysis(self, timestamp: str):
+        """Save error analysis to a file for later review."""
+        errors = [r for r in self.results if not r["is_correct"]]
+        
+        if errors:
+            error_file = os.path.join(self.config.output_dir, f"klue_tc_error_analysis_{timestamp}.txt")
+            with open(error_file, 'w', encoding='utf-8') as f:
+                f.write("KLUE Topic Classification Error Analysis\n")
+                f.write("=" * 60 + "\n\n")
+                f.write(f"Model: {self.config.model_name}\n")
+                f.write(f"Platform: Google Cloud Vertex AI\n")
+                f.write(f"Project: {self.config.project_id or os.getenv('GOOGLE_CLOUD_PROJECT')}\n")
+                f.write(f"Location: {self.config.location}\n")
+                f.write(f"Total Errors: {len(errors)}\n")
+                f.write(f"Total Samples: {len(self.results)}\n")
+                f.write(f"Error Rate: {len(errors)/len(self.results)*100:.2f}%\n\n")
+                
+                f.write("Error Analysis:\n")
+                f.write("-" * 40 + "\n")
+                
+                for i, error in enumerate(errors, 1):
+                    f.write(f"{i}. True: {error['true_label_text']} | Predicted: {error['predicted_label']}\n")
+                    f.write(f"   Text: {error['text'][:100]}...\n")
+                    f.write(f"   Prediction: {error['prediction_text']}\n")
+                    if error.get('finish_reason'):
+                        f.write(f"   Finish Reason: {error['finish_reason']}\n")
+                    if error.get('error'):
+                        f.write(f"   Error: {error['error']}\n")
+                    f.write("\n")
+                    
+                    # Limit to first 50 errors to keep file manageable
+                    if i >= 50:
+                        f.write(f"... and {len(errors) - 50} more errors\n")
+                        break
+                        
+            logger.info(f"Error analysis saved to: {error_file}")
+        else:
+            logger.info("No errors found - no error analysis file created.")
     
     def print_detailed_metrics(self):
         """Print detailed metrics and analysis."""
@@ -394,6 +556,7 @@ def main():
     parser.add_argument("--temperature", type=float, default=0.0, help="Model temperature")
     parser.add_argument("--max-tokens", type=int, default=1024, help="Maximum output tokens")
     parser.add_argument("--no-save-predictions", action="store_true", help="Don't save detailed predictions")
+    parser.add_argument("--save-interval", type=int, default=50, help="Save intermediate results every N samples")
     
     args = parser.parse_args()
     
@@ -405,7 +568,8 @@ def main():
         output_dir=args.output_dir,
         temperature=args.temperature,
         max_tokens=args.max_tokens,
-        save_predictions=not args.no_save_predictions
+        save_predictions=not args.no_save_predictions,
+        save_interval=args.save_interval
     )
     
     try:

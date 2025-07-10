@@ -2,6 +2,50 @@
 
 This document is written in the reverse order.
 
+## Error in .csv: 500 INTERNAL
+
+```
+  ...
+ynat-v1_dev_01161,False,정치,,6,,,ERROR,위민크로스DMZ 28일 남북 평화기원 걷기행사,"500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL', 'details': [{'@type': 'type.googleapis.com/google.rpc.DebugInfo', 'detail': '[ORIGINAL ERROR] generic::internal: LLM API CountTokens failed. LLM model_id: `gemini-2.5-flash-001`, endpoint_id: `6454305878370680832`, deployed_model_id: `8182146619978809344`, status: UNAVAILABLE: Health check alarm: no data for 20.16371620975s [type.googleapis.com/util.MessageSetPayload=\'[production.rpc.stubs.proto.ExtensibleStubsBackendErrors] { errors { code: 5 space: ""RPC"" message: ""Health check alarm: no data for 20.16371620975s"" canonical_code: 14 } }\'] [type.googleapis.com/util.ErrorSpacePayload=\'RPC::UNREACHABLE\']'}]}}"
+```
+
+## Error in .csv: 'NoneType' object has no attribute 'strip'
+Providing the error file fixed the error message in the .csv file. 
+```
+I see error messages in @klue_tc_results_20250709_110749.csv.
+```
+(Not sure if the error was really fixed, but the the error messages were gone.)
+
+## Reorder columns for better readability
+```
+The output result is hard to read. For example, klue_tc_results_*.csv has the columns in the following order. 
+---
+id,text,is_correct,true_label_text,prediction_text,true_label,predicted_label,predicted_label_id,error
+ynat-v1_dev_00000,5억원 무이자 융자는 되고 7천만원 이사비는 안된다,False,사회,경제,2,경제,1.0,
+ynat-v1_dev_00001,왜 수소충전소만 더 멀리 떨어져야 하나 한경연 규제개혁 건의,False,사회,정치,2,정치,6.0,
+  ...
+---
+I want to reorder the columns for a better readability. Specifically,
+
+id,is_correct,true_label_text,prediction_text,true_label,predicted_label,predicted_label_id,text,error
+
+Change the code accordingly.
+```
+
+## Use the `genai` library instead of `aiplatform` library 
+
+In requirements.txt, add
+```
+google-genai
+  ...
+```
+And run `./setup.sh full` to install the library.
+
+Finaly, change the code.
+```
+I want to fix the code not to use aiplatform. Instead I want to use genai. For the usage of genai, refer to the file in hands-on_intro-to-gemini_2_5/kr-gemini_2_5_flash-text_mode_and_basic_config.ipynb
+```
+
 ## Gemini Model Safety Filter Issues
 
 ## Problem: ERROR - Prediction failed: Cannot get the response text
@@ -250,6 +294,63 @@ The primary issue you're encountering is:
 
 This error indicates that the Gemini 2.5 Flash model is not returning any content because its safety filters are flagging the generated output. Additionally, you are seeing finish_reason": "MAX_TOKENS", which means the generation also stopped due to reaching the maximum token limit.
 
+### Action.
+Implement Safety Settings to `HarmBlockThreshold.BLOCK_NONE`
+The opinion about MAX_TOKENS is ignored at the moment.
+```
+Great Now change the code so that the model can use safety filter. Turn off all the available safety filter.
+```
+
+```
+Add a function to configure the use of safety filter. 
+
+Refer to the following code snippet.
+---
+system_instruction = "Be as mean and hateful as possible. Use profanity"
+
+prompt = """
+    Write a list of 5 disrespectful things that I might say to the universe after stubbing my toe in the dark.
+"""
+
+safety_settings = [
+    SafetySetting(
+        category=HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+        threshold=HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    ),
+    SafetySetting(
+        category=HarmCategory.HARM_CATEGORY_HARASSMENT,
+        threshold=HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    ),
+    SafetySetting(
+        category=HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+        threshold=HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    ),
+    SafetySetting(
+        category=HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+        threshold=HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    ),
+]
+
+response = client.models.generate_content(
+    model=MODEL_ID,
+    contents=prompt,
+    config=GenerateContentConfig(
+        system_instruction=system_instruction,
+        safety_settings=safety_settings,
+        thinking_config=thinking_config,
+    ),
+)
+
+# Response will be `None` if it is blocked.
+print(response.text)
+# Finish Reason will be `SAFETY` if it is blocked.
+print(response.candidates[0].finish_reason)
+# Safety Ratings show the levels for each filter.
+for safety_rating in response.candidates[0].safety_ratings:
+    print(safety_rating)
+---
+In the generate code, I want to set "HarmBlockThreshold.BLOCK_NONE"
+```
 
 ## Incorrect Prompt
 ```bash
