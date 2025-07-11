@@ -22,15 +22,16 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
 
 ### Installation
 
-1.  **Clone the repository:**
+1.  **Clone the repository**
     ```bash
     git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
     cd llm_benchmarks_asian_langs
     ```
-3.  **Create and activate the conda environment:**
+3.  **Create and activate the conda environment**
+   Create the 'klue' environment with Python 3
     ```bash
-    # Create the 'klue' environment with Python 3
-    conda create -n klue python=3 anaconda
+    conda create -n klue -y python=3 anaconda
+    ```
 
     # Activate the environment
     conda activate klue
@@ -43,11 +44,11 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
 
 This step is only required if you plan to use Google's Vertex AI Gemini APIs.
 
-1.  **Initialize the gcloud SDK:**
+1.  **Initialize the gcloud SDK**
     ```bash
     gcloud init
     ```
-2.  **Authenticate your account:**
+2.  **Authenticate your account**
     ```bash
     gcloud auth login
     ```
@@ -64,7 +65,7 @@ You have two options for running the benchmarks.
 
 This is the recommended method for a quick start.
 
-1.  **Launch Jupyter Lab:**
+1.  **Launch Jupyter Lab**
     ```bash
     (klue) $ jupyter lab
     ```
