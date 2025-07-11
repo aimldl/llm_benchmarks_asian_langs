@@ -1,0 +1,24 @@
+./run test
+Timestamp: Sat Jul 12 01:46:48 AM KST 2025
+Working Directory: /home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner
+========================================
+
+2025-07-12 01:46:50,347 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-12 01:46:50,348 - INFO - Model name set to: gemini-2.5-flash
+2025-07-12 01:46:50,348 - INFO - Loading KLUE NER dataset for named entity recognition...
+2025-07-12 01:47:00,426 - INFO - Preparing to load a subset of 10 samples.
+2025-07-12 01:47:00,427 - ERROR - ❌ Failed to load or process the dataset: 'int' object has no attribute 'startswith'
+project_id: vertex-workbench-notebook
+Traceback (most recent call last):
+  File "/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 647, in <module>
+    main()
+    ~~~~^^
+  File "/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 635, in main
+    test_data = benchmark.load_dataset()
+  File "/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 134, in load_dataset
+    "entities": self._extract_entities_from_tags(item["tokens"], item["ner_tags"])
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 153, in _extract_entities_from_tags
+    if tag.startswith('B-'):  # Beginning of entity
+       ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'startswith'
