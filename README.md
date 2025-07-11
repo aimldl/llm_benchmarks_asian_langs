@@ -28,12 +28,12 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
     cd llm_benchmarks_asian_langs
     ```
 3.  **Create and activate the conda environment**
-   Create the 'klue' environment with Python 3
+   Create the `klue` environment with Python 3
     ```bash
     (base) $ conda create -n klue -y python=3 anaconda
     ```
 
-    # Activate the environment
+    Activate the environment
     ```bash
     (base) $ conda activate klue
     (klue) $ 
