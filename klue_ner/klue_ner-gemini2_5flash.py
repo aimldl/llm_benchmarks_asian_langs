@@ -127,7 +127,7 @@ class KLUENamedEntityRecognitionBenchmark:
                     
                 # Process NER data
                 processed_data.append({
-                    "id": item["guid"],
+                    "id": f"ner_{len(processed_data):06d}",  # Generate unique ID since guid is not available
                     "tokens": item["tokens"],
                     "ner_tags": item["ner_tags"],
                     "text": " ".join(item["tokens"]),
@@ -144,12 +144,21 @@ class KLUENamedEntityRecognitionBenchmark:
             logger.error(f"❌ Failed to load or process the dataset: {e}")
             raise
     
-    def _extract_entities_from_tags(self, tokens: List[str], ner_tags: List[str]) -> List[Dict[str, Any]]:
-        """Extract entities from BIO tags."""
+    def _extract_entities_from_tags(self, tokens: List[str], ner_tags: List[int]) -> List[Dict[str, Any]]:
+        """Extract entities from BIO tags (integer format)."""
+        # Define the label mapping based on the dataset features
+        label_names = ['B-DT', 'I-DT', 'B-LC', 'I-LC', 'B-OG', 'I-OG', 'B-PS', 'I-PS', 'B-QT', 'I-QT', 'B-TI', 'I-TI', 'O']
+        
         entities = []
         current_entity = None
         
-        for i, (token, tag) in enumerate(zip(tokens, ner_tags)):
+        for i, (token, tag_idx) in enumerate(zip(tokens, ner_tags)):
+            # Convert integer tag to string label
+            if tag_idx < len(label_names):
+                tag = label_names[tag_idx]
+            else:
+                tag = 'O'  # Default to 'O' if index is out of range
+            
             if tag.startswith('B-'):  # Beginning of entity
                 if current_entity:
                     entities.append(current_entity)

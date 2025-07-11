@@ -56,14 +56,15 @@ def test_dataset_access() -> bool:
         print(f"  ✓ Tokens: {len(sample['tokens'])} tokens")
         print(f"  ✓ NER tags: {len(sample['ner_tags'])} tags")
         
-        # Check for required fields
-        required_fields = ['guid', 'tokens', 'ner_tags']
+        # Check for required fields (guid is not available in this dataset version)
+        required_fields = ['tokens', 'ner_tags']
         for field in required_fields:
             if field not in sample:
                 print(f"  ✗ Missing required field: {field}")
                 return False
         
         print("  ✓ All required fields present")
+        print("  ⚠ Note: 'guid' field not available, will generate IDs automatically")
         return True
         
     except Exception as e:
@@ -101,8 +102,17 @@ def test_ner_script() -> bool:
         # Add current directory to path
         sys.path.insert(0, os.getcwd())
         
-        # Import the benchmark class
-        from klue_ner_gemini2_5flash import KLUENamedEntityRecognitionBenchmark, BenchmarkConfig
+        # Import the benchmark class (note: filename uses hyphens, not underscores)
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("klue_ner_gemini2_5flash", "klue_ner-gemini2_5flash.py")
+        if spec is None:
+            raise ImportError("Could not create module spec for klue_ner-gemini2_5flash.py")
+        klue_ner_module = importlib.util.module_from_spec(spec)
+        if spec.loader is None:
+            raise ImportError("Could not get loader for klue_ner-gemini2_5flash.py")
+        spec.loader.exec_module(klue_ner_module)
+        KLUENamedEntityRecognitionBenchmark = klue_ner_module.KLUENamedEntityRecognitionBenchmark
+        BenchmarkConfig = klue_ner_module.BenchmarkConfig
         
         print("  ✓ NER script imported successfully")
         

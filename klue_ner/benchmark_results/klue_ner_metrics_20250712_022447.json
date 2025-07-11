@@ -1,0 +1,12 @@
+{
+  "total_samples": 10,
+  "total_entities": 35,
+  "predicted_entities": 34,
+  "correct_entities": 7,
+  "precision": 0.20588235294117646,
+  "recall": 0.2,
+  "f1": 0.20289855072463767,
+  "total_time": 57.393394470214844,
+  "average_time_per_sample": 5.739339447021484,
+  "samples_per_second": 0.17423607877365832
+}
