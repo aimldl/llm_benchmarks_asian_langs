@@ -23,7 +23,6 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
 ### Installation
 
 1.  **Clone the repository:**
-* [https://github.com/aimldl/llm_benchmarks_asian_langs.git](https://github.com/aimldl/llm_benchmarks_asian_langs.git)
     ```bash
     git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
     cd llm_benchmarks_asian_langs
@@ -85,7 +84,8 @@ This method allows for running tasks independently from their respective directo
     ```
 3.  **Execute the benchmark.** The `run` script can be executed with different modes (`test`, `custom`, `full`).
     ```bash
-    # Run in 'test' mode for a quick check
-    (klue) $ ./run test
+    (klue) $ ./run test       #  10 samples
+    (klue) $ ./run custom 100  # N samples, N=100
+    (klue) $ ./run full        # The number of samples varies from task to task
     ```
     Follow the `README.md` in each task sub-directory for more details.
