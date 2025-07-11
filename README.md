@@ -84,7 +84,7 @@ This method allows for running tasks independently from their respective directo
     ```
 3.  **Execute the benchmark.** The `run` script can be executed with different modes (`test`, `custom`, `full`).
     ```bash
-    (klue) $ ./run test       #  10 samples
+    (klue) $ ./run test        #  10 samples
     (klue) $ ./run custom 100  # N samples, N=100
     (klue) $ ./run full        # The number of samples varies from task to task
     ```
