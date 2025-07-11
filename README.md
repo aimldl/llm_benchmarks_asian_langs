@@ -41,11 +41,11 @@ All KLUE task directories provide:
 * Task-specific prompt engineering and evaluation
 
 Implementation Consistency
-✅ All tasks maintain identical directory structure
-✅ Consistent logging and error handling across all tasks
-✅ Standardized script functionality (test/custom/full modes)
-✅ Comprehensive documentation for each task
-✅ Automated testing and verification scripts
+* All tasks maintain identical directory structure
+* Consistent logging and error handling across all tasks
+* Standardized script functionality (test/custom/full modes)
+* Comprehensive documentation for each task
+* Automated testing and verification scripts
 
 ## Create a new conda environment `klue`
 ```bash
@@ -59,7 +59,7 @@ Implementation Consistency
 ```
 To deactivate an active environment, run:
 ```bash
-
+(klue) $ conda deactivate
 ```
 
 ### Two options to run tasks for KLUE.
