@@ -13,11 +13,12 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
 ### Installation
 
 1.  **Clone the repository:**
+   [https://github.com/aimldl/llm_benchmarks_asian_langs.git](https://github.com/aimldl/llm_benchmarks_asian_langs.git)
     ```bash
-    git clone [https://github.com/aimldl/llm_benchmarks_asian_langs.git](https://github.com/aimldl/llm_benchmarks_asian_langs.git)
+    git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
     cd llm_benchmarks_asian_langs
     ```
-2.  **Create and activate the conda environment:**
+3.  **Create and activate the conda environment:**
     ```bash
     # Create the 'klue' environment with Python 3
     conda create -n klue python=3 anaconda
