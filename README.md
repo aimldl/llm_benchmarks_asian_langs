@@ -99,32 +99,32 @@ For example, run `run_klue_tc.ipynb` for the KLUE Topic Classification (TC) task
 
 ### Option 2: Use the Command Line
 
-This method allows for running tasks independently from their respective directories.
+This method lets you run tasks independently from their respective directories.
 
 1.  **Navigate to a task directory.**
 
-For example, for Topic Classification:
+    For example, for Topic Classification:
 
     ```bash
     (klue) $ cd klue_tc/
     ```
-    
-2.  **Run the setup script.** 
 
-The `full` argument installs all required packages.
+2.  **Run the setup script.**
+
+    The `full` argument installs all required packages.
 
     ```bash
     (klue) $ ./setup.sh full
     ```
-    
-3.  **Execute the benchmark.** 
 
-The `run` script can be executed with different modes (`test`, `custom`, `full`).
+3.  **Execute the benchmark.**
+
+    The `run` script can be executed with different modes (`test`, `custom`, `full`).
 
     ```bash
-    (klue) $ ./run test        #  10 samples
-    (klue) $ ./run custom 100  # N samples, N=100
+    (klue) $ ./run test        # 10 samples
+    (klue) $ ./run custom 100 # N samples, N=100
     (klue) $ ./run full        # The number of samples varies from task to task
     ```
-    
-    Follow the `README.md` in each task sub-directory for more details.
+
+    For more details, follow the `README.md` in each task's subdirectory.
