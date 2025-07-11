@@ -1,6 +1,16 @@
 # LLM Benchmarks for Asian Languages 🌏
 
-This repository provides a suite of LLM benchmarks on various tasks for Asian languages.
+This repository provides a suite of benchmarks to evaluate Large Language Models (LLMs) on a variety of tasks for Asian languages.
+
+## Key Features
+
+The benchmark framework is designed with a focus on consistency, reproducibility, and ease of use.
+
+* **Standardized Structure:** All tasks follow a uniform directory and script structure, ensuring a consistent user experience across the entire suite.
+* **Robust Implementation:** Features include comprehensive logging for detailed analysis, consistent error handling, and automated verification scripts.
+* **Flexible Execution:** Each task provides standardized script functionality with multiple operational modes, such as `test`, `custom`, and `full`, to accommodate different testing needs.
+* **Tailored Evaluation:** Benchmarks include task-specific prompt engineering and evaluation metrics to ensure relevant and accurate performance assessment.
+* **Comprehensive Documentation:** Each task directory contains detailed documentation, including setup instructions and troubleshooting guides.
 
 ---
 
@@ -79,99 +89,3 @@ This method allows for running tasks independently from their respective directo
     (klue) $ ./run test
     ```
     Follow the `README.md` in each task sub-directory for more details.
-
-# LLM Benchmarks for Asian Languages
-
-## Install Anaconda
-Install Anaconda. For details, see [INSTALL-CONDA.md](INSTALL-CONDA.md).
-
-## Project Directory
-`cd` into the project directory. 
-- For example, I've git cloned this repository under the `~/github/aimldl` directory.
-- My project directory is `~/github/aimldl/llm_benchmarks_asian_langs`.
-
-```bash
-(base) ~$ cd ~/github/aimldl/llm_benchmarks_asian_langs
-(base) ~/github/aimldl/llm_benchmarks_asian_langs$
-```
-
-## Launch Jupyter Lab
-```bash
-(base) $ jupyter lab
-```
-To cancel Jupyter Lab, press `Ctrl+C` twice.
-
-## Initialize the `gcloud` SDK and authenticate into your account
-This step is necessary to use Vertex AI Gemini API.
-
-### Install the `gcloud` SDK
-```bash
-$ gcloud init
-```
-
-### Authenticate into your account
-```bash
-$ gcloud auth login
-```
-
-## Run the KLUE benchmarks
-
-All KLUE task directories provide:
-* Consistent directory and script structure
-* Robust logging and error analysis
-* Detailed documentation and troubleshooting
-* Task-specific prompt engineering and evaluation
-
-Implementation Consistency
-* All tasks maintain identical directory structure
-* Consistent logging and error handling across all tasks
-* Standardized script functionality (test/custom/full modes)
-* Comprehensive documentation for each task
-* Automated testing and verification scripts
-
-## Create a new conda environment `klue`
-```bash
-(base) $ conda create -n klue python=3 anaconda
-```
-
-## Activate the klue environment
-```bash
-(base) $ conda activate klue
-(klue) $
-```
-To deactivate an active environment, run:
-```bash
-(klue) $ conda deactivate
-```
-
-### Two options to run tasks for KLUE.
-- Option 1. Use a notebook.
-- Option 2. Use a terminal and follow the instructions in each sub-directory
-
-<img src="images/jupyter_lab-llm_benchmarks_asian_langs.png">
-
-For example,
-```bash
-(klue) aimldl@tkim-glinux:~$ cd ~/github/aimldl/llm_benchmarks_asian_langs
-(klue) aimldl@tkim-glinux:~/github/aimldl/llm_benchmarks_asian_langs$ jupyter lab
-```
-
-For example, 
-- Option 1. Open [run_klue.ipynb](run_klue.ipynb) and run the notebook.
-- Option 2. Open a terminal, `cd` into `klue_tc`, and follow instructions at `README.md`.
-
-Note: The sub-directory `klue_tc` is designed to run independetly. The notebook [run_klue.ipynb](run_klue.ipynb) was created laster ro run the same commands, but it's assumed that the following cells are executed in the `klue` environment. Running the commands in the following cell 
-
-```bash
-cd klue_tc
-./setup.sh full
-./run test
-```
-
-is identical to
-
-```bash
-(klue) $ cd klue_tc
-(klue) $ ./setup.sh full
-(klue) $ ./run test
-```
