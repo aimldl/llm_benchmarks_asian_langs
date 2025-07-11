@@ -44,7 +44,7 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
 
 ## ⚙️ Recommended: Configure Google Cloud for Vertex AI
 
-To run these benchmarks with the Gemini models, you must configure access to a Google API. While there are two options for accessing Gemini, using Vertex AI is strongly recommended for this project.
+To run these benchmarks with the Gemini models, you must configure access to a Gemini API. While there are two options for accessing Gemini, using Vertex AI is strongly recommended for this project.
 
 * **Google AI (Free Tier):** This API is intended for development and has very low rate limits. The benchmark scripts make thousands of API calls and will quickly exceed the free quota, causing the tasks to fail before completion.
 * **Google Cloud Vertex AI (Paid Service):** This is the production-grade platform with high quotas suitable for intensive tasks. To ensure the benchmarks can run to completion, you must set up and use the Vertex AI API.
@@ -57,14 +57,17 @@ To run these benchmarks with the Gemini models, you must configure access to a G
 
 Follow these steps to configure your local environment to use a Google Cloud project with the Vertex AI API enabled.
 
-1.  **Initialize the gcloud SDK**
+1. **Install the gcloud SDK**
+If you do not have gcloud installed, please refer to [Install the gcloud CLI](https://cloud.google.com/sdk/docs/install).
+
+2.  **Initialize the gcloud SDK**
 
     This command walks you through linking a Google Cloud project and configuring defaults.
     ```bash
     gcloud init
     ```
 
-2.  **Authenticate your account**
+3.  **Authenticate your account**
 
     This command opens a browser window to grant the SDK access to your user account.
     ```bash
@@ -97,21 +100,27 @@ This method allows for running tasks independently from their respective directo
 1.  **Navigate to a task directory.**
 
 For example, for Topic Classification:
+
     ```bash
     (klue) $ cd klue_tc/
     ```
-3.  **Run the setup script.** 
+    
+2.  **Run the setup script.** 
 
 The `full` argument installs all required packages.
+
     ```bash
     (klue) $ ./setup.sh full
     ```
-4.  **Execute the benchmark.** 
+    
+3.  **Execute the benchmark.** 
 
 The `run` script can be executed with different modes (`test`, `custom`, `full`).
+
     ```bash
     (klue) $ ./run test        #  10 samples
     (klue) $ ./run custom 100  # N samples, N=100
     (klue) $ ./run full        # The number of samples varies from task to task
     ```
+    
     Follow the `README.md` in each task sub-directory for more details.
