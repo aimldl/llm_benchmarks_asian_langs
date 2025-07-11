@@ -13,7 +13,7 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
 ### Installation
 
 1.  **Clone the repository:**
-   [https://github.com/aimldl/llm_benchmarks_asian_langs.git](https://github.com/aimldl/llm_benchmarks_asian_langs.git)
+* [https://github.com/aimldl/llm_benchmarks_asian_langs.git](https://github.com/aimldl/llm_benchmarks_asian_langs.git)
     ```bash
     git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
     cd llm_benchmarks_asian_langs
