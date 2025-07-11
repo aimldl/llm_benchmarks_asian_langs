@@ -42,7 +42,7 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
 
 ---
 
-## ⚙️ Recommended: Configure Google Cloud for Vertex AI
+## ⚙️ Configure Google Cloud for Vertex AI
 
 To run these benchmarks with the Gemini models, you must configure access to a Gemini API. While there are two options for accessing Gemini, using Vertex AI is strongly recommended for this project.
 
