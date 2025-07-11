@@ -58,21 +58,25 @@ To run these benchmarks with the Gemini models, you must configure access to a G
 Follow these steps to configure your local environment to use a Google Cloud project with the Vertex AI API enabled.
 
 1. **Install the gcloud SDK**
+2. 
 If you do not have gcloud installed, please refer to [Install the gcloud CLI](https://cloud.google.com/sdk/docs/install).
 
-2.  **Initialize the gcloud SDK**
+3.  **Initialize the gcloud SDK**
 
-    This command walks you through linking a Google Cloud project and configuring defaults.
     ```bash
     gcloud init
     ```
 
-3.  **Authenticate your account**
+    This command walks you through linking a Google Cloud project and configuring defaults.
 
-    This command opens a browser window to grant the SDK access to your user account.
+4.  **Authenticate your account**
+
     ```bash
     gcloud auth login
     ```
+
+    This command opens a browser window to grant the SDK access to your user account.
+
 ---
 
 ## ▶️ Running the KLUE Benchmarks
