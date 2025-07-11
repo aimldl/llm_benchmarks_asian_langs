@@ -1,3 +1,84 @@
+# LLM Benchmarks for Asian Languages 🌏
+
+This repository provides a suite of LLM benchmarks on various tasks for Asian languages.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installed. For detailed instructions, refer to [INSTALL-CONDA.md](INSTALL-CONDA.md).
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/aimldl/llm_benchmarks_asian_langs.git](https://github.com/aimldl/llm_benchmarks_asian_langs.git)
+    cd llm_benchmarks_asian_langs
+    ```
+2.  **Create and activate the conda environment:**
+    ```bash
+    # Create the 'klue' environment with Python 3
+    conda create -n klue python=3 anaconda
+
+    # Activate the environment
+    conda activate klue
+    ```
+    To deactivate the environment when you're done, run `conda deactivate`.
+
+---
+
+## ⚙️ Configuration for Google Cloud (Optional)
+
+This step is only required if you plan to use Google's Vertex AI Gemini APIs.
+
+1.  **Initialize the gcloud SDK:**
+    ```bash
+    gcloud init
+    ```
+2.  **Authenticate your account:**
+    ```bash
+    gcloud auth login
+    ```
+
+---
+
+## ▶️ Running the KLUE Benchmarks
+
+All KLUE task implementations share a consistent structure and provide robust logging, detailed documentation, and task-specific prompt engineering.
+
+You have two options for running the benchmarks.
+
+### Option 1: Use the Jupyter Notebook
+
+This is the recommended method for a quick start.
+
+1.  **Launch Jupyter Lab:**
+    ```bash
+    (klue) $ jupyter lab
+    ```
+2.  Open and run the cells in `run_klue.ipynb`. This notebook automates the setup and execution steps for the benchmark tasks.
+
+### Option 2: Use the Command Line
+
+This method allows for running tasks independently from their respective directories.
+
+1.  **Navigate to a task directory.** For example, for Topic Classification:
+    ```bash
+    (klue) $ cd klue_tc/
+    ```
+2.  **Run the setup script.** The `full` argument installs all required packages.
+    ```bash
+    (klue) $ ./setup.sh full
+    ```
+3.  **Execute the benchmark.** The `run` script can be executed with different modes (`test`, `custom`, `full`).
+    ```bash
+    # Run in 'test' mode for a quick check
+    (klue) $ ./run test
+    ```
+    Follow the `README.md` in each task sub-directory for more details.
+
 # LLM Benchmarks for Asian Languages
 
 ## Install Anaconda
