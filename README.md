@@ -30,30 +30,46 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
 3.  **Create and activate the conda environment**
    Create the 'klue' environment with Python 3
     ```bash
-    conda create -n klue -y python=3 anaconda
+    (base) $ conda create -n klue -y python=3 anaconda
     ```
 
     # Activate the environment
     ```bash
-    conda activate klue
+    (base) $ conda activate klue
+    (klue) $ 
     ```
     To deactivate the environment when you're done, run `conda deactivate`.
 
 ---
 
-## ⚙️ Configuration for Google Cloud (Optional)
+## ⚙️ Recommended: Configure Google Cloud for Vertex AI
 
-This step is only required if you plan to use Google's Vertex AI Gemini APIs.
+To run these benchmarks with the Gemini models, you must configure access to a Google API. While there are two options for accessing Gemini, using Vertex AI is strongly recommended for this project.
+
+* **Google AI (Free Tier):** This API is intended for development and has very low rate limits. The benchmark scripts make thousands of API calls and will quickly exceed the free quota, causing the tasks to fail before completion.
+* **Google Cloud Vertex AI (Paid Service):** This is the production-grade platform with high quotas suitable for intensive tasks. To ensure the benchmarks can run to completion, you must set up and use the Vertex AI API.
+
+> **⚠️ Cost Warning**
+>
+> Be aware that running these benchmark tasks will execute a large volume of API calls to Gemini. This **will incur significant costs** on your Google Cloud billing account. Please monitor your usage and set up budget alerts before proceeding.
+
+### Setup Instructions
+
+Follow these steps to configure your local environment to use a Google Cloud project with the Vertex AI API enabled.
 
 1.  **Initialize the gcloud SDK**
+
+    This command walks you through linking a Google Cloud project and configuring defaults.
     ```bash
     gcloud init
     ```
+
 2.  **Authenticate your account**
+
+    This command opens a browser window to grant the SDK access to your user account.
     ```bash
     gcloud auth login
     ```
-
 ---
 
 ## ▶️ Running the KLUE Benchmarks
@@ -70,21 +86,29 @@ This is the recommended method for a quick start.
     ```bash
     (klue) $ jupyter lab
     ```
-2.  Open and run the cells in `run_klue.ipynb`. This notebook automates the setup and execution steps for the benchmark tasks.
+Once launched, open the `.ipynb` notebook for the target benchmark. 
+
+For example, run `run_klue_tc.ipynb` for the KLUE Topic Classification (TC) task. Open and run the cells in `run_klue.ipynb`. This notebook automates the setup and execution steps for the benchmark tasks.
 
 ### Option 2: Use the Command Line
 
 This method allows for running tasks independently from their respective directories.
 
-1.  **Navigate to a task directory.** For example, for Topic Classification:
+1.  **Navigate to a task directory.**
+
+For example, for Topic Classification:
     ```bash
     (klue) $ cd klue_tc/
     ```
-2.  **Run the setup script.** The `full` argument installs all required packages.
+3.  **Run the setup script.** 
+
+The `full` argument installs all required packages.
     ```bash
     (klue) $ ./setup.sh full
     ```
-3.  **Execute the benchmark.** The `run` script can be executed with different modes (`test`, `custom`, `full`).
+4.  **Execute the benchmark.** 
+
+The `run` script can be executed with different modes (`test`, `custom`, `full`).
     ```bash
     (klue) $ ./run test        #  10 samples
     (klue) $ ./run custom 100  # N samples, N=100
