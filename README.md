@@ -34,6 +34,7 @@ Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](htt
     ```
 
     # Activate the environment
+    ```bash
     conda activate klue
     ```
     To deactivate the environment when you're done, run `conda deactivate`.
