@@ -1,0 +1,3 @@
+@/klue_tc @/klue_nli Refer both to the klue_tc and klue_nli directories and expand them to other KLUE (Korean Language Understanding Evaluation) Task. In other words, I want to create sub_directory  klue_ner for KLUE's Named Entity Recognition (NER) task.
+
+Keep the directory and file structure consistent with klue_tc and klue_nli and make appropriate changes for klue_ner. Be careful to use the evaluation data instead of the test data when you evaluate Gemini 2.5 Flash's performance. Additionally, don't be shy to make your prompt long and detailed enough to achieve a better performance when you call Gemini 2.5 Flash and perform the task. If the prompt is too short, the performance may degrade, so don't be shy.

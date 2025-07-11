@@ -280,7 +280,18 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
             }
             
         except Exception as e:
-            logger.error(f"Prediction failed: {e}")
+            # Enhanced error logging with detailed information
+            error_msg = f"Prediction failed: {e}"
+            logger.error(error_msg)
+            
+            # Log additional error details if available
+            if hasattr(e, '__dict__'):
+                try:
+                    error_details = str(e.__dict__)
+                    logger.error(f"Error details: {error_details}")
+                except:
+                    pass
+            
             return {
                 "prediction_text": "",
                 "predicted_label": None,
@@ -403,18 +414,18 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
         }
         
         # Save intermediate metrics
-        metrics_file = os.path.join(self.config.output_dir, f"klue_tc_metrics_intermediate_{current_count:06d}_{timestamp}.json")
+        metrics_file = os.path.join(self.config.output_dir, f"klue_tc_metrics_{current_count:06d}_{timestamp}.json")
         with open(metrics_file, 'w', encoding='utf-8') as f:
             json.dump(intermediate_metrics, f, ensure_ascii=False, indent=2)
         
         # Save intermediate results
         if self.config.save_predictions:
-            results_file = os.path.join(self.config.output_dir, f"klue_tc_results_intermediate_{current_count:06d}_{timestamp}.json")
+            results_file = os.path.join(self.config.output_dir, f"klue_tc_results_{current_count:06d}_{timestamp}.json")
             with open(results_file, 'w', encoding='utf-8') as f:
                 json.dump(self.results, f, ensure_ascii=False, indent=2)
             
             # Save as CSV for easier analysis
-            csv_file = os.path.join(self.config.output_dir, f"klue_tc_results_intermediate_{current_count:06d}_{timestamp}.csv")
+            csv_file = os.path.join(self.config.output_dir, f"klue_tc_results_{current_count:06d}_{timestamp}.csv")
             df = pd.DataFrame(self.results)
             
             # Reorder columns for better readability
@@ -436,7 +447,7 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
         errors = [r for r in self.results if not r["is_correct"]]
         
         if errors:
-            error_file = os.path.join(self.config.output_dir, f"klue_tc_error_analysis_intermediate_{current_count:06d}_{timestamp}.txt")
+            error_file = os.path.join(self.config.output_dir, f"klue_tc_error_analysis_{current_count:06d}_{timestamp}.txt")
             with open(error_file, 'w', encoding='utf-8') as f:
                 f.write("KLUE Topic Classification Intermediate Error Analysis\n")
                 f.write("=" * 70 + "\n\n")

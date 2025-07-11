@@ -1,0 +1,90 @@
+./test_logging.sh (test script)
+Timestamp: 2025. 07. 11. (금) 06:14:12 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_nli
+========================================
+
+Error Analysis (showing first 5 errors):
+  1. True: entailment | Predicted: neutral
+     Premise: 한국은 아시아에 위치한 국가이다.
+     Hypothesis: 한국은 아시아 대륙에 있다.
+     Prediction: neutral
+
+2025-07-06 19:01:48,002 - ERROR - Prediction failed: Cannot get the response text.
+Cannot get the Candidate text.
+Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+Content:
+{
+  "role": "model"
+}
+Candidate:
+{
+  "content": {
+    "role": "model"
+  },
+  "finish_reason": "MAX_TOKENS"
+}
+Response:
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model"
+      },
+      "finish_reason": "MAX_TOKENS"
+    }
+  ],
+  "usage_metadata": {
+    "prompt_token_count": 594,
+    "total_token_count": 1617,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 594
+      }
+    ],
+    "thoughts_token_count": 1023
+  },
+  "model_version": "gemini-2.5-flash",
+  "create_time": "2025-07-06T19:01:40.492285Z",
+  "response_id": "FMhqaP2FHqW8nvgP2IrW4As"
+}
+2025-07-06 19:02:56,717 - ERROR - Prediction failed: Cannot get the response text.
+Cannot get the Candidate text.
+Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+Content:
+{
+  "role": "model"
+}
+Candidate:
+{
+  "content": {
+    "role": "model"
+  },
+  "finish_reason": "MAX_TOKENS"
+}
+Response:
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model"
+      },
+      "finish_reason": "MAX_TOKENS"
+    }
+  ],
+  "usage_metadata": {
+    "prompt_token_count": 587,
+    "total_token_count": 1610,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 587
+      }
+    ],
+    "thoughts_token_count": 1023
+  },
+  "model_version": "gemini-2.5-flash",
+  "create_time": "2025-07-06T19:02:48.616287Z",
+  "response_id": "WMhqaMPPJaKgnvgPiPGr4AE"
+}
+Processing samples: 100%|█████████████████████| 100/100 [07:25<00:00,  4.46s/it]

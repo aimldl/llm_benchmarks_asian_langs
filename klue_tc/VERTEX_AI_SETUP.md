@@ -182,6 +182,26 @@ Test Summary
 After successful setup, run:
 
 ```bash
+# Make the run script executable (if needed)
+chmod +x run
+
+# Run a small test with 10 samples (recommended first)
+./run test
+
+# Run the full benchmark (all test samples)
+./run full
+
+# Run with custom number of samples
+./run custom 100
+```
+
+**Note**: The `./run` script automatically handles logging and saves all output to the `logs/` directory with command headers for easy identification.
+
+### Alternative: Direct Python Usage
+
+If you prefer to run the Python script directly:
+
+```bash
 # a small test with limited samples first
 python klue_tc-gemini2_5flash.py --project-id $GOOGLE_CLOUD_PROJECT --max-samples 10
 
@@ -191,9 +211,21 @@ python klue_tc-gemini2_5flash.py --project-id $GOOGLE_CLOUD_PROJECT
 python klue_tc-gemini2_5flash.py --project-id $GOOGLE_CLOUD_PROJECT --max-samples 1000
 ```
 
-## Step 9: Analyze results in the `benchmark_results/` directory
+## Step 9: Analyze results
 
-Analyze results after running the full benchmark successfully.
+After running the benchmark, you can analyze results in two directories:
+
+### `benchmark_results/` directory
+Contains detailed benchmark results and metrics:
+- JSON files with accuracy and performance metrics
+- CSV files with individual predictions
+- Error analysis files
+
+### `logs/` directory  
+Contains execution logs with command headers:
+- `.log` files with complete output including command context
+- `.err` files with error analysis and error logs
+- Self-documenting files that show exactly what command was run
 
 Additionally, you may monitor costs and usage in Google Cloud Console
 

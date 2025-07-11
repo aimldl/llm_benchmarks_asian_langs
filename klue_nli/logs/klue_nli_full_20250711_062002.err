@@ -1,0 +1,12 @@
+./run full
+Timestamp: 2025. 07. 11. (금) 09:58:32 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_nli
+========================================
+
+Error Analysis (showing first 5 errors):
+  1. True: neutral | Predicted: contradiction
+     Premise: 흡연자분들은 발코니가 있는 방이면 발코니에서 흡연이 가능합니다....
+     Hypothesis: 어떤 방에서도 흡연은 금지됩니다....
+     Prediction: contradiction
+
+

@@ -1,0 +1,55 @@
+KLUE Natural Language Inference Error Analysis
+============================================================
+
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Total Errors: 7
+Total Samples: 10
+Error Rate: 70.00%
+
+Error Analysis:
+----------------------------------------
+1. True: neutral | Predicted: contradiction
+   Premise: 흡연자분들은 발코니가 있는 방이면 발코니에서 흡연이 가능합니다....
+   Hypothesis: 어떤 방에서도 흡연은 금지됩니다....
+   Prediction: contradiction
+   Finish Reason: FinishReason.STOP
+
+2. True: neutral | Predicted: contradiction
+   Premise: 10명이 함께 사용하기 불편함없이 만족했다....
+   Hypothesis: 10명이 함께 사용하기 불편함이 많았다....
+   Prediction: contradiction
+   Finish Reason: FinishReason.STOP
+
+3. True: contradiction | Predicted: None
+   Premise: 10명이 함께 사용하기 불편함없이 만족했다....
+   Hypothesis: 성인 10명이 함께 사용하기 불편함없이 없었다....
+   Prediction: 
+   Finish Reason: SAFETY
+
+4. True: neutral | Predicted: contradiction
+   Premise: 10층에 건물사람들만 이용하는 수영장과 썬베드들이 있구요....
+   Hypothesis: 수영장과 썬베드는 9층에 있습니다....
+   Prediction: contradiction
+   Finish Reason: FinishReason.STOP
+
+5. True: contradiction | Predicted: neutral
+   Premise: 10층에 건물사람들만 이용하는 수영장과 썬베드들이 있구요....
+   Hypothesis: 수영장과 썬베드는 유료입니다....
+   Prediction: neutral
+   Finish Reason: FinishReason.STOP
+
+6. True: neutral | Predicted: contradiction
+   Premise: 11월 5일, 정부가 국무회의에서 통합진보당에 대한 해산심판 청구안을 통과시켰으며, 이애 따라 대한민국 법무부는 즉시 해산 청구서를 제출했다....
+   Hypothesis: 법무부가 해산심판 청구안을 통과시킨 후 정부가 해산 청구서를 제출하였다....
+   Prediction: contradiction
+   Finish Reason: FinishReason.STOP
+
+7. True: contradiction | Predicted: neutral
+   Premise: 11월 5일, 정부가 국무회의에서 통합진보당에 대한 해산심판 청구안을 통과시켰으며, 이애 따라 대한민국 법무부는 즉시 해산 청구서를 제출했다....
+   Hypothesis: 법무부가 청구서를 제출한 3일 뒤에 통합진보당은 해산됐다....
+   Prediction: neutral
+   Finish Reason: FinishReason.STOP
+

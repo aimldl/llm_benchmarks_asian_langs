@@ -119,11 +119,11 @@ result = {
 ```
 
 ### 2. Test Script (`test_setup.py`)
-
+TODO: Double-check that there is no `test` dataset. 
 #### Dataset Testing
 ```python
 # TC Version
-dataset = load_dataset("klue", "tc")
+dataset = load_dataset("klue", "ynat")
 sample = dataset['test'][0]
 print(f"  - Sample text: {sample['title']} {sample['text'][:100]}...")
 print(f"  - Sample label: {sample['label']}")
@@ -173,20 +173,21 @@ Both implementations maintain the same file structure:
 ```
 klue_tc/                    klue_nli/
 ├── klue_tc-gemini2_5flash.py    ├── klue_nli-gemini2_5flash.py
-├── requirements.txt              ├── requirements.txt
-├── README.md                     ├── README.md
-├── setup.sh                      ├── setup.sh
-├── run                           ├── run
-├── test_setup.py                 ├── test_setup.py
-├── install_dependencies.sh       ├── install_dependencies.sh
-├── verify_scripts.sh             ├── verify_scripts.sh
-├── ABOUT_KLUE_TC.md              ├── ABOUT_KLUE_NLI.md
-└── VERTEX_AI_SETUP.md            └── VERTEX_AI_SETUP.md
+├── requirements.txt             ├── requirements.txt
+├── README.md                    ├── README.md
+├── setup.sh                     ├── setup.sh
+├── run                          ├── run
+├── test_setup.py                ├── test_setup.py
+├── install_dependencies.sh      ├── install_dependencies.sh
+├── verify_scripts.sh            ├── verify_scripts.sh
+├── ABOUT_KLUE_TC.md             ├── ABOUT_KLUE_NLI.md
+└── VERTEX_AI_SETUP.md           └── VERTEX_AI_SETUP.md
 ```
 
 ## Usage Differences
 
 ### Command Line
+
 ```bash
 # TC Version
 python klue_tc-gemini2_5flash.py --project-id "your-project-id"
@@ -196,27 +197,38 @@ python klue_nli-gemini2_5flash.py --project-id "your-project-id"
 ```
 
 ### Run Script
+Make the script executable BEFORE running it.
 ```bash
-# TC Version
-./run test    # Runs TC benchmark with 10 samples
+chmod +x run
+```
 
-# NLI Version  
-./run test    # Runs NLI benchmark with 10 samples
+Show help and available options
+```bash
+./run help
+```
+#### TC Version
+Execute the script in the `klue_tc` directory.
+```bash
+./run test         # Runs TC benchmark with 10 samples
+./run custom 100   # Run with custom number of samples
+./run full         # Run the full benchmark with all samples
+```
+#### NLI Version  
+Execute the script in the `klue_nli` directory.
+
+```bash
+./run test         # Runs NLI benchmark with 10 samples
+./run custom 100   # Run with custom number of samples
+./run full         # Run the full benchmark with all samples
 ```
 
 ## Performance Considerations
 
-### 1. Input Length
-- **TC**: Typically shorter inputs (news titles)
-- **NLI**: Longer inputs (premise + hypothesis pairs)
-
-### 2. Token Usage
-- **TC**: Lower token consumption per sample
-- **NLI**: Higher token consumption due to paired inputs
-
-### 3. Processing Time
-- **TC**: Faster processing due to simpler task
-- **NLI**: Slower processing due to complex logical reasoning
+| Consideration | TC (Text Classification) | NLI (Natural Language Inference) |
+| :--- | :--- | :--- |
+| **Input Length** | Typically shorter inputs (news titles) | Longer inputs (premise + hypothesis pairs) |
+| **Token Usage** | Lower token consumption per sample | Higher token consumption due to paired inputs |
+| **Processing Time** | Faster processing due to simpler task | Slower processing due to complex logical reasoning |
 
 ## Extensibility
 

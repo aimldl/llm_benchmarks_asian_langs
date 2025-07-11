@@ -1,0 +1,287 @@
+#!/bin/bash
+
+# KLUE MRC Benchmark Runner Script
+# Simple script to run the KLUE Machine Reading Comprehension benchmark
+
+# Check if Python script exists
+if [ ! -f "klue_mrc-gemini2_5flash.py" ]; then
+    echo "Error: klue_mrc-gemini2_5flash.py not found in current directory"
+    exit 1
+fi
+
+# Check if GOOGLE_CLOUD_PROJECT is set
+if [ -z "$GOOGLE_CLOUD_PROJECT" ]; then
+    echo "Error: GOOGLE_CLOUD_PROJECT environment variable is not set"
+    echo "Please set it with: export GOOGLE_CLOUD_PROJECT='your-project-id'"
+    exit 1
+fi
+
+# Create logs directory if it doesn't exist
+mkdir -p logs
+
+# Function to generate log filename
+generate_log_filename() {
+    local mode=$1
+    local samples=$2
+    local timestamp=$(date +"%Y%m%d_%H%M%S")
+    
+    if [ "$mode" = "custom" ]; then
+        echo "klue_mrc_${mode}_${samples}samples_${timestamp}"
+    else
+        echo "klue_mrc_${mode}_${timestamp}"
+    fi
+}
+
+# Function to extract errors from log content
+extract_errors() {
+    local log_content="$1"
+    
+    # First pass: collect error analysis section
+    error_analysis=$(echo "$log_content" | awk '
+    BEGIN { 
+        in_error_analysis = 0; 
+        error_analysis_done = 0;
+        error_analysis_found = 0;
+    }
+    
+    # Start of error analysis section
+    /Error Analysis \(showing first [0-9]+ errors\):/ {
+        in_error_analysis = 1
+        error_analysis_found = 1
+        print
+        next
+    }
+    
+    # Error analysis content (numbered errors)
+    in_error_analysis && /^[[:space:]]*[0-9]+\. Sample ID:/ {
+        print
+        next
+    }
+    
+    # Error analysis content (question and context lines)
+    in_error_analysis && /^[[:space:]]*Question:/ {
+        print
+        next
+    }
+    
+    in_error_analysis && /^[[:space:]]*Context:/ {
+        print
+        next
+    }
+    
+    in_error_analysis && /^[[:space:]]*Ground Truth:/ {
+        print
+        next
+    }
+    
+    in_error_analysis && /^[[:space:]]*Predicted:/ {
+        print
+        next
+    }
+    
+    in_error_analysis && /^[[:space:]]*Exact Match:/ {
+        print
+        next
+    }
+    
+    in_error_analysis && /^[[:space:]]*F1 Score:/ {
+        print
+        next
+    }
+    
+    in_error_analysis && /^[[:space:]]*Is Impossible:/ {
+        print
+        next
+    }
+    
+    in_error_analysis && /^[[:space:]]*Error:/ {
+        print
+        next
+    }
+    
+    # Empty line after error details marks end of error analysis
+    in_error_analysis && /^[[:space:]]*$/ {
+        if (!error_analysis_done) {
+            error_analysis_done = 1
+            print
+        }
+    }
+    
+    # End of error analysis section (double empty line or new section)
+    in_error_analysis && /^[[:space:]]*$/ {
+        if (error_analysis_done) {
+            in_error_analysis = 0
+            error_analysis_done = 0
+            print
+        }
+    }
+    
+    # If no error analysis was found, add a note
+    END {
+        if (!error_analysis_found) {
+            print "No error analysis section found in the log."
+        }
+    }
+    ')
+    
+    # Second pass: collect ERROR logs
+    error_logs=$(echo "$log_content" | awk '
+    BEGIN { 
+        in_errors = 0; 
+        in_error_block = 0;
+    }
+    
+    # Start of ERROR logs
+    /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3} - ERROR -/ {
+        in_errors = 1
+        in_error_block = 1
+        print
+        next
+    }
+    
+    # Continue ERROR logs until we hit a non-error line
+    in_errors {
+        if (/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3} - (INFO|WARNING|DEBUG)/) {
+            in_errors = 0
+            in_error_block = 0
+        } else if (/^[[:space:]]*$/) {
+            # Empty line in error section
+            if (in_error_block) {
+                print
+            }
+        } else if (/^[[:space:]]*[{}]/) {
+            # JSON content in error section
+            print
+        } else if (/^[[:space:]]*[A-Za-z_]+:/) {
+            # Key-value pairs in error section
+            print
+        } else if (in_error_block) {
+            # Any other content in error section
+            print
+        }
+    }
+    ')
+    
+    # Output error analysis first, then error logs
+    echo "$error_analysis"
+    echo ""
+    echo "$error_logs"
+}
+
+# Function to show usage
+show_help() {
+    echo "KLUE MRC Benchmark Runner"
+    echo ""
+    echo "Usage: $0 [OPTION]"
+    echo ""
+    echo "Options:"
+    echo "  test     Run a small test with 10 samples"
+    echo "  full     Run the full benchmark (all test samples)"
+    echo "  custom N Run with N samples (e.g., custom 100)"
+    echo "  help     Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $0 test        # Run test with 10 samples"
+    echo "  $0 full        # Run full benchmark"
+    echo "  $0 custom 50   # Run with 50 samples"
+    echo ""
+    echo "Log files will be saved to the 'logs' directory with format:"
+    echo "  klue_mrc_[mode]_[samples]samples_[timestamp].log (full output)"
+    echo "  klue_mrc_[mode]_[samples]samples_[timestamp].err (errors only)"
+    echo ""
+    echo "Log files provide:"
+    echo "  - Complete audit trail of benchmark execution"
+    echo "  - Error analysis and debugging information"
+    echo "  - Performance tracking across different runs"
+}
+
+# Main script logic
+case "${1:-help}" in
+    "test")
+        echo "Running small test with 10 samples..."
+        log_filename=$(generate_log_filename "test" "10")
+        
+        # Add command header to log file
+        echo "$0 test" > "logs/${log_filename}.log"
+        echo "Timestamp: $(date)" >> "logs/${log_filename}.log"
+        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.log"
+        echo "========================================" >> "logs/${log_filename}.log"
+        echo "" >> "logs/${log_filename}.log"
+        
+        # Run the command and append output to log file
+        python klue_mrc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples 10 2>&1 | tee -a "logs/${log_filename}.log"
+        
+        # Extract errors and save to .err file with command header
+        echo "$0 test" > "logs/${log_filename}.err"
+        echo "Timestamp: $(date)" >> "logs/${log_filename}.err"
+        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.err"
+        echo "========================================" >> "logs/${log_filename}.err"
+        echo "" >> "logs/${log_filename}.err"
+        extract_errors "$(cat logs/${log_filename}.log)" >> "logs/${log_filename}.err"
+        
+        echo "Log files saved:"
+        echo "  Full output: logs/${log_filename}.log"
+        echo "  Errors only: logs/${log_filename}.err"
+        ;;
+    "full")
+        echo "Running full benchmark..."
+        log_filename=$(generate_log_filename "full" "all")
+        
+        # Add command header to log file
+        echo "$0 full" > "logs/${log_filename}.log"
+        echo "Timestamp: $(date)" >> "logs/${log_filename}.log"
+        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.log"
+        echo "========================================" >> "logs/${log_filename}.log"
+        echo "" >> "logs/${log_filename}.log"
+        
+        # Run the command and append output to log file
+        python klue_mrc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" 2>&1 | tee -a "logs/${log_filename}.log"
+        
+        # Extract errors and save to .err file with command header
+        echo "$0 full" > "logs/${log_filename}.err"
+        echo "Timestamp: $(date)" >> "logs/${log_filename}.err"
+        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.err"
+        echo "========================================" >> "logs/${log_filename}.err"
+        echo "" >> "logs/${log_filename}.err"
+        extract_errors "$(cat logs/${log_filename}.log)" >> "logs/${log_filename}.err"
+        
+        echo "Log files saved:"
+        echo "  Full output: logs/${log_filename}.log"
+        echo "  Errors only: logs/${log_filename}.err"
+        ;;
+    "custom")
+        if [ -z "$2" ] || ! [[ "$2" =~ ^[0-9]+$ ]]; then
+            echo "Error: Please provide a valid number of samples for custom mode"
+            echo "Usage: $0 custom N (where N is a number)"
+            exit 1
+        fi
+        
+        echo "Running custom benchmark with $2 samples..."
+        log_filename=$(generate_log_filename "custom" "$2")
+        
+        # Add command header to log file
+        echo "$0 custom $2" > "logs/${log_filename}.log"
+        echo "Timestamp: $(date)" >> "logs/${log_filename}.log"
+        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.log"
+        echo "========================================" >> "logs/${log_filename}.log"
+        echo "" >> "logs/${log_filename}.log"
+        
+        # Run the command and append output to log file
+        python klue_mrc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples "$2" 2>&1 | tee -a "logs/${log_filename}.log"
+        
+        # Extract errors and save to .err file with command header
+        echo "$0 custom $2" > "logs/${log_filename}.err"
+        echo "Timestamp: $(date)" >> "logs/${log_filename}.err"
+        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.err"
+        echo "========================================" >> "logs/${log_filename}.err"
+        echo "" >> "logs/${log_filename}.err"
+        extract_errors "$(cat logs/${log_filename}.log)" >> "logs/${log_filename}.err"
+        
+        echo "Log files saved:"
+        echo "  Full output: logs/${log_filename}.log"
+        echo "  Errors only: logs/${log_filename}.err"
+        ;;
+    "help"|*)
+        show_help
+        ;;
+esac 

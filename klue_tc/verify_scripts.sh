@@ -7,7 +7,7 @@ echo "Verifying KLUE TC Benchmark Bash scripts..."
 echo "=========================================="
 
 # List of expected scripts
-scripts=("run" "install_dependencies.sh" "setup.sh" "verify_scripts.sh")
+scripts=("run" "install_dependencies.sh" "setup.sh" "verify_scripts.sh" "get_errors.sh")
 
 # Check each script
 for script in "${scripts[@]}"; do
@@ -31,4 +31,5 @@ echo "Available scripts:"
 echo "  ./run                    - Quick benchmark runner"
 echo "  ./install_dependencies.sh - Install Python dependencies"
 echo "  ./setup.sh               - Complete setup process"
-echo "  ./verify_scripts.sh      - This verification script" 
+echo "  ./verify_scripts.sh      - This verification script"
+echo "  ./get_errors.sh          - Extract error details from results" 

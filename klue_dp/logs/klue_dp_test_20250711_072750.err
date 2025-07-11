@@ -1,0 +1,85 @@
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-dp-v1.1_dev_00001
+     Sentence: 한국어 문장의 의존 구문 분석을 수행합니다.
+     Words: 한국어 문장의 의존 구문 분석을 수행합니다
+     UAS: 0.2000 | LAS: 0.1000
+     Error: Failed to parse dependency structure
+
+2025-07-06 19:01:48,002 - ERROR - Prediction failed: Cannot get the response text.
+Cannot get the Candidate text.
+Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+Content:
+{
+  "role": "model"
+}
+Candidate:
+{
+  "content": {
+    "role": "model"
+  },
+  "finish_reason": "MAX_TOKENS"
+}
+Response:
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model"
+      },
+      "finish_reason": "MAX_TOKENS"
+    }
+  ],
+  "usage_metadata": {
+    "prompt_token_count": 594,
+    "total_token_count": 1617,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 594
+      }
+    ],
+    "thoughts_token_count": 1023
+  },
+  "model_version": "gemini-2.5-flash",
+  "create_time": "2025-07-06T19:01:40.492285Z",
+  "response_id": "FMhqaP2FHqW8nvgP2IrW4As"
+}
+2025-07-06 19:02:56,717 - ERROR - Prediction failed: Cannot get the response text.
+Cannot get the Candidate text.
+Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+Content:
+{
+  "role": "model"
+}
+Candidate:
+{
+  "content": {
+    "role": "model"
+  },
+  "finish_reason": "MAX_TOKENS"
+}
+Response:
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model"
+      },
+      "finish_reason": "MAX_TOKENS"
+    }
+  ],
+  "usage_metadata": {
+    "prompt_token_count": 594,
+    "total_token_count": 1617,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 594
+      }
+    ],
+    "thoughts_token_count": 1023
+  },
+  "model_version": "gemini-2.5-flash",
+  "create_time": "2025-07-06T19:02:40.492285Z",
+  "response_id": "FMhqaP2FHqW8nvgP2IrW4As"
+}

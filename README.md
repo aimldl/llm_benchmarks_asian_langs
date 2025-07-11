@@ -3,45 +3,69 @@
 ## Install Anaconda
 Install Anaconda. For details, see [INSTALL-CONDA.md](INSTALL-CONDA.md).
 
-## Create a new conda environment `klue`
+## Project Directory
+`cd` into the project directory. 
+- For example, I've git cloned this repository under the `~/github/aimldl` directory.
+- My project directory is `~/github/aimldl/llm_benchmarks_asian_langs`.
+
 ```bash
-conda create -n klue python=3 anaconda
+(base) ~$ cd ~/github/aimldl/llm_benchmarks_asian_langs
+(base) ~/github/aimldl/llm_benchmarks_asian_langs$
 ```
 
-## Activate the `klue` environment
+## Launch Jupyter Lab
 ```bash
-(base) $ conda activate klue
-(klue) $
+(base) $ jupyter lab
 ```
-
-For example,
-```bash
-(base) aimldl@tkim-glinux:~$ conda activate klue
-(klue) aimldl@tkim-glinux:~$
-```
-
-To deactivate an active environment, run:                
-```bash                                                                                                            conda deactivate 
-```
+To cancel Jupyter Lab, press `Ctrl+C` twice.
 
 ## Initialize the `gcloud` SDK and authenticate into your account
-Install the `gcloud` SDK
+This step is necessary to use Vertex AI Gemini API.
+
+### Install the `gcloud` SDK
 ```bash
 $ gcloud init
 ```
 
-And authenticate into your account
+### Authenticate into your account
 ```bash
 $ gcloud auth login
 ```
 
-## Launch Jupyter Lab
-`cd` into the project directory. For example, `~/github/aimldl/llm_benchmarks_asian_langs`. And launche Jupyter Lab.
+## Run the KLUE benchmarks
 
+All KLUE task directories provide:
+* Consistent directory and script structure
+* Robust logging and error analysis
+* Detailed documentation and troubleshooting
+* Task-specific prompt engineering and evaluation
+
+Implementation Consistency
+✅ All tasks maintain identical directory structure
+✅ Consistent logging and error handling across all tasks
+✅ Standardized script functionality (test/custom/full modes)
+✅ Comprehensive documentation for each task
+✅ Automated testing and verification scripts
+
+## Create a new conda environment `klue`
 ```bash
-(klue) $ cd ~/github/aimldl/llm_benchmarks_asian_langs
-(klue) $ jupyter lab
+(base) $ conda create -n klue python=3 anaconda
 ```
+
+## Activate the klue environment
+```bash
+(base) $ conda activate klue
+(klue) $
+```
+To deactivate an active environment, run:
+```bash
+
+```
+
+### Two options to run tasks for KLUE.
+- Option 1. Use a notebook.
+- Option 2. Use a terminal and follow the instructions in each sub-directory
+
 <img src="images/jupyter_lab-llm_benchmarks_asian_langs.png">
 
 For example,
@@ -49,14 +73,6 @@ For example,
 (klue) aimldl@tkim-glinux:~$ cd ~/github/aimldl/llm_benchmarks_asian_langs
 (klue) aimldl@tkim-glinux:~/github/aimldl/llm_benchmarks_asian_langs$ jupyter lab
 ```
-
-To cancel Jupyter Lab, press Ctrl+C twice.
-
-## Run the KLUE benchmarks
-
-### Two options to run tasks for KLUE.
-- Option 1. Use a notebook.
-- Option 2. Use a terminal and follow the instructions in each sub-directory
 
 For example, 
 - Option 1. Open [run_klue.ipynb](run_klue.ipynb) and run the notebook.

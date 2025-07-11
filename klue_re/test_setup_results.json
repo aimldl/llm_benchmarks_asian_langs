@@ -1,0 +1,59 @@
+{
+  "imports": {
+    "google.genai": true,
+    "datasets": true,
+    "pandas": true,
+    "tqdm": true
+  },
+  "environment": {
+    "GOOGLE_CLOUD_PROJECT": true
+  },
+  "directories": {
+    "logs": true,
+    "benchmark_results": true,
+    "result_analysis": true,
+    "eval_dataset": true
+  },
+  "files": {
+    "klue_re-gemini2_5flash.py": true,
+    "run": true,
+    "setup.sh": true,
+    "requirements.txt": true,
+    "get_errors.sh": true,
+    "test_logging.sh": true,
+    "verify_scripts.sh": true
+  },
+  "dataset": {
+    "success": true,
+    "dataset_size": 7765,
+    "sample_keys": [
+      "guid",
+      "sentence",
+      "subject_entity",
+      "object_entity",
+      "label",
+      "source"
+    ],
+    "subject_entity_keys": [
+      "word",
+      "start_idx",
+      "end_idx",
+      "type"
+    ],
+    "object_entity_keys": [
+      "word",
+      "start_idx",
+      "end_idx",
+      "type"
+    ],
+    "sample_sentence": "20\ub300 \ub0a8\uc131 A(26)\uc528\uac00 \uc544\ubc84\uc9c0 \uce58\ub8cc\ube44\ub97c \uc704\ud574 B(30)\uc528\uac00 \ubaa8\uc544\ub454 \ub3c8\uc744 \ud6d4\uccd0 \uc778\ud130\ub137 \ubc29\uc1a1 BJ\uc5d0\uac8c '\ubcc4\ud48d\uc120'\uc73c\ub85c \uc3dc \uc0ac\uc2e4\uc774 \uc54c\ub824\uc84c\ub2e4.",
+    "sample_subject": "A",
+    "sample_object": "30",
+    "sample_relation": 0
+  },
+  "vertex_ai": {
+    "success": true,
+    "project_id": "vertex-workbench-notebook",
+    "models_available": true
+  }
+}

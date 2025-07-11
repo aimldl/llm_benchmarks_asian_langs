@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default file name
-DEFAULT_FILE="klue_tc_results_intermediate_009100_20250709_233534.csv"
+DEFAULT_FILE="benchmark_results/klue_tc_results_009100_20250709_233534.csv"
 
 # Use the first argument as the file name, or the default if no argument is provided
 FILE="${1:-$DEFAULT_FILE}"
@@ -9,8 +9,17 @@ FILE="${1:-$DEFAULT_FILE}"
 # Check if the input CSV file exists
 if [ ! -f "$FILE" ]; then
   echo "Error: Input CSV file '$FILE' not found." >&2
+  echo "Usage: $0 [csv_file_path]" >&2
+  echo "  csv_file_path: Path to the CSV file to analyze (default: $DEFAULT_FILE)" >&2
   exit 1
 fi
+
+# Create result_analysis directory if it doesn't exist
+mkdir -p result_analysis
+
+# Extract filename without path for output naming
+FILENAME=$(basename "$FILE")
+OUTPUT_FILE="result_analysis/errors_${FILENAME%.csv}.txt"
 
 # Create a temporary file for the awk script
 # mktemp creates a unique temporary file name
@@ -48,7 +57,21 @@ EOF_AWK_SCRIPT
 # Execute awk with the temporary script file and the input CSV file
 # -f "$AWK_SCRIPT_TEMP" tells awk to read its script from the temporary file
 # -v FILENAME_FROM_SHELL="$FILE" passes the actual input CSV filename to awk
-awk -F',' -f "$AWK_SCRIPT_TEMP" -v FILENAME_FROM_SHELL="$FILE" "$FILE"
+echo "Analyzing errors in: $FILE"
+echo "Output will be saved to: $OUTPUT_FILE"
+echo "---"
+
+awk -F',' -f "$AWK_SCRIPT_TEMP" -v FILENAME_FROM_SHELL="$FILE" "$FILE" > "$OUTPUT_FILE"
+
+# Check if the output file was created and has content
+if [ -s "$OUTPUT_FILE" ]; then
+    ERROR_COUNT=$(wc -l < "$OUTPUT_FILE")
+    echo "Analysis complete! Found $ERROR_COUNT errors."
+    echo "Error details saved to: $OUTPUT_FILE"
+else
+    echo "No errors found in the CSV file."
+    echo "Empty output file created: $OUTPUT_FILE"
+fi
 
 # Remove the temporary awk script file upon completion
-rm -f "$AWK_SCRIPT_TEMP"
+rm -f "$AWK_SCRIPT_TEMP" 
