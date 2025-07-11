@@ -1,7 +1,5 @@
 # Installing Anaconda
 
----
-
 This guide summarizes essential commands for installing Anaconda on Linux.
 
 ### 1. Install Anaconda on Linux
