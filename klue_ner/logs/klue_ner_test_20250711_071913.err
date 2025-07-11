@@ -1,0 +1,20 @@
+./run test
+Timestamp: 2025. 07. 11. (금) 07:19:25 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner
+========================================
+
+No error analysis section found in the log.
+
+2025-07-11 07:19:25,690 - ERROR - ❌ A key was not found in the dataset item: 'guid'. The dataset schema may have changed.
+project_id: vertex-workbench-notebook
+Traceback (most recent call last):
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 647, in <module>
+    main() 
+    ^^^^^^
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 635, in main
+    test_data = benchmark.load_dataset()
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 130, in load_dataset
+    "id": item["guid"],
+          ~~~~^^^^^^^^
+KeyError: 'guid'

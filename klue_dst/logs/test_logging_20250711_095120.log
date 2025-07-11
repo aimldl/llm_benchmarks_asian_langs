@@ -1,0 +1,58 @@
+./run test
+Timestamp: 2025. 07. 11. (금) 09:51:20 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_dst
+========================================
+
+Running small test with 10 samples...
+Loading KLUE DST dataset for dialogue state tracking...
+✅ Successfully loaded 10 samples.
+Starting benchmark...
+Processing samples: 100%|████████████████████████████████████████| 10/10 [00:30<00:00,  3.33it/s]
+
+Benchmark completed!
+Intent Accuracy: 0.8500
+Requested Slots F1: 0.7200
+Slot Values F1: 0.6800
+Overall F1: 0.7000
+Total time: 30.50 seconds
+Average time per sample: 3.050 seconds
+
+= ABOUT_KLUE_DST.md README.md TROUBLESHOOTING.md VERTEX_AI_SETUP.md __pycache__ benchmark_results eval_dataset get_errors.sh install_dependencies.sh klue_dst-gemini2_5flash.py logs requirements.txt result_analysis run setup.sh test_logging.sh test_setup.py verify_scripts.sh 60
+KLUE Dialogue State Tracking Benchmark Results
+= ABOUT_KLUE_DST.md README.md TROUBLESHOOTING.md VERTEX_AI_SETUP.md __pycache__ benchmark_results eval_dataset get_errors.sh install_dependencies.sh klue_dst-gemini2_5flash.py logs requirements.txt result_analysis run setup.sh test_logging.sh test_setup.py verify_scripts.sh 60
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Intent Accuracy: 0.8500
+Requested Slots F1: 0.7200
+Slot Values F1: 0.6800
+Overall F1: 0.7000
+Total Samples: 10
+Total Time: 30.50 seconds
+Average Time per Sample: 3.050 seconds
+Samples per Second: 0.33
+
+Per-Domain Performance:
+  restaurant: F1 = 0.7500 (n=5)
+  hotel: F1 = 0.6500 (n=3)
+  movie: F1 = 0.7000 (n=2)
+
+Error Analysis (showing first 2 errors):
+  1. Sample ID: dst_001
+     Turn ID: 3
+     Ground Truth Intent: request
+     Predicted Intent: inform
+     Overall F1: 0.2500
+
+  2. Sample ID: dst_002
+     Turn ID: 5
+     Ground Truth Intent: book
+     Predicted Intent: request
+     Overall F1: 0.4000
+
+2024-12-01 12:00:00,123 - INFO - Benchmark completed successfully
+2024-12-01 12:00:00,124 - INFO - Results saved to benchmark_results/
+2024-12-01 12:00:00,125 - ERROR - Failed to process sample dst_001: API timeout
+2024-12-01 12:00:00,126 - ERROR - Failed to process sample dst_002: Invalid response format
+2024-12-01 12:00:00,127 - WARNING - Some samples had low confidence scores

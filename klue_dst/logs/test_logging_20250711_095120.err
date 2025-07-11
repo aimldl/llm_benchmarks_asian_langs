@@ -1,0 +1,20 @@
+./run test
+Timestamp: 2025. 07. 11. (금) 09:51:20 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_dst
+========================================
+
+Error Analysis (showing first 2 errors):
+  1. Sample ID: dst_001
+     Turn ID: 3
+     Ground Truth Intent: request
+     Predicted Intent: inform
+     Overall F1: 0.2500
+
+  2. Sample ID: dst_002
+     Turn ID: 5
+     Ground Truth Intent: book
+     Predicted Intent: request
+     Overall F1: 0.4000
+
+2024-12-01 12:00:00,125 - ERROR - Failed to process sample dst_001: API timeout
+2024-12-01 12:00:00,126 - ERROR - Failed to process sample dst_002: Invalid response format

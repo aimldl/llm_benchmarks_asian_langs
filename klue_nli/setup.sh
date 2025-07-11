@@ -119,6 +119,11 @@ show_next_steps() {
     echo "4. Set your project ID: export GOOGLE_CLOUD_PROJECT='your-project-id'"
     echo "5. Enable Vertex AI API: gcloud services enable aiplatform.googleapis.com"
     echo "6. Run the benchmark: ./run test (for small test) or ./run full (for full benchmark)"
+    echo ""
+    print_info "Logging features:"
+    echo "- All benchmark runs are automatically logged to the 'logs/' directory"
+    echo "- Log files include command headers for easy identification"
+    echo "- Separate error logs (.err) are created for focused debugging"
 }
 
 # Main script logic

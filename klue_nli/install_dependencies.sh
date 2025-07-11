@@ -1,25 +1,30 @@
 #!/bin/bash
 
-# KLUE NLI Benchmark - Install Dependencies Script
-# This script installs the required Python dependencies for the KLUE NLI benchmark
+echo "Installing dependencies for KLUE NLI Benchmark (Vertex AI)..."
 
-set -e  # Exit on any error
-
-echo "Installing KLUE NLI benchmark dependencies..."
-
-# Check if requirements.txt exists
-if [ ! -f "requirements.txt" ]; then
-    echo "Error: requirements.txt not found in current directory"
+# Check if pip is available
+if ! command -v pip &> /dev/null; then
+    echo "Error: pip is not installed. Please install Python and pip first."
     exit 1
 fi
 
 # Install dependencies
-echo "Installing Python packages from requirements.txt..."
+echo "Installing Python packages..."
 pip install -r requirements.txt
 
-echo "✅ Dependencies installed successfully!"
-echo ""
-echo "Next steps:"
-echo "1. Set up Google Cloud authentication"
-echo "2. Set your project ID: export GOOGLE_CLOUD_PROJECT='your-project-id'"
-echo "3. Run the benchmark: python klue_nli-gemini2_5flash.py --project-id 'your-project-id'" 
+# Check if installation was successful
+if [ $? -eq 0 ]; then
+    echo "✅ Dependencies installed successfully!"
+    echo ""
+    echo "Next steps for Vertex AI setup:"
+    echo "1. Install Google Cloud CLI: https://cloud.google.com/sdk/docs/install"
+    echo "2. Authenticate with gcloud: gcloud auth login"
+    echo "3. Set up application default credentials: gcloud auth application-default login"
+    echo "4. Set your project ID: export GOOGLE_CLOUD_PROJECT='your-project-id'"
+    echo "5. Enable Vertex AI API: gcloud services enable aiplatform.googleapis.com"
+    echo "6. Test the setup: python test_setup.py"
+    echo "7. Run the benchmark: python klue_nli-gemini2_5flash.py --project-id 'your-project-id'"
+else
+    echo "❌ Failed to install dependencies. Please check the error messages above."
+    exit 1
+fi 

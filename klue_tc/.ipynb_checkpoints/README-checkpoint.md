@@ -217,8 +217,113 @@ The run script automatically:
 - Verifies that `GOOGLE_CLOUD_PROJECT` environment variable is set
 - Executes the appropriate Python command with the correct parameters
 - Provides clear error messages if prerequisites are not met
+- **Captures and saves all output to log files** (see [Logging](#logging) section)
 
 This is the recommended way to run the benchmark for most users.
+
+| Consideration | Text Classification (TC) | Natural Language Inference (NLI) |
+| :--- | :--- | :--- |
+| **Input Length** | Shorter inputs (e.g., news titles) | Longer inputs (premise + hypothesis) |
+| **Token Usage** | Lower token consumption per sample | Higher token consumption due to paired inputs |
+| **Processing Time** | Faster due to a simpler task | Slower due to complex logical reasoning |
+
+---
+
+## Logging
+
+The benchmark automatically captures and saves all output to log files for later review and analysis.
+
+### Log File Locations
+
+-   **Logs:** All log files (`.log`, `.err`) are saved in the `logs/` directory.
+-   **Intermediate Results:** CSV, JSON, and TXT files with intermediate results are saved in the `benchmark_results/` directory.
+
+#### `logs/` Directory Structure
+```bash
+logs/
+├── klue_tc_test_10samples_20250706_185948.log
+├── klue_tc_test_10samples_20250706_185948.err
+├── klue_tc_custom_100samples_20250706_185948.log
+└── klue_tc_custom_100samples_20250706_185948.err
+```
+
+#### `benchmark_results/` Directory Structure
+```bash
+benchmark_results/
+├── klue_tc_results_009050_20250709_233210.csv
+├── klue_tc_results_009100_20250709_233534.json
+├── klue_tc_metrics_009050_20250709_233210.json
+└── klue_tc_error_analysis_009100_20250709_233534.txt
+```
+### File Naming Convention
+
+Log files follow a consistent naming format:
+`klue_tc_[mode]_[samples]samples_[timestamp].[log|err]`
+
+-   **`mode`**: The benchmark mode (`test`, `full`, or `custom`).
+-   **`samples`**: The number of samples processed (`10`, `all`, or a specific number).
+-   **`timestamp`**: The execution timestamp (`YYYYMMDD_HHMMSS`).
+
+### File Types
+
+#### `.log` Files
+Contain the complete output from a benchmark run, including:
+-   Command header with run details.
+-   Initialization messages and progress updates.
+-   Final results and performance metrics.
+-   A summary of the error analysis.
+-   All detailed error logs.
+
+#### `.err` Files
+Contain a focused summary of all errors, including:
+-   Command header with run details.
+-   The error analysis section showing misclassified samples.
+-   Detailed error logs with timestamps.
+-   JSON response details for failed predictions.
+-   Error messages and stack traces.
+
+### Command Header Format
+
+Each log file begins with a self-documenting header for easy identification:
+./run custom 100 Timestamp: Thu Jul 11 05:08:49 PDT 2025 Working Directory: /path/to/klue_tc
+### Benefits of Logging
+-   **Complete Audit Trail**: Every run is logged for future reference.
+-   **Self-Documenting**: Each log includes the command and its context.
+-   **Targeted Error Analysis**: Separate `.err` files simplify reviewing issues.
+-   **Performance Tracking**: Easily compare results across different runs.
+-   **Efficient Debugging**: Detailed logs help identify and resolve issues quickly.
+-   **Compliance**: Maintain clear records of all benchmark executions.
+
+### Example Usage
+
+1.  **Run the benchmark:**
+    ```bash
+    # Run a quick test with 10 samples
+    ./run test
+
+    # Run the full benchmark on all samples
+    ./run full
+
+    # Run a custom benchmark with 100 samples
+    ./run custom 100
+    ```
+
+2.  **Check the generated files:**
+    ```bash
+    # See what logs were created
+    ls -la logs/
+
+    # Review the full output of a specific run
+    cat logs/klue_tc_custom_100samples_*.log
+
+    # Review only the errors for that run
+    cat logs/klue_tc_custom_100samples_*.err
+    ```
+
+### File Management
+-   Log files are created automatically for each run.
+-   Old log files are **not** automatically deleted.
+-   Periodically archive or remove old logs to manage disk space.
 
 ## Available Scripts
 
@@ -271,6 +376,12 @@ The benchmark generates several output files in the specified output directory:
 
 3. **CSV Results**: `klue_tc_results_YYYYMMDD_HHMMSS.csv`
    - Tabular format for easy analysis in Excel/spreadsheets
+
+4. **Intermediate Results** (saved periodically during long benchmarks):
+   - `klue_tc_results_[sample_count]_YYYYMMDD_HHMMSS.csv`
+   - `klue_tc_results_[sample_count]_YYYYMMDD_HHMMSS.json`
+   - `klue_tc_metrics_[sample_count]_YYYYMMDD_HHMMSS.json`
+   - `klue_tc_error_analysis_[sample_count]_YYYYMMDD_HHMMSS.txt`
 
 ## Example Output
 

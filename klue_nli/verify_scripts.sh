@@ -16,6 +16,7 @@ required_files=(
     "test_setup.py"
     "install_dependencies.sh"
     "README.md"
+    "get_errors.sh"
 )
 
 # Check if all required files exist
@@ -42,10 +43,12 @@ chmod +x setup.sh
 chmod +x run
 chmod +x install_dependencies.sh
 chmod +x verify_scripts.sh
+chmod +x get_errors.sh
 
 echo "✅ Scripts are now executable!"
 echo ""
 echo "You can now run:"
 echo "  ./setup.sh full    # Complete setup"
 echo "  ./run test         # Run small test"
-echo "  ./run full         # Run full benchmark" 
+echo "  ./run full         # Run full benchmark"
+echo "  ./get_errors.sh    # Extract error details from results" 

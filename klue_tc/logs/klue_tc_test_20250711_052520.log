@@ -1,0 +1,92 @@
+Executed Command: ./run test
+Timestamp: 2025. 07. 11. (금) 05:25:20 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_tc
+========================================
+
+2025-07-11 05:25:22,231 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-11 05:25:22,231 - INFO - Model name set to: gemini-2.5-flash
+2025-07-11 05:25:22,231 - INFO - Loading KLUE YNAT dataset for topic classification...
+2025-07-11 05:25:37,176 - INFO - Preparing to load a subset of 10 samples.
+2025-07-11 05:25:37,177 - INFO - Reached sample limit of 10. Halting data loading.
+2025-07-11 05:25:37,177 - INFO - ✅ Successfully loaded 10 samples.
+2025-07-11 05:25:37,177 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/10 [00:00<?, ?it/s]2025-07-11 05:25:37,178 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:25:42,018 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:25:42,020 - INFO - AFC remote call 1 is done.
+Processing samples:  10%|█         | 1/10 [00:04<00:43,  4.88s/it]2025-07-11 05:25:42,060 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:25:47,865 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:25:47,866 - INFO - AFC remote call 1 is done.
+Processing samples:  20%|██        | 2/10 [00:10<00:43,  5.45s/it]2025-07-11 05:25:47,907 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:25:51,283 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:25:51,284 - INFO - AFC remote call 1 is done.
+Processing samples:  30%|███       | 3/10 [00:14<00:31,  4.52s/it]2025-07-11 05:25:51,325 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:25:54,549 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:25:54,551 - INFO - AFC remote call 1 is done.
+Processing samples:  40%|████      | 4/10 [00:17<00:24,  4.03s/it]2025-07-11 05:25:54,591 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:25:58,423 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:25:58,425 - INFO - AFC remote call 1 is done.
+Processing samples:  50%|█████     | 5/10 [00:21<00:19,  3.97s/it]2025-07-11 05:25:58,465 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:26:05,544 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:26:05,545 - INFO - AFC remote call 1 is done.
+Processing samples:  60%|██████    | 6/10 [00:28<00:20,  5.04s/it]2025-07-11 05:26:05,585 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:26:08,958 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:26:08,959 - INFO - AFC remote call 1 is done.
+Processing samples:  70%|███████   | 7/10 [00:31<00:13,  4.51s/it]2025-07-11 05:26:08,999 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:26:16,481 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:26:16,482 - INFO - AFC remote call 1 is done.
+Processing samples:  80%|████████  | 8/10 [00:39<00:10,  5.47s/it]2025-07-11 05:26:16,523 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:26:25,648 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:26:25,649 - INFO - AFC remote call 1 is done.
+Processing samples:  90%|█████████ | 9/10 [00:48<00:06,  6.63s/it]2025-07-11 05:26:25,689 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-11 05:26:28,221 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-11 05:26:28,222 - INFO - AFC remote call 1 is done.
+Processing samples: 100%|██████████| 10/10 [00:51<00:00,  5.37s/it]Processing samples: 100%|██████████| 10/10 [00:51<00:00,  5.11s/it]
+2025-07-11 05:26:28,262 - INFO - Benchmark completed!
+2025-07-11 05:26:28,262 - INFO - Accuracy: 0.5000 (5/10)
+2025-07-11 05:26:28,262 - INFO - Total time: 51.09 seconds
+2025-07-11 05:26:28,262 - INFO - Average time per sample: 5.109 seconds
+2025-07-11 05:26:28,263 - INFO - Metrics saved to: benchmark_results/klue_tc_metrics_20250711_052628.json
+2025-07-11 05:26:28,263 - INFO - Detailed results saved to: benchmark_results/klue_tc_results_20250711_052628.json
+2025-07-11 05:26:28,266 - INFO - Results saved as CSV: benchmark_results/klue_tc_results_20250711_052628.csv
+2025-07-11 05:26:28,267 - INFO - Error analysis saved to: benchmark_results/klue_tc_error_analysis_20250711_052628.txt
+
+============================================================
+KLUE Topic Classification Benchmark Results
+============================================================
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Accuracy: 0.5000 (5/10)
+Total Time: 51.09 seconds
+Average Time per Sample: 5.109 seconds
+Samples per Second: 0.20
+
+Per-label Accuracy:
+  IT과학: 1.0000 (1/1)
+  경제: 1.0000 (2/2)
+  사회: 0.1667 (1/6)
+  생활문화: 1.0000 (1/1)
+
+Error Analysis (showing first 5 errors):
+  1. True: 사회 | Predicted: 경제
+     Text: 5억원 무이자 융자는 되고 7천만원 이사비는 안된다...
+     Prediction: 경제
+
+  2. True: 사회 | Predicted: 정치
+     Text: 왜 수소충전소만 더 멀리 떨어져야 하나 한경연 규제개혁 건의...
+     Prediction: 정치
+
+  3. True: 사회 | Predicted: 정치
+     Text: 모의선거 교육 불허 선관위·교육부 각성하라...
+     Prediction: 정치
+
+  4. True: 사회 | Predicted: 정치
+     Text: 가짜뉴스 징벌적 손해배상제도 도입 변협 토론회...
+     Prediction: 정치
+
+  5. True: 사회 | Predicted: 경제
+     Text: MBN 노조 부동산 물적분할 중단하고 소유경영 분리해야...
+     Prediction: 경제
+

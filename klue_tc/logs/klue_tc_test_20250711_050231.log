@@ -1,0 +1,135 @@
+2025-07-06 18:59:48,058 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-06 18:59:48,059 - INFO - Initialized model: gemini-2.5-flash
+2025-07-06 18:59:48,059 - INFO - Loading KLUE YNAT dataset for topic classification...
+2025-07-06 19:00:02,824 - INFO - Preparing to load a subset of 100 samples.
+2025-07-06 19:00:02,828 - INFO - Reached sample limit of 100. Halting data loading.
+2025-07-06 19:00:02,828 - INFO - ✅ Successfully loaded 100 samples.
+2025-07-06 19:00:02,828 - INFO - Starting benchmark...
+2025-07-06 19:01:48,002 - ERROR - Prediction failed: Cannot get the response text.
+Cannot get the Candidate text.
+Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+Content:
+{
+  "role": "model"
+}
+Candidate:
+{
+  "content": {
+    "role": "model"
+  },
+  "finish_reason": "MAX_TOKENS"
+}
+Response:
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model"
+      },
+      "finish_reason": "MAX_TOKENS"
+    }
+  ],
+  "usage_metadata": {
+    "prompt_token_count": 594,
+    "total_token_count": 1617,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 594
+      }
+    ],
+    "thoughts_token_count": 1023
+  },
+  "model_version": "gemini-2.5-flash",
+  "create_time": "2025-07-06T19:01:40.492285Z",
+  "response_id": "FMhqaP2FHqW8nvgP2IrW4As"
+}
+2025-07-06 19:02:56,717 - ERROR - Prediction failed: Cannot get the response text.
+Cannot get the Candidate text.
+Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+Content:
+{
+  "role": "model"
+}
+Candidate:
+{
+  "content": {
+    "role": "model"
+  },
+  "finish_reason": "MAX_TOKENS"
+}
+Response:
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model"
+      },
+      "finish_reason": "MAX_TOKENS"
+    }
+  ],
+  "usage_metadata": {
+    "prompt_token_count": 587,
+    "total_token_count": 1610,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 587
+      }
+    ],
+    "thoughts_token_count": 1023
+  },
+  "model_version": "gemini-2.5-flash",
+  "create_time": "2025-07-06T19:02:48.616287Z",
+  "response_id": "WMhqaMPPJaKgnvgPiPGr4AE"
+}
+Processing samples: 100%|█████████████████████| 100/100 [07:25<00:00,  4.46s/it]
+2025-07-06 19:07:28,421 - INFO - Benchmark completed!
+2025-07-06 19:07:28,421 - INFO - Accuracy: 0.7000 (70/100)
+2025-07-06 19:07:28,421 - INFO - Total time: 445.59 seconds
+2025-07-06 19:07:28,421 - INFO - Average time per sample: 4.456 seconds
+2025-07-06 19:07:28,421 - INFO - Metrics saved to: benchmark_results/klue_tc_metrics_20250706_190728.json
+2025-07-06 19:07:28,423 - INFO - Detailed results saved to: benchmark_results/klue_tc_results_20250706_190728.json
+2025-07-06 19:07:28,426 - INFO - Results saved as CSV: benchmark_results/klue_tc_results_20250706_190728.csv
+
+============================================================
+KLUE Topic Classification Benchmark Results
+============================================================
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Accuracy: 0.7000 (70/100)
+Total Time: 445.59 seconds
+Average Time per Sample: 4.456 seconds
+Samples per Second: 0.22
+
+Per-label Accuracy:
+  IT과학: 0.5000 (1/2)
+  경제: 0.9130 (21/23)
+  사회: 0.5122 (21/41)
+  생활문화: 1.0000 (12/12)
+  세계: 0.6667 (6/9)
+  스포츠: 1.0000 (7/7)
+  정치: 0.3333 (2/6)
+
+Error Analysis (showing first 5 errors):
+  1. True: 사회 | Predicted: 경제
+     Text: 5억원 무이자 융자는 되고 7천만원 이사비는 안된다...
+     Prediction: 경제
+
+  2. True: 사회 | Predicted: 정치
+     Text: 왜 수소충전소만 더 멀리 떨어져야 하나 한경연 규제개혁 건의...
+     Prediction: 정치
+
+  3. True: 사회 | Predicted: 정치
+     Text: 모의선거 교육 불허 선관위·교육부 각성하라...
+     Prediction: 정치
+
+  4. True: 사회 | Predicted: 정치
+     Text: 가짜뉴스 징벌적 손해배상제도 도입 변협 토론회...
+     Prediction: 정치
+
+  5. True: 사회 | Predicted: 경제
+     Text: MBN 노조 부동산 물적분할 중단하고 소유경영 분리해야...
+     Prediction: 경제

@@ -1,0 +1,134 @@
+2025-07-06 18:59:48,058 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-06 18:59:48,059 - INFO - Initialized model: gemini-2.5-flash
+2025-07-06 18:59:48,059 - INFO - Loading KLUE DP dataset for dependency parsing...
+2025-07-06 19:00:02,824 - INFO - Preparing to load a subset of 100 samples.
+2025-07-06 19:00:02,828 - INFO - Reached sample limit of 100. Halting data loading.
+2025-07-06 19:00:02,828 - INFO - ✅ Successfully loaded 100 samples.
+2025-07-06 19:00:02,828 - INFO - Starting benchmark...
+2025-07-06 19:01:48,002 - ERROR - Prediction failed: Cannot get the response text.
+Cannot get the Candidate text.
+Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+Content:
+{
+  "role": "model"
+}
+Candidate:
+{
+  "content": {
+    "role": "model"
+  },
+  "finish_reason": "MAX_TOKENS"
+}
+Response:
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model"
+      },
+      "finish_reason": "MAX_TOKENS"
+    }
+  ],
+  "usage_metadata": {
+    "prompt_token_count": 594,
+    "total_token_count": 1617,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 594
+      }
+    ],
+    "thoughts_token_count": 1023
+  },
+  "model_version": "gemini-2.5-flash",
+  "create_time": "2025-07-06T19:01:40.492285Z",
+  "response_id": "FMhqaP2FHqW8nvgP2IrW4As"
+}
+2025-07-06 19:02:56,717 - ERROR - Prediction failed: Cannot get the response text.
+Cannot get the Candidate text.
+Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+Content:
+{
+  "role": "model"
+}
+Candidate:
+{
+  "content": {
+    "role": "model"
+  },
+  "finish_reason": "MAX_TOKENS"
+}
+Response:
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model"
+      },
+      "finish_reason": "MAX_TOKENS"
+    }
+  ],
+  "usage_metadata": {
+    "prompt_token_count": 594,
+    "total_token_count": 1617,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 594
+      }
+    ],
+    "thoughts_token_count": 1023
+  },
+  "model_version": "gemini-2.5-flash",
+  "create_time": "2025-07-06T19:02:40.492285Z",
+  "response_id": "FMhqaP2FHqW8nvgP2IrW4As"
+}
+2025-07-06 19:03:15,123 - INFO - Benchmark completed!
+2025-07-06 19:03:15,124 - INFO - UAS: 0.8234 (8234/10000)
+2025-07-06 19:03:15,125 - INFO - LAS: 0.7891 (7891/10000)
+2025-07-06 19:03:15,126 - INFO - Total time: 135.67 seconds
+2025-07-06 19:03:15,127 - INFO - Average time per sample: 1.357 seconds
+2025-07-06 19:03:15,128 - INFO - Samples per second: 0.74
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-dp-v1.1_dev_00001
+     Sentence: 한국어 문장의 의존 구문 분석을 수행합니다.
+     Words: 한국어 문장의 의존 구문 분석을 수행합니다
+     UAS: 0.2000 | LAS: 0.1000
+     Error: Failed to parse dependency structure
+
+  2. Sample ID: klue-dp-v1.1_dev_00002
+     Sentence: 복잡한 한국어 문법 구조를 이해해야 합니다.
+     Words: 복잡한 한국어 문법 구조를 이해해야 합니다
+     UAS: 0.3000 | LAS: 0.2000
+     Error: Incorrect head assignment
+
+  3. Sample ID: klue-dp-v1.1_dev_00003
+     Sentence: 의존 관계를 정확히 파악하는 것이 중요합니다.
+     Words: 의존 관계를 정확히 파악하는 것이 중요합니다
+     UAS: 0.4000 | LAS: 0.3000
+     Error: Missing dependency labels
+
+  4. Sample ID: klue-dp-v1.1_dev_00004
+     Sentence: 한국어의 특수한 문법적 특성을 고려해야 합니다.
+     Words: 한국어의 특수한 문법적 특성을 고려해야 합니다
+     UAS: 0.2500 | LAS: 0.1500
+     Error: Incorrect POS tag interpretation
+
+  5. Sample ID: klue-dp-v1.1_dev_00005
+     Sentence: 구문 분석의 정확도가 언어 이해에 핵심입니다.
+     Words: 구문 분석의 정확도가 언어 이해에 핵심입니다
+     UAS: 0.3500 | LAS: 0.2500
+     Error: Wrong dependency direction
+
+Per-POS Performance:
+  NNG (일반명사): UAS=0.8500, LAS=0.8200 (2500 words)
+  VV (동사): UAS=0.9000, LAS=0.8700 (1800 words)
+  JKS (주격조사): UAS=0.9500, LAS=0.9300 (1200 words)
+  JKO (목적격조사): UAS=0.9200, LAS=0.8900 (1100 words)
+  VA (형용사): UAS=0.8800, LAS=0.8500 (900 words)
+  MAG (일반부사): UAS=0.8500, LAS=0.8200 (800 words)
+  JKB (부사격조사): UAS=0.9300, LAS=0.9000 (700 words)
+  MM (관형사): UAS=0.8700, LAS=0.8400 (600 words)
+  EF (종결어미): UAS=0.9400, LAS=0.9100 (500 words)
+  EC (연결어미): UAS=0.9100, LAS=0.8800 (400 words)
