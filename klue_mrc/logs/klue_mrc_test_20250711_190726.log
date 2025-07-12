@@ -1,0 +1,14 @@
+./run test
+Timestamp: 2025. 07. 11. (금) 19:07:26 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_mrc
+========================================
+
+2025-07-11 19:07:28,796 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-11 19:07:28,796 - INFO - Model name set to: gemini-2.5-flash
+2025-07-11 19:07:28,796 - INFO - Loading KLUE MRC dataset for machine reading comprehension...
+2025-07-11 19:07:41,812 - INFO - Preparing to load a subset of 10 samples.
+2025-07-11 19:07:41,813 - INFO - Reached sample limit of 10. Halting data loading.
+2025-07-11 19:07:41,813 - INFO - ✅ Successfully loaded 10 samples.
+2025-07-11 19:07:41,814 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/10 [00:00<?, ?it/s]2025-07-11 19:07:41,814 - INFO - AFC is enabled with max remote calls: 10.

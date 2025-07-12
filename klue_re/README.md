@@ -289,7 +289,7 @@ klue_re/
 ├── install_dependencies.sh      # Dependency installation
 ├── requirements.txt             # Python dependencies
 ├── README.md                    # This file
-├── ABOUT_KLUE_RE.md            # Task description
+├── ABOUT_KLUE_RE.md             # Task description
 ├── TROUBLESHOOTING.md           # Troubleshooting guide
 ├── VERTEX_AI_SETUP.md           # Vertex AI setup
 ├── logs/                        # Log files

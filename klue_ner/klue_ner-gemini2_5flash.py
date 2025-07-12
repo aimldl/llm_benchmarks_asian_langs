@@ -9,6 +9,9 @@ import json
 import time
 import argparse
 import re
+import sys
+import io
+from contextlib import redirect_stdout, redirect_stderr
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
 from datetime import datetime
@@ -28,6 +31,14 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+# Reduce verbosity of Google Cloud client logging
+logging.getLogger('google.cloud.aiplatform').setLevel(logging.ERROR)
+logging.getLogger('google.auth').setLevel(logging.ERROR)
+logging.getLogger('google.api_core').setLevel(logging.ERROR)
+logging.getLogger('urllib3').setLevel(logging.ERROR)
+logging.getLogger('google.genai').setLevel(logging.ERROR)
+logging.getLogger('google.cloud').setLevel(logging.ERROR)
+
 @dataclass
 class BenchmarkConfig:
     """Configuration for the benchmark."""
@@ -44,6 +55,7 @@ class BenchmarkConfig:
     save_interval: int = 50  # Save intermediate results every N samples
     project_id: Optional[str] = None
     location: str = "us-central1"
+    verbose: bool = False  # Control logging verbosity
 
 class KLUENamedEntityRecognitionBenchmark:
     """Benchmark class for KLUE Named Entity Recognition task using Vertex AI."""
@@ -127,7 +139,7 @@ class KLUENamedEntityRecognitionBenchmark:
                     
                 # Process NER data
                 processed_data.append({
-                    "id": f"ner_{len(processed_data):06d}",  # Generate unique ID since guid is not available
+                    "id": f"ner-val_{len(processed_data):06d}",  # Generate unique ID since guid is not available
                     "tokens": item["tokens"],
                     "ner_tags": item["ner_tags"],
                     "text": " ".join(item["tokens"]),
@@ -256,18 +268,34 @@ class KLUENamedEntityRecognitionBenchmark:
             # Configure safety settings
             safety_settings = self.configure_safety_settings()
             
-            # Generate content
-            response = self.client.models.generate_content(
-                model=self.model_name,
-                contents=prompt,
-                config=GenerateContentConfig(
-                    safety_settings=safety_settings,
-                    max_output_tokens=self.config.max_tokens,
-                    temperature=self.config.temperature,
-                    top_p=self.config.top_p,
-                    top_k=self.config.top_k,
-                ),
-            )
+            # Generate content with optional logging suppression
+            if not self.config.verbose:
+                # In default mode, suppress all output from the API call
+                with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                    response = self.client.models.generate_content(
+                        model=self.model_name,
+                        contents=prompt,
+                        config=GenerateContentConfig(
+                            safety_settings=safety_settings,
+                            max_output_tokens=self.config.max_tokens,
+                            temperature=self.config.temperature,
+                            top_p=self.config.top_p,
+                            top_k=self.config.top_k,
+                        ),
+                    )
+            else:
+                # In verbose mode, allow all output
+                response = self.client.models.generate_content(
+                    model=self.model_name,
+                    contents=prompt,
+                    config=GenerateContentConfig(
+                        safety_settings=safety_settings,
+                        max_output_tokens=self.config.max_tokens,
+                        temperature=self.config.temperature,
+                        top_p=self.config.top_p,
+                        top_k=self.config.top_k,
+                    ),
+                )
             
             # Extract response text
             if response and response.text:
@@ -382,14 +410,32 @@ class KLUENamedEntityRecognitionBenchmark:
         """Run the NER benchmark."""
         logger.info("Starting benchmark...")
         
+        # Configure logging based on verbose mode
+        if not self.config.verbose:
+            # In default mode, completely suppress Google Cloud logging during benchmark
+            original_levels = {}
+            for logger_name in ['google.cloud.aiplatform', 'google.auth', 'google.api_core', 'urllib3', 'google.genai', 'google.cloud', 'google']:
+                logger_obj = logging.getLogger(logger_name)
+                original_levels[logger_name] = logger_obj.level
+                logger_obj.setLevel(logging.CRITICAL)  # Only show critical errors
+                logger_obj.disabled = True  # Completely disable
+        else:
+            # In verbose mode, allow all logging
+            original_levels = {}
+            for logger_name in ['google.cloud.aiplatform', 'google.auth', 'google.api_core', 'urllib3', 'google.genai', 'google.cloud', 'google']:
+                logger_obj = logging.getLogger(logger_name)
+                original_levels[logger_name] = logger_obj.level
+                logger_obj.setLevel(logging.INFO)
+                logger_obj.disabled = False
+        
         start_time = time.time()
         total_samples = len(test_data)
         correct_predictions = 0
         total_entities = 0
         predicted_entities = 0
         
-        # Process each sample
-        for i, sample in enumerate(tqdm(test_data, desc="Processing samples")):
+        # Process each sample with very infrequent progress bar updates (about 25% of current frequency)
+        for i, sample in enumerate(tqdm(test_data, desc="Processing samples", mininterval=10.0, maxinterval=30.0, leave=False, unit="samples", bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt}')):
             try:
                 # Make prediction
                 prediction_result = self.predict_single(sample["text"])
@@ -405,12 +451,12 @@ class KLUENamedEntityRecognitionBenchmark:
                 # Store result
                 result = {
                     "id": sample["id"],
-                    "text": sample["text"],
+                    "success": prediction_result["success"],
+                    "raw_response": prediction_result.get("raw_response", ""),
                     "true_entities": sample["entities"],
                     "predicted_entities": prediction_result.get("entities", []),
                     "metrics": metrics,
-                    "success": prediction_result["success"],
-                    "raw_response": prediction_result.get("raw_response", ""),
+                    "text": sample["text"],
                     "error": prediction_result.get("error", "")
                 }
                 
@@ -427,12 +473,12 @@ class KLUENamedEntityRecognitionBenchmark:
                 logger.error(f"Error processing sample {i}: {e}")
                 self.results.append({
                     "id": sample["id"],
-                    "text": sample["text"],
+                    "success": False,
+                    "raw_response": "",
                     "true_entities": sample["entities"],
                     "predicted_entities": [],
                     "metrics": {"precision": 0.0, "recall": 0.0, "f1": 0.0, "correct": 0, "predicted": 0, "total": len(sample["entities"])},
-                    "success": False,
-                    "raw_response": "",
+                    "text": sample["text"],
                     "error": str(e)
                 })
         
@@ -456,6 +502,12 @@ class KLUENamedEntityRecognitionBenchmark:
             "average_time_per_sample": total_time / total_samples if total_samples > 0 else 0.0,
             "samples_per_second": total_samples / total_time if total_time > 0 else 0.0
         }
+        
+        # Restore original logging levels
+        for logger_name, original_level in original_levels.items():
+            logger_obj = logging.getLogger(logger_name)
+            logger_obj.setLevel(original_level)
+            logger_obj.disabled = False  # Re-enable all loggers
         
         logger.info("Benchmark completed!")
         logger.info(f"F1 Score: {overall_f1:.4f} ({correct_predictions}/{total_entities})")
@@ -487,14 +539,14 @@ class KLUENamedEntityRecognitionBenchmark:
         for result in self.results:
             csv_data.append({
                 "id": result["id"],
-                "text": result["text"],
+                "success": result["success"],
+                "correct_entities": result["metrics"]["correct"],
                 "true_entities_count": len(result["true_entities"]),
                 "predicted_entities_count": len(result["predicted_entities"]),
                 "precision": result["metrics"]["precision"],
                 "recall": result["metrics"]["recall"],
                 "f1": result["metrics"]["f1"],
-                "correct_entities": result["metrics"]["correct"],
-                "success": result["success"],
+                "text": result["text"],
                 "error": result.get("error", "")
             })
         
@@ -525,12 +577,32 @@ class KLUENamedEntityRecognitionBenchmark:
         with open(metrics_file, 'w', encoding='utf-8') as f:
             json.dump(intermediate_metrics, f, ensure_ascii=False, indent=2)
         
-        # Save intermediate results
+        # Save intermediate results as JSON
         results_file = os.path.join(self.config.output_dir, f"klue_ner_results_{current_count:06d}_{timestamp}.json")
         with open(results_file, 'w', encoding='utf-8') as f:
             json.dump(self.results, f, ensure_ascii=False, indent=2)
         
-        logger.info(f"Intermediate results saved at {current_count} samples")
+        # Save intermediate results as CSV
+        csv_data = []
+        for result in self.results:
+            csv_data.append({
+                "id": result["id"],
+                "success": result["success"],
+                "correct_entities": result["metrics"]["correct"],
+                "true_entities_count": len(result["true_entities"]),
+                "predicted_entities_count": len(result["predicted_entities"]),
+                "precision": result["metrics"]["precision"],
+                "recall": result["metrics"]["recall"],
+                "f1": result["metrics"]["f1"],
+                "text": result["text"],
+                "error": result.get("error", "")
+            })
+        
+        csv_file = os.path.join(self.config.output_dir, f"klue_ner_results_{current_count:06d}_{timestamp}.csv")
+        df = pd.DataFrame(csv_data)
+        df.to_csv(csv_file, index=False, encoding='utf-8')
+        
+        logger.info(f"Intermediate results saved at {current_count} samples (JSON + CSV)")
     
     def save_error_analysis(self, timestamp: str):
         """Save error analysis for failed predictions."""
@@ -622,6 +694,7 @@ def main():
     parser.add_argument("--max-tokens", type=int, default=2048, help="Maximum output tokens")
     parser.add_argument("--no-save-predictions", action="store_true", help="Skip saving detailed predictions")
     parser.add_argument("--save-interval", type=int, default=50, help="Save intermediate results every N samples")
+    parser.add_argument("--verbose", action="store_true", help="Enable verbose logging (shows Google Cloud API details)")
     
     args = parser.parse_args()
     
@@ -634,7 +707,8 @@ def main():
         temperature=args.temperature,
         max_tokens=args.max_tokens,
         save_predictions=not args.no_save_predictions,
-        save_interval=args.save_interval
+        save_interval=args.save_interval,
+        verbose=args.verbose
     )
     
     # Create and run benchmark

@@ -1,0 +1,106 @@
+./run test
+Timestamp: 2025. 07. 12. (토) 05:35:13 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_re
+========================================
+
+2025-07-12 05:35:14,728 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-12 05:35:14,728 - INFO - Model name set to: gemini-2.5-flash
+2025-07-12 05:35:14,728 - INFO - Loading KLUE RE dataset for relation extraction...
+2025-07-12 05:35:24,476 - INFO - Preparing to load a subset of 10 samples.
+2025-07-12 05:35:24,477 - INFO - Reached sample limit of 10. Halting data loading.
+2025-07-12 05:35:24,477 - INFO - ✅ Successfully loaded 10 samples.
+2025-07-12 05:35:24,477 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/10 [00:00<?, ?it/s]2025-07-12 05:35:24,478 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:35:39,263 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:35:39,264 - INFO - AFC remote call 1 is done.
+2025-07-12 05:35:39,264 - ERROR - Cannot get the response text.
+2025-07-12 05:35:39,264 - ERROR - Cannot get the Candidate text.
+2025-07-12 05:35:39,264 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 05:35:39,264 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  10%|█         | 1/10 [00:14<02:13, 14.83s/it]2025-07-12 05:35:39,305 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:35:50,248 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:35:50,249 - INFO - AFC remote call 1 is done.
+Processing samples:  20%|██        | 2/10 [00:25<01:40, 12.57s/it]2025-07-12 05:35:50,289 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:36:02,099 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:36:02,100 - INFO - AFC remote call 1 is done.
+Processing samples:  30%|███       | 3/10 [00:37<01:25, 12.24s/it]2025-07-12 05:36:02,140 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:36:15,504 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:36:15,507 - INFO - AFC remote call 1 is done.
+Processing samples:  40%|████      | 4/10 [00:51<01:16, 12.70s/it]2025-07-12 05:36:15,547 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:36:18,525 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:36:18,526 - INFO - AFC remote call 1 is done.
+Processing samples:  50%|█████     | 5/10 [00:54<00:46,  9.21s/it]2025-07-12 05:36:18,567 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:36:29,620 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:36:29,621 - INFO - AFC remote call 1 is done.
+Processing samples:  60%|██████    | 6/10 [01:05<00:39,  9.85s/it]2025-07-12 05:36:29,661 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:36:34,385 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:36:34,386 - INFO - AFC remote call 1 is done.
+Processing samples:  70%|███████   | 7/10 [01:09<00:24,  8.19s/it]2025-07-12 05:36:34,427 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:36:43,961 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:36:43,962 - INFO - AFC remote call 1 is done.
+Processing samples:  80%|████████  | 8/10 [01:19<00:17,  8.63s/it]2025-07-12 05:36:44,003 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:36:58,886 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:36:58,887 - INFO - AFC remote call 1 is done.
+Processing samples:  90%|█████████ | 9/10 [01:34<00:10, 10.60s/it]2025-07-12 05:36:58,928 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:37:01,902 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:37:01,903 - INFO - AFC remote call 1 is done.
+Processing samples: 100%|██████████| 10/10 [01:37<00:00,  8.26s/it]Processing samples: 100%|██████████| 10/10 [01:37<00:00,  9.75s/it]
+2025-07-12 05:37:01,943 - INFO - Benchmark completed!
+2025-07-12 05:37:01,943 - INFO - Accuracy: 0.0000 (0/10)
+2025-07-12 05:37:01,943 - INFO - Total time: 97.47 seconds
+2025-07-12 05:37:01,943 - INFO - Average time per sample: 9.747 seconds
+2025-07-12 05:37:01,944 - INFO - Metrics saved to: benchmark_results/klue_re_metrics_20250712_053701.json
+2025-07-12 05:37:01,944 - INFO - Detailed results saved to: benchmark_results/klue_re_results_20250712_053701.json
+2025-07-12 05:37:01,947 - INFO - Results saved as CSV: benchmark_results/klue_re_results_20250712_053701.csv
+2025-07-12 05:37:01,948 - INFO - Error analysis saved to: benchmark_results/klue_re_error_analysis_20250712_053701.txt
+============================================================
+KLUE Relation Extraction Benchmark Results
+============================================================
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Accuracy: 0.0000 (0/10)
+Total Time: 97.47 seconds
+Average Time per Sample: 9.747 seconds
+Samples per Second: 0.10
+
+Per-relation Type Performance:
+  0 (0): 0.0000 (0/7)
+  18 (18): 0.0000 (0/1)
+  17 (17): 0.0000 (0/1)
+  10 (10): 0.0000 (0/1)
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-re-v1_dev_00000
+     Sentence: 20대 남성 A(26)씨가 아버지 치료비를 위해 B(30)씨가 모아둔 돈을 훔쳐 인터넷 방송 BJ에게 '별풍선'으로 쏜 사실이 알려졌다....
+     Subject: A (PER)
+     Object: 30 (NOH)
+     True: 0 | Predicted: no_relation
+     Error: 'GenerateContentResponse' object has no attribute 'content'
+
+  2. Sample ID: klue-re-v1_dev_00001
+     Sentence: 그러나 심 의원은 보좌진이 접속 권한을 받아 정부 업무추진비 사용 내역 등을 다운받았음에도 정부가 허위 사실을 유포하는 등 국정감사 활동을 방해하고 있다고 반박했고, 김동연 경제부...
+     Subject: 심 의원 (PER)
+     Object: 정부 (ORG)
+     True: 0 | Predicted: per:charges
+
+  3. Sample ID: klue-re-v1_dev_00002
+     Sentence: 영화 《룸》에서 감금되어 살아가는 여자의 아들 '잭' 역으로 주목받으며, 크리틱스 초이스 영화상 최우수 아역연기상, 캐나다 스크린 어워드(캐나다 영화 & 텔레비전 아카데미상) 영화...
+     Subject: 잭 (PER)
+     Object: 캐나다 스크린 어워드 (POH)
+     True: 0 | Predicted: no_relation
+
+  4. Sample ID: klue-re-v1_dev_00003
+     Sentence: 전라남도(도지사 김영록)는 해양수산부의 2020년 어촌뉴딜300 공모사업에 15개 연안 시군 70개소 7천61억 원 규모를 신청했다고 14일 밝혔다....
+     Subject: 해양수산부 (ORG)
+     Object: 도지사 (POH)
+     True: 0 | Predicted: no_relation
+
+  5. Sample ID: klue-re-v1_dev_00004
+     Sentence: 부산항만공사(BPA, 사장 남기찬)는 27일 아동의 인권존중과 아동학대 예방에 대한 인식을 제고하기 위해 전 임직원을 대상으로 아동학대 예방교육을 실시했다....
+     Subject: 부산항만공사 (ORG)
+     Object: 27일 (DAT)
+     True: 0 | Predicted: no_relation
+

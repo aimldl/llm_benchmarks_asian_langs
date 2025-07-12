@@ -122,7 +122,21 @@ MemoryError: Unable to allocate memory
 3. **Check disk space**: Ensure sufficient disk space for log files
 4. **Review log extraction**: Use `./test_logging.sh` to test logging functionality
 
-### 8. Script Permission Issues
+### 8. Output Clutter Issues
+
+**Problem**: Too much redundant output or Google Cloud logging cluttering the progress
+
+**Solutions**:
+1. **Use clean mode (default)**: The `./run` script uses clean mode by default
+2. **Switch to verbose mode for debugging**:
+   ```bash
+   python klue_ner-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples 10 --verbose
+   ```
+
+3. **Check progress bar**: Clean mode shows a cleaner progress bar with less frequent updates
+4. **Review log files**: Full details are always saved in log files regardless of output mode
+
+### 9. Script Permission Issues
 
 **Problem**: Scripts not executable
 ```
@@ -140,7 +154,7 @@ bash: ./run: Permission denied
    chmod +x run setup.sh install_dependencies.sh get_errors.sh test_logging.sh verify_scripts.sh
    ```
 
-### 9. Python Import Errors
+### 10. Python Import Errors
 
 **Problem**: Missing Python packages
 ```
@@ -160,7 +174,7 @@ ModuleNotFoundError: No module named 'google.genai'
 
 3. **Verify Python environment**: Ensure you're using the correct Python environment
 
-### 10. Entity Type Mapping Issues
+### 11. Entity Type Mapping Issues
 
 **Problem**: Incorrect entity type recognition
 

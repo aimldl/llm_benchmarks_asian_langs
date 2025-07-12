@@ -1,0 +1,63 @@
+KLUE NER Error Analysis
+==================================================
+
+1. Sample ID: ner-val_000255
+   Text: 배 두 나   씨 는   지 난 해   1 1 월   루 이 비 통   2 0 1 5   봄 / 여 름   콜 렉 션   컷 에   아 시 아 인 으 로 는   유 일 하 게   참 석 해   화 제 가   되 기 도   했 다 .
+   True Entities: [{'type': 'PS', 'text': '배 두 나', 'start': 0, 'end': 2}, {'type': 'DT', 'text': '지 난 해   1 1 월', 'start': 7, 'end': 13}, {'type': 'OG', 'text': '루 이 비 통', 'start': 15, 'end': 18}, {'type': 'DT', 'text': '2 0 1 5   봄 / 여 름', 'start': 20, 'end': 28}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+2. Sample ID: ner-val_000270
+   Text: ' 응 답 하 라   1 9 8 8 ' 에 서   이 민 지   씨 는   고 등 학 생   배 역 을   소 화 하 기   위 해   화 장 기   없 는   얼 굴 ,   단 발 머 리 ,   치 아   교 정 기 를   착 용 하 고   출 연 한 다 .
+   True Entities: [{'type': 'DT', 'text': '1 9 8 8', 'start': 6, 'end': 9}, {'type': 'PS', 'text': '이 민 지', 'start': 14, 'end': 16}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+3. Sample ID: ner-val_000387
+   Text: 한 국 지 질 자 원 연 구 원 은   2 0 1 1 년   3 월   일 본   도 호 쿠   지 방 에 서   발 생 한   동 일 본   대 지 진 의   영 향 에   의 한   것 으 로   추 정 했 다 .
+   True Entities: [{'type': 'OG', 'text': '한 국 지 질 자 원 연 구 원', 'start': 0, 'end': 8}, {'type': 'DT', 'text': '2 0 1 1 년   3 월', 'start': 11, 'end': 18}, {'type': 'LC', 'text': '일 본   도 호 쿠', 'start': 20, 'end': 25}, {'type': 'LC', 'text': '동 일 본', 'start': 36, 'end': 38}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+4. Sample ID: ner-val_000388
+   Text: 개 정 안 에   따 르 면   충 남 지 역   학 원 과   교 습 소 는   학 생 이 나   학 부 모 가   학 원 비 를   쉽 게   알 아 볼   수   있 도 록   실 내 뿐 만   아 니 라   건 물   주   출 입 구 와   보 조   출 입 구 에   게 시 해 야   한 다 .
+   True Entities: [{'type': 'LC', 'text': '충 남', 'start': 9, 'end': 10}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+5. Sample ID: ner-val_000456
+   Text: 4 년   전   2 0 1 0   남 아 공   월 드 컵   대 표 팀   최 종   명 단 에 서   탈 락 했 던   이 근 호 가   최 근   방 송 된   브 라 질   월 드 컵   특 집   다 큐 멘 터 리 에 서   당 시   심 경 을   밝 혔 습 니 다 .
+   True Entities: [{'type': 'DT', 'text': '4 년', 'start': 0, 'end': 1}, {'type': 'DT', 'text': '2 0 1 0', 'start': 5, 'end': 8}, {'type': 'OG', 'text': '남 아 공   월 드 컵   대 표 팀', 'start': 10, 'end': 20}, {'type': 'PS', 'text': '이 근 호', 'start': 35, 'end': 37}, {'type': 'LC', 'text': '브 라 질', 'start': 47, 'end': 49}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+6. Sample ID: ner-val_000479
+   Text: 천 안 함   사 건 은   지 난   2 0 1 0 년   3 월   2 6 일   오 후   9 시   2 2 분 경   백 령 도   서 남 방   2 . 5 k m   해 상 에 서   발 생 해 ,   승 조 원   1 0 4 명   중   4 6 명 의   전 사 자 를   냈 는 데 요 .
+   True Entities: [{'type': 'DT', 'text': '지 난   2 0 1 0 년   3 월   2 6 일', 'start': 8, 'end': 22}, {'type': 'TI', 'text': '오 후   9 시   2 2 분', 'start': 24, 'end': 32}, {'type': 'LC', 'text': '백 령 도   서 남 방   2 . 5 k m   해 상', 'start': 35, 'end': 50}, {'type': 'QT', 'text': '1 0 4 명', 'start': 63, 'end': 66}, {'type': 'QT', 'text': '4 6 명', 'start': 70, 'end': 72}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+7. Sample ID: ner-val_000571
+   Text: 방 송   패 널 로 는   변 희 재   미 디 어 워 치   대 표 와   진 성 호   전   국 회 의 원 ,   이 재 교   변 호 사 ,   이 호 중   서 강 대   교 수 ,   곽 동 수   숭 실 사 이 버 대   교 수 ,   이 택 광   경 희 대   교 수 가   출 연 한 다 .
+   True Entities: [{'type': 'PS', 'text': '변 희 재', 'start': 8, 'end': 10}, {'type': 'OG', 'text': '미 디 어 워 치', 'start': 12, 'end': 16}, {'type': 'PS', 'text': '진 성 호', 'start': 22, 'end': 24}, {'type': 'PS', 'text': '이 재 교', 'start': 34, 'end': 36}, {'type': 'PS', 'text': '이 호 중', 'start': 43, 'end': 45}, {'type': 'OG', 'text': '서 강 대', 'start': 47, 'end': 49}, {'type': 'PS', 'text': '곽 동 수', 'start': 55, 'end': 57}, {'type': 'OG', 'text': '숭 실 사 이 버 대', 'start': 59, 'end': 64}, {'type': 'PS', 'text': '이 택 광', 'start': 70, 'end': 72}, {'type': 'OG', 'text': '경 희 대', 'start': 74, 'end': 76}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+8. Sample ID: ner-val_000592
+   Text: 그 는   ' 비 버 리 힐 즈 의   아 이 들 ' 에 서   뛰 어 난   연 기 를   선 보 여   할 리 우 드 의   주 목 받 는   스 타 로   떠 올 랐 다 .
+   True Entities: [{'type': 'LC', 'text': '비 버 리 힐 즈', 'start': 4, 'end': 8}, {'type': 'LC', 'text': '할 리 우 드', 'start': 30, 'end': 33}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+9. Sample ID: ner-val_000642
+   Text: 단 순 히   본 인 의   재 미 를   위 해   사 실 무 근 의   자 극 적 인   내 용 을   게 시 함 으 로 써   두   회 사 와   그 리 고   관 련 된   모 든   임 직 원   분 들 과   믿 고   이 용 해 주 신   소 비 자   분 들 께   금 전 적   정 신 적   피 해 를   입 히 게   되 었 습 니 다 .
+   True Entities: [{'type': 'QT', 'text': '두   회 사', 'start': 37, 'end': 40}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+10. Sample ID: ner-val_000724
+   Text: 대 법 원   전 원 합 의 체 ( 주 심   민 일 영   대 법 관 ) 는   1 6 일   교 사   A ( 4 4 ) 씨 가   연 구 원   남 편   B ( 4 4 ) 씨 를   상 대 로   낸   이 혼   및   재 산 분 할 소 송 에 서   원 고   일 부   승 소 로   판 결 한   원 심 을   깨 고   사 건 을   대 전 고 법 으 로   돌 려 보 냈 다 .
+   True Entities: [{'type': 'OG', 'text': '대 법 원   전 원 합 의 체', 'start': 0, 'end': 8}, {'type': 'PS', 'text': '민 일 영', 'start': 13, 'end': 15}, {'type': 'DT', 'text': '1 6 일', 'start': 23, 'end': 25}, {'type': 'PS', 'text': 'A', 'start': 30, 'end': 30}, {'type': 'QT', 'text': '4 4', 'start': 32, 'end': 33}, {'type': 'PS', 'text': 'B', 'start': 45, 'end': 45}, {'type': 'QT', 'text': '4 4', 'start': 47, 'end': 48}, {'type': 'OG', 'text': '대 전 고 법', 'start': 98, 'end': 101}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+

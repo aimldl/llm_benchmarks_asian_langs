@@ -9,6 +9,9 @@ import json
 import time
 import argparse
 import re
+import sys
+import io
+import contextlib
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
 from datetime import datetime
@@ -44,6 +47,7 @@ class BenchmarkConfig:
     save_interval: int = 50  # Save intermediate results every N samples
     project_id: Optional[str] = None
     location: str = "us-central1"
+    verbose: bool = False  # Add verbose mode for detailed logging
 
 class KLUERelationExtractionBenchmark:
     """Benchmark class for KLUE Relation Extraction task using Vertex AI."""
@@ -87,21 +91,6 @@ class KLUERelationExtractionBenchmark:
         "per:other_family": "인물:기타가족",
         "per:charges": "인물:혐의",
         "per:alternate_names": "인물:대체명",
-        "per:age": "인물:나이",
-        "per:date_of_birth": "인물:출생일",
-        "per:date_of_death": "인물:사망일",
-        "per:place_of_birth": "인물:출생지",
-        "per:place_of_death": "인물:사망지",
-        "per:cause_of_death": "인물:사망원인",
-        "per:origin": "인물:출신",
-        "per:religion": "인물:종교",
-        "per:spouse": "인물:배우자",
-        "per:children": "인물:자녀",
-        "per:parents": "인물:부모",
-        "per:siblings": "인물:형제자매",
-        "per:other_family": "인물:기타가족",
-        "per:charges": "인물:혐의",
-        "per:alternate_names": "인물:대체명",
         "per:age": "인물:나이"
     }
     
@@ -110,6 +99,14 @@ class KLUERelationExtractionBenchmark:
         self.model = None
         self.results = []
         self.metrics = {}
+        
+        # Configure logging based on verbose mode
+        if not config.verbose:
+            # Suppress Google Cloud client logging in clean mode
+            logging.getLogger('google.cloud').setLevel(logging.WARNING)
+            logging.getLogger('google.auth').setLevel(logging.WARNING)
+            logging.getLogger('google.api_core').setLevel(logging.WARNING)
+            logging.getLogger('google.genai').setLevel(logging.WARNING)
         
         # Initialize Vertex AI
         self._initialize_vertex_ai()
@@ -199,79 +196,60 @@ class KLUERelationExtractionBenchmark:
             raise
     
     def create_prompt(self, sentence: str, subject_entity: Dict, object_entity: Dict) -> str:
-        """Create detailed prompt for relation extraction."""
-        subject_text = subject_entity["text"]
-        subject_type = subject_entity["type"]
-        object_text = object_entity["text"]
-        object_type = object_entity["type"]
-        
-        prompt = f"""역할: 당신은 한국어 텍스트에서 두 개체 간의 관계를 정확하게 분석하고 분류하는 "전문 관계 추출 AI"입니다.
+        """Create a prompt for the RE task."""
+        prompt = f"""Analyze the relationship between two entities in the given Korean sentence.
 
-임무: 아래에 제시된 문장에서 두 개체 간의 관계를 파악하여, 가장 적합한 관계 유형을 선택해 주세요.
+Sentence: {sentence}
 
-문장: {sentence}
+Subject entity: {subject_entity['text']} ({subject_entity['type']})
+Object entity: {object_entity['text']} ({object_entity['type']})
 
-개체 1: {subject_text} (유형: {subject_type})
-개체 2: {object_text} (유형: {object_type})
+Choose the relationship type from the following options:
 
-관계 유형 정의:
+Relationship types:
+- no_relation: no relationship
+- per:employee_of: person is employee of organization
+- per:member_of: person is member of organization
+- per:works_for: person works for organization
+- per:title: person's title
+- per:schools_attended: schools person attended
+- per:countries_of_residence: person's country of residence
+- per:stateorprovinces_of_residence: person's state/province of residence
+- per:cities_of_residence: person's city of residence
+- per:countries_of_birth: person's country of birth
+- per:stateorprovinces_of_birth: person's state/province of birth
+- per:cities_of_birth: person's city of birth
+- per:date_of_birth: person's date of birth
+- per:date_of_death: person's date of death
+- per:place_of_birth: person's place of birth
+- per:place_of_death: person's place of death
+- per:cause_of_death: person's cause of death
+- per:origin: person's origin
+- per:religion: person's religion
+- per:spouse: person's spouse
+- per:children: person's children
+- per:parents: person's parents
+- per:siblings: person's siblings
+- per:other_family: person's other family
+- per:charges: person's charges
+- per:alternate_names: person's alternate names
+- per:age: person's age
+- org:top_members/employees: organization's top members/employees
+- org:members: organization's members
+- org:product: organization's product
+- org:founded: organization's founding
+- org:alternate_names: organization's alternate names
+- org:place_of_headquarters: organization's headquarters location
+- org:number_of_employees/members: organization's number of employees/members
+- org:website: organization's website
+- org:subsidiaries: organization's subsidiaries
+- org:parents: organization's parent organization
+- org:dissolved: organization's dissolution
 
-1. 조직 관련 관계 (org:):
-   - org:top_members/employees: 조직의 최고경영진이나 직원 관계
-   - org:members: 조직의 구성원 관계
-   - org:product: 조직이 생산하는 제품 관계
-   - org:founded: 조직의 설립 관계
-   - org:alternate_names: 조직의 대체명이나 별칭
-   - org:place_of_headquarters: 조직의 본사 위치
-   - org:number_of_employees/members: 조직의 직원/구성원 수
-   - org:website: 조직의 웹사이트
-   - org:subsidiaries: 조직의 자회사
-   - org:parents: 조직의 상위조직
-   - org:dissolved: 조직의 해산
+Output format:
+Respond with only the relationship type code (e.g., per:employee_of, org:product, no_relation).
 
-2. 인물 관련 관계 (per:):
-   - per:title: 인물의 직책이나 호칭
-   - per:employee_of: 인물이 소속된 조직
-   - per:member_of: 인물이 속한 조직이나 단체
-   - per:schools_attended: 인물이 다닌 학교
-   - per:works_for: 인물이 근무하는 곳
-   - per:countries_of_residence: 인물이 거주하는 국가
-   - per:stateorprovinces_of_residence: 인물이 거주하는 지역
-   - per:cities_of_residence: 인물이 거주하는 도시
-   - per:countries_of_birth: 인물의 출생국
-   - per:stateorprovinces_of_birth: 인물의 출생지역
-   - per:cities_of_birth: 인물의 출생도시
-   - per:date_of_birth: 인물의 출생일
-   - per:date_of_death: 인물의 사망일
-   - per:place_of_birth: 인물의 출생지
-   - per:place_of_death: 인물의 사망지
-   - per:cause_of_death: 인물의 사망원인
-   - per:origin: 인물의 출신
-   - per:religion: 인물의 종교
-   - per:spouse: 인물의 배우자
-   - per:children: 인물의 자녀
-   - per:parents: 인물의 부모
-   - per:siblings: 인물의 형제자매
-   - per:other_family: 인물의 기타 가족
-   - per:charges: 인물의 혐의나 기소
-   - per:alternate_names: 인물의 대체명이나 별칭
-   - per:age: 인물의 나이
-
-3. 기타 관계:
-   - no_relation: 두 개체 간에 명확한 관계가 없음
-
-분석 지침:
-
-1. 문장의 전체 맥락을 고려하여 두 개체 간의 관계를 분석합니다.
-2. 개체의 유형(인물, 조직 등)을 고려하여 적절한 관계를 판단합니다.
-3. 관계가 명확하지 않은 경우 "no_relation"을 선택합니다.
-4. 가장 구체적이고 정확한 관계 유형을 선택합니다.
-5. 관계의 방향성을 고려합니다 (예: A가 B의 직원인 경우 per:employee_of).
-
-출력 형식:
-관계 유형의 영어 코드만 출력하세요 (예: per:employee_of, org:product, no_relation).
-
-관계 유형:"""
+Relationship:"""
         return prompt
     
     def configure_safety_settings(self, threshold=HarmBlockThreshold.BLOCK_NONE):
@@ -303,41 +281,68 @@ class KLUERelationExtractionBenchmark:
             # Configure safety settings
             safety_settings = self.configure_safety_settings()
             
-            # Generate content
-            response = self.client.models.generate_content(
-                model=self.model_name,
-                contents=prompt,
-                config=GenerateContentConfig(
-                    safety_settings=safety_settings,
-                    max_output_tokens=self.config.max_tokens,
-                    temperature=self.config.temperature,
-                    top_p=self.config.top_p,
-                    top_k=self.config.top_k,
-                ),
-            )
+            # Suppress Google Cloud logging during API call if not verbose
+            if not self.config.verbose:
+                # Redirect stdout and stderr to suppress Google Cloud logging
+                with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                    # Generate content
+                    response = self.client.models.generate_content(
+                        model=self.model_name,
+                        contents=prompt,
+                        config=GenerateContentConfig(
+                            safety_settings=safety_settings,
+                            max_output_tokens=self.config.max_tokens,
+                            temperature=self.config.temperature,
+                            top_p=self.config.top_p,
+                            top_k=self.config.top_k,
+                        ),
+                    )
+            else:
+                # Generate content with full logging
+                response = self.client.models.generate_content(
+                    model=self.model_name,
+                    contents=prompt,
+                    config=GenerateContentConfig(
+                        safety_settings=safety_settings,
+                        max_output_tokens=self.config.max_tokens,
+                        temperature=self.config.temperature,
+                        top_p=self.config.top_p,
+                        top_k=self.config.top_k,
+                    ),
+                )
             
-            # Extract response text
-            if response and response.text:
+            # Extract response text - improved handling
+            if response and hasattr(response, 'text') and response.text:
                 predicted_relation = self._parse_re_response(response.text)
                 return {
                     "success": True,
                     "relation": predicted_relation,
                     "raw_response": response.text
                 }
-            else:
-                logger.error("Cannot get the response text.")
-                logger.error("Cannot get the Candidate text.")
-                logger.error("Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.")
-                if response:
-                    logger.error(f"Content:\n{response.content}")
-                    logger.error(f"Candidate:\n{response.candidates[0] if response.candidates else 'No candidates'}")
-                    logger.error(f"Response:\n{response}")
-                return {
-                    "success": False,
-                    "relation": "no_relation",
-                    "raw_response": "",
-                    "error": "No response text"
-                }
+            elif response and hasattr(response, 'candidates') and response.candidates:
+                # Try to get text from candidates
+                candidate = response.candidates[0]
+                if hasattr(candidate, 'content') and candidate.content:
+                    if hasattr(candidate.content, 'parts') and candidate.content.parts:
+                        text = candidate.content.parts[0].text
+                        predicted_relation = self._parse_re_response(text)
+                        return {
+                            "success": True,
+                            "relation": predicted_relation,
+                            "raw_response": text
+                        }
+            
+            # If we get here, the response was blocked or empty
+            logger.error("Cannot get the response text.")
+            logger.error("Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.")
+            if response and hasattr(response, 'candidates') and response.candidates:
+                logger.error(f"Candidate:\n{response.candidates[0] if response.candidates else 'No candidates'}")
+            return {
+                "success": False,
+                "relation": "no_relation",
+                "raw_response": "",
+                "error": "No response text - likely blocked by safety filters"
+            }
                 
         except Exception as e:
             logger.error(f"Prediction failed: {e}")
@@ -401,8 +406,8 @@ class KLUERelationExtractionBenchmark:
         total_samples = len(test_data)
         correct_predictions = 0
         
-        # Process each sample
-        for i, sample in enumerate(tqdm(test_data, desc="Processing samples")):
+        # Process each sample with reduced progress bar updates (every 4th sample)
+        for i, sample in enumerate(tqdm(test_data, desc="Processing samples", mininterval=1.0, maxinterval=5.0)):
             try:
                 # Make prediction
                 prediction_result = self.predict_single(
@@ -522,18 +527,19 @@ class KLUERelationExtractionBenchmark:
         self.save_error_analysis(timestamp)
     
     def save_intermediate_results(self, current_count: int, correct_count: int, start_time: float):
-        """Save intermediate results."""
-        if not self.config.save_predictions:
-            return
-            
+        """Save intermediate results during benchmark execution."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         
         # Calculate intermediate metrics
+        accuracy = correct_count / current_count if current_count > 0 else 0.0
+        elapsed_time = time.time() - start_time
+        
         intermediate_metrics = {
             "samples_processed": current_count,
             "correct_predictions": correct_count,
-            "accuracy": correct_count / current_count if current_count > 0 else 0.0,
-            "timestamp": timestamp
+            "accuracy": accuracy,
+            "elapsed_time": elapsed_time,
+            "average_time_per_sample": elapsed_time / current_count if current_count > 0 else 0.0
         }
         
         # Save intermediate metrics
@@ -541,46 +547,77 @@ class KLUERelationExtractionBenchmark:
         with open(metrics_file, 'w', encoding='utf-8') as f:
             json.dump(intermediate_metrics, f, ensure_ascii=False, indent=2)
         
-        # Save intermediate results
-        results_file = os.path.join(self.config.output_dir, f"klue_re_results_{current_count:06d}_{timestamp}.json")
-        with open(results_file, 'w', encoding='utf-8') as f:
-            json.dump(self.results, f, ensure_ascii=False, indent=2)
+        # Save intermediate results as CSV
+        csv_data = []
+        for result in self.results:
+            csv_data.append({
+                "id": result["id"],
+                "sentence": result["sentence"],
+                "subject_entity_text": result["subject_entity"]["text"],
+                "subject_entity_type": result["subject_entity"]["type"],
+                "object_entity_text": result["object_entity"]["text"],
+                "object_entity_type": result["object_entity"]["type"],
+                "true_relation": result["true_relation"],
+                "predicted_relation": result["predicted_relation"],
+                "accuracy": result["metrics"]["accuracy"],
+                "success": result["success"],
+                "error": result.get("error", "")
+            })
         
-        logger.info(f"Intermediate results saved at {current_count} samples")
+        csv_file = os.path.join(self.config.output_dir, f"klue_re_results_{current_count:06d}_{timestamp}.csv")
+        df = pd.DataFrame(csv_data)
+        df.to_csv(csv_file, index=False, encoding='utf-8')
+        
+        logger.info(f"Intermediate results saved: {metrics_file} and {csv_file}")
     
     def save_error_analysis(self, timestamp: str):
-        """Save error analysis for failed predictions."""
-        error_samples = [r for r in self.results if not r["success"] or r.get("error") or r["true_relation"] != r["predicted_relation"]]
-        
-        if not error_samples:
-            logger.info("No errors to analyze")
-            return
-        
+        """Save detailed error analysis."""
         error_file = os.path.join(self.config.output_dir, f"klue_re_error_analysis_{timestamp}.txt")
         
         with open(error_file, 'w', encoding='utf-8') as f:
             f.write("KLUE RE Error Analysis\n")
             f.write("=" * 50 + "\n\n")
             
-            for i, sample in enumerate(error_samples[:10], 1):  # Show first 10 errors
-                f.write(f"{i}. Sample ID: {sample['id']}\n")
-                f.write(f"   Sentence: {sample['sentence']}\n")
-                f.write(f"   Subject: {sample['subject_entity']['text']} ({sample['subject_entity']['type']})\n")
-                f.write(f"   Object: {sample['object_entity']['text']} ({sample['object_entity']['type']})\n")
-                f.write(f"   True Relation: {sample['true_relation']}\n")
-                f.write(f"   Predicted Relation: {sample['predicted_relation']}\n")
-                if sample.get("error"):
-                    f.write(f"   Error: {sample['error']}\n")
-                f.write("\n")
+            # Count errors by type
+            error_counts = {}
+            failed_predictions = 0
+            
+            for result in self.results:
+                if not result["success"]:
+                    failed_predictions += 1
+                    error_type = result.get("error", "Unknown error")
+                    error_counts[error_type] = error_counts.get(error_type, 0) + 1
+            
+            f.write(f"Total samples: {len(self.results)}\n")
+            f.write(f"Failed predictions: {failed_predictions}\n")
+            f.write(f"Success rate: {(len(self.results) - failed_predictions) / len(self.results) * 100:.2f}%\n\n")
+            
+            f.write("Error breakdown:\n")
+            for error_type, count in error_counts.items():
+                f.write(f"  {error_type}: {count}\n")
+            
+            f.write("\nDetailed error analysis (showing first 10 errors):\n")
+            f.write("-" * 50 + "\n")
+            
+            error_count = 0
+            for result in self.results:
+                if not result["success"] and error_count < 10:
+                    f.write(f"\n{error_count + 1}. Sample ID: {result['id']}\n")
+                    f.write(f"   Sentence: {result['sentence'][:100]}...\n")
+                    f.write(f"   Subject: {result['subject_entity']['text']} ({result['subject_entity']['type']})\n")
+                    f.write(f"   Object: {result['object_entity']['text']} ({result['object_entity']['type']})\n")
+                    f.write(f"   True: {result['true_relation']} | Predicted: {result['predicted_relation']}\n")
+                    f.write(f"   Error: {result.get('error', 'Unknown error')}\n")
+                    error_count += 1
         
         logger.info(f"Error analysis saved to: {error_file}")
     
     def print_detailed_metrics(self):
-        """Print detailed benchmark results."""
+        """Print detailed metrics and results."""
         print("=" * 60)
         print("KLUE Relation Extraction Benchmark Results")
         print("=" * 60)
-        print(f"Model: {self.model_name}")
+        print(f"Model: {self.config.model_name}")
         print(f"Platform: Google Cloud Vertex AI")
         print(f"Project: {self.config.project_id or os.getenv('GOOGLE_CLOUD_PROJECT')}")
         print(f"Location: {self.config.location}")
@@ -588,82 +625,75 @@ class KLUERelationExtractionBenchmark:
         print(f"Total Time: {self.metrics['total_time']:.2f} seconds")
         print(f"Average Time per Sample: {self.metrics['average_time_per_sample']:.3f} seconds")
         print(f"Samples per Second: {self.metrics['samples_per_second']:.2f}")
-        print()
         
-        # Per-relation type analysis
-        relation_metrics = {}
+        # Per-relation type performance
+        print("\nPer-relation Type Performance:")
+        relation_performance = {}
         for result in self.results:
-            relation_type = result["true_relation"]
-            if relation_type not in relation_metrics:
-                relation_metrics[relation_type] = {"total": 0, "correct": 0}
-            relation_metrics[relation_type]["total"] += 1
-            
-            if result["true_relation"] == result["predicted_relation"]:
-                relation_metrics[relation_type]["correct"] += 1
+            true_rel = result["true_relation"]
+            if true_rel not in relation_performance:
+                relation_performance[true_rel] = {"correct": 0, "total": 0}
+            relation_performance[true_rel]["total"] += 1
+            if result["metrics"]["correct"]:
+                relation_performance[true_rel]["correct"] += 1
         
-        print("Per-relation Type Performance:")
-        for relation_type, metrics in relation_metrics.items():
-            accuracy = metrics["correct"] / metrics["total"] if metrics["total"] > 0 else 0.0
-            relation_name = self.RELATION_TYPES.get(relation_type, relation_type)
-            print(f"  {relation_type} ({relation_name}): {accuracy:.4f} ({metrics['correct']}/{metrics['total']})")
+        for relation, stats in relation_performance.items():
+            accuracy = stats["correct"] / stats["total"] if stats["total"] > 0 else 0.0
+            print(f"  {relation} ({relation}): {accuracy:.4f} ({stats['correct']}/{stats['total']})")
         
-        print()
+        # Error analysis summary
+        failed_count = sum(1 for r in self.results if not r["success"])
+        if failed_count > 0:
+            print(f"\nFailed predictions: {failed_count}/{len(self.results)} ({failed_count/len(self.results)*100:.1f}%)")
         
-        # Error analysis
-        error_count = sum(1 for r in self.results if not r["success"] or r.get("error") or r["true_relation"] != r["predicted_relation"])
-        if error_count > 0:
-            print(f"Error Analysis (showing first 5 errors):")
-            error_samples = [r for r in self.results if not r["success"] or r.get("error") or r["true_relation"] != r["predicted_relation"]]
-            for i, sample in enumerate(error_samples[:5], 1):
-                print(f"  {i}. Sample ID: {sample['id']}")
-                print(f"     Sentence: {sample['sentence'][:100]}...")
-                print(f"     Subject: {sample['subject_entity']['text']} ({sample['subject_entity']['type']})")
-                print(f"     Object: {sample['object_entity']['text']} ({sample['object_entity']['type']})")
-                print(f"     True: {sample['true_relation']} | Predicted: {sample['predicted_relation']}")
-                if sample.get("error"):
-                    print(f"     Error: {sample['error']}")
+        print("\nError Analysis (showing first 5 errors):")
+        error_count = 0
+        for result in self.results:
+            if not result["success"] and error_count < 5:
+                print(f"  {error_count + 1}. Sample ID: {result['id']}")
+                print(f"     Sentence: {result['sentence'][:100]}...")
+                print(f"     Subject: {result['subject_entity']['text']} ({result['subject_entity']['type']})")
+                print(f"     Object: {result['object_entity']['text']} ({result['object_entity']['type']})")
+                print(f"     True: {result['true_relation']} | Predicted: {result['predicted_relation']}")
+                print(f"     Error: {result.get('error', 'Unknown error')}")
                 print()
+                error_count += 1
 
 def main():
     """Main function to run the benchmark."""
     parser = argparse.ArgumentParser(description="KLUE RE Benchmark with Gemini 2.5 Flash")
     parser.add_argument("--project-id", type=str, help="Google Cloud project ID")
-    parser.add_argument("--location", type=str, default="us-central1", help="Vertex AI location")
     parser.add_argument("--max-samples", type=int, help="Maximum number of samples to test")
-    parser.add_argument("--output-dir", type=str, default="benchmark_results", help="Output directory")
-    parser.add_argument("--temperature", type=float, default=0.1, help="Model temperature")
-    parser.add_argument("--max-tokens", type=int, default=2048, help="Maximum output tokens")
-    parser.add_argument("--no-save-predictions", action="store_true", help="Skip saving detailed predictions")
-    parser.add_argument("--save-interval", type=int, default=50, help="Save intermediate results every N samples")
+    parser.add_argument("--verbose", action="store_true", help="Enable verbose logging")
     
     args = parser.parse_args()
     
     # Create configuration
     config = BenchmarkConfig(
-        project_id=args.project_id,
-        location=args.location,
         max_samples=args.max_samples,
-        output_dir=args.output_dir,
-        temperature=args.temperature,
-        max_tokens=args.max_tokens,
-        save_predictions=not args.no_save_predictions,
-        save_interval=args.save_interval
+        project_id=args.project_id,
+        verbose=args.verbose
     )
     
-    # Create and run benchmark
-    benchmark = KLUERelationExtractionBenchmark(config)
-    
-    # Load dataset
-    test_data = benchmark.load_dataset()
-    
-    # Run benchmark
-    metrics = benchmark.run_benchmark(test_data)
-    
-    # Save results
-    benchmark.save_results()
-    
-    # Print detailed results
-    benchmark.print_detailed_metrics()
+    try:
+        # Initialize benchmark
+        benchmark = KLUERelationExtractionBenchmark(config)
+        
+        # Load dataset
+        test_data = benchmark.load_dataset()
+        
+        # Run benchmark
+        metrics = benchmark.run_benchmark(test_data)
+        
+        # Save results
+        benchmark.save_results()
+        
+        # Print detailed metrics
+        benchmark.print_detailed_metrics()
+        
+    except Exception as e:
+        logger.error(f"Benchmark failed: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main() 

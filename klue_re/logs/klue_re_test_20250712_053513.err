@@ -1,0 +1,17 @@
+./run test
+Timestamp: 2025. 07. 12. (토) 05:37:02 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_re
+========================================
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-re-v1_dev_00000
+     Sentence: 20대 남성 A(26)씨가 아버지 치료비를 위해 B(30)씨가 모아둔 돈을 훔쳐 인터넷 방송 BJ에게 '별풍선'으로 쏜 사실이 알려졌다....
+     Subject: A (PER)
+     Object: 30 (NOH)
+     Error: 'GenerateContentResponse' object has no attribute 'content'
+
+2025-07-12 05:35:39,264 - ERROR - Cannot get the response text.
+2025-07-12 05:35:39,264 - ERROR - Cannot get the Candidate text.
+2025-07-12 05:35:39,264 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 05:35:39,264 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  10%|█         | 1/10 [00:14<02:13, 14.83s/it]2025-07-12 05:35:39,305 - INFO - AFC is enabled with max remote calls: 10.
