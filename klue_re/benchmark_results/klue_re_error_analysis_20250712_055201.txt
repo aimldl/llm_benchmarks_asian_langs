@@ -1,0 +1,11 @@
+KLUE RE Error Analysis
+==================================================
+
+Total samples: 10
+Failed predictions: 0
+Success rate: 100.00%
+
+Error breakdown:
+
+Detailed error analysis (showing first 10 errors):
+--------------------------------------------------
