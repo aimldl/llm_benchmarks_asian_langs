@@ -24,3 +24,48 @@ project_id: vertex-workbench-notebook
 2025-07-12 05:51:21,477 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
 2025-07-12 05:51:21,478 - INFO - AFC remote call 1 is done.
 Processing samples:  40%|████      | 4/10 [00:26<00:37,  6.21s/it]2025-07-12 05:51:21,519 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:51:25,389 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:51:25,390 - INFO - AFC remote call 1 is done.
+Processing samples:  50%|█████     | 5/10 [00:30<00:26,  5.38s/it]2025-07-12 05:51:25,431 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:51:31,975 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:51:31,976 - INFO - AFC remote call 1 is done.
+Processing samples:  60%|██████    | 6/10 [00:36<00:23,  5.79s/it]2025-07-12 05:51:32,017 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:51:35,953 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:51:35,955 - INFO - AFC remote call 1 is done.
+Processing samples:  70%|███████   | 7/10 [00:40<00:15,  5.20s/it]2025-07-12 05:51:35,995 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:51:49,171 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:51:49,172 - INFO - AFC remote call 1 is done.
+Processing samples:  80%|████████  | 8/10 [00:54<00:15,  7.75s/it]2025-07-12 05:51:49,213 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:51:57,955 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:51:57,956 - INFO - AFC remote call 1 is done.
+Processing samples:  90%|█████████ | 9/10 [01:02<00:08,  8.07s/it]2025-07-12 05:51:57,997 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:52:01,156 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:52:01,157 - INFO - AFC remote call 1 is done.
+Processing samples: 100%|██████████| 10/10 [01:06<00:00,  6.57s/it]Processing samples: 100%|██████████| 10/10 [01:06<00:00,  6.61s/it]
+2025-07-12 05:52:01,198 - INFO - Benchmark completed!
+2025-07-12 05:52:01,198 - INFO - Accuracy: 0.0000 (0/10)
+2025-07-12 05:52:01,198 - INFO - Total time: 66.12 seconds
+2025-07-12 05:52:01,198 - INFO - Average time per sample: 6.612 seconds
+2025-07-12 05:52:01,198 - INFO - Metrics saved to: benchmark_results/klue_re_metrics_20250712_055201.json
+2025-07-12 05:52:01,199 - INFO - Detailed results saved to: benchmark_results/klue_re_results_20250712_055201.json
+2025-07-12 05:52:01,203 - INFO - Results saved as CSV: benchmark_results/klue_re_results_20250712_055201.csv
+2025-07-12 05:52:01,203 - INFO - Error analysis saved to: benchmark_results/klue_re_error_analysis_20250712_055201.txt
+============================================================
+KLUE Relation Extraction Benchmark Results
+============================================================
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Accuracy: 0.0000 (0/10)
+Total Time: 66.12 seconds
+Average Time per Sample: 6.612 seconds
+Samples per Second: 0.15
+
+Per-relation Type Performance:
+  0 (0): 0.0000 (0/7)
+  18 (18): 0.0000 (0/1)
+  17 (17): 0.0000 (0/1)
+  10 (10): 0.0000 (0/1)
+
+Error Analysis (showing first 5 errors):
