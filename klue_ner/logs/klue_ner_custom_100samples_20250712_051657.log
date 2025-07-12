@@ -1,0 +1,62 @@
+./run custom 100
+Timestamp: 2025. 07. 12. (토) 05:16:57 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner
+========================================
+
+2025-07-12 05:16:58,732 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-12 05:16:58,732 - INFO - Model name set to: gemini-2.5-flash
+2025-07-12 05:16:58,732 - INFO - Loading KLUE NER dataset for named entity recognition...
+2025-07-12 05:17:09,298 - INFO - Preparing to load a subset of 100 samples.
+2025-07-12 05:17:09,309 - INFO - Reached sample limit of 100. Halting data loading.
+2025-07-12 05:17:09,309 - INFO - ✅ Successfully loaded 100 samples.
+2025-07-12 05:17:09,309 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/1002025-07-12 05:17:09,310 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:14,441 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:14,442 - INFO - AFC remote call 1 is done.
+2025-07-12 05:17:14,483 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:17,473 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:17,474 - INFO - AFC remote call 1 is done.
+2025-07-12 05:17:17,514 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:21,714 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:21,715 - INFO - AFC remote call 1 is done.
+Processing samples:   3%|▎         | 3/1002025-07-12 05:17:21,755 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:30,539 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:30,540 - INFO - AFC remote call 1 is done.
+2025-07-12 05:17:30,580 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:33,866 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:33,867 - INFO - AFC remote call 1 is done.
+2025-07-12 05:17:33,908 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:39,181 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:39,182 - INFO - AFC remote call 1 is done.
+Processing samples:   6%|▌         | 6/1002025-07-12 05:17:39,223 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:45,146 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:45,147 - INFO - AFC remote call 1 is done.
+2025-07-12 05:17:45,187 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:49,509 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:49,510 - INFO - AFC remote call 1 is done.
+2025-07-12 05:17:49,551 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:55,255 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:55,255 - INFO - AFC remote call 1 is done.
+Processing samples:   9%|▉         | 9/1002025-07-12 05:17:55,296 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:17:58,593 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:17:58,594 - INFO - AFC remote call 1 is done.
+2025-07-12 05:17:58,635 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:18:00,435 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:18:00,436 - INFO - AFC remote call 1 is done.
+2025-07-12 05:18:00,476 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:18:03,055 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:18:03,057 - INFO - AFC remote call 1 is done.
+2025-07-12 05:18:03,097 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:18:06,736 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:18:06,737 - INFO - AFC remote call 1 is done.
+Processing samples:  13%|█▎        | 13/1002025-07-12 05:18:06,777 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:18:08,518 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:18:08,519 - INFO - AFC remote call 1 is done.
+2025-07-12 05:18:08,559 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:18:15,762 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:18:15,763 - INFO - AFC remote call 1 is done.
+2025-07-12 05:18:15,804 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:18:18,648 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:18:18,649 - INFO - AFC remote call 1 is done.
+Processing samples:  16%|█▌        | 16/1002025-07-12 05:18:18,689 - INFO - AFC is enabled with max remote calls: 10.

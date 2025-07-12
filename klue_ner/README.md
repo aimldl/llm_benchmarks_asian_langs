@@ -24,6 +24,7 @@ klue_ner/
 ├── test_setup.py                 # Setup verification script
 ├── get_errors.sh                 # Error analysis script
 ├── test_logging.sh               # Logging test script
+├── test_verbose_mode.sh          # Verbose mode test script
 ├── verify_scripts.sh             # Script verification
 ├── requirements.txt              # Python dependencies
 ├── README.md                     # This file
@@ -70,25 +71,35 @@ gcloud services enable aiplatform.googleapis.com
 ### 4. Run Benchmark
 
 ```bash
-# Quick test with 10 samples
+# Quick test with 10 samples (clean mode - recommended)
 ./run test
 
-# Custom number of samples
+# Custom number of samples (clean mode - recommended)
 ./run custom 100
 
-# Full benchmark (all validation samples)
+# Full benchmark (all validation samples) (clean mode - recommended)
 ./run full
+
+# Verbose mode for debugging (shows all logging details)
+python klue_ner-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples 10 --verbose
 ```
 
 ## Detailed Usage
 
 ### Running the Benchmark
 
-The benchmark can be run in three modes:
+The benchmark can be run in three modes with two output levels:
 
+#### Execution Modes:
 1. **Test Mode** (`./run test`): Runs with 10 samples for quick testing
 2. **Custom Mode** (`./run custom N`): Runs with N samples
 3. **Full Mode** (`./run full`): Runs with all validation samples
+
+#### Output Modes:
+- **Default Mode (Clean)**: Minimal output with suppressed Google Cloud logging for better readability
+- **Verbose Mode**: Full output with all logging details for debugging
+
+**Recommended**: Use the default clean mode for normal operation. Use verbose mode only when debugging issues.
 
 ### Logging System
 
@@ -124,6 +135,9 @@ Extract error information from benchmark results:
 # Test logging functionality
 ./test_logging.sh test
 
+# Test verbose mode functionality
+./test_verbose_mode.sh
+
 # Verify all scripts and setup
 ./verify_scripts.sh check
 
@@ -154,7 +168,8 @@ config = BenchmarkConfig(
     temperature=0.1,           # Model temperature
     save_interval=50,          # Save intermediate results every N samples
     project_id="your-project", # Google Cloud project ID
-    location="us-central1"     # Vertex AI location
+    location="us-central1",    # Vertex AI location
+    verbose=False              # Set to True for verbose logging
 )
 ```
 
@@ -165,6 +180,10 @@ config = BenchmarkConfig(
 - **Metrics**: `benchmark_results/klue_ner_metrics_[timestamp].json`
 - **Detailed Results**: `benchmark_results/klue_ner_results_[timestamp].json`
 - **CSV Results**: `benchmark_results/klue_ner_results_[timestamp].csv`
+
+**Note**: Intermediate results are also saved every 50 samples (configurable) with both JSON and CSV formats:
+- `benchmark_results/klue_ner_results_000050_[timestamp].json`
+- `benchmark_results/klue_ner_results_000050_[timestamp].csv`
 
 ### CSV Output Format
 
@@ -190,6 +209,23 @@ Error analysis files contain:
 - Entity comparison information
 - Error statistics and rates
 - Debugging information
+
+## Recent Improvements
+
+### Progress Bar Enhancement
+- **Reduced Update Frequency**: Progress bar now updates less frequently (approximately 25% of previous frequency) for better readability
+- **Cleaner Output**: Improved formatting with better visual separation between progress updates
+- **Better User Experience**: Less cluttered output while maintaining useful progress information
+
+### CSV File Generation
+- **Intermediate Results**: CSV files are now generated for both intermediate and final results
+- **Easy Analysis**: CSV format provides quick access to summary statistics
+- **Consistent Format**: Both JSON and CSV files are available for all result saves
+
+### Verbose/Clean Mode System
+- **Default Clean Mode**: Minimal output with suppressed Google Cloud logging for optimal readability
+- **Verbose Mode**: Full logging details available for debugging and troubleshooting
+- **Flexible Usage**: Users can choose the appropriate output level for their needs
 
 ## Performance Metrics
 

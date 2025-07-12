@@ -127,7 +127,7 @@ class KLUENamedEntityRecognitionBenchmark:
                     
                 # Process NER data
                 processed_data.append({
-                    "id": f"ner_{len(processed_data):06d}",  # Generate unique ID since guid is not available
+                    "id": f"ner-val_{len(processed_data):06d}",  # Generate unique ID since guid is not available
                     "tokens": item["tokens"],
                     "ner_tags": item["ner_tags"],
                     "text": " ".join(item["tokens"]),
@@ -487,14 +487,14 @@ class KLUENamedEntityRecognitionBenchmark:
         for result in self.results:
             csv_data.append({
                 "id": result["id"],
-                "text": result["text"],
+                "success": result["success"],
+                "correct_entities": result["metrics"]["correct"],
                 "true_entities_count": len(result["true_entities"]),
                 "predicted_entities_count": len(result["predicted_entities"]),
                 "precision": result["metrics"]["precision"],
                 "recall": result["metrics"]["recall"],
                 "f1": result["metrics"]["f1"],
-                "correct_entities": result["metrics"]["correct"],
-                "success": result["success"],
+                "text": result["text"],
                 "error": result.get("error", "")
             })
         

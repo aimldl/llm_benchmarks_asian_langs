@@ -1,0 +1,13 @@
+./run test
+Timestamp: 2025. 07. 11. (금) 19:06:04 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_mrc
+========================================
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-mrc-v1_dev_01891
+     Question: 말라카이트에서 나온 색깔을 사용한 에디션은?...
+     Ground Truth: {'answer_start': [666, 666], 'text': ['뉴 740Li 25주년 에디션', '뉴 740Li 25주년']}
+     Predicted: 뉴 740Li 25주년 에디션...
+     Exact Match: 0.0000 | F1: 0.0000
+
+

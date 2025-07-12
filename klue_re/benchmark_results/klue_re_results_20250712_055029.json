@@ -1,0 +1,50 @@
+[
+  {
+    "id": "klue-re-v1_dev_00000",
+    "sentence": "20대 남성 A(26)씨가 아버지 치료비를 위해 B(30)씨가 모아둔 돈을 훔쳐 인터넷 방송 BJ에게 '별풍선'으로 쏜 사실이 알려졌다.",
+    "subject_entity": {
+      "text": "A",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "30",
+      "type": "NOH"
+    },
+    "true_relation": 0,
+    "predicted_relation": "no_relation",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "no_relation"
+    },
+    "success": true,
+    "raw_response": "no_relation",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00001",
+    "sentence": "그러나 심 의원은 보좌진이 접속 권한을 받아 정부 업무추진비 사용 내역 등을 다운받았음에도 정부가 허위 사실을 유포하는 등 국정감사 활동을 방해하고 있다고 반박했고, 김동연 경제부총리 겸 기획재정부 장관과 김재훈 재정정보원장, 기재부 관계자 등을 무고 등 혐의로 전날 맞고발했다.",
+    "subject_entity": {
+      "text": "심 의원",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "정부",
+      "type": "ORG"
+    },
+    "true_relation": 0,
+    "predicted_relation": "no_relation",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "no_relation"
+    },
+    "success": true,
+    "raw_response": "no_relation",
+    "error": ""
+  }
+]

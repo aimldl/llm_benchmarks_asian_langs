@@ -60,6 +60,7 @@ check_scripts() {
         "install_dependencies.sh"
         "get_errors.sh"
         "test_logging.sh"
+        "test_verbose_mode.sh"
         "verify_scripts.sh"
     )
     
@@ -106,6 +107,7 @@ fix_permissions() {
         "install_dependencies.sh"
         "get_errors.sh"
         "test_logging.sh"
+        "test_verbose_mode.sh"
         "verify_scripts.sh"
     )
     

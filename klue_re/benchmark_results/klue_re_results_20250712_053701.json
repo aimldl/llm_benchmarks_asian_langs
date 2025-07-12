@@ -1,0 +1,242 @@
+[
+  {
+    "id": "klue-re-v1_dev_00000",
+    "sentence": "20대 남성 A(26)씨가 아버지 치료비를 위해 B(30)씨가 모아둔 돈을 훔쳐 인터넷 방송 BJ에게 '별풍선'으로 쏜 사실이 알려졌다.",
+    "subject_entity": {
+      "text": "A",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "30",
+      "type": "NOH"
+    },
+    "true_relation": 0,
+    "predicted_relation": "no_relation",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "no_relation"
+    },
+    "success": false,
+    "raw_response": "",
+    "error": "'GenerateContentResponse' object has no attribute 'content'"
+  },
+  {
+    "id": "klue-re-v1_dev_00001",
+    "sentence": "그러나 심 의원은 보좌진이 접속 권한을 받아 정부 업무추진비 사용 내역 등을 다운받았음에도 정부가 허위 사실을 유포하는 등 국정감사 활동을 방해하고 있다고 반박했고, 김동연 경제부총리 겸 기획재정부 장관과 김재훈 재정정보원장, 기재부 관계자 등을 무고 등 혐의로 전날 맞고발했다.",
+    "subject_entity": {
+      "text": "심 의원",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "정부",
+      "type": "ORG"
+    },
+    "true_relation": 0,
+    "predicted_relation": "per:charges",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "per:charges"
+    },
+    "success": true,
+    "raw_response": "per:charges",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00002",
+    "sentence": "영화 《룸》에서 감금되어 살아가는 여자의 아들 '잭' 역으로 주목받으며, 크리틱스 초이스 영화상 최우수 아역연기상, 캐나다 스크린 어워드(캐나다 영화 & 텔레비전 아카데미상) 영화부문 최우수 남우주연상을 수상하였고, 미국 배우 조합상(SAG) 최우수 남우조연상에 후보 지명되었다.",
+    "subject_entity": {
+      "text": "잭",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "캐나다 스크린 어워드",
+      "type": "POH"
+    },
+    "true_relation": 0,
+    "predicted_relation": "no_relation",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "no_relation"
+    },
+    "success": true,
+    "raw_response": "no_relation",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00003",
+    "sentence": "전라남도(도지사 김영록)는 해양수산부의 2020년 어촌뉴딜300 공모사업에 15개 연안 시군 70개소 7천61억 원 규모를 신청했다고 14일 밝혔다.",
+    "subject_entity": {
+      "text": "해양수산부",
+      "type": "ORG"
+    },
+    "object_entity": {
+      "text": "도지사",
+      "type": "POH"
+    },
+    "true_relation": 0,
+    "predicted_relation": "no_relation",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "no_relation"
+    },
+    "success": true,
+    "raw_response": "no_relation",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00004",
+    "sentence": "부산항만공사(BPA, 사장 남기찬)는 27일 아동의 인권존중과 아동학대 예방에 대한 인식을 제고하기 위해 전 임직원을 대상으로 아동학대 예방교육을 실시했다.",
+    "subject_entity": {
+      "text": "부산항만공사",
+      "type": "ORG"
+    },
+    "object_entity": {
+      "text": "27일",
+      "type": "DAT"
+    },
+    "true_relation": 0,
+    "predicted_relation": "no_relation",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "no_relation"
+    },
+    "success": true,
+    "raw_response": "no_relation",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00005",
+    "sentence": "왕손의 나이 6세에 왕손사부를 임명하는 것이 관례였지만 영조는 1757년에 두 왕손을 가르칠 왕손교부를 초빙, 임명하였다.",
+    "subject_entity": {
+      "text": "영조",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "1757년",
+      "type": "DAT"
+    },
+    "true_relation": 0,
+    "predicted_relation": "no_relation",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "no_relation"
+    },
+    "success": true,
+    "raw_response": "no_relation",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00006",
+    "sentence": "심은주 하나금융투자 연구원은 “매일유업의 3분기 별도기준 매출액은 전년 동기대비 5.1% 증가한 3504억원, 영업이익은 9.5% 줄어든 192억원을 달성해 시장 전망치를 소폭 하회했다”라며 “이는 성수기를 맞이한 컵커피 등 기존 제품 매출 성장을 위한 판촉비 및 신제품 ‘셀렉타’의 시장 안착을 위한 비용 투하가 영향을 끼쳤다”라고 전했다.",
+    "subject_entity": {
+      "text": "심은주",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "하나금융투자",
+      "type": "ORG"
+    },
+    "true_relation": 18,
+    "predicted_relation": "per:employee_of",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 18,
+      "predicted_relation": "per:employee_of"
+    },
+    "success": true,
+    "raw_response": "per:employee_of",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00007",
+    "sentence": "공개된 영상은 한국 경제의 심장부에 서 있는 채이헌 허재 이혜준을 조명하며 시작했다.",
+    "subject_entity": {
+      "text": "허재",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "한국",
+      "type": "LOC"
+    },
+    "true_relation": 17,
+    "predicted_relation": "per:countries_of_residence",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 17,
+      "predicted_relation": "per:countries_of_residence"
+    },
+    "success": true,
+    "raw_response": "per:countries_of_residence",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00008",
+    "sentence": "사건 확산과 자신이 동침한 여자와의 사이에 아이가 태어났다는 점 등 여러가지 문제로 박정희의 호출에 무릎을 꿇은 정일권은 자신은 정인숙과 사귀긴 했으나 죽이지는 않았다며 억울함을 호소했다.",
+    "subject_entity": {
+      "text": "박정희",
+      "type": "PER"
+    },
+    "object_entity": {
+      "text": "정일권",
+      "type": "PER"
+    },
+    "true_relation": 0,
+    "predicted_relation": "per:employee_of",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 0,
+      "predicted_relation": "per:employee_of"
+    },
+    "success": true,
+    "raw_response": "per:employee_of",
+    "error": ""
+  },
+  {
+    "id": "klue-re-v1_dev_00009",
+    "sentence": "김진우 한국투자증권 연구원은 “8년 만에 파업 없이 합의했다”며 “이제 다시 신차와 이익 모멘텀에 주목할 시점”이라고 말했다.",
+    "subject_entity": {
+      "text": "한국투자증권",
+      "type": "ORG"
+    },
+    "object_entity": {
+      "text": "김진우",
+      "type": "PER"
+    },
+    "true_relation": 10,
+    "predicted_relation": "per:employee_of",
+    "metrics": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 1,
+      "true_relation": 10,
+      "predicted_relation": "per:employee_of"
+    },
+    "success": true,
+    "raw_response": "per:employee_of",
+    "error": ""
+  }
+]
