@@ -162,14 +162,14 @@ class KLUEDependencyParsingBenchmark:
                     logger.info(f"Reached sample limit of {self.config.max_samples}. Halting data loading.")
                     break
                     
-                # Process DP data
+                # Process DP data - using correct field names from KLUE DP dataset
                 processed_data.append({
-                    "id": item["guid"],
+                    "id": item.get("guid", f"dp_{len(processed_data)}"),
                     "sentence": item["sentence"],
-                    "words": item["words"],
-                    "pos_tags": item["pos_tags"],
-                    "heads": item["heads"],
-                    "deprels": item["deprels"]
+                    "words": item["word_form"],
+                    "pos_tags": item["pos"],
+                    "heads": item["head"],
+                    "deprels": item["deprel"]
                 })
 
             logger.info(f"✅ Successfully loaded {len(processed_data)} samples.")

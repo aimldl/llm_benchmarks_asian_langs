@@ -1,0 +1,15 @@
+./run full
+Timestamp: 2025. 07. 13. (일) 15:52:13 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_dp
+========================================
+
+2025-07-13 15:52:14,834 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-13 15:52:14,835 - INFO - Model name set to: gemini-2.5-flash
+2025-07-13 15:52:14,835 - INFO - Loading KLUE DP dataset for dependency parsing...
+2025-07-13 15:52:25,727 - INFO - ✅ Successfully loaded 2000 samples.
+2025-07-13 15:52:25,727 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/2000 [00:00<?, ?it/s]2025-07-13 15:52:25,728 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:52:45,829 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:52:45,830 - INFO - AFC remote call 1 is done.
+Processing samples:   0%|          | 1/2000 [00:20<11:11:06, 20.14s/it]2025-07-13 15:52:45,871 - INFO - AFC is enabled with max remote calls: 10.

@@ -1,0 +1,63 @@
+KLUE NER Error Analysis
+==================================================
+
+1. Sample ID: ner-val_000214
+   Text: 이 상 덕   외 교 부   동 북 아 국 장 대 리 는   이 날   오 전   후 나 코 시   주 한   일 본 대 사 관   정 무 공 사 를   초 치 해   항 의   입 장 을   전 했 다 .
+   True Entities: [{'type': 'PS', 'text': '이 상 덕', 'start': 0, 'end': 2}, {'type': 'OG', 'text': '외 교 부', 'start': 4, 'end': 6}, {'type': 'DT', 'text': '이 날', 'start': 17, 'end': 18}, {'type': 'TI', 'text': '오 전', 'start': 20, 'end': 21}, {'type': 'PS', 'text': '후 나 코 시', 'start': 23, 'end': 26}, {'type': 'OG', 'text': '일 본 대 사 관', 'start': 31, 'end': 35}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+2. Sample ID: ner-val_000227
+   Text: 9 일   오 후   방 송 된   S B S   예 능 프 로 그 램   ' 일 요 일 이   좋 다 - 서 바 이 벌   오 디 션   K 팝 스 타   시 즌 3 ’ 에 서 는   톱 1 0 을   결 정 짓 기   위 한   배 틀 오 디 션 이   진 행 됐 다 .
+   True Entities: [{'type': 'DT', 'text': '9 일', 'start': 0, 'end': 1}, {'type': 'TI', 'text': '오 후', 'start': 3, 'end': 4}, {'type': 'OG', 'text': 'S B S', 'start': 10, 'end': 12}, {'type': 'QT', 'text': '시 즌 3', 'start': 44, 'end': 46}, {'type': 'QT', 'text': '톱 1 0', 'start': 52, 'end': 54}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+3. Sample ID: ner-val_000316
+   Text: 이 어   체 코 산   마 토 니 그 랜 드 가   5 . 8 배 ,   . 이 탈 리 아 산   산 베 네 디 토   4 . 3 배 ,   폴 란 드 산   페 라 지   3 . 5 배 ,   프 랑 스   페 리 에 는   3 . 4 배   순 이 다 .
+   True Entities: [{'type': 'LC', 'text': '체 코', 'start': 3, 'end': 4}, {'type': 'QT', 'text': '5 . 8 배', 'start': 15, 'end': 18}, {'type': 'LC', 'text': '. 이 탈 리 아', 'start': 21, 'end': 25}, {'type': 'QT', 'text': '4 . 3 배', 'start': 34, 'end': 37}, {'type': 'LC', 'text': '폴 란 드', 'start': 40, 'end': 42}, {'type': 'QT', 'text': '3 . 5 배', 'start': 49, 'end': 52}, {'type': 'LC', 'text': '프 랑 스', 'start': 55, 'end': 57}, {'type': 'QT', 'text': '3 . 4 배', 'start': 64, 'end': 67}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+4. Sample ID: ner-val_000389
+   Text: 문 근 영   복 귀 !   불 의   여 신   정 이   재 미 있 어 요 !
+   True Entities: [{'type': 'PS', 'text': '문 근 영', 'start': 0, 'end': 2}, {'type': 'PS', 'text': '정 이', 'start': 14, 'end': 15}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+5. Sample ID: ner-val_000456
+   Text: 4 년   전   2 0 1 0   남 아 공   월 드 컵   대 표 팀   최 종   명 단 에 서   탈 락 했 던   이 근 호 가   최 근   방 송 된   브 라 질   월 드 컵   특 집   다 큐 멘 터 리 에 서   당 시   심 경 을   밝 혔 습 니 다 .
+   True Entities: [{'type': 'DT', 'text': '4 년', 'start': 0, 'end': 1}, {'type': 'DT', 'text': '2 0 1 0', 'start': 5, 'end': 8}, {'type': 'OG', 'text': '남 아 공   월 드 컵   대 표 팀', 'start': 10, 'end': 20}, {'type': 'PS', 'text': '이 근 호', 'start': 35, 'end': 37}, {'type': 'LC', 'text': '브 라 질', 'start': 47, 'end': 49}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+6. Sample ID: ner-val_000479
+   Text: 천 안 함   사 건 은   지 난   2 0 1 0 년   3 월   2 6 일   오 후   9 시   2 2 분 경   백 령 도   서 남 방   2 . 5 k m   해 상 에 서   발 생 해 ,   승 조 원   1 0 4 명   중   4 6 명 의   전 사 자 를   냈 는 데 요 .
+   True Entities: [{'type': 'DT', 'text': '지 난   2 0 1 0 년   3 월   2 6 일', 'start': 8, 'end': 22}, {'type': 'TI', 'text': '오 후   9 시   2 2 분', 'start': 24, 'end': 32}, {'type': 'LC', 'text': '백 령 도   서 남 방   2 . 5 k m   해 상', 'start': 35, 'end': 50}, {'type': 'QT', 'text': '1 0 4 명', 'start': 63, 'end': 66}, {'type': 'QT', 'text': '4 6 명', 'start': 70, 'end': 72}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+7. Sample ID: ner-val_000630
+   Text: 테 인   세 인   미 얀 마   대 통 령 과   미 얀 마   군 부 가   자 유 롭 게   치 러 진   총 선   결 과 를   존 중 할   것 이 라 는   뜻 을   밝 혔 다 .
+   True Entities: [{'type': 'PS', 'text': '테 인   세 인', 'start': 0, 'end': 4}, {'type': 'LC', 'text': '미 얀 마', 'start': 6, 'end': 8}, {'type': 'OG', 'text': '미 얀 마   군 부', 'start': 15, 'end': 20}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+8. Sample ID: ner-val_000638
+   Text: 1 일 ( 이 하   한 국 시 각 )   미 국   펜 실 베 이 니 아 주   피 츠 버 그   P N C   파 크 에 서 는   ' 2 0 1 5   메 이 저 리 그 '   세 인 트 루 이 스   카 디 널 스 와   피 츠 버 그   파 이 어 리 츠 의   경 기 가   열 렸 다 .
+   True Entities: [{'type': 'DT', 'text': '1 일', 'start': 0, 'end': 1}, {'type': 'LC', 'text': '한 국', 'start': 6, 'end': 7}, {'type': 'LC', 'text': '미 국   펜 실 베 이 니 아 주   피 츠 버 그   P N C   파 크', 'start': 12, 'end': 33}, {'type': 'DT', 'text': '2 0 1 5', 'start': 39, 'end': 42}, {'type': 'OG', 'text': '세 인 트 루 이 스   카 디 널 스', 'start': 51, 'end': 61}, {'type': 'OG', 'text': '피 츠 버 그   파 이 어 리 츠', 'start': 64, 'end': 73}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+9. Sample ID: ner-val_000642
+   Text: 단 순 히   본 인 의   재 미 를   위 해   사 실 무 근 의   자 극 적 인   내 용 을   게 시 함 으 로 써   두   회 사 와   그 리 고   관 련 된   모 든   임 직 원   분 들 과   믿 고   이 용 해 주 신   소 비 자   분 들 께   금 전 적   정 신 적   피 해 를   입 히 게   되 었 습 니 다 .
+   True Entities: [{'type': 'QT', 'text': '두   회 사', 'start': 37, 'end': 40}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+
+10. Sample ID: ner-val_000650
+   Text: 시 미 즈   다 카 시   주 온   3 탄   기 다 리 며 . . . 1 0 주 년   기 념 으 로   만 든   었 지 만   주 온   단 어   좀   빼 으
+   True Entities: [{'type': 'PS', 'text': '시 미 즈   다 카 시', 'start': 0, 'end': 6}, {'type': 'QT', 'text': '3 탄', 'start': 11, 'end': 12}, {'type': 'DT', 'text': '1 0 주 년', 'start': 21, 'end': 24}]
+   Predicted Entities: []
+   Error: 'GenerateContentResponse' object has no attribute 'content'
+

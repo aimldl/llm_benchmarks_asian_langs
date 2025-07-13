@@ -1,0 +1,291 @@
+./run full
+Timestamp: 2025. 07. 12. (토) 11:24:10 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner
+========================================
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: ner-val_000214
+     Text: 이 상 덕   외 교 부   동 북 아 국 장 대 리 는   이 날   오 전   후 나 코 시   주 한   일 본 대 사 관   정 무 공 사 를   초 치 해   항 의   ...
+     True Entities: 6 entities
+     Predicted Entities: 0 entities
+     Error: 'GenerateContentResponse' object has no attribute 'content'
+
+2025-07-12 05:57:56,548 - ERROR - Cannot get the response text.
+2025-07-12 05:57:56,548 - ERROR - Cannot get the Candidate text.
+2025-07-12 05:57:56,548 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 05:57:56,548 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 05:59:09,866 - ERROR - Cannot get the response text.
+2025-07-12 05:59:09,866 - ERROR - Cannot get the Candidate text.
+2025-07-12 05:59:09,866 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 05:59:09,867 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 06:05:57,031 - ERROR - Cannot get the response text.
+2025-07-12 06:05:57,032 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:05:57,032 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:05:57,032 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:   6%|▋         | 317/50002025-07-12 06:05:57,072 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 06:10:59,912 - ERROR - Cannot get the response text.
+2025-07-12 06:10:59,912 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:10:59,912 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:10:59,912 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 06:16:05,904 - ERROR - Cannot get the response text.
+2025-07-12 06:16:05,904 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:16:05,904 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:16:05,904 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 06:17:40,717 - ERROR - Cannot get the response text.
+2025-07-12 06:17:40,717 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:17:40,717 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:17:40,718 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 06:27:45,673 - ERROR - Cannot get the response text.
+2025-07-12 06:27:45,673 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:27:45,673 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:27:45,673 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 06:28:25,864 - ERROR - Cannot get the response text.
+2025-07-12 06:28:25,864 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:28:25,864 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:28:25,864 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  13%|█▎        | 639/50002025-07-12 06:28:25,904 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 06:28:48,702 - ERROR - Cannot get the response text.
+2025-07-12 06:28:48,702 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:28:48,702 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:28:48,702 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  13%|█▎        | 643/50002025-07-12 06:28:48,742 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 06:29:24,920 - ERROR - Cannot get the response text.
+2025-07-12 06:29:24,920 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:29:24,920 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:29:24,921 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 06:31:22,294 - ERROR - Cannot get the response text.
+2025-07-12 06:31:22,294 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:31:22,294 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:31:22,294 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  14%|█▎        | 677/50002025-07-12 06:31:22,334 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 06:56:00,617 - ERROR - Cannot get the response text.
+2025-07-12 06:56:00,618 - ERROR - Cannot get the Candidate text.
+2025-07-12 06:56:00,618 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 06:56:00,618 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  21%|██        | 1052/50002025-07-12 06:56:00,658 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 07:04:47,592 - ERROR - Cannot get the response text.
+2025-07-12 07:04:47,592 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:04:47,592 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:04:47,592 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 07:05:14,993 - ERROR - Cannot get the response text.
+2025-07-12 07:05:14,993 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:05:14,993 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:05:14,993 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 07:12:01,791 - ERROR - Cannot get the response text.
+2025-07-12 07:12:01,791 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:12:01,791 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:12:01,791 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  26%|██▌       | 1278/50002025-07-12 07:12:01,832 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 07:13:44,552 - ERROR - Cannot get the response text.
+2025-07-12 07:13:44,552 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:13:44,552 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:13:44,552 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  26%|██▌       | 1299/50002025-07-12 07:13:44,592 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 07:21:03,355 - ERROR - Cannot get the response text.
+2025-07-12 07:21:03,355 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:21:03,355 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:21:03,355 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 07:27:16,670 - ERROR - Cannot get the response text.
+2025-07-12 07:27:16,670 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:27:16,670 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:27:16,670 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 07:30:11,798 - ERROR - Cannot get the response text.
+2025-07-12 07:30:11,798 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:30:11,798 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:30:11,798 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  31%|███       | 1531/50002025-07-12 07:30:11,839 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 07:43:27,440 - ERROR - Cannot get the response text.
+2025-07-12 07:43:27,440 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:43:27,440 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:43:27,440 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  35%|███▍      | 1739/50002025-07-12 07:43:27,480 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 07:43:58,645 - ERROR - Cannot get the response text.
+2025-07-12 07:43:58,645 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:43:58,645 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:43:58,645 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 07:48:02,280 - ERROR - Cannot get the response text.
+2025-07-12 07:48:02,280 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:48:02,280 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:48:02,280 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 07:51:53,545 - ERROR - Cannot get the response text.
+2025-07-12 07:51:53,545 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:51:53,545 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:51:53,545 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  37%|███▋      | 1866/50002025-07-12 07:51:53,585 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 07:52:07,460 - ERROR - Cannot get the response text.
+2025-07-12 07:52:07,460 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:52:07,460 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:52:07,460 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 07:53:17,616 - ERROR - Cannot get the response text.
+2025-07-12 07:53:17,616 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:53:17,616 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:53:17,617 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 07:59:49,915 - ERROR - Cannot get the response text.
+2025-07-12 07:59:49,915 - ERROR - Cannot get the Candidate text.
+2025-07-12 07:59:49,915 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 07:59:49,915 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  40%|███▉      | 1975/50002025-07-12 07:59:49,956 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 08:06:18,825 - ERROR - Cannot get the response text.
+2025-07-12 08:06:18,825 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:06:18,825 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:06:18,825 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 08:09:18,473 - ERROR - Cannot get the response text.
+2025-07-12 08:09:18,473 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:09:18,473 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:09:18,473 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 08:09:57,944 - ERROR - Cannot get the response text.
+2025-07-12 08:09:57,944 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:09:57,944 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:09:57,944 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  42%|████▏     | 2121/50002025-07-12 08:09:57,985 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 08:20:39,376 - ERROR - Cannot get the response text.
+2025-07-12 08:20:39,376 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:20:39,376 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:20:39,376 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 08:29:05,776 - ERROR - Cannot get the response text.
+2025-07-12 08:29:05,776 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:29:05,776 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:29:05,776 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 08:29:23,836 - ERROR - Cannot get the response text.
+2025-07-12 08:29:23,836 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:29:23,836 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:29:23,836 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  48%|████▊     | 2422/50002025-07-12 08:29:23,876 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 08:32:49,237 - ERROR - Cannot get the response text.
+2025-07-12 08:32:49,237 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:32:49,237 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:32:49,237 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 08:39:06,552 - ERROR - Cannot get the response text.
+2025-07-12 08:39:06,552 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:39:06,552 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:39:06,552 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  51%|█████▏    | 2566/50002025-07-12 08:39:06,593 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 08:42:10,538 - ERROR - Cannot get the response text.
+2025-07-12 08:42:10,538 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:42:10,538 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:42:10,538 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 08:44:50,831 - ERROR - Cannot get the response text.
+2025-07-12 08:44:50,831 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:44:50,831 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:44:50,831 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 08:45:32,965 - ERROR - Cannot get the response text.
+2025-07-12 08:45:32,965 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:45:32,965 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:45:32,965 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  53%|█████▎    | 2653/50002025-07-12 08:45:33,005 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 08:50:41,695 - ERROR - Cannot get the response text.
+2025-07-12 08:50:41,695 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:50:41,695 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:50:41,696 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  55%|█████▍    | 2733/50002025-07-12 08:50:41,736 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 08:53:03,182 - ERROR - Cannot get the response text.
+2025-07-12 08:53:03,182 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:53:03,182 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:53:03,182 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  55%|█████▌    | 2760/50002025-07-12 08:53:03,223 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 08:54:02,838 - ERROR - Cannot get the response text.
+2025-07-12 08:54:02,838 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:54:02,838 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:54:02,838 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 08:58:17,430 - ERROR - Cannot get the response text.
+2025-07-12 08:58:17,431 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:58:17,431 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:58:17,431 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  57%|█████▋    | 2833/50002025-07-12 08:58:17,471 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 08:59:45,319 - ERROR - Cannot get the response text.
+2025-07-12 08:59:45,319 - ERROR - Cannot get the Candidate text.
+2025-07-12 08:59:45,319 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 08:59:45,319 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 09:04:21,039 - ERROR - Cannot get the response text.
+2025-07-12 09:04:21,039 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:04:21,039 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:04:21,039 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 09:07:28,414 - ERROR - Cannot get the response text.
+2025-07-12 09:07:28,414 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:07:28,414 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:07:28,414 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 09:09:30,205 - ERROR - Cannot get the response text.
+2025-07-12 09:09:30,205 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:09:30,205 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:09:30,205 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  60%|█████▉    | 2995/50002025-07-12 09:09:30,245 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 09:09:44,543 - ERROR - Cannot get the response text.
+2025-07-12 09:09:44,543 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:09:44,543 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:09:44,543 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 09:18:12,919 - ERROR - Cannot get the response text.
+2025-07-12 09:18:12,919 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:18:12,919 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:18:12,919 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 09:20:55,259 - ERROR - Cannot get the response text.
+2025-07-12 09:20:55,259 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:20:55,259 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:20:55,260 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  63%|██████▎   | 3155/50002025-07-12 09:20:55,300 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 09:26:30,533 - ERROR - Cannot get the response text.
+2025-07-12 09:26:30,533 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:26:30,533 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:26:30,533 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 09:33:06,714 - ERROR - Cannot get the response text.
+2025-07-12 09:33:06,714 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:33:06,714 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:33:06,714 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 09:44:05,931 - ERROR - Cannot get the response text.
+2025-07-12 09:44:05,931 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:44:05,931 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:44:05,931 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 09:57:37,922 - ERROR - Cannot get the response text.
+2025-07-12 09:57:37,922 - ERROR - Cannot get the Candidate text.
+2025-07-12 09:57:37,922 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 09:57:37,922 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  74%|███████▍  | 3694/50002025-07-12 09:57:37,962 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 10:02:04,918 - ERROR - Cannot get the response text.
+2025-07-12 10:02:04,918 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:02:04,918 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:02:04,918 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 10:03:32,933 - ERROR - Cannot get the response text.
+2025-07-12 10:03:32,933 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:03:32,933 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:03:32,933 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  76%|███████▌  | 3787/50002025-07-12 10:03:32,973 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 10:06:37,423 - ERROR - Cannot get the response text.
+2025-07-12 10:06:37,423 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:06:37,423 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:06:37,423 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  77%|███████▋  | 3826/50002025-07-12 10:06:37,464 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 10:22:16,139 - ERROR - Cannot get the response text.
+2025-07-12 10:22:16,139 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:22:16,139 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:22:16,139 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  81%|████████  | 4056/50002025-07-12 10:22:16,179 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 10:34:29,105 - ERROR - Cannot get the response text.
+2025-07-12 10:34:29,105 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:34:29,105 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:34:29,105 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 10:35:08,835 - ERROR - Cannot get the response text.
+2025-07-12 10:35:08,835 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:35:08,835 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:35:08,835 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 10:39:55,770 - ERROR - Cannot get the response text.
+2025-07-12 10:39:55,770 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:39:55,770 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:39:55,771 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 10:41:29,533 - ERROR - Cannot get the response text.
+2025-07-12 10:41:29,533 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:41:29,533 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:41:29,533 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  87%|████████▋ | 4339/50002025-07-12 10:41:29,574 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 10:48:09,321 - ERROR - Cannot get the response text.
+2025-07-12 10:48:09,321 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:48:09,321 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:48:09,321 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  89%|████████▉ | 4441/50002025-07-12 10:48:09,362 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 10:48:38,899 - ERROR - Cannot get the response text.
+2025-07-12 10:48:38,899 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:48:38,899 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:48:38,899 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+2025-07-12 10:53:02,568 - ERROR - Cannot get the response text.
+2025-07-12 10:53:02,568 - ERROR - Cannot get the Candidate text.
+2025-07-12 10:53:02,568 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 10:53:02,568 - ERROR - Prediction failed: 'GenerateContentResponse' object has no attribute 'content'
+Processing samples:  90%|█████████ | 4509/50002025-07-12 10:53:02,608 - INFO - AFC is enabled with max remote calls: 10.

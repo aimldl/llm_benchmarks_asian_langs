@@ -1,0 +1,32 @@
+KLUE DP Error Analysis
+==================================================
+
+1. Sample ID: dp_0
+   Sentence: 'K팝스타3’ 유희열이 홍정희의 탈락에 눈물을 흘렸다.
+   Words: 'K팝스타3’ 유희열이 홍정희의 탈락에 눈물을 흘렸다.
+   POS Tags: SS+SL+NNP+SN+SS NNP+JKS NNP+JKG NNG+JKB NNG+JKO VV+EP+EF+SF
+   True Heads: [2, 6, 4, 6, 6, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0]
+   UAS: 0.1667
+   LAS: 0.0000
+
+2. Sample ID: dp_3
+   Sentence: 검증과 여과 없이 배포된 기사들에 오판과 여론은 확산되었고 저는 어느새 치욕스러운 범죄자가 되어 버렸습니다.
+   Words: 검증과 여과 없이 배포된 기사들에 오판과 여론은 확산되었고 저는 어느새 치욕스러운 범죄자가 되어 버렸습니다.
+   POS Tags: NNG+JC NNG MAG NNG+XSV+ETM NNG+XSN+JKB NNG+JC NNG+JX NNG+XSV+EP+EC NP+JX MAG NNG+XSA+ETM NNG+JKC VV+EC VX+EP+EF+SF
+   True Heads: [2, 3, 4, 5, 8, 7, 8, 13, 13, 13, 12, 13, 14, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0714
+   LAS: 0.0000
+   Error: No response text
+
+3. Sample ID: dp_6
+   Sentence: 이 불이 빠르게 번지며 주변 점포 5개가 불 탔고 6개 점포는 부분적으로 소실됐다.
+   Words: 이 불이 빠르게 번지며 주변 점포 5개가 불 탔고 6개 점포는 부분적으로 소실됐다.
+   POS Tags: MMD NNG+JKS VA+EC VV+EC NNG NNG SN+NNB+JKS NNG VV+EP+EC SN+NNB NNG+JX NNG+XSN+JKB NNG+XSV+EP+EF+SF
+   True Heads: [2, 4, 4, 9, 6, 7, 9, 9, 13, 11, 13, 13, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0769
+   LAS: 0.0000
+   Error: No response text
+

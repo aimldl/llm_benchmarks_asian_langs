@@ -6,3 +6,103 @@ Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_as
 2025-07-12 05:52:43,015 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
 2025-07-12 05:52:43,015 - INFO - Model name set to: gemini-2.5-flash
 2025-07-12 05:52:43,015 - INFO - Loading KLUE RE dataset for relation extraction...
+2025-07-12 05:52:54,634 - INFO - Preparing to load a subset of 10 samples.
+2025-07-12 05:52:54,635 - INFO - Reached sample limit of 10. Halting data loading.
+2025-07-12 05:52:54,635 - INFO - ✅ Successfully loaded 10 samples.
+2025-07-12 05:52:54,635 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/10 [00:00<?, ?it/s]2025-07-12 05:52:54,635 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:53:03,024 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:53:03,025 - INFO - AFC remote call 1 is done.
+Processing samples:  10%|█         | 1/10 [00:08<01:15,  8.43s/it]2025-07-12 05:53:03,066 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:53:09,493 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:53:09,494 - INFO - AFC remote call 1 is done.
+Processing samples:  20%|██        | 2/10 [00:14<00:58,  7.28s/it]2025-07-12 05:53:09,534 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:53:15,804 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:53:15,805 - INFO - AFC remote call 1 is done.
+Processing samples:  30%|███       | 3/10 [00:21<00:47,  6.84s/it]2025-07-12 05:53:15,846 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:53:25,072 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:53:25,073 - INFO - AFC remote call 1 is done.
+Processing samples:  40%|████      | 4/10 [00:30<00:46,  7.80s/it]2025-07-12 05:53:25,113 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:53:29,841 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:53:29,842 - INFO - AFC remote call 1 is done.
+Processing samples:  50%|█████     | 5/10 [00:35<00:33,  6.70s/it]2025-07-12 05:53:29,882 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:53:41,542 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:53:41,543 - INFO - AFC remote call 1 is done.
+Processing samples:  60%|██████    | 6/10 [00:46<00:33,  8.40s/it]2025-07-12 05:53:41,583 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:53:46,120 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:53:46,121 - INFO - AFC remote call 1 is done.
+Processing samples:  70%|███████   | 7/10 [00:51<00:21,  7.15s/it]2025-07-12 05:53:46,161 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:54:03,034 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:54:03,034 - INFO - AFC remote call 1 is done.
+2025-07-12 05:54:03,035 - ERROR - Cannot get the response text.
+2025-07-12 05:54:03,035 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 05:54:03,035 - ERROR - Candidate:
+content=Content(
+  role='model'
+) citation_metadata=None finish_message=None token_count=None finish_reason=<FinishReason.MAX_TOKENS: 'MAX_TOKENS'> url_context_metadata=None avg_logprobs=None grounding_metadata=None index=None logprobs_result=None safety_ratings=[SafetyRating(
+  category=<HarmCategory.HARM_CATEGORY_HATE_SPEECH: 'HARM_CATEGORY_HATE_SPEECH'>,
+  probability=<HarmProbability.NEGLIGIBLE: 'NEGLIGIBLE'>,
+  probability_score=1.0032179e-06,
+  severity=<HarmSeverity.HARM_SEVERITY_NEGLIGIBLE: 'HARM_SEVERITY_NEGLIGIBLE'>,
+  severity_score=0.09035605
+), SafetyRating(
+  category=<HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: 'HARM_CATEGORY_DANGEROUS_CONTENT'>,
+  probability=<HarmProbability.NEGLIGIBLE: 'NEGLIGIBLE'>,
+  probability_score=8.744774e-09,
+  severity=<HarmSeverity.HARM_SEVERITY_NEGLIGIBLE: 'HARM_SEVERITY_NEGLIGIBLE'>,
+  severity_score=0.020546436
+), SafetyRating(
+  category=<HarmCategory.HARM_CATEGORY_HARASSMENT: 'HARM_CATEGORY_HARASSMENT'>,
+  probability=<HarmProbability.NEGLIGIBLE: 'NEGLIGIBLE'>,
+  probability_score=3.4184032e-07,
+  severity=<HarmSeverity.HARM_SEVERITY_NEGLIGIBLE: 'HARM_SEVERITY_NEGLIGIBLE'>
+), SafetyRating(
+  category=<HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: 'HARM_CATEGORY_SEXUALLY_EXPLICIT'>,
+  probability=<HarmProbability.NEGLIGIBLE: 'NEGLIGIBLE'>,
+  probability_score=6.7776775e-09,
+  severity=<HarmSeverity.HARM_SEVERITY_NEGLIGIBLE: 'HARM_SEVERITY_NEGLIGIBLE'>
+)]
+Processing samples:  80%|████████  | 8/10 [01:08<00:20, 10.26s/it]2025-07-12 05:54:03,075 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:54:18,665 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:54:18,666 - INFO - AFC remote call 1 is done.
+Processing samples:  90%|█████████ | 9/10 [01:24<00:11, 11.94s/it]2025-07-12 05:54:18,706 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-12 05:54:22,066 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-12 05:54:22,067 - INFO - AFC remote call 1 is done.
+Processing samples: 100%|██████████| 10/10 [01:27<00:00,  9.30s/it]Processing samples: 100%|██████████| 10/10 [01:27<00:00,  8.75s/it]
+2025-07-12 05:54:22,107 - INFO - Benchmark completed!
+2025-07-12 05:54:22,107 - INFO - Accuracy: 0.0000 (0/10)
+2025-07-12 05:54:22,107 - INFO - Total time: 87.47 seconds
+2025-07-12 05:54:22,107 - INFO - Average time per sample: 8.747 seconds
+2025-07-12 05:54:22,108 - INFO - Metrics saved to: benchmark_results/klue_re_metrics_20250712_055422.json
+2025-07-12 05:54:22,108 - INFO - Detailed results saved to: benchmark_results/klue_re_results_20250712_055422.json
+2025-07-12 05:54:22,111 - INFO - Results saved as CSV: benchmark_results/klue_re_results_20250712_055422.csv
+2025-07-12 05:54:22,111 - INFO - Error analysis saved to: benchmark_results/klue_re_error_analysis_20250712_055422.txt
+============================================================
+KLUE Relation Extraction Benchmark Results
+============================================================
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Accuracy: 0.0000 (0/10)
+Total Time: 87.47 seconds
+Average Time per Sample: 8.747 seconds
+Samples per Second: 0.11
+
+Per-relation Type Performance:
+  0 (0): 0.0000 (0/7)
+  18 (18): 0.0000 (0/1)
+  17 (17): 0.0000 (0/1)
+  10 (10): 0.0000 (0/1)
+
+Failed predictions: 1/10 (10.0%)
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-re-v1_dev_00007
+     Sentence: 공개된 영상은 한국 경제의 심장부에 서 있는 채이헌 허재 이혜준을 조명하며 시작했다....
+     Subject: 허재 (PER)
+     Object: 한국 (LOC)
+     True: 17 | Predicted: no_relation
+     Error: No response text - likely blocked by safety filters
+
