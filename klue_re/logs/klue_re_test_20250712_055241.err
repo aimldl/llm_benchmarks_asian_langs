@@ -1,0 +1,41 @@
+./run test
+Timestamp: 2025. 07. 12. (토) 05:54:22 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_re
+========================================
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-re-v1_dev_00007
+     Sentence: 공개된 영상은 한국 경제의 심장부에 서 있는 채이헌 허재 이혜준을 조명하며 시작했다....
+     Subject: 허재 (PER)
+     Object: 한국 (LOC)
+     Error: No response text - likely blocked by safety filters
+
+2025-07-12 05:54:03,035 - ERROR - Cannot get the response text.
+2025-07-12 05:54:03,035 - ERROR - Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
+2025-07-12 05:54:03,035 - ERROR - Candidate:
+content=Content(
+  role='model'
+) citation_metadata=None finish_message=None token_count=None finish_reason=<FinishReason.MAX_TOKENS: 'MAX_TOKENS'> url_context_metadata=None avg_logprobs=None grounding_metadata=None index=None logprobs_result=None safety_ratings=[SafetyRating(
+  category=<HarmCategory.HARM_CATEGORY_HATE_SPEECH: 'HARM_CATEGORY_HATE_SPEECH'>,
+  probability=<HarmProbability.NEGLIGIBLE: 'NEGLIGIBLE'>,
+  probability_score=1.0032179e-06,
+  severity=<HarmSeverity.HARM_SEVERITY_NEGLIGIBLE: 'HARM_SEVERITY_NEGLIGIBLE'>,
+  severity_score=0.09035605
+), SafetyRating(
+  category=<HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: 'HARM_CATEGORY_DANGEROUS_CONTENT'>,
+  probability=<HarmProbability.NEGLIGIBLE: 'NEGLIGIBLE'>,
+  probability_score=8.744774e-09,
+  severity=<HarmSeverity.HARM_SEVERITY_NEGLIGIBLE: 'HARM_SEVERITY_NEGLIGIBLE'>,
+  severity_score=0.020546436
+), SafetyRating(
+  category=<HarmCategory.HARM_CATEGORY_HARASSMENT: 'HARM_CATEGORY_HARASSMENT'>,
+  probability=<HarmProbability.NEGLIGIBLE: 'NEGLIGIBLE'>,
+  probability_score=3.4184032e-07,
+  severity=<HarmSeverity.HARM_SEVERITY_NEGLIGIBLE: 'HARM_SEVERITY_NEGLIGIBLE'>
+), SafetyRating(
+  category=<HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: 'HARM_CATEGORY_SEXUALLY_EXPLICIT'>,
+  probability=<HarmProbability.NEGLIGIBLE: 'NEGLIGIBLE'>,
+  probability_score=6.7776775e-09,
+  severity=<HarmSeverity.HARM_SEVERITY_NEGLIGIBLE: 'HARM_SEVERITY_NEGLIGIBLE'>
+)]
+Processing samples:  80%|████████  | 8/10 [01:08<00:20, 10.26s/it]2025-07-12 05:54:03,075 - INFO - AFC is enabled with max remote calls: 10.

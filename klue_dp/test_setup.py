@@ -56,20 +56,22 @@ def test_klue_dataset():
             sample = dataset['validation'][0]
             print(f"  - Sample from validation set:")
             print(f"    - Sentence: {sample.get('sentence', 'N/A')}")
-            print(f"    - Words: {sample.get('words', [])}")
-            print(f"    - POS tags: {sample.get('pos_tags', [])}")
-            print(f"    - Heads: {sample.get('heads', [])}")
-            print(f"    - Dependency relations: {sample.get('deprels', [])}")
+            print(f"    - Words: {sample.get('word_form', [])}")
+            print(f"    - POS tags: {sample.get('pos', [])}")
+            print(f"    - Heads: {sample.get('head', [])}")
+            print(f"    - Dependency relations: {sample.get('deprel', [])}")
         elif 'train' in dataset and len(dataset['train']) > 0:
             sample = dataset['train'][0]
             print(f"  - Sample from train set:")
             print(f"    - Sentence: {sample.get('sentence', 'N/A')}")
-            print(f"    - Words: {sample.get('words', [])}")
-            print(f"    - POS tags: {sample.get('pos_tags', [])}")
-            print(f"    - Heads: {sample.get('heads', [])}")
-            print(f"    - Dependency relations: {sample.get('deprels', [])}")
+            print(f"    - Words: {sample.get('word_form', [])}")
+            print(f"    - POS tags: {sample.get('pos', [])}")
+            print(f"    - Heads: {sample.get('head', [])}")
+            print(f"    - Dependency relations: {sample.get('deprel', [])}")
         else:
             print("  - No samples available in 'train' or 'validation' splits.")
+        
+        return True
 
     except Exception as e:
         print(f"✗ Failed to load KLUE dataset: {e}")

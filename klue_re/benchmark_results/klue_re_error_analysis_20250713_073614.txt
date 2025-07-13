@@ -1,0 +1,82 @@
+KLUE RE Error Analysis
+==================================================
+
+Total samples: 7765
+Failed predictions: 611
+Success rate: 92.13%
+
+Error breakdown:
+  No response text - likely blocked by safety filters: 611
+
+Detailed error analysis (showing first 10 errors):
+--------------------------------------------------
+
+1. Sample ID: klue-re-v1_dev_00011
+   Sentence: 그린메이트 14기는 1차 서류심사와 2차 면접을 통해 최종 20명을 선발한다....
+   Subject: 그린메이트 (ORG)
+   Object: 14기 (NOH)
+   True: 0 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+2. Sample ID: klue-re-v1_dev_00015
+   Sentence: KT가 신종 코로나바이러스를 악용한 스미싱으로부터 고객을 보호하기 위해 차단 대응을 강화 중이라고 11일 밝혔다....
+   Subject: KT (ORG)
+   Object: 고객 (POH)
+   True: 0 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+3. Sample ID: klue-re-v1_dev_00053
+   Sentence: 코페르니쿠스는 (점성술에 관한 그의 업적은 이론에만 그쳤는데, 경험주의적 천문학은 물론) 점성술을 사용하지 않았지만, 튀코 브라헤와 요하네스 케플러 그리고 갈릴레오 갈릴레이와 같이...
+   Subject: 튀코 브라헤 (PER)
+   Object: 천문학 (POH)
+   True: 29 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+4. Sample ID: klue-re-v1_dev_00069
+   Sentence: 도교육청은 이날 간담회를 통해 청취한 현장의견 등을 숙고해 유치원 공공성 강화를 위해 사립유치원 에듀파인의 현장 안착, 투명한 회계 운영, 회계 관련 연수 및 컨설팅 등에 만전을 ...
+   Subject: 도교육청 (ORG)
+   Object: 에듀파인 (ORG)
+   True: 0 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+5. Sample ID: klue-re-v1_dev_00102
+   Sentence: 사천시 4-H본부 명기천 회장은 “함평에서만 볼 수 있는 다양한 기획 작품에 나비축제 이상의 감동을 받았다”며 극찬했다....
+   Subject: 명기천 (PER)
+   Object: 사천시 4-H본부 (ORG)
+   True: 18 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+6. Sample ID: klue-re-v1_dev_00126
+   Sentence: 이후 이베리아 반도에서 계속된 기독교 국가와 이슬람과의 전쟁에는 성지의 수호라는 명분이 더해졌다....
+   Subject: 기독교 (ORG)
+   Object: 이베리아 반도 (LOC)
+   True: 0 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+7. Sample ID: klue-re-v1_dev_00141
+   Sentence: 이날 오전 10시 경기도시공사 북부본부에서 열린 출범식에는 이화순 행정2부지사, 안병용 경기도 시장군수협의회장, 김원기 도의회 부의장, 김명원 도의회 건설교통부위원장, 이헌욱 경기...
+   Subject: 김명원 (PER)
+   Object: 관계자 (POH)
+   True: 0 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+8. Sample ID: klue-re-v1_dev_00156
+   Sentence: 서구청 관계자는 “구민들을 위해 인문학·민주시민교육 등 다양한 평생교육 프로그램을 개발·운영 중이다.”며, “이번 교육을 통해 참여 학습자들에게 작게나마 도움이 되길 바란다” 고 ...
+   Subject: 서구청 (ORG)
+   Object: 구민 (POH)
+   True: 10 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+9. Sample ID: klue-re-v1_dev_00181
+   Sentence: 2018년 아우디그룹은 아우디 브랜드 181만 2천여대, 람보르기니 스포츠카 5천 750대, 두카티 모터사이클 5만 3천 4대를 판매했으며, 592억 유로의 매출을 기록했다....
+   Subject: 아우디그룹 (ORG)
+   Object: 람보르기니 (POH)
+   True: 6 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
+
+10. Sample ID: klue-re-v1_dev_00205
+   Sentence: 광주여대(총장 이선재) 대학일자리센터는 지난 25일 대학본부 JOB세미나실에서 9월 23일부터 9주간 운영된 해외취업 스터디 ‘해외취업 뽀개기’의 수료식을 진행했다고 밝혔다....
+   Subject: 대학일자리 (ORG)
+   Object: 이선재 (PER)
+   True: 0 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters

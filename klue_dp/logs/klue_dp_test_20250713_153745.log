@@ -1,0 +1,148 @@
+./run test
+Timestamp: 2025. 07. 13. (일) 15:37:45 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_dp
+========================================
+
+2025-07-13 15:37:46,951 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-13 15:37:46,951 - INFO - Model name set to: gemini-2.5-flash
+2025-07-13 15:37:46,951 - INFO - Loading KLUE DP dataset for dependency parsing...
+2025-07-13 15:37:57,582 - INFO - Preparing to load a subset of 10 samples.
+2025-07-13 15:37:57,584 - INFO - Reached sample limit of 10. Halting data loading.
+2025-07-13 15:37:57,584 - INFO - ✅ Successfully loaded 10 samples.
+2025-07-13 15:37:57,584 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/10 [00:00<?, ?it/s]2025-07-13 15:37:57,584 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:38:25,227 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:38:25,228 - INFO - AFC remote call 1 is done.
+Processing samples:  10%|█         | 1/10 [00:27<04:09, 27.68s/it]2025-07-13 15:38:25,269 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:38:48,669 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:38:48,670 - INFO - AFC remote call 1 is done.
+Processing samples:  20%|██        | 2/10 [00:51<03:21, 25.19s/it]2025-07-13 15:38:48,711 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:38:59,586 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:38:59,587 - INFO - AFC remote call 1 is done.
+Processing samples:  30%|███       | 3/10 [01:02<02:10, 18.67s/it]2025-07-13 15:38:59,627 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:39:23,748 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:39:23,749 - INFO - AFC remote call 1 is done.
+2025-07-13 15:39:23,749 - ERROR - Cannot get the response text.
+Processing samples:  40%|████      | 4/10 [01:26<02:05, 20.84s/it]2025-07-13 15:39:23,789 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:39:45,174 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:39:45,175 - INFO - AFC remote call 1 is done.
+Processing samples:  50%|█████     | 5/10 [01:47<01:45, 21.05s/it]2025-07-13 15:39:45,215 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:40:00,728 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:40:00,729 - INFO - AFC remote call 1 is done.
+Processing samples:  60%|██████    | 6/10 [02:03<01:16, 19.18s/it]2025-07-13 15:40:00,770 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:40:25,816 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:40:25,817 - INFO - AFC remote call 1 is done.
+2025-07-13 15:40:25,817 - ERROR - Cannot get the response text.
+Processing samples:  70%|███████   | 7/10 [02:28<01:03, 21.11s/it]2025-07-13 15:40:25,857 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:40:51,631 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:40:51,632 - INFO - AFC remote call 1 is done.
+Processing samples:  80%|████████  | 8/10 [02:54<00:45, 22.61s/it]2025-07-13 15:40:51,673 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:41:11,207 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:41:11,208 - INFO - AFC remote call 1 is done.
+Processing samples:  90%|█████████ | 9/10 [03:13<00:21, 21.66s/it]2025-07-13 15:41:11,248 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-13 15:41:34,679 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-13 15:41:34,680 - INFO - AFC remote call 1 is done.
+Processing samples: 100%|██████████| 10/10 [03:37<00:00, 22.22s/it]Processing samples: 100%|██████████| 10/10 [03:37<00:00, 21.71s/it]
+2025-07-13 15:41:34,721 - INFO - Benchmark completed!
+2025-07-13 15:41:34,721 - INFO - UAS: 0.5985 (82/137)
+2025-07-13 15:41:34,721 - INFO - LAS: 0.0000 (0/137)
+2025-07-13 15:41:34,721 - INFO - Total time: 217.14 seconds
+2025-07-13 15:41:34,721 - INFO - Average time per sample: 21.714 seconds
+2025-07-13 15:41:34,721 - INFO - Metrics saved to: benchmark_results/klue_dp_metrics_20250713_154134.json
+2025-07-13 15:41:34,722 - INFO - Detailed results saved to: benchmark_results/klue_dp_results_20250713_154134.json
+2025-07-13 15:41:34,725 - INFO - Results saved as CSV: benchmark_results/klue_dp_results_20250713_154134.csv
+2025-07-13 15:41:34,725 - INFO - Error analysis saved to: benchmark_results/klue_dp_error_analysis_20250713_154134.txt
+============================================================
+KLUE Dependency Parsing Benchmark Results
+============================================================
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+UAS: 0.5985 (82/137)
+LAS: 0.0000 (0/137)
+Total Time: 217.14 seconds
+Average Time per Sample: 21.714 seconds
+Samples per Second: 0.05
+
+Per-POS Performance:
+  SS+SL+NNP+SN+SS (SS+SL+NNP+SN+SS): UAS=0.0000, LAS=0.0000 (1 words)
+  NNP+JKS (NNP+JKS): UAS=0.0000, LAS=0.0000 (1 words)
+  NNP+JKG (NNP+JKG): UAS=0.0000, LAS=0.0000 (2 words)
+  NNG+JKB (NNG+JKB): UAS=0.4286, LAS=0.0000 (7 words)
+  NNG+JKO (NNG+JKO): UAS=0.8000, LAS=0.0000 (10 words)
+  VV+EP+EF+SF (VV+EP+EF+SF): UAS=1.0000, LAS=0.0000 (2 words)
+  NNG+JX (NNG+JX): UAS=0.6000, LAS=0.0000 (5 words)
+  NNG+JKG (NNG+JKG): UAS=0.5000, LAS=0.0000 (2 words)
+  NNG+XSA+ETM (NNG+XSA+ETM): UAS=0.5000, LAS=0.0000 (2 words)
+  VV+ETM (VV+ETM): UAS=1.0000, LAS=0.0000 (7 words)
+  NNG+JKS (NNG+JKS): UAS=0.7500, LAS=0.0000 (4 words)
+  VV+EC (VV+EC): UAS=0.3333, LAS=0.0000 (6 words)
+  VX+EC (VX+EC): UAS=0.5000, LAS=0.0000 (2 words)
+  NNP+NNB+JC (NNP+NNB+JC): UAS=1.0000, LAS=0.0000 (1 words)
+  NNP+NNB+JKS (NNP+NNB+JKS): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+XSN (NNG+XSN): UAS=1.0000, LAS=0.0000 (1 words)
+  VV+EP+ETM (VV+EP+ETM): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+XSV+EP+EF+SF (NNG+XSV+EP+EF+SF): UAS=1.0000, LAS=0.0000 (2 words)
+  MAG (일반부사): UAS=0.5000, LAS=0.0000 (4 words)
+  NNG+VCP+EP+EF+SF (NNG+VCP+EP+EF+SF): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+JC (NNG+JC): UAS=0.3333, LAS=0.0000 (3 words)
+  NNG (일반명사): UAS=0.4375, LAS=0.0000 (16 words)
+  NNG+XSV+ETM (NNG+XSV+ETM): UAS=0.2500, LAS=0.0000 (4 words)
+  NNG+XSN+JKB (NNG+XSN+JKB): UAS=0.0000, LAS=0.0000 (2 words)
+  NNG+XSV+EP+EC (NNG+XSV+EP+EC): UAS=0.0000, LAS=0.0000 (1 words)
+  NP+JX (NP+JX): UAS=0.5000, LAS=0.0000 (2 words)
+  NNG+JKC (NNG+JKC): UAS=0.0000, LAS=0.0000 (1 words)
+  VX+EP+EF+SF (VX+EP+EF+SF): UAS=1.0000, LAS=0.0000 (1 words)
+  NNP (고유명사): UAS=1.0000, LAS=0.0000 (3 words)
+  MMD (MMD): UAS=0.5000, LAS=0.0000 (2 words)
+  NNG+XSN+JKS (NNG+XSN+JKS): UAS=1.0000, LAS=0.0000 (1 words)
+  VV+EC+VV+EC (VV+EC+VV+EC): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+XSN+SP (NNG+XSN+SP): UAS=0.0000, LAS=0.0000 (1 words)
+  NNG+XSN+JKO (NNG+XSN+JKO): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+XSV+ETN (NNG+XSV+ETN): UAS=1.0000, LAS=0.0000 (1 words)
+  VA+ETM (VA+ETM): UAS=1.0000, LAS=0.0000 (2 words)
+  NNB+JKB (NNB+JKB): UAS=0.7500, LAS=0.0000 (4 words)
+  NNG+XSV+EP+ETN (NNG+XSV+EP+ETN): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+XSV+EF+SF (NNG+XSV+EF+SF): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+NNB (NNG+NNB): UAS=0.0000, LAS=0.0000 (1 words)
+  NNP+JX (NNP+JX): UAS=0.0000, LAS=0.0000 (1 words)
+  NNB (의존명사): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+XSV+EC (NNG+XSV+EC): UAS=0.6000, LAS=0.0000 (5 words)
+  NNP+XSN+JKO (NNP+XSN+JKO): UAS=1.0000, LAS=0.0000 (1 words)
+  VV+EC+VX+EP+EF+SF (VV+EC+VX+EP+EF+SF): UAS=1.0000, LAS=0.0000 (1 words)
+  VA+EC (VA+EC): UAS=0.0000, LAS=0.0000 (1 words)
+  SN+NNB+JKS (SN+NNB+JKS): UAS=0.0000, LAS=0.0000 (1 words)
+  VV+EP+EC (VV+EP+EC): UAS=0.0000, LAS=0.0000 (1 words)
+  SN+NNB (SN+NNB): UAS=0.3333, LAS=0.0000 (3 words)
+  NNG+SP (NNG+SP): UAS=1.0000, LAS=0.0000 (1 words)
+  VV+VX+EC (VV+VX+EC): UAS=1.0000, LAS=0.0000 (1 words)
+  VV+EF+SF (VV+EF+SF): UAS=1.0000, LAS=0.0000 (1 words)
+  NP+JKO (NP+JKO): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+NNG+JKO (NNG+NNG+JKO): UAS=1.0000, LAS=0.0000 (1 words)
+  VV+ETN (VV+ETN): UAS=1.0000, LAS=0.0000 (1 words)
+  VX+ETM (VX+ETM): UAS=0.0000, LAS=0.0000 (1 words)
+  NNB+VCP+EF+SF (NNB+VCP+EF+SF): UAS=1.0000, LAS=0.0000 (1 words)
+  SN+NNB+JKB (SN+NNB+JKB): UAS=1.0000, LAS=0.0000 (1 words)
+  SS+NNP+SS (SS+NNP+SS): UAS=1.0000, LAS=0.0000 (1 words)
+  NNG+NNG+JKB (NNG+NNG+JKB): UAS=0.0000, LAS=0.0000 (1 words)
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: dp_0
+     Sentence: 'K팝스타3’ 유희열이 홍정희의 탈락에 눈물을 흘렸다....
+     Words: 'K팝스타3’ 유희열이 홍정희의 탈락에 눈물을 흘렸다....
+     UAS: 0.1667 | LAS: 0.0000
+
+  2. Sample ID: dp_3
+     Sentence: 검증과 여과 없이 배포된 기사들에 오판과 여론은 확산되었고 저는 어느새 치욕스러운 범죄자가 되어 버렸습니다....
+     Words: 검증과 여과 없이 배포된 기사들에 오판과 여론은 확산되었고 저는 어느새...
+     UAS: 0.0714 | LAS: 0.0000
+     Error: No response text
+
+  3. Sample ID: dp_6
+     Sentence: 이 불이 빠르게 번지며 주변 점포 5개가 불 탔고 6개 점포는 부분적으로 소실됐다....
+     Words: 이 불이 빠르게 번지며 주변 점포 5개가 불 탔고 6개...
+     UAS: 0.0769 | LAS: 0.0000
+     Error: No response text
+

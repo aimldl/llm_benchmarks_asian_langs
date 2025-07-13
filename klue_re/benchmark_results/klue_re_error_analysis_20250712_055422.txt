@@ -1,0 +1,19 @@
+KLUE RE Error Analysis
+==================================================
+
+Total samples: 10
+Failed predictions: 1
+Success rate: 90.00%
+
+Error breakdown:
+  No response text - likely blocked by safety filters: 1
+
+Detailed error analysis (showing first 10 errors):
+--------------------------------------------------
+
+1. Sample ID: klue-re-v1_dev_00007
+   Sentence: 공개된 영상은 한국 경제의 심장부에 서 있는 채이헌 허재 이혜준을 조명하며 시작했다....
+   Subject: 허재 (PER)
+   Object: 한국 (LOC)
+   True: 17 | Predicted: no_relation
+   Error: No response text - likely blocked by safety filters
