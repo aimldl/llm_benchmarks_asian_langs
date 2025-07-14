@@ -1,0 +1,11 @@
+{
+  "total_samples": 2000,
+  "total_words": 22496,
+  "correct_heads": 11542,
+  "correct_labels": 0,
+  "uas": 0.5130689900426743,
+  "las": 0.0,
+  "total_time": 34533.20904660225,
+  "average_time_per_sample": 17.266604523301126,
+  "samples_per_second": 0.057915266354222054
+}
