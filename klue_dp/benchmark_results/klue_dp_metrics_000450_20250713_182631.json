@@ -1,0 +1,9 @@
+{
+  "samples_processed": 450,
+  "total_words": 6925,
+  "correct_heads": 2535,
+  "correct_labels": 0,
+  "uas": 0.36606498194945847,
+  "las": 0.0,
+  "timestamp": "20250713_182631"
+}

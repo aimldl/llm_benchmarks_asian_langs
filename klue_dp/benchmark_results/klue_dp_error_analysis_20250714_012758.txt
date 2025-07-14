@@ -1,0 +1,100 @@
+KLUE DP Error Analysis
+==================================================
+
+1. Sample ID: dp_1
+   Sentence: 재판부는 검찰의 공정한 수사에 대한 신뢰가 깨져 버려 최씨와 김씨가 정신적 피해를 봤다는 점을 인정했다.
+   Words: 재판부는 검찰의 공정한 수사에 대한 신뢰가 깨져 버려 최씨와 김씨가 정신적 피해를 봤다는 점을 인정했다.
+   POS Tags: NNG+JX NNG+JKG NNG+XSA+ETM NNG+JKB VV+ETM NNG+JKS VV+EC VX+EC NNP+NNB+JC NNP+NNB+JKS NNG+XSN NNG+JKO VV+EP+ETM NNG+JKO NNG+XSV+EP+EF+SF
+   True Heads: [15, 4, 4, 5, 6, 7, 8, 13, 10, 13, 12, 13, 14, 15, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0667
+   LAS: 0.0000
+   Error: No response text
+
+2. Sample ID: dp_4
+   Sentence: 이는 김 전 지검장과 함께 근무한 후배 검사들이 사건을 넘겨받게 될 경우 수사의 객관성, 공정성을 담보하기 어려울 것으로 판단했기 때문으로 풀이된다.
+   Words: 이는 김 전 지검장과 함께 근무한 후배 검사들이 사건을 넘겨받게 될 경우 수사의 객관성, 공정성을 담보하기 어려울 것으로 판단했기 때문으로 풀이된다.
+   POS Tags: NP+JX NNP MMD NNG+JKB MAG NNG+XSV+ETM NNG NNG+XSN+JKS NNG+JKO VV+EC+VV+EC VV+ETM NNG NNG+JKG NNG+XSN+SP NNG+XSN+JKO NNG+XSV+ETN VA+ETM NNB+JKB NNG+XSV+EP+ETN NNB+JKB NNG+XSV+EF+SF
+   True Heads: [21, 4, 4, 6, 6, 8, 8, 10, 10, 11, 12, 17, 15, 15, 16, 17, 18, 19, 20, 21, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0476
+   LAS: 0.0000
+   Error: No response text
+
+3. Sample ID: dp_5
+   Sentence: 극중 수현은 과학자 겸 의사로 등장해 어벤져스들을 돕는 역할을 맡은 것으로 알려졌다.
+   Words: 극중 수현은 과학자 겸 의사로 등장해 어벤져스들을 돕는 역할을 맡은 것으로 알려졌다.
+   POS Tags: NNG+NNB NNP+JX NNG NNB NNG+JKB NNG+XSV+EC NNP+XSN+JKO VV+ETM NNG+JKO VV+ETM NNB+JKB VV+EC+VX+EP+EF+SF
+   True Heads: [12, 12, 4, 5, 6, 10, 8, 9, 10, 11, 12, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0833
+   LAS: 0.0000
+
+4. Sample ID: dp_6
+   Sentence: 이 불이 빠르게 번지며 주변 점포 5개가 불 탔고 6개 점포는 부분적으로 소실됐다.
+   Words: 이 불이 빠르게 번지며 주변 점포 5개가 불 탔고 6개 점포는 부분적으로 소실됐다.
+   POS Tags: MMD NNG+JKS VA+EC VV+EC NNG NNG SN+NNB+JKS NNG VV+EP+EC SN+NNB NNG+JX NNG+XSN+JKB NNG+XSV+EP+EF+SF
+   True Heads: [2, 4, 4, 9, 6, 7, 9, 9, 13, 11, 13, 13, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0769
+   LAS: 0.0000
+   Error: No response text
+
+5. Sample ID: dp_7
+   Sentence: 만약 카드 정보가 확인되지 않는다며 거절한다면 카드 앞, 뒤와 신분증을 복사해 보내주면 된다.
+   Words: 만약 카드 정보가 확인되지 않는다며 거절한다면 카드 앞, 뒤와 신분증을 복사해 보내주면 된다.
+   POS Tags: NNG NNG NNG+JKS NNG+XSV+EC VX+EC NNG+XSV+EC NNG NNG+SP NNG+JC NNG+JKO NNG+XSV+EC VV+VX+EC VV+EF+SF
+   True Heads: [6, 3, 4, 5, 6, 11, 9, 9, 10, 11, 12, 13, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0769
+   LAS: 0.0000
+
+6. Sample ID: dp_11
+   Sentence: 이 사고로 박모(35·부산시)씨 등 이용객 100여명이 지상에서 40∼50ｍ가량 공중에 멈춰선 리프트에 갇힌 채 수십분 간 추위와 공포에 떨어야 했다.
+   Words: 이 사고로 박모(35·부산시)씨 등 이용객 100여명이 지상에서 40∼50ｍ가량 공중에 멈춰선 리프트에 갇힌 채 수십분 간 추위와 공포에 떨어야 했다.
+   POS Tags: MMD NNG+JKB NNP+NP+SS+SN+SP+NNP+SS+NNB NNB NNG SN+XSN+NNB+JKS NNG+JKB SN+SO+SN+SW+NNG NNG+JKB VV+EC+VV+ETM NNG+JKB VV+ETM NNB NR+NNB NNB NNG+JC NNG+JKB VV+EC VX+EP+EF+SF
+   True Heads: [2, 18, 4, 6, 6, 18, 10, 9, 10, 11, 12, 13, 18, 15, 18, 17, 18, 19, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0526
+   LAS: 0.0000
+   Error: No response text
+
+7. Sample ID: dp_13
+   Sentence: 이 가운데에는 게임업체 넥슨의 창업자인 김정주 NXC 회장이 가장 순위가 높았다.
+   Words: 이 가운데에는 게임업체 넥슨의 창업자인 김정주 NXC 회장이 가장 순위가 높았다.
+   POS Tags: MMD NNG+JKB+JX NNG+NNG NNP+JKG NNG+VCP+ETM NNP SL NNG+JKS MAG NNG+JKS VA+EP+EF+SF
+   True Heads: [2, 11, 4, 5, 8, 8, 8, 11, 11, 11, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0909
+   LAS: 0.0000
+   Error: No response text
+
+8. Sample ID: dp_18
+   Sentence: 그는 옌지에서 북한 함경북도 나선시로 통근했고 국제 무역과 호텔업을 하는 회사의 사장으로 일했다고 덧붙였다.
+   Words: 그는 옌지에서 북한 함경북도 나선시로 통근했고 국제 무역과 호텔업을 하는 회사의 사장으로 일했다고 덧붙였다.
+   POS Tags: NP+JX NNP+JKB NNP NNP NNP+JKB NNG+XSV+EP+EC NNG NNG+JC NNG+JKO VV+ETM NNG+JKG NNG+JKB NNG+XSV+EP+EC VV+EP+EF+SF
+   True Heads: [6, 6, 4, 5, 6, 13, 8, 9, 10, 11, 12, 13, 14, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0714
+   LAS: 0.0000
+
+9. Sample ID: dp_21
+   Sentence: 국가의 내면 실상은 이러하나 가장 큰 위기는 아무도 모르게 다가온다는 말과 같이 우리 국민은 아직 잠들어 있습니다.
+   Words: 국가의 내면 실상은 이러하나 가장 큰 위기는 아무도 모르게 다가온다는 말과 같이 우리 국민은 아직 잠들어 있습니다.
+   POS Tags: NNG+JKG NNG NNG+JX VA+EC MAG VA+ETM NNG+JX NP+JX VV+EC VV+ETM NNG+JKB MAG NP NNG+JX MAG NNG+VV+EC VX+EF+SF
+   True Heads: [3, 3, 4, 16, 6, 7, 10, 9, 10, 11, 12, 16, 14, 16, 16, 17, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0588
+   LAS: 0.0000
+   Error: No response text
+
+10. Sample ID: dp_25
+   Sentence: 송모(48) 한국수력원자력 부장에게 17억원을 제공한 혐의를 받는 현대중공업 임·직원 가운데 일부는 김앤장 변호사 2명의 집중적인 도움을 받고 있다.
+   Words: 송모(48) 한국수력원자력 부장에게 17억원을 제공한 혐의를 받는 현대중공업 임·직원 가운데 일부는 김앤장 변호사 2명의 집중적인 도움을 받고 있다.
+   POS Tags: NNP+NP+SS+SN+SS NNP NNG+JKB SN+NR+NNB+JKO NNG+XSV+ETM NNG+JKO VV+ETM NNP NNG+SP+NNG NNG NNG+JX NNP NNG SN+NNB+JKG NNG+XSN+VCP+ETM NNG+JKO VV+EC VX+EF+SF
+   True Heads: [3, 3, 5, 5, 6, 7, 9, 9, 10, 11, 17, 13, 14, 16, 16, 17, 18, 0]
+   Predicted Heads: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   UAS: 0.0556
+   LAS: 0.0000
+   Error: No response text
+
