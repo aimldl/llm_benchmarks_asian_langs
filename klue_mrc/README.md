@@ -164,9 +164,8 @@ Overall performance metrics:
   "impossible_samples": 200,
   "exact_match": 0.75,
   "f1_score": 0.82,
-  "rouge1": 0.78,
-  "rouge2": 0.65,
-  "rougeL": 0.76,
+  "rouge_w": 0.78,
+  "lccs_f1": 0.76,
   "impossible_accuracy": 0.90,
   "total_time": 1200.5,
   "average_time_per_sample": 1.2,
@@ -187,23 +186,22 @@ Automatic logging to `logs/` directory:
 
 ## Performance Metrics
 
-- Both token-based (F1) and n-gram overlap (ROUGE) metrics are included for comprehensive evaluation. 
-- Uses stemmer for better Korean text processing.
+- Both token-based (F1) and sequence-based (ROUGE-W, LCCS-F1) metrics are included for comprehensive evaluation.
+- ROUGE-W and LCCS-F1 are different metrics that provide complementary evaluation perspectives.
 
 ### Primary Metrics
 - **Exact Match**: Percentage of predictions exactly matching ground truth
 - **F1 Score**: Harmonic mean of precision and recall
-- **ROUGE-1**: Unigram overlap between prediction and reference
-- **ROUGE-2**: Bigram overlap between prediction and reference
-- **ROUGE-L**: Longest common subsequence between prediction and reference
+- **ROUGE-W**: Weighted ROUGE score that gives higher weight to longer consecutive matches
+- **LCCS-F1**: F1 score based on Longest Common Contiguous Subsequence
 - **Impossible Accuracy**: Accuracy on unanswerable questions
 
-### ROUGE > Integration Points
-- Answerable questions: ROUGE scores calculated against ground truth answers
-- Impossible questions: ROUGE scores set to 1.0 if model correctly identifies as impossible
-- Error cases: ROUGE scores set to 0.0 for failed predictions
-- Intermediate results: ROUGE scores included in periodic saves
-- Final metrics: ROUGE scores included in overall performance summary
+### ROUGE-W and LCCS-F1 Integration Points
+- Answerable questions: Both metrics calculated against ground truth answers
+- Impossible questions: Both metrics set to 1.0 if model correctly identifies as impossible
+- Error cases: Both metrics set to 0.0 for failed predictions
+- Intermediate results: Both metrics included in periodic saves
+- Final metrics: Both metrics included in overall performance summary
 
 ### Secondary Metrics
 - **Processing Time**: Total and average time per sample

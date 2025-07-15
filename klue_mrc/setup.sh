@@ -76,7 +76,8 @@ check_prerequisites() {
 install_dependencies() {
     print_info "Installing Python dependencies..."
     
-    if pip install -r requirements.txt; then
+    # Redirect pip output to /dev/null to suppress verbose installation messages
+    if pip install -r requirements.txt > /dev/null 2>&1; then
         print_success "Dependencies installed successfully!"
     else
         print_error "Failed to install dependencies"

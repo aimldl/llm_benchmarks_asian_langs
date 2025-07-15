@@ -87,7 +87,8 @@ install_dependencies() {
     
     # Upgrade pip first
     print_info "Upgrading pip..."
-    if pip install --upgrade pip; then
+    # Redirect pip output to /dev/null to suppress verbose installation messages
+    if pip install --upgrade pip > /dev/null 2>&1; then
         print_success "pip upgraded successfully"
     else
         print_warning "Failed to upgrade pip, continuing with installation"
@@ -95,7 +96,8 @@ install_dependencies() {
     
     # Install dependencies from requirements.txt
     print_info "Installing dependencies from requirements.txt..."
-    if pip install -r requirements.txt; then
+    # Redirect pip output to /dev/null to suppress verbose installation messages
+    if pip install -r requirements.txt > /dev/null 2>&1; then
         print_success "Dependencies installed successfully!"
     else
         print_error "Failed to install dependencies"

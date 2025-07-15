@@ -114,7 +114,8 @@ install_packages() {
         
         install_cmd="$install_cmd $package"
         
-        if $install_cmd; then
+        # Redirect pip output to /dev/null to suppress verbose installation messages
+        if $install_cmd > /dev/null 2>&1; then
             print_success "Installed $package"
         else
             print_error "Failed to install $package"
@@ -214,7 +215,8 @@ main_installation() {
     
     # Upgrade pip
     print_info "Upgrading pip..."
-    if "$python_cmd" -m pip install --upgrade pip; then
+    # Redirect pip output to /dev/null to suppress verbose installation messages
+    if "$python_cmd" -m pip install --upgrade pip > /dev/null 2>&1; then
         print_success "Pip upgraded"
     else
         print_warning "Failed to upgrade pip, continuing..."
