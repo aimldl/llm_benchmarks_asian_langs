@@ -1,0 +1,11 @@
+id,dialogue_id,turn_id,domains,ground_truth_intent,predicted_intent,ground_truth_requested_slots,predicted_requested_slots,ground_truth_slot_values,predicted_slot_values,intent_accuracy,requested_slots_f1,slot_values_f1,overall_f1,success,error
+wos-v1_dev_00000,,0,"관광, 식당, 숙소",,None,,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00001,,0,"식당, 택시",,None,,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00002,,0,숙소,,None,,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00003,,0,"식당, 관광, 지하철",,N/A (사용자 발화 없음),,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00004,,0,"숙소, 관광",,None,,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00005,,0,"숙소, 식당, 관광",,None,,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00006,,0,"식당, 관광, 숙소",,없음,,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00007,,0,"관광, 숙소, 식당",,None,,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00008,,0,"숙소, 관광, 택시",,none,,,{},{},0.0,1.0,1.0,1.0,True,
+wos-v1_dev_00009,,0,"숙소, 식당, 택시",,None,,,{},{},0.0,1.0,1.0,1.0,True,

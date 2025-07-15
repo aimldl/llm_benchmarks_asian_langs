@@ -1,130 +1,219 @@
 # LLM Benchmarks for Asian Languages 🌏
 
-This repository provides a suite of benchmarks to evaluate Large Language Models (LLMs) on a variety of tasks for Asian languages.
+A comprehensive suite of benchmarks to evaluate Large Language Models (LLMs) on Korean language understanding tasks using Google Cloud Vertex AI and Gemini 2.5 Flash.
+
+## Quickstart
+
+```bash
+# Clone and navigate
+git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
+cd llm_benchmarks_asian_langs
+
+# Setup environment
+conda create -n klue -y python=3 anaconda
+conda activate klue
+
+# Run any benchmark
+cd klue_tc  # or klue_nli, klue_ner, klue_mrc, klue_dp, klue_re, klue_dst
+./setup.sh full
+./run test
+```
+
+## Available Tasks
+
+| Task | Description | Dataset Size | Expected Performance | Complexity |
+|------|-------------|--------------|---------------------|------------|
+| **KLUE TC** | Topic Classification (7 news categories) | ~3K samples | 85-95% accuracy | Low |
+| **KLUE NLI** | Natural Language Inference (entailment/contradiction/neutral) | ~3K samples | 75-85% accuracy | Medium |
+| **KLUE NER** | Named Entity Recognition (person/location/organization) | ~1K samples | 70-85% F1 | Medium |
+| **KLUE MRC** | Machine Reading Comprehension (Q&A from passages) | ~2K samples | 60-80% F1 | High |
+| **KLUE DP** | Dependency Parsing (grammatical relationships) | ~1K samples | 75-90% UAS/LAS | Very High |
+| **KLUE RE** | Relation Extraction (entity relationships) | ~1K samples | 65-80% accuracy | High |
+| **KLUE DST** | Dialogue State Tracking (conversation state) | ~1K samples | 60-75% F1 | High |
+
+## Project Structure
+
+```
+llm_benchmarks_asian_langs/
+├── klue_tc/          # Topic Classification
+├── klue_nli/         # Natural Language Inference  
+├── klue_ner/         # Named Entity Recognition
+├── klue_mrc/         # Machine Reading Comprehension
+├── klue_dp/          # Dependency Parsing
+├── klue_re/          # Relation Extraction
+└── klue_dst/         # Dialogue State Tracking
+```
+
+Each task directory contains:
+- **`README.md`**: Detailed task-specific documentation
+- **`run`**: Benchmark execution script with test/custom/full modes
+- **`setup.sh`**: Environment and dependency setup
+- **`*.ipynb`**: Jupyter notebook for interactive execution
+- **`benchmark_results/`**: Generated metrics and analysis
+- **`logs/`**: Execution logs and error analysis
+
+## Quick Setup
+
+### 1. Environment Setup
+```bash
+# Option 1: Anaconda (recommended)
+conda create -n klue -y python=3 anaconda
+conda activate klue
+
+# Option 2: Virtual environment
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 2. Google Cloud Configuration
+```bash
+# Set project and enable APIs
+export GOOGLE_CLOUD_PROJECT="your-project-id"
+gcloud services enable aiplatform.googleapis.com
+
+# Authentication (choose one)
+gcloud auth application-default login
+# OR use service account key
+export GOOGLE_APPLICATION_CREDENTIALS="path/to/key.json"
+```
+
+### 3. Run Benchmarks
+```bash
+# Navigate to any task
+cd klue_tc    # or klue_nli, klue_ner, klue_mrc, klue_dp, klue_re, klue_dst
+
+# Complete setup
+./setup.sh full
+
+# Execute benchmark
+./run test        # 10 samples
+./run custom 100  # 100 samples  
+./run full        # All samples
+```
+
+## Execution Modes
+
+All benchmarks support three execution modes:
+
+- **`test`**: Quick validation with 10 samples
+- **`custom N`**: Run with N samples (e.g., `./run custom 50`)
+- **`full`**: Complete benchmark on all available samples
+
+## Background Processing
+
+For long-running benchmarks, use `tmux` to run processes in the background:
+
+### Create and Start Session
+```bash
+tmux new -s klue
+./run full
+```
+
+### Detach from Session
+Press `Ctrl+b d` to detach while keeping the process running.
+
+### Reattach to Session
+```bash
+# List sessions
+tmux ls
+
+# Reattach
+tmux attach -t klue
+```
+
+## Performance Metrics
+
+### Task-Specific Metrics
+
+| Task | Primary Metrics | Secondary Metrics | Key Challenges |
+|------|----------------|-------------------|----------------|
+| **TC** | Accuracy, Per-category accuracy | Speed, Error analysis | Topic ambiguity |
+| **NLI** | Accuracy, Per-class accuracy | Confusion matrix | Logical reasoning |
+| **NER** | Precision, Recall, F1 | Per-entity F1 | Korean names/honorifics |
+| **MRC** | Exact Match, F1, Impossible Accuracy | Per-type analysis | Unanswerable questions |
+| **DP** | UAS, LAS | POS accuracy | Korean agglutination |
+| **RE** | Accuracy, Per-relation accuracy | Error analysis | Complex sentence structures |
+| **DST** | Intent Accuracy, Overall F1 | Requested Slots F1 | Multi-turn dialogue |
+
+### Expected Performance Ranges
+
+| Task | Metric | Expected Range | Best Performance |
+|------|--------|----------------|------------------|
+| TC | Accuracy | 85-95% | Simple news headlines |
+| NLI | Accuracy | 75-85% | Simple premises |
+| NER | F1-Score | 70-85% | Common entities |
+| MRC | F1-Score | 60-80% | Answerable questions |
+| DP | UAS/LAS | 75-90%/70-85% | Simple sentences |
+| RE | Accuracy | 65-80% | Simple sentences |
+| DST | F1-Score | 60-75% | Clear dialogue turns |
+
+## Output Structure
+
+Each benchmark generates:
+
+- **Metrics**: Overall performance scores (accuracy, F1, etc.)
+- **Detailed Results**: Per-sample predictions and analysis
+- **Error Analysis**: Failed predictions and debugging info
+- **Logs**: Complete execution logs for troubleshooting
+
+Results are saved in `benchmark_results/` and `logs/` directories.
 
 ## Key Features
 
-The benchmark framework is designed with a focus on consistency, reproducibility, and ease of use.
+- **Standardized Structure**: Uniform scripts and directory layout across all tasks
+- **Flexible Execution**: Multiple modes and customizable parameters
+- **Comprehensive Logging**: Detailed logs and error analysis
+- **Vertex AI Integration**: Production-grade Google Cloud platform
+- **Task-Specific Evaluation**: Optimized prompts and metrics for each task
+- **Background Processing**: tmux support for long-running benchmarks
 
-* **Standardized Structure:** All tasks follow a uniform directory and script structure, ensuring a consistent user experience across the entire suite.
-* **Robust Implementation:** Features include comprehensive logging for detailed analysis, consistent error handling, and automated verification scripts.
-* **Flexible Execution:** Each task provides standardized script functionality with multiple operational modes, such as `test`, `custom`, and `full`, to accommodate different testing needs.
-* **Tailored Evaluation:** Benchmarks include task-specific prompt engineering and evaluation metrics to ensure relevant and accurate performance assessment.
-* **Comprehensive Documentation:** Each task directory contains detailed documentation, including setup instructions and troubleshooting guides.
+## Prerequisites
 
----
+- **Google Cloud Project** with Vertex AI API enabled
+- **Authentication**: Service Account Key or Application Default Credentials
+- **Python 3.8+**: For environment setup and execution
 
-## 🚀 Getting Started
+## Cost Considerations
 
-### Prerequisites
+⚠️ **Important**: Running full benchmarks incurs significant Google Cloud costs. Monitor usage and set budget alerts.
 
-Ensure you have [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installed. For detailed instructions, refer to [INSTALL-CONDA.md](INSTALL-CONDA.md).
+- **Vertex AI**: Production platform with high quotas
+- **Google AI (Free)**: Not recommended - low rate limits cause failures
 
-### Installation
+## Getting Started
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
-    cd llm_benchmarks_asian_langs
-    ```
-3.  **Create and activate the conda environment**
-   Create the `klue` environment with Python 3
-    ```bash
-    (base) $ conda create -n klue -y python=3 anaconda
-    ```
+1. **Choose a Task**: Navigate to any `klue_*` directory
+2. **Read Task README**: Review task-specific documentation
+3. **Setup Environment**: Run `./setup.sh full`
+4. **Test Execution**: Run `./run test` for quick validation
+5. **Full Benchmark**: Run `./run full` for complete evaluation
 
-    Activate the environment
-    ```bash
-    (base) $ conda activate klue
-    (klue) $ 
-    ```
-    To deactivate the environment when you're done, run `conda deactivate`.
+## Troubleshooting
 
----
+- **Authentication**: Use `gcloud auth application-default login`
+- **API Quotas**: Check Vertex AI quota in Google Cloud Console
+- **Environment**: Recreate conda environment if needed
+- **Logs**: Check `logs/` directory for detailed error information
 
-## ⚙️ Configure Google Cloud for Vertex AI
+## Contributing
 
-To run these benchmarks with the Gemini models, you must configure access to a Gemini API. While there are two options for accessing Gemini, using Vertex AI is strongly recommended for this project.
+1. Fork the repository
+2. Create a feature branch
+3. Make changes and test thoroughly
+4. Submit a pull request
 
-* **Google AI (Free Tier):** This API is intended for development and has very low rate limits. The benchmark scripts make thousands of API calls and will quickly exceed the free quota, causing the tasks to fail before completion.
-* **Google Cloud Vertex AI (Paid Service):** This is the production-grade platform with high quotas suitable for intensive tasks. To ensure the benchmarks can run to completion, you must set up and use the Vertex AI API.
+## License
 
-> **⚠️ Cost Warning**
->
-> Be aware that running these benchmark tasks will execute a large volume of API calls to Gemini. This **will incur significant costs** on your Google Cloud billing account. Please monitor your usage and set up budget alerts before proceeding.
+Apache License Version 2.0 - see LICENSE file for details.
 
-### Setup Instructions
+## Acknowledgments
 
-Follow these steps to configure your local environment to use a Google Cloud project with the Vertex AI API enabled.
+- KLUE dataset creators and maintainers
+- Google Cloud Vertex AI team
+- Hugging Face datasets library
 
-1. **Install the gcloud SDK**
- 
-If you do not have gcloud installed, please refer to [Install the gcloud CLI](https://cloud.google.com/sdk/docs/install).
+## Related Work
 
-2.  **Initialize the gcloud SDK**
-
-    ```bash
-    gcloud init
-    ```
-
-    This command walks you through linking a Google Cloud project and configuring defaults.
-
-3.  **Authenticate your account**
-
-    ```bash
-    gcloud auth login
-    ```
-
-    This command opens a browser window to grant the SDK access to your user account.
-
----
-
-## ▶️ Running the KLUE Benchmarks
-
-All KLUE task implementations share a consistent structure and provide robust logging, detailed documentation, and task-specific prompt engineering.
-
-You have two options for running the benchmarks.
-
-### Option 1: Use the Jupyter Notebook
-
-This is the recommended method for a quick start.
-
-1.  **Launch Jupyter Lab**
-    ```bash
-    (klue) $ jupyter lab
-    ```
-Once launched, open the `.ipynb` notebook for the target benchmark. 
-
-For example, run `run_klue_tc.ipynb` for the KLUE Topic Classification (TC) task. Open and run the cells in `run_klue.ipynb`. This notebook automates the setup and execution steps for the benchmark tasks.
-
-### Option 2: Use the Command Line
-
-This method lets you run tasks independently from their respective directories.
-
-1.  **Navigate to a task directory.**
-
-    For example, for Topic Classification:
-
-    ```bash
-    (klue) $ cd klue_tc/
-    ```
-
-2.  **Run the setup script.**
-
-    The `full` argument installs all required packages.
-
-    ```bash
-    (klue) $ ./setup.sh full
-    ```
-
-3.  **Execute the benchmark.**
-
-    The `run` script can be executed with different modes (`test`, `custom`, `full`).
-
-    ```bash
-    (klue) $ ./run test        # 10 samples
-    (klue) $ ./run custom 100 # N samples, N=100
-    (klue) $ ./run full        # The number of samples varies from task to task
-    ```
-
-    For more details, follow the `README.md` in each task's subdirectory.
+- [KLUE Paper](https://arxiv.org/abs/2105.09680)
+- [KLUE GitHub Repository](https://github.com/KLUE-benchmark/KLUE)
+- [Google Cloud Vertex AI Documentation](https://cloud.google.com/vertex-ai)

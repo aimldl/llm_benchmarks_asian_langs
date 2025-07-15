@@ -99,7 +99,7 @@ class KLUEDialogueStateTrackingBenchmark:
             logger.info("Loading KLUE DST dataset for dialogue state tracking...")
             
             # Load the validation split from the Hugging Face Hub.
-            validation_dataset = load_dataset('klue', 'dst', split='validation')
+            validation_dataset = load_dataset('klue', 'wos', split='validation')
 
             processed_data = []
             
@@ -115,17 +115,27 @@ class KLUEDialogueStateTrackingBenchmark:
                     logger.info(f"Reached sample limit of {self.config.max_samples}. Halting data loading.")
                     break
                     
-                # Process DST data
+                # Process WOS dataset data
+                # Extract the last turn's state as the current state
+                dialogue = item["dialogue"]
+                current_state = []
+                if dialogue:
+                    # Get the state from the last user turn
+                    for turn in reversed(dialogue):
+                        if turn.get("role") == "user" and turn.get("state"):
+                            current_state = turn.get("state", [])
+                            break
+                
                 processed_data.append({
                     "id": item["guid"],
                     "dialogue_id": item.get("dialogue_id", ""),
                     "turn_id": item.get("turn_id", 0),
                     "dialogue": item["dialogue"],
                     "domains": item.get("domains", []),
-                    "state": item.get("state", {}),
-                    "active_intent": item.get("active_intent", ""),
-                    "requested_slots": item.get("requested_slots", []),
-                    "slot_values": item.get("slot_values", {})
+                    "state": current_state,
+                    "active_intent": "",  # WOS doesn't have explicit active_intent
+                    "requested_slots": [],  # WOS doesn't have explicit requested_slots
+                    "slot_values": {}  # WOS doesn't have explicit slot_values
                 })
 
             logger.info(f"✅ Successfully loaded {len(processed_data)} samples.")

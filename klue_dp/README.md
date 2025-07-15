@@ -1,49 +1,72 @@
-# KLUE Dependency Parsing Benchmark with Gemini 2.5 Flash on Vertex AI
+# KLUE Dependency Parsing Benchmark with Gemini 2.5 Flash
 
-This repository contains a benchmark script for evaluating Gemini 2.5 Flash on the Korean Language Understanding Evaluation (KLUE) Dependency Parsing task using Google Cloud Vertex AI.
+Benchmark script for evaluating Gemini 2.5 Flash on the Korean Language Understanding Evaluation (KLUE) Dependency Parsing task using Google Cloud Vertex AI.
 
-## Summary
-In essence, run the following commands:
+## Quickstart
+
+This guide assumes the repository has been cloned and the user has navigated into its directory:
+
 ```bash
-$ git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
-$ cd klue_dp
-$ ./setup.sh full
-$ ./run test
+git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
+cd llm_benchmarks_asian_langs
+```
+
+### Setting Up the Virtual Environment
+Two options are available for setting up the virtual environment:
+
+#### Anaconda
+Activate the pre-existing `klue` environment. If it doesn't exist, create it first.
+
+```bash
+(base) $ conda activate klue
+(klue) $
+```
+
+#### `.venv`
+For users preferring .venv, create and activate a new virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### Running the Benchmarks
+Open `run_klue_dp.ipynb` to execute its cells, or run the following commands in a terminal.
+
+```bash
+cd klue_dp
+./setup.sh full          # Installs all necessary dependencies
+./run test               # Runs 10 samples for a quick test
+./run custom 50          # Runs 50 samples
+./run full               # Runs the full benchmark (consider using `tmux` for background execution)
 ```
 
 ## Overview
 
-The KLUE Dependency Parsing (DP) task involves analyzing Korean sentences to identify the grammatical relationships between words. The task requires:
-- **Part-of-Speech (POS) Tagging**: Identifying the grammatical category of each word
-- **Dependency Parsing**: Determining which word each word depends on (head) and the type of dependency relationship
+The KLUE Dependency Parsing (DP) task analyzes Korean sentences to identify grammatical relationships between words:
 
-The benchmark evaluates two key metrics:
+- **Part-of-Speech (POS) Tagging**: Identifying grammatical categories of words
+- **Dependency Parsing**: Determining word dependencies and relationship types
+
+The benchmark evaluates:
 - **UAS (Unlabeled Attachment Score)**: Percentage of words with correctly identified heads
 - **LAS (Labeled Attachment Score)**: Percentage of words with correctly identified heads and dependency labels
 
 ## Features
 
-- **Comprehensive Benchmarking**: Evaluates UAS, LAS, and per-POS performance
-- **Detailed Analysis**: Provides error analysis and per-POS accuracy breakdown
-- **Flexible Configuration**: Supports various model parameters and sampling options
-- **Result Export**: Saves results in JSON and CSV formats for further analysis
-- **Progress Tracking**: Real-time progress bar and logging
-- **Vertex AI Integration**: Uses Google Cloud Vertex AI for model inference
-- **Professional Logging**: Automatic log file generation with error extraction
+- **Comprehensive Evaluation**: UAS, LAS, and per-POS performance
+- **Detailed Analysis**: Error analysis and per-POS accuracy breakdown
+- **Flexible Configuration**: Customizable model parameters and sampling
+- **Result Export**: JSON and CSV outputs for analysis
+- **Progress Tracking**: Real-time progress and comprehensive logging
+- **Vertex AI Integration**: Google Cloud Vertex AI for model inference
 
 ## Prerequisites
 
-1. **Google Cloud Project**: You need a Google Cloud project with Vertex AI API enabled
-2. **Authentication**: Set up authentication using one of the following methods:
-   - Service Account Key (recommended for production)
-   - Application Default Credentials (ADC) for local development
-   - gcloud CLI authentication
+1. **Google Cloud Project** with Vertex AI API enabled
+2. **Authentication** via Service Account Key, Application Default Credentials, or gcloud CLI
 
-## Installation
-
-### Quick Setup (Recommended)
-
-Use the provided setup script for easy installation:
+## Quick Setup
 
 ```bash
 # Complete setup (install dependencies + test)
@@ -54,127 +77,72 @@ Use the provided setup script for easy installation:
 ./setup.sh test       # Test the setup
 ```
 
-### Manual Installation
+## Google Cloud Setup
 
-1. Clone this repository or download the files
-2. Install the required dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Setup
-
-### 1. Google Cloud Setup
-
-1. **Create a Google Cloud Project** (if you don't have one):
+1. **Create/Select Project**:
    ```bash
    gcloud projects create YOUR_PROJECT_ID
-   ```
-
-2. **Enable Required APIs**:
-   ```bash
    gcloud services enable aiplatform.googleapis.com
    ```
 
-3. **Set up Authentication** (choose one method):
+2. **Set up Authentication** (choose one):
 
-   **Method A: Service Account (Recommended)**
+   **Service Account (Recommended)**:
    ```bash
-   # Create a service account
-   gcloud iam service-accounts create klue-benchmark \
-       --display-name="KLUE Benchmark Service Account"
-   
-   # Grant necessary permissions
+   gcloud iam service-accounts create klue-benchmark --display-name="KLUE Benchmark"
    gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
        --member="serviceAccount:klue-benchmark@YOUR_PROJECT_ID.iam.gserviceaccount.com" \
        --role="roles/aiplatform.user"
-   
-   # Create and download key
    gcloud iam service-accounts keys create key.json \
        --iam-account=klue-benchmark@YOUR_PROJECT_ID.iam.gserviceaccount.com
-   
-   # Set environment variable
    export GOOGLE_APPLICATION_CREDENTIALS="path/to/key.json"
    ```
 
-   **Method B: Application Default Credentials**
+   **Application Default Credentials**:
    ```bash
    gcloud auth application-default login
    ```
 
-   **Method C: gcloud CLI**
-   ```bash
-   gcloud auth login
-   ```
-
-4. **Set Project ID**:
+3. **Set Project ID**:
    ```bash
    export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
+   # For permanent setup, add to .bashrc:
+   echo "export GOOGLE_CLOUD_PROJECT=\"$(gcloud config get-value project)\"" >> ~/.bashrc
+   source ~/.bashrc
    ```
-
-5. **Consider Adding Project ID to .bashrc**:
-For convenience, consider adding this line to your .bashrc. This environment variable will be lost every time the OS is restarted causing the following error:
-
-In the Python code, 
-```python
-    def _initialize_vertex_ai(self):
-        """Initialize Vertex AI with project and location."""
-        try:
-            project_id = self.config.project_id or os.getenv("GOOGLE_CLOUD_PROJECT")
-            if not project_id:
-                raise ValueError("Google Cloud project ID must be provided via the --project-id flag or by setting the GOOGLE_CLOUD_PROJECT environment variable.")
-```
-
-In Terminal,
-```bash
-Error: GOOGLE_CLOUD_PROJECT environment variable is not set
-Please set it with: export GOOGLE_CLOUD_PROJECT='your-project-id'
-```
-
-To fix this error, you may re-run:
-
-```bash
-echo 'export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"' >> ~/.bashrc
-```
-
-But a more convenient and permanent fix is to add Project ID to `.bashrc`.
-
-```bash
-# Fetch the PROJECT_ID automatically with gcloud config get-value project
-echo "export GOOGLE_CLOUD_PROJECT=\"$(gcloud config get-value project)\"" >> ~/.bashrc
-echo "GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT"
-
-# Activate the change
-source ~/.bashrc
-```
-Note the `gcloud` command automatically fetches `YOUR_PROJECT_ID`.
 
 ## Usage
 
-### Basic Usage
+### Quick Start with Run Script
 
 ```bash
-python klue_dp-gemini2_5flash.py --project-id "your-project-id"
+# Test with 10 samples
+./run test
+
+# Run with custom number of samples
+./run custom 50
+
+# Run full benchmark
+./run full
+
+# Show help
+./run help
 ```
 
-### Advanced Usage
+### Direct Python Usage
 
 ```bash
-# Test with limited samples (useful for quick testing)
+# Basic usage
+python klue_dp-gemini2_5flash.py --project-id "your-project-id"
+
+# Test with limited samples
 python klue_dp-gemini2_5flash.py --project-id "your-project-id" --max-samples 100
 
 # Custom output directory
 python klue_dp-gemini2_5flash.py --project-id "your-project-id" --output-dir "my_results"
 
-# Use different Vertex AI location
-python klue_dp-gemini2_5flash.py --project-id "your-project-id" --location "us-west1"
-
 # Adjust model parameters
 python klue_dp-gemini2_5flash.py --project-id "your-project-id" --temperature 0.1 --max-tokens 4096
-
-# Skip saving detailed predictions (saves disk space)
-python klue_dp-gemini2_5flash.py --project-id "your-project-id" --no-save-predictions
 ```
 
 ### Command Line Arguments
@@ -187,90 +155,83 @@ python klue_dp-gemini2_5flash.py --project-id "your-project-id" --no-save-predic
 - `--max-tokens`: Maximum output tokens (default: 4096)
 - `--no-save-predictions`: Skip saving detailed prediction results
 
-### Quick Start with Run Script
+## Output Files
 
-For convenience, a simple Bash script `run` is provided to quickly execute common benchmark scenarios:
+Generated in the `benchmark_results` directory:
 
-```bash
-# Make the script executable (if needed)
-chmod +x run
-
-# Run a small test (10 samples)
-./run test
-
-# Run the full benchmark
-./run full
-
-# Run with custom number of samples
-./run custom 50
+### Metrics File (`klue_dp_metrics_[timestamp].json`)
+Overall performance metrics:
+```json
+{
+  "total_samples": 1000,
+  "uas_score": 0.75,
+  "las_score": 0.68,
+  "per_pos_accuracy": {
+    "NNG": 0.82,
+    "VV": 0.71,
+    "JKS": 0.89,
+    "JKO": 0.76
+  },
+  "total_time": 1500.5,
+  "average_time_per_sample": 1.5,
+  "samples_per_second": 0.67
+}
 ```
 
-The run script automatically:
-- Creates log files in the `logs/` directory
-- Extracts error information to separate `.err` files
-- Provides progress updates during execution
+### Additional Files
+- **Detailed Results** (`klue_dp_results_[timestamp].json`): Per-sample results with predictions
+- **CSV Results** (`klue_dp_results_[timestamp].csv`): Tabular format for analysis
+- **Error Analysis** (`klue_dp_error_analysis_[timestamp].txt`): Parsing errors analysis
 
-## Output and Results
+## Logging
 
-### Result Files
+Automatic logging to `logs/` directory:
+- **Full Logs** (`klue_dp_[mode]_[timestamp].log`): Complete execution logs
+- **Error Logs** (`klue_dp_[mode]_[timestamp].err`): Error analysis and debugging
 
-The benchmark generates several output files:
+## Performance Metrics
 
-1. **Metrics JSON**: `klue_dp_metrics_[timestamp].json`
-   - Overall performance metrics (UAS, LAS, timing)
-   - Per-POS performance breakdown
-
-2. **Detailed Results JSON**: `klue_dp_results_[timestamp].json`
-   - Complete prediction results for each sample
-   - Raw model responses and error information
-
-3. **CSV Results**: `klue_dp_results_[timestamp].csv`
-   - Tabular format for easy analysis
-   - Includes sentence, words, POS tags, predictions, and metrics
-
-4. **Error Analysis**: `klue_dp_error_analysis_[timestamp].txt`
-   - Detailed analysis of failed predictions
-   - Sample sentences and error patterns
-
-### Log Files
-
-All benchmark runs are automatically logged:
-
-- **Full Logs**: `logs/klue_dp_[mode]_[samples]samples_[timestamp].log`
-  - Complete execution output
-  - Command headers for easy identification
-
-- **Error Logs**: `logs/klue_dp_[mode]_[samples]samples_[timestamp].err`
-  - Extracted error information only
-  - Focused debugging information
-
-### Performance Metrics
-
-The benchmark reports:
-
-- **UAS (Unlabeled Attachment Score)**: Percentage of words with correct head assignment
+### Primary Metrics
+- **UAS (Unlabeled Attachment Score)**: Percentage of words with correct head identification
 - **LAS (Labeled Attachment Score)**: Percentage of words with correct head and dependency label
-- **Per-POS Performance**: Accuracy breakdown by part-of-speech category
-- **Timing Information**: Total time, average time per sample, samples per second
+- **Per-POS Accuracy**: Accuracy breakdown by part-of-speech tags
+- **Processing Time**: Total and average time per sample
 
-## Korean POS Tags
+### Error Analysis
+- **Parsing Errors**: Detailed analysis of dependency parsing mistakes
+- **POS Tagging Errors**: Analysis of part-of-speech tagging issues
+- **Error Patterns**: Identifies systematic parsing problems
 
-The benchmark handles 35 Korean POS tags including:
+## Dataset Information
 
-- **Nouns**: NNG (일반명사), NNP (고유명사), NNB (의존명사), etc.
-- **Verbs**: VV (동사), VA (형용사), VX (보조용언), etc.
-- **Particles**: JKS (주격조사), JKO (목적격조사), JKB (부사격조사), etc.
-- **Endings**: EF (종결어미), EC (연결어미), ETN (명사형전성어미), etc.
-- **Others**: MM (관형사), MAG (일반부사), IC (감탄사), etc.
+KLUE DP dataset:
+- **Training Set**: ~10,000 samples
+- **Validation Set**: ~1,000 samples
+- **Test Set**: ~1,000 samples (not used in benchmark)
 
-## Dependency Relations
+Each sample includes:
+- **Sentence**: Korean sentence text
+- **Tokens**: Word-level tokenization
+- **POS Tags**: Part-of-speech annotations
+- **Dependencies**: Head word and dependency label for each token
 
-The benchmark evaluates various dependency relations including:
+## Available Scripts
 
-- **Core Arguments**: nsubj (주어), obj (목적어), iobj (간접목적어)
-- **Modifiers**: amod (형용사 수식어), nummod (수사 수식어), advmod (부사 수식어)
-- **Function Words**: case (격조사), mark (접속조사), aux (보조동사)
-- **Special Relations**: root (루트), punct (구두점), compound (복합어)
+### Core Scripts
+- **`./run`** - Quick benchmark runner
+- **`./setup.sh`** - Complete setup process
+- **`./install_dependencies.sh`** - Install Python dependencies
+- **`./get_errors.sh`** - Extract error details from results
+
+### Usage Examples
+```bash
+# Complete setup and run
+./setup.sh full
+./run test
+
+# Analyze errors from results
+./get_errors.sh
+```
 
 ## Troubleshooting
 
@@ -278,74 +239,42 @@ The benchmark evaluates various dependency relations including:
 
 1. **Authentication Errors**:
    ```bash
-   # Verify credentials
-   gcloud auth list
-   gcloud config get-value project
+   gcloud auth application-default login
+   export GOOGLE_CLOUD_PROJECT="your-project-id"
    ```
 
-2. **API Not Enabled**:
-   ```bash
-   # Enable Vertex AI API
-   gcloud services enable aiplatform.googleapis.com
-   ```
+2. **API Quota Exceeded**: Check Vertex AI quota in Google Cloud Console
 
-3. **Memory Issues**:
-   - Reduce `--max-samples` for testing
-   - Use `--no-save-predictions` to save disk space
+3. **Memory Issues**: Reduce `--max-tokens` parameter
 
-4. **Rate Limiting**:
-   - The script includes built-in delays between API calls
-   - Adjust `sleep_interval_between_api_calls` in the code if needed
+4. **Network Issues**: Verify Vertex AI API accessibility
 
-### Error Analysis
+### Getting Help
 
-Use the provided error analysis tools:
-
-```bash
-# Extract errors from results
-./get_errors.sh benchmark_results/klue_dp_results_[timestamp].csv
-
-# Test logging functionality
-./test_logging.sh
-```
-
-## Scripts Overview
-
-- `klue_dp-gemini2_5flash.py`: Main benchmark script
-- `run`: Quick benchmark runner with logging
-- `setup.sh`: Complete setup process
-- `install_dependencies.sh`: Install Python dependencies
-- `test_setup.py`: Verify setup and connectivity
-- `get_errors.sh`: Extract error details from results
-- `test_logging.sh`: Test logging functionality
-- `verify_scripts.sh`: Verify all scripts are executable
-
-## Performance Expectations
-
-Typical performance ranges for Gemini 2.5 Flash on KLUE DP:
-
-- **UAS**: 75-85% (depending on sentence complexity)
-- **LAS**: 70-80% (depending on dependency label accuracy)
-- **Processing Speed**: 0.5-2 seconds per sentence
-- **Best Performance**: On simple sentences with clear dependency structures
-- **Challenging Cases**: Complex sentences with multiple clauses, ambiguous dependencies
+1. **Check Logs**: Review files in `logs/` directory
+2. **Test Setup**: Run `python test_setup.py`
+3. **Error Analysis**: Use `./get_errors.sh` to extract error details
 
 ## Contributing
-
-To contribute to this benchmark:
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly with different sample sizes
+4. Test thoroughly
 5. Submit a pull request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License - see LICENSE file for details.
 
 ## Acknowledgments
 
-- KLUE dataset creators for providing the Korean language understanding benchmark
-- Google Cloud for providing Vertex AI infrastructure
-- The Korean NLP community for ongoing research and development 
+- KLUE dataset creators and maintainers
+- Google Cloud Vertex AI team
+- Hugging Face datasets library
+
+## Related Work
+
+- [KLUE Paper](https://arxiv.org/abs/2105.09680)
+- [KLUE GitHub Repository](https://github.com/KLUE-benchmark/KLUE)
+- [Google Cloud Vertex AI Documentation](https://cloud.google.com/vertex-ai)

@@ -1,141 +1,195 @@
-# KLUE DST (Dialogue State Tracking) Benchmark
+# KLUE Dialogue State Tracking Benchmark with Gemini 2.5 Flash
 
-This directory contains the implementation for benchmarking Gemini 2.5 Flash on the Korean Language Understanding Evaluation (KLUE) Dialogue State Tracking task using Google Cloud Vertex AI.
+Benchmark script for evaluating Gemini 2.5 Flash on the Korean Language Understanding Evaluation (KLUE) Dialogue State Tracking task using Google Cloud Vertex AI.
+
+## Quickstart
+
+This guide assumes the repository has been cloned and the user has navigated into its directory:
+
+```bash
+git clone https://github.com/aimldl/llm_benchmarks_asian_langs.git
+cd llm_benchmarks_asian_langs
+```
+
+### Setting Up the Virtual Environment
+Two options are available for setting up the virtual environment:
+
+#### Anaconda
+Activate the pre-existing `klue` environment. If it doesn't exist, create it first.
+
+```bash
+(base) $ conda activate klue
+(klue) $
+```
+
+#### `.venv`
+For users preferring .venv, create and activate a new virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### Running the Benchmarks
+Open `run_klue_dst.ipynb` to execute its cells, or run the following commands in a terminal.
+
+```bash
+cd klue_dst
+./setup.sh full          # Installs all necessary dependencies
+./run test               # Runs 10 samples for a quick test
+./run custom 50          # Runs 50 samples
+./run full               # Runs the full benchmark (consider using `tmux` for background execution)
+```
 
 ## Overview
 
-Dialogue State Tracking (DST) is a crucial component of task-oriented dialogue systems. The task involves tracking the user's intent and the values of slots (parameters) throughout a conversation. This benchmark evaluates the model's ability to:
+The KLUE Dialogue State Tracking (DST) task analyzes multi-turn Korean dialogues to predict:
 
-- Identify the user's current intent (e.g., request, inform, book, confirm)
-- Extract requested slots (information the user is asking for)
-- Track slot values (specific information provided by the user)
+- **Active Intent**: User's current intention (request, inform, book, confirm, etc.)
+- **Requested Slots**: Information the user is asking for (location, time, price, etc.)
+- **Slot Values**: Specific information provided by the user (e.g., "서울" for location)
 
-## Task Description
+This is crucial for task-oriented dialogue systems like virtual assistants and chatbots.
 
-The KLUE DST task involves analyzing multi-turn Korean dialogues and predicting:
-1. **Active Intent**: The user's current intention (e.g., request, inform, book, confirm, deny, affirm, search, recommend)
-2. **Requested Slots**: Slots that the user is requesting information about (e.g., location, time, price, cuisine)
-3. **Slot Values**: The actual values provided for each slot (e.g., "서울" for location, "한식" for cuisine)
+## Features
 
-## Directory Structure
+- **Comprehensive Evaluation**: Intent accuracy, slot F1 scores, and overall performance
+- **Detailed Analysis**: Error analysis and per-domain breakdown
+- **Flexible Configuration**: Customizable model parameters and sampling
+- **Result Export**: JSON and CSV outputs for analysis
+- **Progress Tracking**: Real-time progress and comprehensive logging
+- **Vertex AI Integration**: Google Cloud Vertex AI for model inference
 
-```
-klue_dst/
-├── klue_dst-gemini2_5flash.py    # Main benchmark script
-├── run                           # Benchmark runner script
-├── setup.sh                      # Environment setup script
-├── install_dependencies.sh       # Dependency installation script
-├── test_setup.py                 # Environment testing script
-├── get_errors.sh                 # Error analysis script
-├── test_logging.sh               # Logging test script
-├── verify_scripts.sh             # Script verification script
-├── requirements.txt              # Python dependencies
-├── README.md                     # This file
-├── ABOUT_KLUE_DST.md            # Detailed task description
-├── TROUBLESHOOTING.md            # Troubleshooting guide
-├── VERTEX_AI_SETUP.md            # Vertex AI setup guide
-├── logs/                         # Log files directory
-├── benchmark_results/            # Benchmark results directory
-├── result_analysis/              # Error analysis results
-└── eval_dataset/                 # Evaluation dataset directory
-```
+## Prerequisites
 
-## Quick Start
+1. **Google Cloud Project** with Vertex AI API enabled
+2. **Authentication** via Service Account Key, Application Default Credentials, or gcloud CLI
 
-### 1. Prerequisites
-
-- Python 3.8 or higher
-- Google Cloud account with Vertex AI enabled
-- Google Cloud SDK installed and configured
-- Sufficient Vertex AI quota for Gemini 2.5 Flash
-
-### 2. Setup
+## Quick Setup
 
 ```bash
-# Clone the repository and navigate to klue_dst directory
-cd klue_dst
+# Complete setup (install dependencies + test)
+./setup.sh full
 
-# Run the setup script
-./setup.sh
-
-# Or install dependencies manually
-./install_dependencies.sh
+# Or step by step:
+./setup.sh install    # Install dependencies only
+./setup.sh test       # Test the setup
 ```
 
-### 3. Configure Google Cloud
+## Google Cloud Setup
+
+1. **Create/Select Project**:
+   ```bash
+   gcloud projects create YOUR_PROJECT_ID
+   gcloud services enable aiplatform.googleapis.com
+   ```
+
+2. **Set up Authentication** (choose one):
+
+   **Service Account (Recommended)**:
+   ```bash
+   gcloud iam service-accounts create klue-benchmark --display-name="KLUE Benchmark"
+   gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+       --member="serviceAccount:klue-benchmark@YOUR_PROJECT_ID.iam.gserviceaccount.com" \
+       --role="roles/aiplatform.user"
+   gcloud iam service-accounts keys create key.json \
+       --iam-account=klue-benchmark@YOUR_PROJECT_ID.iam.gserviceaccount.com
+   export GOOGLE_APPLICATION_CREDENTIALS="path/to/key.json"
+   ```
+
+   **Application Default Credentials**:
+   ```bash
+   gcloud auth application-default login
+   ```
+
+3. **Set Project ID**:
+   ```bash
+   export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
+   # For permanent setup, add to .bashrc:
+   echo "export GOOGLE_CLOUD_PROJECT=\"$(gcloud config get-value project)\"" >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+## Usage
+
+### Quick Start with Run Script
 
 ```bash
-# Set your Google Cloud project ID
-export GOOGLE_CLOUD_PROJECT='your-project-id'
-
-# Authenticate with Google Cloud
-gcloud auth login
-gcloud config set project $GOOGLE_CLOUD_PROJECT
-```
-
-### 4. Test the Setup
-
-```bash
-# Test the environment
-python3 test_setup.py
-
-# Test logging functionality
-./test_logging.sh test
-```
-
-### 5. Run Benchmarks
-
-```bash
-# Run a small test (10 samples)
+# Test with 10 samples
 ./run test
 
 # Run with custom number of samples
 ./run custom 50
 
-# Run the full benchmark (all validation samples)
+# Run full benchmark
 ./run full
+
+# Show help
+./run help
 ```
 
-## Usage
-
-### Running Benchmarks
-
-The `run` script provides three modes:
-
-1. **Test Mode** (`./run test`): Runs with 10 samples for quick testing
-2. **Custom Mode** (`./run custom N`): Runs with N samples
-3. **Full Mode** (`./run full`): Runs with all validation samples
-
-### Logging
-
-All benchmark runs create detailed log files in the `logs/` directory:
-
-- **Full logs**: `klue_dst_[mode]_[samples]samples_[timestamp].log`
-- **Error logs**: `klue_dst_[mode]_[samples]samples_[timestamp].err`
-
-The error logs contain:
-- Error analysis with sample details
-- ERROR level log messages
-- Performance metrics for failed samples
-
-### Error Analysis
-
-Use the error analysis script to examine benchmark results:
+### Direct Python Usage
 
 ```bash
-# Analyze the latest log file
-./get_errors.sh latest
+# Basic usage
+python klue_dst-gemini2_5flash.py --project-id "your-project-id"
 
-# Analyze a specific log file
-./get_errors.sh analyze logs/klue_dst_test_20241201_120000.log
+# Test with limited samples
+python klue_dst-gemini2_5flash.py --project-id "your-project-id" --max-samples 100
 
-# Analyze all log files
-./get_errors.sh all
+# Custom output directory
+python klue_dst-gemini2_5flash.py --project-id "your-project-id" --output-dir "my_results"
+
+# Adjust model parameters
+python klue_dst-gemini2_5flash.py --project-id "your-project-id" --temperature 0.1 --max-tokens 2048
 ```
 
-## Evaluation Metrics
+### Command Line Arguments
 
-The benchmark evaluates performance using multiple metrics:
+- `--project-id`: Google Cloud project ID (required if not set as environment variable)
+- `--location`: Vertex AI location (default: "us-central1")
+- `--max-samples`: Maximum number of samples to test (default: all validation samples)
+- `--output-dir`: Output directory for results (default: "benchmark_results")
+- `--temperature`: Model temperature (default: 0.1)
+- `--max-tokens`: Maximum output tokens (default: 2048)
+- `--no-save-predictions`: Skip saving detailed prediction results
+
+## Output Files
+
+Generated in the `benchmark_results` directory:
+
+### Metrics File (`klue_dst_metrics_[timestamp].json`)
+Overall performance metrics:
+```json
+{
+  "total_samples": 1000,
+  "intent_accuracy": 0.78,
+  "requested_slots_f1": 0.72,
+  "slot_values_f1": 0.68,
+  "overall_f1": 0.70,
+  "per_domain_f1": {
+    "restaurant": 0.75,
+    "hotel": 0.68,
+    "movie": 0.72
+  },
+  "total_time": 2400.5,
+  "average_time_per_sample": 2.4,
+  "samples_per_second": 0.42
+}
+```
+
+### Additional Files
+- **Detailed Results** (`klue_dst_results_[timestamp].json`): Per-sample results with predictions
+- **CSV Results** (`klue_dst_results_[timestamp].csv`): Tabular format for analysis
+- **Error Analysis** (`klue_dst_error_analysis_[timestamp].txt`): DST errors analysis
+
+## Logging
+
+Automatic logging to `logs/` directory:
+- **Full Logs** (`klue_dst_[mode]_[timestamp].log`): Complete execution logs
+- **Error Logs** (`klue_dst_[mode]_[timestamp].err`): Error analysis and debugging
+
+## Performance Metrics
 
 ### Primary Metrics
 - **Intent Accuracy**: Percentage of correctly predicted intents
@@ -144,114 +198,84 @@ The benchmark evaluates performance using multiple metrics:
 - **Overall F1**: Average of all F1 scores
 
 ### Secondary Metrics
-- **Per-domain Performance**: F1 scores broken down by dialogue domain
-- **Processing Time**: Total time and average time per sample
+- **Per-Domain Performance**: F1 scores broken down by dialogue domain
+- **Processing Time**: Total and average time per sample
 - **Success Rate**: Percentage of successful API calls
 
-## Dataset
+## Dataset Information
 
-The benchmark uses the KLUE DST dataset from Hugging Face:
-- **Dataset**: `klue` dataset with `dst` configuration
-- **Split**: Validation set
-- **Format**: Multi-turn dialogues with intent and slot annotations
+KLUE DST dataset:
+- **Training Set**: ~8,000 samples
+- **Validation Set**: ~1,000 samples
+- **Test Set**: ~1,000 samples (not used in benchmark)
+
+Each sample includes:
+- **Dialogue Context**: Multi-turn conversation history
+- **Active Intent**: User's current intention
+- **Requested Slots**: Information being requested
+- **Slot Values**: Specific values provided by user
 - **Domains**: Restaurant, hotel, movie, music, etc.
 
-## Model Configuration
+## Available Scripts
 
-The benchmark uses Gemini 2.5 Flash with the following settings:
-- **Model**: `gemini-2.5-flash`
-- **Temperature**: 0.1 (for consistent outputs)
-- **Max Tokens**: 2048 (increased for DST task complexity)
-- **Top-p**: 1.0
-- **Top-k**: 1
+### Core Scripts
+- **`./run`** - Quick benchmark runner
+- **`./setup.sh`** - Complete setup process
+- **`./install_dependencies.sh`** - Install Python dependencies
+- **`./get_errors.sh`** - Extract error details from results
 
-## Prompt Engineering
+### Usage Examples
+```bash
+# Complete setup and run
+./setup.sh full
+./run test
 
-The DST prompt includes:
-- Detailed role definition as a dialogue state tracking expert
-- Comprehensive explanation of DST components (intent, slots, values)
-- Common intent and slot type definitions
-- Step-by-step guidelines for analysis
-- Structured output format requirements
-
-## Results
-
-Results are saved in multiple formats:
-
-### JSON Files
-- **Metrics**: `klue_dst_metrics_[timestamp].json`
-- **Detailed Results**: `klue_dst_results_[timestamp].json`
-
-### CSV Files
-- **Results Table**: `klue_dst_results_[timestamp].csv`
-
-### Error Analysis
-- **Error Report**: `klue_dst_error_analysis_[timestamp].txt`
+# Analyze errors from results
+./get_errors.sh
+```
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Authentication Errors**
+1. **Authentication Errors**:
    ```bash
-   # Ensure you're authenticated
-   gcloud auth login
    gcloud auth application-default login
+   export GOOGLE_CLOUD_PROJECT="your-project-id"
    ```
 
-2. **Project ID Issues**
-   ```bash
-   # Set the correct project ID
-   export GOOGLE_CLOUD_PROJECT='your-project-id'
-   ```
+2. **API Quota Exceeded**: Check Vertex AI quota in Google Cloud Console
 
-3. **Quota Exceeded**
-   - Check your Vertex AI quota in Google Cloud Console
-   - Consider using a smaller sample size for testing
+3. **Memory Issues**: Reduce `--max-tokens` parameter
 
-4. **Import Errors**
-   ```bash
-   # Reinstall dependencies
-   ./install_dependencies.sh
-   ```
+4. **Network Issues**: Verify Vertex AI API accessibility
 
 ### Getting Help
 
-- Check the `TROUBLESHOOTING.md` file for detailed solutions
-- Review log files in the `logs/` directory
-- Use `./get_errors.sh latest` to analyze recent errors
-- Run `python3 test_setup.py` to verify your environment
-
-## Performance Expectations
-
-Typical performance ranges for Gemini 2.5 Flash on KLUE DST:
-- **Intent Accuracy**: 70-85%
-- **Requested Slots F1**: 60-75%
-- **Slot Values F1**: 55-70%
-- **Overall F1**: 60-75%
-
-Performance may vary based on:
-- Dialogue complexity
-- Domain diversity
-- Slot value specificity
-- Context length
+1. **Check Logs**: Review files in `logs/` directory
+2. **Test Setup**: Run `python test_setup.py`
+3. **Error Analysis**: Use `./get_errors.sh` to extract error details
 
 ## Contributing
 
-To contribute to this benchmark:
-
-1. Follow the existing code structure
-2. Maintain consistent logging and error handling
-3. Update documentation for any changes
-4. Test thoroughly before submitting
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## License
 
-This project is licensed under the same terms as the parent repository.
+MIT License - see LICENSE file for details.
 
-## References
+## Acknowledgments
 
-- [KLUE Dataset Paper](https://arxiv.org/abs/2105.09680)
-- [Dialogue State Tracking Survey](https://arxiv.org/abs/2002.01389)
-- [Google Cloud Vertex AI Documentation](https://cloud.google.com/vertex-ai)
-- [Gemini 2.5 Flash Documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-flash) 
+- KLUE dataset creators and maintainers
+- Google Cloud Vertex AI team
+- Hugging Face datasets library
+
+## Related Work
+
+- [KLUE Paper](https://arxiv.org/abs/2105.09680)
+- [KLUE GitHub Repository](https://github.com/KLUE-benchmark/KLUE)
+- [Google Cloud Vertex AI Documentation](https://cloud.google.com/vertex-ai) 

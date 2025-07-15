@@ -1,0 +1,8 @@
+{
+  "samples_processed": 300,
+  "intent_accuracy": 0.0033333333333333335,
+  "requested_slots_f1": 1.0,
+  "slot_values_f1": 1.0,
+  "overall_f1": 1.0,
+  "timestamp": "20250714_162312"
+}
