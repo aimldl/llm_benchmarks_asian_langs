@@ -51,15 +51,15 @@ def test_dataset_loading():
         from datasets import load_dataset
         
         # Load a small sample to test
-        dataset = load_dataset('klue', 'dst', split='validation')
+        dataset = load_dataset('klue', 'wos', split='validation')
         print(f"✓ Dataset loaded successfully: {len(dataset)} samples")
         
         # Check dataset features
         features = list(dataset.features.keys())
         print(f"✓ Dataset features: {features}")
         
-        # Check required features
-        required_features = ['guid', 'dialogue', 'domains', 'state', 'active_intent', 'requested_slots', 'slot_values']
+        # Check required features for WOS dataset
+        required_features = ['guid', 'dialogue', 'domains']
         missing_features = [f for f in required_features if f not in features]
         
         if missing_features:
@@ -74,9 +74,13 @@ def test_dataset_loading():
         print(f"  - guid: {sample['guid']}")
         print(f"  - dialogue length: {len(sample['dialogue'])} turns")
         print(f"  - domains: {sample['domains']}")
-        print(f"  - active_intent: {sample['active_intent']}")
-        print(f"  - requested_slots: {sample['requested_slots']}")
-        print(f"  - slot_values: {sample['slot_values']}")
+        
+        # Check dialogue structure
+        if sample['dialogue']:
+            first_turn = sample['dialogue'][0]
+            print(f"  - dialogue turn keys: {list(first_turn.keys())}")
+            print(f"  - sample turn: role={first_turn.get('role', 'N/A')}, text={first_turn.get('text', 'N/A')[:50]}...")
+            print(f"  - state in turn: {first_turn.get('state', [])}")
         
         return True
         
@@ -194,7 +198,14 @@ def test_sample_prediction():
     try:
         # Import the benchmark class
         sys.path.append('.')
-        from klue_dst_gemini2_5flash import KLUEDialogueStateTrackingBenchmark, BenchmarkConfig
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("klue_dst_module", "klue_dst-gemini2_5flash.py")
+        if spec is None:
+            raise ImportError("Could not load klue_dst-gemini2_5flash.py")
+        klue_dst_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(klue_dst_module)
+        KLUEDialogueStateTrackingBenchmark = klue_dst_module.KLUEDialogueStateTrackingBenchmark
+        BenchmarkConfig = klue_dst_module.BenchmarkConfig
         
         # Create a minimal config for testing
         config = BenchmarkConfig(

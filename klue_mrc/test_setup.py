@@ -70,6 +70,8 @@ def test_klue_dataset():
             print(f"    - Is Impossible: {sample.get('is_impossible', 'N/A')}")
         else:
             print("  - No samples available in 'train' or 'validation' splits.")
+        
+        return True
 
     except Exception as e:
         print(f"✗ Failed to load KLUE MRC dataset: {e}")

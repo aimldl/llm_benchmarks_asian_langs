@@ -176,14 +176,14 @@ show_help() {
     echo ""
     echo "Options:"
     echo "  test     Run a small test with 10 samples"
-    echo "  full     Run the full benchmark (all test samples)"
     echo "  custom N Run with N samples (e.g., custom 100)"
+    echo "  full     Run the full benchmark (all test samples)"
     echo "  help     Show this help message"
     echo ""
     echo "Examples:"
     echo "  $0 test        # Run test with 10 samples"
-    echo "  $0 full        # Run full benchmark"
     echo "  $0 custom 50   # Run with 50 samples"
+    echo "  $0 full        # Run full benchmark"
     echo ""
     echo "Log files will be saved to the 'logs' directory with format:"
     echo "  klue_mrc_[mode]_[samples]samples_[timestamp].log (full output)"
@@ -195,93 +195,59 @@ show_help() {
     echo "  - Performance tracking across different runs"
 }
 
+# Function to add command header to log file
+add_command_header() {
+    local log_file="$1"
+    local command="$2"
+    local samples="$3"
+    
+    echo "$command" > "$log_file"
+    echo "Timestamp: $(date)" >> "$log_file"
+    echo "Working Directory: $(pwd)" >> "$log_file"
+    echo "========================================" >> "$log_file"
+    echo "" >> "$log_file"
+}
+
+# Function to extract errors and save to .err file
+save_error_file() {
+    local log_filename="$1"
+    local command="$2"
+    local samples="$3"
+    
+    # Extract errors and save to .err file with command header
+    add_command_header "logs/${log_filename}.err" "$command" "$samples"
+    extract_errors "$(cat logs/${log_filename}.log)" >> "logs/${log_filename}.err"
+}
+
+# Function to run benchmark and save logs
+run_benchmark() {
+    local mode="$1"
+    local samples="$2"
+    local python_args="$3"
+    
+    echo "Running ${mode} benchmark${samples:+ with $samples samples}..."
+    log_filename=$(generate_log_filename "$mode" "$samples")
+    
+    # Add command header to log file
+    add_command_header "logs/${log_filename}.log" "$0 $mode${samples:+ $samples}" "$samples"
+    
+    # Run the command and append output to log file
+    python klue_mrc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" $python_args 2>&1 | tee -a "logs/${log_filename}.log"
+    
+    # Extract errors and save to .err file
+    save_error_file "$log_filename" "$0 $mode${samples:+ $samples}" "$samples"
+    
+    echo "Log files saved:"
+    echo "  Full output: logs/${log_filename}.log"
+    echo "  Errors only: logs/${log_filename}.err"
+}
+
 # Main script logic
 case "${1:-help}" in
-    "test")
-        echo "Running small test with 10 samples..."
-        log_filename=$(generate_log_filename "test" "10")
-        
-        # Add command header to log file
-        echo "$0 test" > "logs/${log_filename}.log"
-        echo "Timestamp: $(date)" >> "logs/${log_filename}.log"
-        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.log"
-        echo "========================================" >> "logs/${log_filename}.log"
-        echo "" >> "logs/${log_filename}.log"
-        
-        # Run the command and append output to log file
-        python klue_mrc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples 10 2>&1 | tee -a "logs/${log_filename}.log"
-        
-        # Extract errors and save to .err file with command header
-        echo "$0 test" > "logs/${log_filename}.err"
-        echo "Timestamp: $(date)" >> "logs/${log_filename}.err"
-        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.err"
-        echo "========================================" >> "logs/${log_filename}.err"
-        echo "" >> "logs/${log_filename}.err"
-        extract_errors "$(cat logs/${log_filename}.log)" >> "logs/${log_filename}.err"
-        
-        echo "Log files saved:"
-        echo "  Full output: logs/${log_filename}.log"
-        echo "  Errors only: logs/${log_filename}.err"
-        ;;
-    "full")
-        echo "Running full benchmark..."
-        log_filename=$(generate_log_filename "full" "all")
-        
-        # Add command header to log file
-        echo "$0 full" > "logs/${log_filename}.log"
-        echo "Timestamp: $(date)" >> "logs/${log_filename}.log"
-        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.log"
-        echo "========================================" >> "logs/${log_filename}.log"
-        echo "" >> "logs/${log_filename}.log"
-        
-        # Run the command and append output to log file
-        python klue_mrc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" 2>&1 | tee -a "logs/${log_filename}.log"
-        
-        # Extract errors and save to .err file with command header
-        echo "$0 full" > "logs/${log_filename}.err"
-        echo "Timestamp: $(date)" >> "logs/${log_filename}.err"
-        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.err"
-        echo "========================================" >> "logs/${log_filename}.err"
-        echo "" >> "logs/${log_filename}.err"
-        extract_errors "$(cat logs/${log_filename}.log)" >> "logs/${log_filename}.err"
-        
-        echo "Log files saved:"
-        echo "  Full output: logs/${log_filename}.log"
-        echo "  Errors only: logs/${log_filename}.err"
-        ;;
+    "test") run_benchmark "test" "10" "--max-samples 10" ;;
     "custom")
-        if [ -z "$2" ] || ! [[ "$2" =~ ^[0-9]+$ ]]; then
-            echo "Error: Please provide a valid number of samples for custom mode"
-            echo "Usage: $0 custom N (where N is a number)"
-            exit 1
-        fi
-        
-        echo "Running custom benchmark with $2 samples..."
-        log_filename=$(generate_log_filename "custom" "$2")
-        
-        # Add command header to log file
-        echo "$0 custom $2" > "logs/${log_filename}.log"
-        echo "Timestamp: $(date)" >> "logs/${log_filename}.log"
-        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.log"
-        echo "========================================" >> "logs/${log_filename}.log"
-        echo "" >> "logs/${log_filename}.log"
-        
-        # Run the command and append output to log file
-        python klue_mrc-gemini2_5flash.py --project-id "$GOOGLE_CLOUD_PROJECT" --max-samples "$2" 2>&1 | tee -a "logs/${log_filename}.log"
-        
-        # Extract errors and save to .err file with command header
-        echo "$0 custom $2" > "logs/${log_filename}.err"
-        echo "Timestamp: $(date)" >> "logs/${log_filename}.err"
-        echo "Working Directory: $(pwd)" >> "logs/${log_filename}.err"
-        echo "========================================" >> "logs/${log_filename}.err"
-        echo "" >> "logs/${log_filename}.err"
-        extract_errors "$(cat logs/${log_filename}.log)" >> "logs/${log_filename}.err"
-        
-        echo "Log files saved:"
-        echo "  Full output: logs/${log_filename}.log"
-        echo "  Errors only: logs/${log_filename}.err"
-        ;;
-    "help"|*)
-        show_help
-        ;;
+        [[ -z "$2" || ! "$2" =~ ^[0-9]+$ ]] && { echo "Error: Please provide a valid number of samples for custom mode"; echo "Usage: $0 custom N (where N is a number)"; exit 1; }
+        run_benchmark "custom" "$2" "--max-samples $2" ;;
+    "full") run_benchmark "full" "all" "" ;;
+    "help"|*) show_help ;;
 esac 

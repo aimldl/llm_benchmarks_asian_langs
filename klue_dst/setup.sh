@@ -60,32 +60,6 @@ else
     exit 1
 fi
 
-# Check if virtual environment exists
-if [ -d "venv" ]; then
-    print_warning "Virtual environment 'venv' already exists"
-    read -p "Do you want to recreate it? (y/N): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        print_status "Removing existing virtual environment..."
-        rm -rf venv
-        print_success "Removed existing virtual environment"
-    else
-        print_status "Using existing virtual environment"
-    fi
-fi
-
-# Create virtual environment if it doesn't exist
-if [ ! -d "venv" ]; then
-    print_status "Creating virtual environment..."
-    python3 -m venv venv
-    print_success "Virtual environment created"
-fi
-
-# Activate virtual environment
-print_status "Activating virtual environment..."
-source venv/bin/activate
-print_success "Virtual environment activated"
-
 # Upgrade pip
 print_status "Upgrading pip..."
 $PIP_CMD install --upgrade pip
@@ -196,7 +170,7 @@ python3 -c "
 from datasets import load_dataset
 try:
     print('Loading KLUE DST dataset...')
-    dataset = load_dataset('klue', 'dst', split='validation')
+    dataset = load_dataset('klue', 'wos', split='validation')
     print(f'✓ Dataset loaded successfully: {len(dataset)} samples')
     print(f'✓ Dataset features: {list(dataset.features.keys())}')
 except Exception as e:
@@ -222,11 +196,12 @@ echo ""
 echo "2. Run a test benchmark:"
 echo "   ./run test"
 echo ""
-echo "3. Run the full benchmark:"
-echo "   ./run full"
-echo ""
-echo "4. Run with custom number of samples:"
+echo "3. Run with custom number of samples:"
 echo "   ./run custom 100"
+echo ""
+echo "4. Run the full benchmark in the background:"
+echo "   # Use tmux or nohup to run it in the background"
+echo "   ./run full"
 echo ""
 print_status "Log files will be saved to the 'logs' directory"
 print_status "Results will be saved to the 'benchmark_results' directory" 

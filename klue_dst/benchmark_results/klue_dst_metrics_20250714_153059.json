@@ -1,0 +1,10 @@
+{
+  "total_samples": 10,
+  "intent_accuracy": 0.0,
+  "requested_slots_f1": 1.0,
+  "slot_values_f1": 1.0,
+  "overall_f1": 1.0,
+  "total_time": 47.4456467628479,
+  "average_time_per_sample": 4.74456467628479,
+  "samples_per_second": 0.21076749253696453
+}

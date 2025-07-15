@@ -1,0 +1,14 @@
+./run custom 100
+Timestamp: 2025. 07. 14. (월) 09:13:19 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_mrc
+========================================
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-mrc-v1_dev_01835
+     Question: 가공하는데 몇 초밖에 걸리지 않는 물질은?...
+     Ground Truth: {'answer_start': [250], 'text': ['실리콘유']}
+     Predicted: 무명천...
+     Exact Match: 0.0000 | F1: 0.0000
+
+2025-07-14 09:11:49,677 - ERROR - Cannot get the response text.
+Processing samples:  68%|██████▊   | 68/100 [03:37<04:08,  7.77s/it]2025-07-14 09:11:49,718 - INFO - AFC is enabled with max remote calls: 10.

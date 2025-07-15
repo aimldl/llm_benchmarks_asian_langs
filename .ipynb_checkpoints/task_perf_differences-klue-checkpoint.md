@@ -13,6 +13,21 @@ The KLUE benchmark consists of 8 Korean natural language understanding tasks. Th
 5. **RE (Relation Extraction)** - `klue_re/`
 6. **DP (Dependency Parsing)** - `klue_dp/` ⭐ **NEW**
 
+## Dataload Configuration
+### Common errors
+The mismatch between the acronym of a KLUE task and the dataset name may cause the following error.
+
+```bash
+Loading KLUE DST dataset...
+✗ Failed to load dataset: BuilderConfig 'dst' not found. Available: ['dp', 'mrc', 'ner', 'nli', 're', 'sts', 'wos', 'ynat']
+```
+For example, there's no 'dst' configuration for DST (Dialogue State Tracking). The config name for the DST task in KLUE is `wos` or Wizard of Seoul. 
+
+### Correct `BuilderConfig` names for each of the KLUE sub-tasks
+
+
+
+
 ## Performance Metrics by Task
 
 ### 1. TC (Topic Classification)

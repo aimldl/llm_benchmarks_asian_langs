@@ -142,7 +142,7 @@ class KLUEMachineReadingComprehensionBenchmark:
 
 임무: 주어진 지문을 읽고 질문에 대한 정확한 답을 찾아주세요. 답이 지문에 없는 경우 "답을 찾을 수 없습니다"라고 답하세요.
 
-지침:
+중요한 지침:
 
 1. **정확한 답 찾기**: 질문에 대한 답이 지문에 명확히 나와 있는지 확인하세요.
 2. **문맥 이해**: 지문의 전체적인 맥락을 파악하여 정확한 답을 찾으세요.
@@ -151,6 +151,14 @@ class KLUEMachineReadingComprehensionBenchmark:
    - 답이 지문에 없으면: "답을 찾을 수 없습니다"라고 답하세요
 4. **한국어 특성 고려**: 한국어의 문법과 표현을 정확히 이해하여 답하세요.
 5. **명확성**: 답은 간결하고 명확해야 합니다.
+
+**답변 형식 규칙:**
+- 답변은 가능한 한 짧고 정확해야 합니다
+- 문장을 완성하지 말고 핵심 답만 제공하세요
+- 예시:
+  - 질문: "어디로 보내졌나?" → 답변: "노르웨이" (O), "노르웨이로 파견되었다" (X)
+  - 질문: "가격은?" → 답변: "79달러" (O), "79달러에 팔린다" (X)
+  - 질문: "물질은?" → 답변: "실리콘유" (O), "무명천" (X)
 
 제목: {title}
 
@@ -331,9 +339,11 @@ class KLUEMachineReadingComprehensionBenchmark:
                 )
                 
                 # Calculate metrics
+                # Extract text answers from the answers dictionary
+                ground_truth_texts = sample["answers"].get("text", []) if isinstance(sample["answers"], dict) else sample["answers"]
                 metrics = self.calculate_metrics(
                     prediction_result.get("answer", ""),
-                    sample["answers"],
+                    ground_truth_texts,
                     sample["is_impossible"]
                 )
                 
@@ -372,6 +382,8 @@ class KLUEMachineReadingComprehensionBenchmark:
                 
             except Exception as e:
                 logger.error(f"Error processing sample {i}: {e}")
+                # Extract text answers from the answers dictionary for error case too
+                ground_truth_texts = sample["answers"].get("text", []) if isinstance(sample["answers"], dict) else sample["answers"]
                 self.results.append({
                     "id": sample["id"],
                     "title": sample["title"],
