@@ -23,7 +23,7 @@ from datasets import load_dataset
 import pandas as pd
 from tqdm import tqdm
 import logging
-from rouge_score import rouge_scorer
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -292,31 +292,102 @@ class KLUEMachineReadingComprehensionBenchmark:
         # normalized = re.sub(r'[^\w\s]', '', normalized)
         return normalized
     
-    def calculate_rouge_scores(self, predicted_answer: str, ground_truth_answers: List[str]) -> Dict[str, float]:
-        """Calculate ROUGE scores for answer prediction."""
-        try:
-            # Initialize ROUGE scorer
-            scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
-            
-            # Use the first ground truth answer for ROUGE calculation
-            # For multiple ground truth answers, we could average across all, but using the first is common
-            reference = ground_truth_answers[0] if ground_truth_answers else ""
-            
-            # Calculate ROUGE scores
-            scores = scorer.score(reference, predicted_answer)
-            
-            return {
-                "rouge1": scores["rouge1"].fmeasure,
-                "rouge2": scores["rouge2"].fmeasure,
-                "rougeL": scores["rougeL"].fmeasure
-            }
-        except Exception as e:
-            logger.warning(f"ROUGE calculation failed: {e}")
-            return {
-                "rouge1": 0.0,
-                "rouge2": 0.0,
-                "rougeL": 0.0
-            }
+    def calculate_lccs_f1(self, predicted_answer: str, ground_truth_answers: List[str]) -> float:
+        """
+        Calculate LCCS-based F1 score (Longest Common Contiguous Subsequence)
+        
+        LCCS finds the longest sequence of consecutive words that appear in both
+        prediction and reference, then calculates F1 based on this.
+        """
+        if not ground_truth_answers:
+            return 0.0
+        
+        # Use the first ground truth answer for calculation
+        reference = ground_truth_answers[0]
+        
+        # Normalize and tokenize
+        pred_tokens = self._normalize_answer(predicted_answer).split()
+        ref_tokens = self._normalize_answer(reference).split()
+        
+        if not pred_tokens or not ref_tokens:
+            return 0.0
+        
+        # Find longest common contiguous subsequence
+        lccs_length = 0
+        
+        # Dynamic programming approach to find LCCS
+        dp = [[0] * (len(ref_tokens) + 1) for _ in range(len(pred_tokens) + 1)]
+        
+        for i in range(1, len(pred_tokens) + 1):
+            for j in range(1, len(ref_tokens) + 1):
+                if pred_tokens[i-1] == ref_tokens[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                    if dp[i][j] > lccs_length:
+                        lccs_length = dp[i][j]
+        
+        if lccs_length == 0:
+            return 0.0
+        
+        # Calculate precision and recall based on LCCS
+        precision = lccs_length / len(pred_tokens)
+        recall = lccs_length / len(ref_tokens)
+        
+        # Calculate F1
+        if precision + recall > 0:
+            f1 = 2 * precision * recall / (precision + recall)
+        else:
+            f1 = 0.0
+        
+        return f1
+    
+    def calculate_rouge_w(self, predicted_answer: str, ground_truth_answers: List[str]) -> float:
+        """
+        Calculate ROUGE-W (ROUGE Weighted) score
+        
+        ROUGE-W is similar to ROUGE-L but gives higher weight to longer consecutive matches.
+        It's essentially a weighted version of longest common subsequence.
+        """
+        if not ground_truth_answers:
+            return 0.0
+        
+        # Use the first ground truth answer for calculation
+        reference = ground_truth_answers[0]
+        
+        # Normalize and tokenize
+        pred_tokens = self._normalize_answer(predicted_answer).split()
+        ref_tokens = self._normalize_answer(reference).split()
+        
+        if not pred_tokens or not ref_tokens:
+            return 0.0
+        
+        # Find longest common subsequence with weights
+        # Create a matrix to track LCS with weights
+        dp = [[0.0] * (len(ref_tokens) + 1) for _ in range(len(pred_tokens) + 1)]
+        
+        for i in range(1, len(pred_tokens) + 1):
+            for j in range(1, len(ref_tokens) + 1):
+                if pred_tokens[i-1] == ref_tokens[j-1]:
+                    # Weight consecutive matches higher
+                    weight = 1.0
+                    if i > 1 and j > 1 and pred_tokens[i-2] == ref_tokens[j-2]:
+                        weight = 1.5  # Bonus for consecutive matches
+                    dp[i][j] = dp[i-1][j-1] + weight
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+        
+        lcs_weighted = dp[len(pred_tokens)][len(ref_tokens)]
+        
+        # Calculate precision and recall
+        precision = lcs_weighted / len(pred_tokens) if pred_tokens else 0.0
+        recall = lcs_weighted / len(ref_tokens) if ref_tokens else 0.0
+        
+        # Calculate F1
+        if precision + recall > 0:
+            f1 = 2 * precision * recall / (precision + recall)
+        else:
+            f1 = 0.0
+        
+        return f1
     
     def calculate_metrics(self, predicted_answer: str, ground_truth_answers: List[str], is_impossible: bool) -> Dict[str, Any]:
         """Calculate MRC metrics."""
@@ -330,23 +401,22 @@ class KLUEMachineReadingComprehensionBenchmark:
             return {
                 "exact_match": 1.0 if is_correct else 0.0,
                 "f1_score": 1.0 if is_correct else 0.0,
-                "rouge1": 1.0 if is_correct else 0.0,
-                "rouge2": 1.0 if is_correct else 0.0,
-                "rougeL": 1.0 if is_correct else 0.0,
+                "rouge_w": 1.0 if is_correct else 0.0,
+                "lccs_f1": 1.0 if is_correct else 0.0,
                 "is_impossible_correct": is_correct
             }
         else:
             # For answerable questions
             exact_match = self.calculate_exact_match(predicted_answer, ground_truth_answers)
             f1_score = self.calculate_f1_score(predicted_answer, ground_truth_answers)
-            rouge_scores = self.calculate_rouge_scores(predicted_answer, ground_truth_answers)
+            rouge_w_score = self.calculate_rouge_w(predicted_answer, ground_truth_answers)
+            lccs_f1_score = self.calculate_lccs_f1(predicted_answer, ground_truth_answers)
             
             return {
                 "exact_match": 1.0 if exact_match else 0.0,
                 "f1_score": f1_score,
-                "rouge1": rouge_scores["rouge1"],
-                "rouge2": rouge_scores["rouge2"],
-                "rougeL": rouge_scores["rougeL"],
+                "rouge_w": rouge_w_score,
+                "lccs_f1": lccs_f1_score,
                 "is_impossible_correct": True  # Not applicable for answerable questions
             }
     
@@ -358,9 +428,8 @@ class KLUEMachineReadingComprehensionBenchmark:
         total_samples = len(test_data)
         total_exact_match = 0
         total_f1_score = 0.0
-        total_rouge1_score = 0.0
-        total_rouge2_score = 0.0
-        total_rougeL_score = 0.0
+        total_rouge_w_score = 0.0
+        total_lccs_f1_score = 0.0
         total_impossible_correct = 0
         impossible_count = 0
         
@@ -387,9 +456,8 @@ class KLUEMachineReadingComprehensionBenchmark:
                 # Update counters
                 total_exact_match += metrics["exact_match"]
                 total_f1_score += metrics["f1_score"]
-                total_rouge1_score += metrics["rouge1"]
-                total_rouge2_score += metrics["rouge2"]
-                total_rougeL_score += metrics["rougeL"]
+                total_rouge_w_score += metrics["rouge_w"]
+                total_lccs_f1_score += metrics["lccs_f1"]
                 
                 if sample["is_impossible"]:
                     impossible_count += 1
@@ -415,7 +483,7 @@ class KLUEMachineReadingComprehensionBenchmark:
                 
                 # Save intermediate results
                 if (i + 1) % self.config.save_interval == 0:
-                    self.save_intermediate_results(i + 1, total_exact_match, total_f1_score, total_rouge1_score, total_rouge2_score, total_rougeL_score, start_time)
+                    self.save_intermediate_results(i + 1, total_exact_match, total_f1_score, total_rouge_w_score, total_lccs_f1_score, start_time)
                 
                 # Sleep between API calls
                 time.sleep(self.config.sleep_interval_between_api_calls)
@@ -432,7 +500,7 @@ class KLUEMachineReadingComprehensionBenchmark:
                     "ground_truth_answers": sample["answers"],
                     "is_impossible": sample["is_impossible"],
                     "predicted_answer": "답을 찾을 수 없습니다",
-                    "metrics": {"exact_match": 0.0, "f1_score": 0.0, "rouge1": 0.0, "rouge2": 0.0, "rougeL": 0.0, "is_impossible_correct": False},
+                    "metrics": {"exact_match": 0.0, "f1_score": 0.0, "rouge_w": 0.0, "lccs_f1": 0.0, "is_impossible_correct": False},
                     "success": False,
                     "raw_response": "",
                     "error": str(e)
@@ -444,9 +512,8 @@ class KLUEMachineReadingComprehensionBenchmark:
         
         exact_match_score = total_exact_match / total_samples if total_samples > 0 else 0.0
         f1_score = total_f1_score / total_samples if total_samples > 0 else 0.0
-        rouge1_score = total_rouge1_score / total_samples if total_samples > 0 else 0.0
-        rouge2_score = total_rouge2_score / total_samples if total_samples > 0 else 0.0
-        rougeL_score = total_rougeL_score / total_samples if total_samples > 0 else 0.0
+        rouge_w_score = total_rouge_w_score / total_samples if total_samples > 0 else 0.0
+        lccs_f1_score = total_lccs_f1_score / total_samples if total_samples > 0 else 0.0
         impossible_accuracy = total_impossible_correct / impossible_count if impossible_count > 0 else 0.0
         
         self.metrics = {
@@ -455,9 +522,8 @@ class KLUEMachineReadingComprehensionBenchmark:
             "impossible_samples": impossible_count,
             "exact_match": exact_match_score,
             "f1_score": f1_score,
-            "rouge1": rouge1_score,
-            "rouge2": rouge2_score,
-            "rougeL": rougeL_score,
+            "rouge_w": rouge_w_score,
+            "lccs_f1": lccs_f1_score,
             "impossible_accuracy": impossible_accuracy,
             "total_time": total_time,
             "average_time_per_sample": total_time / total_samples if total_samples > 0 else 0.0,
@@ -467,9 +533,8 @@ class KLUEMachineReadingComprehensionBenchmark:
         logger.info("Benchmark completed!")
         logger.info(f"Exact Match: {exact_match_score:.4f}")
         logger.info(f"F1 Score: {f1_score:.4f}")
-        logger.info(f"ROUGE-1: {rouge1_score:.4f}")
-        logger.info(f"ROUGE-2: {rouge2_score:.4f}")
-        logger.info(f"ROUGE-L: {rougeL_score:.4f}")
+        logger.info(f"ROUGE-W: {rouge_w_score:.4f}")
+        logger.info(f"LCCS-F1: {lccs_f1_score:.4f}")
         logger.info(f"Impossible Accuracy: {impossible_accuracy:.4f}")
         logger.info(f"Total time: {total_time:.2f} seconds")
         logger.info(f"Average time per sample: {total_time / total_samples:.3f} seconds")
@@ -505,9 +570,8 @@ class KLUEMachineReadingComprehensionBenchmark:
                 "predicted_answer": result["predicted_answer"],
                 "exact_match": result["metrics"]["exact_match"],
                 "f1_score": result["metrics"]["f1_score"],
-                "rouge1": result["metrics"]["rouge1"],
-                "rouge2": result["metrics"]["rouge2"],
-                "rougeL": result["metrics"]["rougeL"],
+                "rouge_w": result["metrics"]["rouge_w"],
+                "lccs_f1": result["metrics"]["lccs_f1"],
                 "success": result["success"],
                 "error": result.get("error", "")
             })
@@ -520,7 +584,7 @@ class KLUEMachineReadingComprehensionBenchmark:
         # Save error analysis
         self.save_error_analysis(timestamp)
     
-    def save_intermediate_results(self, current_count: int, exact_match_count: int, f1_sum: float, rouge1_sum: float, rouge2_sum: float, rougeL_sum: float, start_time: float):
+    def save_intermediate_results(self, current_count: int, exact_match_count: int, f1_sum: float, rouge_w_sum: float, lccs_f1_sum: float, start_time: float):
         """Save intermediate results."""
         if not self.config.save_predictions:
             return
@@ -530,17 +594,15 @@ class KLUEMachineReadingComprehensionBenchmark:
         # Calculate intermediate metrics
         exact_match_score = exact_match_count / current_count if current_count > 0 else 0.0
         f1_score = f1_sum / current_count if current_count > 0 else 0.0
-        rouge1_score = rouge1_sum / current_count if current_count > 0 else 0.0
-        rouge2_score = rouge2_sum / current_count if current_count > 0 else 0.0
-        rougeL_score = rougeL_sum / current_count if current_count > 0 else 0.0
+        rouge_w_score = rouge_w_sum / current_count if current_count > 0 else 0.0
+        lccs_f1_score = lccs_f1_sum / current_count if current_count > 0 else 0.0
         
         intermediate_metrics = {
             "samples_processed": current_count,
             "exact_match": exact_match_score,
             "f1_score": f1_score,
-            "rouge1": rouge1_score,
-            "rouge2": rouge2_score,
-            "rougeL": rougeL_score,
+            "rouge_w": rouge_w_score,
+            "lccs_f1": lccs_f1_score,
             "timestamp": timestamp
         }
         
@@ -579,9 +641,8 @@ class KLUEMachineReadingComprehensionBenchmark:
                 f.write(f"   Predicted: {sample['predicted_answer']}\n")
                 f.write(f"   Exact Match: {sample['metrics']['exact_match']:.4f}\n")
                 f.write(f"   F1 Score: {sample['metrics']['f1_score']:.4f}\n")
-                f.write(f"   ROUGE-1: {sample['metrics']['rouge1']:.4f}\n")
-                f.write(f"   ROUGE-2: {sample['metrics']['rouge2']:.4f}\n")
-                f.write(f"   ROUGE-L: {sample['metrics']['rougeL']:.4f}\n")
+                f.write(f"   ROUGE-W: {sample['metrics']['rouge_w']:.4f}\n")
+                f.write(f"   LCCS-F1: {sample['metrics']['lccs_f1']:.4f}\n")
                 f.write(f"   Is Impossible: {sample['is_impossible']}\n")
                 if sample.get("error"):
                     f.write(f"   Error: {sample['error']}\n")
@@ -600,9 +661,8 @@ class KLUEMachineReadingComprehensionBenchmark:
         print(f"Location: {self.config.location}")
         print(f"Exact Match: {self.metrics['exact_match']:.4f}")
         print(f"F1 Score: {self.metrics['f1_score']:.4f}")
-        print(f"ROUGE-1: {self.metrics['rouge1']:.4f}")
-        print(f"ROUGE-2: {self.metrics['rouge2']:.4f}")
-        print(f"ROUGE-L: {self.metrics['rougeL']:.4f}")
+        print(f"ROUGE-W: {self.metrics['rouge_w']:.4f}")
+        print(f"LCCS-F1: {self.metrics['lccs_f1']:.4f}")
         print(f"Impossible Accuracy: {self.metrics['impossible_accuracy']:.4f}")
         print(f"Total Samples: {self.metrics['total_samples']}")
         print(f"Answerable Samples: {self.metrics['answerable_samples']}")
@@ -619,15 +679,13 @@ class KLUEMachineReadingComprehensionBenchmark:
         if answerable_results:
             answerable_exact_match = sum(r["metrics"]["exact_match"] for r in answerable_results) / len(answerable_results)
             answerable_f1 = sum(r["metrics"]["f1_score"] for r in answerable_results) / len(answerable_results)
-            answerable_rouge1 = sum(r["metrics"]["rouge1"] for r in answerable_results) / len(answerable_results)
-            answerable_rouge2 = sum(r["metrics"]["rouge2"] for r in answerable_results) / len(answerable_results)
-            answerable_rougeL = sum(r["metrics"]["rougeL"] for r in answerable_results) / len(answerable_results)
+            answerable_rouge_w = sum(r["metrics"]["rouge_w"] for r in answerable_results) / len(answerable_results)
+            answerable_lccs_f1 = sum(r["metrics"]["lccs_f1"] for r in answerable_results) / len(answerable_results)
             print("Answerable Questions Performance:")
             print(f"  Exact Match: {answerable_exact_match:.4f}")
             print(f"  F1 Score: {answerable_f1:.4f}")
-            print(f"  ROUGE-1: {answerable_rouge1:.4f}")
-            print(f"  ROUGE-2: {answerable_rouge2:.4f}")
-            print(f"  ROUGE-L: {answerable_rougeL:.4f}")
+            print(f"  ROUGE-W: {answerable_rouge_w:.4f}")
+            print(f"  LCCS-F1: {answerable_lccs_f1:.4f}")
             print(f"  Sample Count: {len(answerable_results)}")
             print()
         
@@ -650,7 +708,7 @@ class KLUEMachineReadingComprehensionBenchmark:
                 print(f"     Ground Truth: {sample['ground_truth_answers']}")
                 print(f"     Predicted: {sample['predicted_answer'][:100]}...")
                 print(f"     Exact Match: {sample['metrics']['exact_match']:.4f} | F1: {sample['metrics']['f1_score']:.4f}")
-                print(f"     ROUGE-1: {sample['metrics']['rouge1']:.4f} | ROUGE-2: {sample['metrics']['rouge2']:.4f} | ROUGE-L: {sample['metrics']['rougeL']:.4f}")
+                print(f"     ROUGE-W: {sample['metrics']['rouge_w']:.4f} | LCCS-F1: {sample['metrics']['lccs_f1']:.4f}")
                 if sample.get("error"):
                     print(f"     Error: {sample['error']}")
                 print()

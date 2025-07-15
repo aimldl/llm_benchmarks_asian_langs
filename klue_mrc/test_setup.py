@@ -17,8 +17,7 @@ def test_imports():
         'pandas',
         'tqdm',
         'huggingface_hub',
-        'google.auth',
-        'rouge_score'
+        'google.auth'
     ]
     
     print("Testing package imports...")
@@ -131,31 +130,43 @@ def test_environment_variables():
     
     return True
 
-def test_rouge_metrics():
-    """Test if ROUGE metrics can be calculated."""
+def test_new_metrics():
+    """Test if ROUGE-W and LCCS-F1 metrics can be calculated."""
     try:
-        from rouge_score import rouge_scorer
-        print("\nTesting ROUGE metrics...")
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("klue_mrc_module", "klue_mrc-gemini2_5flash.py")
+        if spec is None:
+            raise ImportError("Could not load klue_mrc-gemini2_5flash.py")
+        klue_mrc_module = importlib.util.module_from_spec(spec)
+        if spec.loader is None:
+            raise ImportError("Could not load module spec")
+        spec.loader.exec_module(klue_mrc_module)
         
-        # Initialize scorer
-        scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+        KLUEMachineReadingComprehensionBenchmark = klue_mrc_module.KLUEMachineReadingComprehensionBenchmark
+        BenchmarkConfig = klue_mrc_module.BenchmarkConfig
+        
+        print("\nTesting ROUGE-W and LCCS-F1 metrics...")
+        
+        # Create a minimal benchmark instance for testing
+        config = BenchmarkConfig()
+        benchmark = KLUEMachineReadingComprehensionBenchmark(config)
         
         # Test with sample data
         reference = "노르웨이로 파견되었다"
         prediction = "노르웨이"
         
-        scores = scorer.score(reference, prediction)
+        rouge_w_score = benchmark.calculate_rouge_w(prediction, [reference])
+        lccs_f1_score = benchmark.calculate_lccs_f1(prediction, [reference])
         
-        print(f"✓ ROUGE metrics calculation works")
+        print(f"✓ ROUGE-W and LCCS-F1 metrics calculation works")
         print(f"  - Reference: {reference}")
         print(f"  - Prediction: {prediction}")
-        print(f"  - ROUGE-1: {scores['rouge1'].fmeasure:.4f}")
-        print(f"  - ROUGE-2: {scores['rouge2'].fmeasure:.4f}")
-        print(f"  - ROUGE-L: {scores['rougeL'].fmeasure:.4f}")
+        print(f"  - ROUGE-W: {rouge_w_score:.4f}")
+        print(f"  - LCCS-F1: {lccs_f1_score:.4f}")
         
         return True
     except Exception as e:
-        print(f"✗ Failed to test ROUGE metrics: {e}")
+        print(f"✗ Failed to test new metrics: {e}")
         return False
 
 def main():
@@ -176,14 +187,14 @@ def main():
     # Test Vertex AI authentication
     auth_ok = test_vertex_ai_auth()
     
-    # Test ROUGE metrics
-    rouge_ok = test_rouge_metrics()
+    # Test new metrics
+    metrics_ok = test_new_metrics()
     
     print("\n" + "=" * 60)
     print("Test Summary")
     print("=" * 60)
     
-    if imports_ok and dataset_ok and auth_ok and rouge_ok:
+    if imports_ok and dataset_ok and auth_ok and metrics_ok:
         print("✅ All tests passed! Your setup is ready.")
         print("\nNext steps:")
         print("1. Ensure your Google Cloud project has Vertex AI API enabled")

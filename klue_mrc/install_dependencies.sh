@@ -10,7 +10,8 @@ fi
 
 # Install dependencies
 echo "Installing Python packages..."
-pip install -r requirements.txt
+# Redirect pip output to /dev/null to suppress verbose installation messages
+pip install -r requirements.txt > /dev/null 2>&1
 
 # Check if installation was successful
 if [ $? -eq 0 ]; then

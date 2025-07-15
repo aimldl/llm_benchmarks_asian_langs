@@ -57,11 +57,13 @@ echo "✅ pip upgraded"
 # Install requirements
 echo "Installing required packages..."
 if [ -f "requirements.txt" ]; then
-    pip install -r requirements.txt
+    # Redirect pip output to /dev/null to suppress verbose installation messages
+    pip install -r requirements.txt > /dev/null 2>&1
     echo "✅ Requirements installed from requirements.txt"
 else
     echo "Warning: requirements.txt not found, installing basic packages..."
-    pip install google-genai datasets pandas tqdm google-cloud-aiplatform
+    # Redirect pip output to /dev/null to suppress verbose installation messages
+    pip install google-genai datasets pandas tqdm google-cloud-aiplatform > /dev/null 2>&1
     echo "✅ Basic packages installed"
 fi
 
