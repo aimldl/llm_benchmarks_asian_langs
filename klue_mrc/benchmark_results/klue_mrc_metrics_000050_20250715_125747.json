@@ -1,0 +1,9 @@
+{
+  "samples_processed": 50,
+  "exact_match": 0.9,
+  "f1_score": 0.9159999999999999,
+  "rouge1": 0.38,
+  "rouge2": 0.24,
+  "rougeL": 0.38,
+  "timestamp": "20250715_125747"
+}

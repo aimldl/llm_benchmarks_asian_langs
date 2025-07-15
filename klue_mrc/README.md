@@ -164,6 +164,9 @@ Overall performance metrics:
   "impossible_samples": 200,
   "exact_match": 0.75,
   "f1_score": 0.82,
+  "rouge1": 0.78,
+  "rouge2": 0.65,
+  "rougeL": 0.76,
   "impossible_accuracy": 0.90,
   "total_time": 1200.5,
   "average_time_per_sample": 1.2,
@@ -184,10 +187,23 @@ Automatic logging to `logs/` directory:
 
 ## Performance Metrics
 
+- Both token-based (F1) and n-gram overlap (ROUGE) metrics are included for comprehensive evaluation. 
+- Uses stemmer for better Korean text processing.
+
 ### Primary Metrics
 - **Exact Match**: Percentage of predictions exactly matching ground truth
 - **F1 Score**: Harmonic mean of precision and recall
+- **ROUGE-1**: Unigram overlap between prediction and reference
+- **ROUGE-2**: Bigram overlap between prediction and reference
+- **ROUGE-L**: Longest common subsequence between prediction and reference
 - **Impossible Accuracy**: Accuracy on unanswerable questions
+
+### ROUGE > Integration Points
+- Answerable questions: ROUGE scores calculated against ground truth answers
+- Impossible questions: ROUGE scores set to 1.0 if model correctly identifies as impossible
+- Error cases: ROUGE scores set to 0.0 for failed predictions
+- Intermediate results: ROUGE scores included in periodic saves
+- Final metrics: ROUGE scores included in overall performance summary
 
 ### Secondary Metrics
 - **Processing Time**: Total and average time per sample

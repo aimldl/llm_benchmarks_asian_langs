@@ -1,0 +1,111 @@
+./run test
+Timestamp: 2025. 07. 14. (월) 07:47:53 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_mrc
+========================================
+
+2025-07-14 07:47:55,375 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-14 07:47:55,375 - INFO - Model name set to: gemini-2.5-flash
+2025-07-14 07:47:55,375 - INFO - Loading KLUE MRC dataset for machine reading comprehension...
+2025-07-14 07:48:06,218 - INFO - Preparing to load a subset of 10 samples.
+2025-07-14 07:48:06,219 - INFO - Reached sample limit of 10. Halting data loading.
+2025-07-14 07:48:06,219 - INFO - ✅ Successfully loaded 10 samples.
+2025-07-14 07:48:06,219 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/10 [00:00<?, ?it/s]2025-07-14 07:48:06,220 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:09,135 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:09,136 - INFO - AFC remote call 1 is done.
+Processing samples:  10%|█         | 1/10 [00:02<00:26,  2.96s/it]2025-07-14 07:48:09,177 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:10,769 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:10,770 - INFO - AFC remote call 1 is done.
+Processing samples:  20%|██        | 2/10 [00:04<00:17,  2.18s/it]2025-07-14 07:48:10,810 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:11,910 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:11,911 - INFO - AFC remote call 1 is done.
+Processing samples:  30%|███       | 3/10 [00:05<00:11,  1.70s/it]2025-07-14 07:48:11,951 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:13,141 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:13,142 - INFO - AFC remote call 1 is done.
+Processing samples:  40%|████      | 4/10 [00:06<00:09,  1.52s/it]2025-07-14 07:48:13,183 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:14,303 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:14,304 - INFO - AFC remote call 1 is done.
+Processing samples:  50%|█████     | 5/10 [00:08<00:06,  1.39s/it]2025-07-14 07:48:14,344 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:16,215 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:16,216 - INFO - AFC remote call 1 is done.
+Processing samples:  60%|██████    | 6/10 [00:10<00:06,  1.57s/it]2025-07-14 07:48:16,257 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:17,678 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:17,679 - INFO - AFC remote call 1 is done.
+Processing samples:  70%|███████   | 7/10 [00:11<00:04,  1.53s/it]2025-07-14 07:48:17,720 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:19,005 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:19,006 - INFO - AFC remote call 1 is done.
+Processing samples:  80%|████████  | 8/10 [00:12<00:02,  1.47s/it]2025-07-14 07:48:19,046 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:20,571 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:20,572 - INFO - AFC remote call 1 is done.
+Processing samples:  90%|█████████ | 9/10 [00:14<00:01,  1.50s/it]2025-07-14 07:48:20,612 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-14 07:48:21,899 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-14 07:48:21,902 - INFO - AFC remote call 1 is done.
+Processing samples: 100%|██████████| 10/10 [00:15<00:00,  1.45s/it]Processing samples: 100%|██████████| 10/10 [00:15<00:00,  1.57s/it]
+2025-07-14 07:48:21,942 - INFO - Benchmark completed!
+2025-07-14 07:48:21,942 - INFO - Exact Match: 0.2000
+2025-07-14 07:48:21,942 - INFO - F1 Score: 0.2000
+2025-07-14 07:48:21,942 - INFO - Impossible Accuracy: 1.0000
+2025-07-14 07:48:21,942 - INFO - Total time: 15.72 seconds
+2025-07-14 07:48:21,942 - INFO - Average time per sample: 1.572 seconds
+2025-07-14 07:48:21,943 - INFO - Metrics saved to: benchmark_results/klue_mrc_metrics_20250714_074821.json
+2025-07-14 07:48:21,943 - INFO - Detailed results saved to: benchmark_results/klue_mrc_results_20250714_074821.json
+2025-07-14 07:48:21,946 - INFO - Results saved as CSV: benchmark_results/klue_mrc_results_20250714_074821.csv
+2025-07-14 07:48:21,946 - INFO - Error analysis saved to: benchmark_results/klue_mrc_error_analysis_20250714_074821.txt
+============================================================
+KLUE Machine Reading Comprehension Benchmark Results
+============================================================
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Exact Match: 0.2000
+F1 Score: 0.2000
+Impossible Accuracy: 1.0000
+Total Samples: 10
+Answerable Samples: 8
+Impossible Samples: 2
+Total Time: 15.72 seconds
+Average Time per Sample: 1.572 seconds
+Samples per Second: 0.64
+
+Answerable Questions Performance:
+  Exact Match: 0.0000
+  F1 Score: 0.0000
+  Sample Count: 8
+
+Impossible Questions Performance:
+  Accuracy: 1.0000
+  Correct: 2/2
+
+Error Analysis (showing first 5 errors):
+  1. Sample ID: klue-mrc-v1_dev_01891
+     Question: 말라카이트에서 나온 색깔을 사용한 에디션은?...
+     Ground Truth: {'answer_start': [666, 666], 'text': ['뉴 740Li 25주년 에디션', '뉴 740Li 25주년']}
+     Predicted: 뉴 740Li 25주년 에디션...
+     Exact Match: 0.0000 | F1: 0.0000
+
+  2. Sample ID: klue-mrc-v1_dev_01842
+     Question: 사고 비행기의 목적지는?...
+     Ground Truth: {'answer_start': [556], 'text': ['독일 뒤셀도르프']}
+     Predicted: 독일 뒤셀도르프...
+     Exact Match: 0.0000 | F1: 0.0000
+
+  3. Sample ID: klue-mrc-v1_dev_02673
+     Question: 2014년 일하고 싶은 50대 회사 중에서 5위로 선정된 기업은?...
+     Ground Truth: {'answer_start': [543], 'text': ['페이스북']}
+     Predicted: 페이스북...
+     Exact Match: 0.0000 | F1: 0.0000
+
+  4. Sample ID: klue-mrc-v1_dev_05664
+     Question: 포브스의 2014년 일하고 싶은 50대 회사 조사에서 5위를 한 기업은?...
+     Ground Truth: {'answer_start': [543], 'text': ['페이스북']}
+     Predicted: 페이스북...
+     Exact Match: 0.0000 | F1: 0.0000
+
+  5. Sample ID: klue-mrc-v1_dev_00170
+     Question: 호세 카레라스가 재단의 도움을 받아 병을 치료한 병원의 소재지는?...
+     Ground Truth: {'answer_start': [408], 'text': ['마드리드']}
+     Predicted: 마드리드...
+     Exact Match: 0.0000 | F1: 0.0000
+

@@ -1,0 +1,11 @@
+{
+  "total_samples": 10,
+  "answerable_samples": 8,
+  "impossible_samples": 2,
+  "exact_match": 1.0,
+  "f1_score": 1.0,
+  "impossible_accuracy": 1.0,
+  "total_time": 28.68963050842285,
+  "average_time_per_sample": 2.868963050842285,
+  "samples_per_second": 0.3485579919568552
+}
