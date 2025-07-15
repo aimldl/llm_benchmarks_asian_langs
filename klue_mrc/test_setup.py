@@ -17,7 +17,8 @@ def test_imports():
         'pandas',
         'tqdm',
         'huggingface_hub',
-        'google.auth'
+        'google.auth',
+        'rouge_score'
     ]
     
     print("Testing package imports...")
@@ -130,6 +131,33 @@ def test_environment_variables():
     
     return True
 
+def test_rouge_metrics():
+    """Test if ROUGE metrics can be calculated."""
+    try:
+        from rouge_score import rouge_scorer
+        print("\nTesting ROUGE metrics...")
+        
+        # Initialize scorer
+        scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+        
+        # Test with sample data
+        reference = "노르웨이로 파견되었다"
+        prediction = "노르웨이"
+        
+        scores = scorer.score(reference, prediction)
+        
+        print(f"✓ ROUGE metrics calculation works")
+        print(f"  - Reference: {reference}")
+        print(f"  - Prediction: {prediction}")
+        print(f"  - ROUGE-1: {scores['rouge1'].fmeasure:.4f}")
+        print(f"  - ROUGE-2: {scores['rouge2'].fmeasure:.4f}")
+        print(f"  - ROUGE-L: {scores['rougeL'].fmeasure:.4f}")
+        
+        return True
+    except Exception as e:
+        print(f"✗ Failed to test ROUGE metrics: {e}")
+        return False
+
 def main():
     """Run all tests."""
     print("=" * 60)
@@ -148,11 +176,14 @@ def main():
     # Test Vertex AI authentication
     auth_ok = test_vertex_ai_auth()
     
+    # Test ROUGE metrics
+    rouge_ok = test_rouge_metrics()
+    
     print("\n" + "=" * 60)
     print("Test Summary")
     print("=" * 60)
     
-    if imports_ok and dataset_ok and auth_ok:
+    if imports_ok and dataset_ok and auth_ok and rouge_ok:
         print("✅ All tests passed! Your setup is ready.")
         print("\nNext steps:")
         print("1. Ensure your Google Cloud project has Vertex AI API enabled")
