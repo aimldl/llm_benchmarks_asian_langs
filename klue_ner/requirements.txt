@@ -3,4 +3,5 @@ google-genai
 datasets>=2.14.0
 pandas>=1.5.0
 tqdm>=4.64.0
-google-cloud-aiplatform>=1.35.0 
+google-cloud-aiplatform>=1.35.0
+seqeval>=1.2.2 

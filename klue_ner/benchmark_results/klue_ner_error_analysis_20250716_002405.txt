@@ -1,0 +1,63 @@
+KLUE NER Error Analysis
+==================================================
+
+1. Sample ID: ner-val_000001
+   Text: B   씨 는   사 법 시 험   합 격 증 이   위 조 된   것 인 지   알   수   없 었 고 ,   아 들 이   좋 은   대 학 에   들 어 갈   수   있 기 만 을   바 라 던 터 라   A   씨 를   더   의 심 하 지   않 았 다 .
+   True Entities: [{'type': 'PS', 'text': 'B', 'start': 0, 'end': 0}, {'type': 'PS', 'text': 'A', 'start': 60, 'end': 60}]
+   Predicted Entities: []
+   Error: list index out of range
+
+2. Sample ID: ner-val_000002
+   Text: 수 학   A 형 의   1 등 급   커 트 라 인 은   평 균   9 6 점 ,   수 학   B 형 은   9 9 점 이 었 다 .
+   True Entities: [{'type': 'QT', 'text': '1 등 급', 'start': 7, 'end': 9}, {'type': 'QT', 'text': '9 6 점', 'start': 20, 'end': 22}, {'type': 'QT', 'text': '9 9 점', 'start': 32, 'end': 34}]
+   Predicted Entities: []
+   Error: list index out of range
+
+3. Sample ID: ner-val_000003
+   Text: ' 변 호 인 ' 은   5 공 화 국   시 절   부 산   지 역 에 서   벌 어 진   최 대   공 안   사 건 인   ' 부 림 사 건 ' 을   모 티 브 로   다 룬   영 화 로 ,   지 난   1 9 일   개 봉 해   나 흘   만 에   관 객   1 7 5 만 명 을   넘 어 섰 습 니 다 .
+   True Entities: [{'type': 'DT', 'text': '5 공 화 국   시 절', 'start': 7, 'end': 13}, {'type': 'LC', 'text': '부 산', 'start': 15, 'end': 16}, {'type': 'DT', 'text': '지 난   1 9 일', 'start': 58, 'end': 63}, {'type': 'DT', 'text': '나 흘', 'start': 69, 'end': 70}, {'type': 'QT', 'text': '1 7 5 만 명', 'start': 78, 'end': 82}]
+   Predicted Entities: []
+   Error: list index out of range
+
+4. Sample ID: ner-val_000005
+   Text: 1 8 번   홀 ( 파 5 ) 에 서   열 린   연 장   첫   번 째   홀 에 서   파 를   지 킨   최 운 정 은   보 기 에   그 친   장 하 나 를   따 돌 리 고   L P G A   투 어   첫   우 승 의   감 격 을   누 렸 다 .
+   True Entities: [{'type': 'QT', 'text': '1 8 번   홀', 'start': 0, 'end': 4}, {'type': 'QT', 'text': '파 5', 'start': 6, 'end': 7}, {'type': 'QT', 'text': '첫   번 째', 'start': 18, 'end': 21}, {'type': 'PS', 'text': '최 운 정', 'start': 33, 'end': 35}, {'type': 'PS', 'text': '장 하 나', 'start': 45, 'end': 47}, {'type': 'OG', 'text': 'L P G A', 'start': 55, 'end': 58}]
+   Predicted Entities: []
+   Error: list index out of range
+
+5. Sample ID: ner-val_000022
+   Text: 춘 천 시 와   원 주 시 는   이 달 부 터   시 내 버 스   요 금 을   평 균   8 . 3 %   인 상 했 고   태 백 시 는   기 본 요 금 을   기 준 으 로   9 . 1 %   올 렸 다 .
+   True Entities: [{'type': 'LC', 'text': '춘 천 시', 'start': 0, 'end': 2}, {'type': 'LC', 'text': '원 주 시', 'start': 5, 'end': 7}, {'type': 'DT', 'text': '이 달', 'start': 10, 'end': 11}, {'type': 'QT', 'text': '8 . 3 %', 'start': 27, 'end': 30}, {'type': 'LC', 'text': '태 백 시', 'start': 37, 'end': 39}, {'type': 'QT', 'text': '9 . 1 %', 'start': 53, 'end': 56}]
+   Predicted Entities: []
+   Error: list index out of range
+
+6. Sample ID: ner-val_000026
+   Text: 4 일   오 전   1 시   1 9 분   여 수   거 문 도   남 동 쪽   공 해 상 에 서   항 해   중 이 던   몽 골   선 적   4 천 3 0 0 t 급   화 물 선   ' 그 랜 드 포 춘 1 호 ' 가   침 몰 해   북 한   선 원   1 6 명   가 운 데   3 명 은   구 조 됐 다 .
+   True Entities: [{'type': 'DT', 'text': '4 일', 'start': 0, 'end': 1}, {'type': 'TI', 'text': '오 전   1 시   1 9 분', 'start': 3, 'end': 11}, {'type': 'LC', 'text': '여 수   거 문 도', 'start': 13, 'end': 18}, {'type': 'LC', 'text': '몽 골', 'start': 37, 'end': 38}, {'type': 'QT', 'text': '4 천 3 0 0 t', 'start': 43, 'end': 48}, {'type': 'QT', 'text': '1 호', 'start': 61, 'end': 62}, {'type': 'LC', 'text': '북 한', 'start': 70, 'end': 71}, {'type': 'QT', 'text': '1 6 명', 'start': 76, 'end': 78}, {'type': 'QT', 'text': '3 명', 'start': 84, 'end': 85}]
+   Predicted Entities: []
+   Error: list index out of range
+
+7. Sample ID: ner-val_000028
+   Text: 이   게 시 물 은   2 9 일 ( 한 국 시 각 )   오 전   9 시   3 0 분   기 준   2 1 1 만 8 5 2 5   조 회   수 를   기 록 하 고   있 다 .
+   True Entities: [{'type': 'DT', 'text': '2 9 일', 'start': 7, 'end': 9}, {'type': 'LC', 'text': '한 국', 'start': 11, 'end': 12}, {'type': 'TI', 'text': '오 전   9 시   3 0 분', 'start': 17, 'end': 25}, {'type': 'QT', 'text': '2 1 1 만 8 5 2 5   조 회   수', 'start': 30, 'end': 42}]
+   Predicted Entities: []
+   Error: list index out of range
+
+8. Sample ID: ner-val_000035
+   Text: 각   조   3 위 에   오 른   6 개 국   중 에 서 는   한 국 이   승 점   4 ,   골 득 실   0 으 로   가 장   좋 은   성 적 을   남 겼 고 ,   우 즈 베 키 스 탄 ( 승 점   4 · 골 득 실   - 1 ) ,   멕 시 코 ( 승 점   3 · 골 득 실   1 ) ,   가 나 ( 승 점   3 · 골 득 실   0 · 5 득 점 ) 가   뒤 를   이 어   1 6 강 에   진 출 했 다 .
+   True Entities: [{'type': 'QT', 'text': '3 위', 'start': 4, 'end': 5}, {'type': 'QT', 'text': '6 개 국', 'start': 11, 'end': 13}, {'type': 'OG', 'text': '한 국', 'start': 20, 'end': 21}, {'type': 'QT', 'text': '4', 'start': 27, 'end': 27}, {'type': 'QT', 'text': '0', 'start': 34, 'end': 34}, {'type': 'OG', 'text': '우 즈 베 키 스 탄', 'start': 53, 'end': 58}, {'type': 'QT', 'text': '4', 'start': 63, 'end': 63}, {'type': 'QT', 'text': '- 1', 'start': 69, 'end': 70}, {'type': 'OG', 'text': '멕 시 코', 'start': 74, 'end': 76}, {'type': 'QT', 'text': '3', 'start': 81, 'end': 81}, {'type': 'QT', 'text': '1', 'start': 87, 'end': 87}, {'type': 'OG', 'text': '가 나', 'start': 91, 'end': 92}, {'type': 'QT', 'text': '3', 'start': 97, 'end': 97}, {'type': 'QT', 'text': '0', 'start': 103, 'end': 103}, {'type': 'QT', 'text': '5', 'start': 105, 'end': 105}, {'type': 'QT', 'text': '1 6 강', 'start': 117, 'end': 119}]
+   Predicted Entities: []
+   Error: list index out of range
+
+9. Sample ID: ner-val_000036
+   Text: 존   메 이 어 의   첫   번 째   내 한   공 연 은   5 월   6 일   오 후   7 시   잠 실   보 조 경 기 장 에 서   열 립 니 다 .
+   True Entities: [{'type': 'PS', 'text': '존   메 이 어', 'start': 0, 'end': 4}, {'type': 'QT', 'text': '첫   번 째', 'start': 7, 'end': 10}, {'type': 'DT', 'text': '5 월   6 일', 'start': 19, 'end': 23}, {'type': 'TI', 'text': '오 후   7 시', 'start': 25, 'end': 29}, {'type': 'LC', 'text': '잠 실   보 조 경 기 장', 'start': 31, 'end': 38}]
+   Predicted Entities: []
+   Error: list index out of range
+
+10. Sample ID: ner-val_000039
+   Text: 내   일 요 일   두 시 간 을   잡 아 먹 은   또   한   편 의   영 화 . . 이   영 화 를   보 게 된 건   8 점 대 의   네 이 버 평 점   때 문 이 었 다 . . .
+   True Entities: [{'type': 'DT', 'text': '일 요 일', 'start': 2, 'end': 4}, {'type': 'TI', 'text': '두 시 간', 'start': 6, 'end': 8}, {'type': 'QT', 'text': '8 점', 'start': 38, 'end': 39}, {'type': 'OG', 'text': '네 이 버', 'start': 43, 'end': 45}]
+   Predicted Entities: []
+   Error: list index out of range
+

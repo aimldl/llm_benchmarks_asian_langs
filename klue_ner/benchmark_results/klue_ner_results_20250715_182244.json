@@ -1,0 +1,624 @@
+[
+  {
+    "id": "ner-val_000000",
+    "success": true,
+    "raw_response": "개체명 인식 결과:\n[경찰:OG]\n[박 씨:PS]\n[32:QT]\n[김 모 씨:PS]\n[33:QT]\n[16명:QT]",
+    "true_entities": [
+      {
+        "type": "OG",
+        "text": "경 찰",
+        "start": 0,
+        "end": 1
+      },
+      {
+        "type": "PS",
+        "text": "박",
+        "start": 21,
+        "end": 21
+      },
+      {
+        "type": "QT",
+        "text": "3 2",
+        "start": 27,
+        "end": 28
+      },
+      {
+        "type": "PS",
+        "text": "김",
+        "start": 39,
+        "end": 39
+      },
+      {
+        "type": "QT",
+        "text": "3 3",
+        "start": 42,
+        "end": 43
+      },
+      {
+        "type": "QT",
+        "text": "1 6 명",
+        "start": 49,
+        "end": 51
+      }
+    ],
+    "predicted_entities": [
+      {
+        "text": "경찰",
+        "type": "OG",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "박 씨",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "32",
+        "type": "QT",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "김 모 씨",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "33",
+        "type": "QT",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "16명",
+        "type": "QT",
+        "start": -1,
+        "end": -1
+      }
+    ],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 6,
+        "total": 6
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 22,
+        "predicted_chars": 0
+      }
+    },
+    "text": "경 찰 은   또   성 매 매   알 선   자 금 을   관 리 한   박 씨 의   딸 ( 3 2 ) 과   성 매 매   여 성   김 모 ( 3 3 ) 씨   등   1 6 명 을   같 은   혐 의 로   불 구 속   입 건 했 다 .",
+    "error": ""
+  },
+  {
+    "id": "ner-val_000001",
+    "success": false,
+    "raw_response": "",
+    "true_entities": [
+      {
+        "type": "PS",
+        "text": "B",
+        "start": 0,
+        "end": 0
+      },
+      {
+        "type": "PS",
+        "text": "A",
+        "start": 60,
+        "end": 60
+      }
+    ],
+    "predicted_entities": [],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 0,
+        "total": 2
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 0,
+        "predicted_chars": 0
+      }
+    },
+    "text": "B   씨 는   사 법 시 험   합 격 증 이   위 조 된   것 인 지   알   수   없 었 고 ,   아 들 이   좋 은   대 학 에   들 어 갈   수   있 기 만 을   바 라 던 터 라   A   씨 를   더   의 심 하 지   않 았 다 .",
+    "error": "list index out of range"
+  },
+  {
+    "id": "ner-val_000002",
+    "success": false,
+    "raw_response": "",
+    "true_entities": [
+      {
+        "type": "QT",
+        "text": "1 등 급",
+        "start": 7,
+        "end": 9
+      },
+      {
+        "type": "QT",
+        "text": "9 6 점",
+        "start": 20,
+        "end": 22
+      },
+      {
+        "type": "QT",
+        "text": "9 9 점",
+        "start": 32,
+        "end": 34
+      }
+    ],
+    "predicted_entities": [],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 0,
+        "total": 3
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 0,
+        "predicted_chars": 0
+      }
+    },
+    "text": "수 학   A 형 의   1 등 급   커 트 라 인 은   평 균   9 6 점 ,   수 학   B 형 은   9 9 점 이 었 다 .",
+    "error": "list index out of range"
+  },
+  {
+    "id": "ner-val_000003",
+    "success": false,
+    "raw_response": "",
+    "true_entities": [
+      {
+        "type": "DT",
+        "text": "5 공 화 국   시 절",
+        "start": 7,
+        "end": 13
+      },
+      {
+        "type": "LC",
+        "text": "부 산",
+        "start": 15,
+        "end": 16
+      },
+      {
+        "type": "DT",
+        "text": "지 난   1 9 일",
+        "start": 58,
+        "end": 63
+      },
+      {
+        "type": "DT",
+        "text": "나 흘",
+        "start": 69,
+        "end": 70
+      },
+      {
+        "type": "QT",
+        "text": "1 7 5 만 명",
+        "start": 78,
+        "end": 82
+      }
+    ],
+    "predicted_entities": [],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 0,
+        "total": 5
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 0,
+        "predicted_chars": 0
+      }
+    },
+    "text": "' 변 호 인 ' 은   5 공 화 국   시 절   부 산   지 역 에 서   벌 어 진   최 대   공 안   사 건 인   ' 부 림 사 건 ' 을   모 티 브 로   다 룬   영 화 로 ,   지 난   1 9 일   개 봉 해   나 흘   만 에   관 객   1 7 5 만 명 을   넘 어 섰 습 니 다 .",
+    "error": "list index out of range"
+  },
+  {
+    "id": "ner-val_000004",
+    "success": true,
+    "raw_response": "[유 시 진 대 위:PS]\n[송 중 기:PS]\n[의 사 강 모 연 팀 장:PS]\n[송 혜 교:PS]\n[촬 영 지:LC]",
+    "true_entities": [
+      {
+        "type": "PS",
+        "text": "유 시 진",
+        "start": 0,
+        "end": 2
+      },
+      {
+        "type": "PS",
+        "text": "송 중 기",
+        "start": 7,
+        "end": 9
+      },
+      {
+        "type": "PS",
+        "text": "강 모 연",
+        "start": 16,
+        "end": 18
+      },
+      {
+        "type": "PS",
+        "text": "송 혜 교",
+        "start": 23,
+        "end": 25
+      }
+    ],
+    "predicted_entities": [
+      {
+        "text": "유 시 진 대 위",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "송 중 기",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "의 사 강 모 연 팀 장",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "송 혜 교",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "촬 영 지",
+        "type": "LC",
+        "start": -1,
+        "end": -1
+      }
+    ],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 5,
+        "total": 4
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 24,
+        "predicted_chars": 0
+      }
+    },
+    "text": "유 시 진   대 위 ( 송 중 기 ) 와   의 사   강 모 연   팀 장 ( 송 혜 교 ) 의   흔 적 이 라 도   엿 볼   수   있 을 까 ' 하 는   마 음 에   촬 영 지 를   찾 은   관 광 객 들 은   아 쉬 운   발 걸 음 을   되 돌 리 고   있 다 .",
+    "error": ""
+  },
+  {
+    "id": "ner-val_000005",
+    "success": false,
+    "raw_response": "",
+    "true_entities": [
+      {
+        "type": "QT",
+        "text": "1 8 번   홀",
+        "start": 0,
+        "end": 4
+      },
+      {
+        "type": "QT",
+        "text": "파 5",
+        "start": 6,
+        "end": 7
+      },
+      {
+        "type": "QT",
+        "text": "첫   번 째",
+        "start": 18,
+        "end": 21
+      },
+      {
+        "type": "PS",
+        "text": "최 운 정",
+        "start": 33,
+        "end": 35
+      },
+      {
+        "type": "PS",
+        "text": "장 하 나",
+        "start": 45,
+        "end": 47
+      },
+      {
+        "type": "OG",
+        "text": "L P G A",
+        "start": 55,
+        "end": 58
+      }
+    ],
+    "predicted_entities": [],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 0,
+        "total": 6
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 0,
+        "predicted_chars": 0
+      }
+    },
+    "text": "1 8 번   홀 ( 파 5 ) 에 서   열 린   연 장   첫   번 째   홀 에 서   파 를   지 킨   최 운 정 은   보 기 에   그 친   장 하 나 를   따 돌 리 고   L P G A   투 어   첫   우 승 의   감 격 을   누 렸 다 .",
+    "error": "list index out of range"
+  },
+  {
+    "id": "ner-val_000006",
+    "success": true,
+    "raw_response": "[부친 신 총괄회장:PS]\n[신 동 빈:PS]\n[회장:PS]\n[신 회장:PS]\n[롯데 그룹:OG]",
+    "true_entities": [
+      {
+        "type": "PS",
+        "text": "신",
+        "start": 7,
+        "end": 7
+      },
+      {
+        "type": "PS",
+        "text": "신 동 빈",
+        "start": 18,
+        "end": 20
+      },
+      {
+        "type": "PS",
+        "text": "신",
+        "start": 39,
+        "end": 39
+      },
+      {
+        "type": "OG",
+        "text": "롯 데 그 룹",
+        "start": 53,
+        "end": 56
+      }
+    ],
+    "predicted_entities": [
+      {
+        "text": "부친 신 총괄회장",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "신 동 빈",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "회장",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "신 회장",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "롯데 그룹",
+        "type": "OG",
+        "start": -1,
+        "end": -1
+      }
+    ],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 5,
+        "total": 4
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 18,
+        "predicted_chars": 0
+      }
+    },
+    "text": "따 라 서   부 친   신   총 괄 회 장 에 게 까 지   신 동 빈   회 장 이   ' 반 기 ' 를   든   상 황 에 서   신   회 장 을   뺀   채   작 금 의   롯 데 그 룹   사 태 에   대 한   논 의 가   이 뤄 질   가 능 성 을   배 제 할   수   없 어   보 인 다 .",
+    "error": ""
+  },
+  {
+    "id": "ner-val_000007",
+    "success": true,
+    "raw_response": "[시 네 마 테 크:OG]",
+    "true_entities": [
+      {
+        "type": "LC",
+        "text": "시 네 마 테 크",
+        "start": 3,
+        "end": 7
+      }
+    ],
+    "predicted_entities": [
+      {
+        "text": "시 네 마 테 크",
+        "type": "OG",
+        "start": -1,
+        "end": -1
+      }
+    ],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 1,
+        "total": 1
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 10,
+        "predicted_chars": 0
+      }
+    },
+    "text": "현 재   시 네 마 테 크 에 서   하 고   있 는   영 화 . .   놓 치 면   후 회 합 니 다 .",
+    "error": ""
+  },
+  {
+    "id": "ner-val_000008",
+    "success": true,
+    "raw_response": "[저 우 쉰:PS]\n[탕 웨 이:PS]\n[오 리 엔 트:LC]",
+    "true_entities": [
+      {
+        "type": "PS",
+        "text": "저 우 쉰",
+        "start": 0,
+        "end": 2
+      },
+      {
+        "type": "PS",
+        "text": "탕 웨 이",
+        "start": 5,
+        "end": 7
+      },
+      {
+        "type": "QT",
+        "text": "두   사 람",
+        "start": 27,
+        "end": 30
+      }
+    ],
+    "predicted_entities": [
+      {
+        "text": "저 우 쉰",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "탕 웨 이",
+        "type": "PS",
+        "start": -1,
+        "end": -1
+      },
+      {
+        "text": "오 리 엔 트",
+        "type": "LC",
+        "start": -1,
+        "end": -1
+      }
+    ],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 3,
+        "total": 3
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 20,
+        "predicted_chars": 0
+      }
+    },
+    "text": "저 우 쉰 과   탕 웨 이 .   오 리 엔 트 의   여 배 우   부 분 에 선   이   두   사 람 이   최 고 이 지   않 을 까   싶 다 .",
+    "error": ""
+  },
+  {
+    "id": "ner-val_000009",
+    "success": true,
+    "raw_response": "[180도:QT]",
+    "true_entities": [
+      {
+        "type": "QT",
+        "text": "1 8 0 도",
+        "start": 23,
+        "end": 26
+      }
+    ],
+    "predicted_entities": [
+      {
+        "text": "180도",
+        "type": "QT",
+        "start": -1,
+        "end": -1
+      }
+    ],
+    "metrics": {
+      "entity_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct": 0,
+        "predicted": 1,
+        "total": 1
+      },
+      "character_level": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "correct_chars": 0,
+        "total_chars": 8,
+        "predicted_chars": 0
+      }
+    },
+    "text": "m 이 라 고   써 있 는   펜 던 트   보 면 서   설 마   저 거   1 8 0 도   회 전 시 킨   다 음 반 전 이 라 고   지 껄 이 는 건   아 니 겠 지 . .",
+    "error": ""
+  }
+]
