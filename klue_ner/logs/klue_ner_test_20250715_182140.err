@@ -1,0 +1,13 @@
+./run test 10
+Timestamp: 2025. 07. 15. (화) 18:22:45 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner
+========================================
+
+No error analysis section found in the log.
+
+2025-07-15 18:22:00,970 - ERROR - Error processing sample 1: list index out of range
+2025-07-15 18:22:03,751 - ERROR - Error processing sample 2: list index out of range
+Processing samples:  30%|███       | 3/102025-07-15 18:22:03,751 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:22:16,948 - ERROR - Error processing sample 3: list index out of range
+2025-07-15 18:22:24,936 - ERROR - Error processing sample 5: list index out of range
+Processing samples:  60%|██████    | 6/102025-07-15 18:22:24,936 - INFO - AFC is enabled with max remote calls: 10.

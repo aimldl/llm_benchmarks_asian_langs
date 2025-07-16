@@ -26,6 +26,7 @@ from datasets import load_dataset
 import pandas as pd
 from tqdm import tqdm
 import logging
+from seqeval.metrics import classification_report, f1_score, precision_score, recall_score
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -362,8 +363,8 @@ class KLUENamedEntityRecognitionBenchmark:
         
         return entities
     
-    def calculate_metrics(self, true_entities: List[Dict], pred_entities: List[Dict]) -> Dict[str, Any]:
-        """Calculate precision, recall, and F1 score for NER."""
+    def calculate_entity_level_metrics(self, true_entities: List[Dict], pred_entities: List[Dict]) -> Dict[str, Any]:
+        """Calculate Entity-level Macro F1 with exact boundary and type match."""
         if not pred_entities:
             return {
                 "precision": 0.0,
@@ -384,11 +385,13 @@ class KLUENamedEntityRecognitionBenchmark:
                 "total": 0
             }
         
-        # Simple exact match for entity text and type
+        # Entity-level evaluation: exact boundary match + correct type
         correct = 0
         for true_entity in true_entities:
             for pred_entity in pred_entities:
-                if (true_entity["text"] == pred_entity["text"] and 
+                # Check exact boundary match and correct type
+                if (true_entity["start"] == pred_entity["start"] and 
+                    true_entity["end"] == pred_entity["end"] and 
                     true_entity["type"] == pred_entity["type"]):
                     correct += 1
                     break
@@ -404,6 +407,93 @@ class KLUENamedEntityRecognitionBenchmark:
             "correct": correct,
             "predicted": len(pred_entities),
             "total": len(true_entities)
+        }
+    
+    def calculate_character_level_metrics(self, text: str, true_entities: List[Dict], pred_entities: List[Dict]) -> Dict[str, Any]:
+        """Calculate Character-level Macro F1 for Korean agglutinative language."""
+        # Create character-level labels for the entire text
+        char_labels_true = ['O'] * len(text)
+        char_labels_pred = ['O'] * len(text)
+        
+        # Fill in true entity labels at character level
+        for entity in true_entities:
+            start_char = sum(len(text.split()[i]) + 1 for i in range(entity["start"])) if entity["start"] > 0 else 0
+            end_char = sum(len(text.split()[i]) + 1 for i in range(entity["end"] + 1)) - 1
+            
+            # Mark characters as entity type
+            for i in range(start_char, min(end_char + 1, len(text))):
+                if i < len(char_labels_true):
+                    char_labels_true[i] = entity["type"]
+        
+        # Fill in predicted entity labels at character level
+        for entity in pred_entities:
+            start_char = sum(len(text.split()[i]) + 1 for i in range(entity["start"])) if entity["start"] > 0 else 0
+            end_char = sum(len(text.split()[i]) + 1 for i in range(entity["end"] + 1)) - 1
+            
+            # Mark characters as entity type
+            for i in range(start_char, min(end_char + 1, len(text))):
+                if i < len(char_labels_pred):
+                    char_labels_pred[i] = entity["type"]
+        
+        # Calculate character-level metrics using seqeval
+        try:
+            # Convert to format expected by seqeval
+            y_true = [char_labels_true]
+            y_pred = [char_labels_pred]
+            
+            # Get unique labels (excluding 'O')
+            labels = list(set([label for label in char_labels_true + char_labels_pred if label != 'O']))
+            
+            if not labels:
+                return {
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0,
+                    "correct_chars": 0,
+                    "total_chars": len(char_labels_true),
+                    "predicted_chars": len([l for l in char_labels_pred if l != 'O'])
+                }
+            
+            # Calculate metrics
+            precision = precision_score(y_true, y_pred, average='macro', zero_division=0)
+            recall = recall_score(y_true, y_pred, average='macro', zero_division=0)
+            f1 = f1_score(y_true, y_pred, average='macro', zero_division=0)
+            
+            # Count correct character predictions
+            correct_chars = sum(1 for i in range(len(char_labels_true)) 
+                              if char_labels_true[i] != 'O' and char_labels_true[i] == char_labels_pred[i])
+            
+            return {
+                "precision": precision,
+                "recall": recall,
+                "f1": f1,
+                "correct_chars": correct_chars,
+                "total_chars": len([l for l in char_labels_true if l != 'O']),
+                "predicted_chars": len([l for l in char_labels_pred if l != 'O'])
+            }
+            
+        except Exception as e:
+            logger.warning(f"Error calculating character-level metrics: {e}")
+            return {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "correct_chars": 0,
+                "total_chars": len([l for l in char_labels_true if l != 'O']),
+                "predicted_chars": len([l for l in char_labels_pred if l != 'O'])
+            }
+    
+    def calculate_metrics(self, text: str, true_entities: List[Dict], pred_entities: List[Dict]) -> Dict[str, Any]:
+        """Calculate both Entity-level and Character-level metrics."""
+        # Calculate entity-level metrics
+        entity_metrics = self.calculate_entity_level_metrics(true_entities, pred_entities)
+        
+        # Calculate character-level metrics
+        char_metrics = self.calculate_character_level_metrics(text, true_entities, pred_entities)
+        
+        return {
+            "entity_level": entity_metrics,
+            "character_level": char_metrics
         }
     
     def run_benchmark(self, test_data: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -441,12 +531,12 @@ class KLUENamedEntityRecognitionBenchmark:
                 prediction_result = self.predict_single(sample["text"])
                 
                 # Calculate metrics
-                metrics = self.calculate_metrics(sample["entities"], prediction_result.get("entities", []))
+                metrics = self.calculate_metrics(sample["text"], sample["entities"], prediction_result.get("entities", []))
                 
-                # Update counters
-                correct_predictions += metrics["correct"]
-                total_entities += metrics["total"]
-                predicted_entities += metrics["predicted"]
+                # Update counters (using entity-level metrics for overall stats)
+                correct_predictions += metrics["entity_level"]["correct"]
+                total_entities += metrics["entity_level"]["total"]
+                predicted_entities += metrics["entity_level"]["predicted"]
                 
                 # Store result
                 result = {
@@ -477,7 +567,10 @@ class KLUENamedEntityRecognitionBenchmark:
                     "raw_response": "",
                     "true_entities": sample["entities"],
                     "predicted_entities": [],
-                    "metrics": {"precision": 0.0, "recall": 0.0, "f1": 0.0, "correct": 0, "predicted": 0, "total": len(sample["entities"])},
+                    "metrics": {
+                        "entity_level": {"precision": 0.0, "recall": 0.0, "f1": 0.0, "correct": 0, "predicted": 0, "total": len(sample["entities"])},
+                        "character_level": {"precision": 0.0, "recall": 0.0, "f1": 0.0, "correct_chars": 0, "total_chars": 0, "predicted_chars": 0}
+                    },
                     "text": sample["text"],
                     "error": str(e)
                 })
@@ -486,21 +579,41 @@ class KLUENamedEntityRecognitionBenchmark:
         end_time = time.time()
         total_time = end_time - start_time
         
+        # Calculate overall entity-level metrics
         overall_precision = correct_predictions / predicted_entities if predicted_entities > 0 else 0.0
         overall_recall = correct_predictions / total_entities if total_entities > 0 else 0.0
         overall_f1 = 2 * (overall_precision * overall_recall) / (overall_precision + overall_recall) if (overall_precision + overall_recall) > 0 else 0.0
         
+        # Calculate overall character-level metrics
+        total_char_correct = sum(r["metrics"]["character_level"]["correct_chars"] for r in self.results)
+        total_char_true = sum(r["metrics"]["character_level"]["total_chars"] for r in self.results)
+        total_char_pred = sum(r["metrics"]["character_level"]["predicted_chars"] for r in self.results)
+        
+        char_precision = total_char_correct / total_char_pred if total_char_pred > 0 else 0.0
+        char_recall = total_char_correct / total_char_true if total_char_true > 0 else 0.0
+        char_f1 = 2 * (char_precision * char_recall) / (char_precision + char_recall) if (char_precision + char_recall) > 0 else 0.0
+        
         self.metrics = {
             "total_samples": total_samples,
-            "total_entities": total_entities,
-            "predicted_entities": predicted_entities,
-            "correct_entities": correct_predictions,
-            "precision": overall_precision,
-            "recall": overall_recall,
-            "f1": overall_f1,
             "total_time": total_time,
             "average_time_per_sample": total_time / total_samples if total_samples > 0 else 0.0,
-            "samples_per_second": total_samples / total_time if total_time > 0 else 0.0
+            "samples_per_second": total_samples / total_time if total_time > 0 else 0.0,
+            "entity_level": {
+                "total_entities": total_entities,
+                "predicted_entities": predicted_entities,
+                "correct_entities": correct_predictions,
+                "precision": overall_precision,
+                "recall": overall_recall,
+                "f1": overall_f1
+            },
+            "character_level": {
+                "total_chars": total_char_true,
+                "predicted_chars": total_char_pred,
+                "correct_chars": total_char_correct,
+                "precision": char_precision,
+                "recall": char_recall,
+                "f1": char_f1
+            }
         }
         
         # Restore original logging levels
@@ -510,9 +623,12 @@ class KLUENamedEntityRecognitionBenchmark:
             logger_obj.disabled = False  # Re-enable all loggers
         
         logger.info("Benchmark completed!")
-        logger.info(f"F1 Score: {overall_f1:.4f} ({correct_predictions}/{total_entities})")
-        logger.info(f"Precision: {overall_precision:.4f}")
-        logger.info(f"Recall: {overall_recall:.4f}")
+        logger.info(f"Entity-level F1: {overall_f1:.4f} ({correct_predictions}/{total_entities})")
+        logger.info(f"Entity-level Precision: {overall_precision:.4f}")
+        logger.info(f"Entity-level Recall: {overall_recall:.4f}")
+        logger.info(f"Character-level F1: {char_f1:.4f} ({total_char_correct}/{total_char_true})")
+        logger.info(f"Character-level Precision: {char_precision:.4f}")
+        logger.info(f"Character-level Recall: {char_recall:.4f}")
         logger.info(f"Total time: {total_time:.2f} seconds")
         logger.info(f"Average time per sample: {total_time / total_samples:.3f} seconds")
         
@@ -540,12 +656,18 @@ class KLUENamedEntityRecognitionBenchmark:
             csv_data.append({
                 "id": result["id"],
                 "success": result["success"],
-                "correct_entities": result["metrics"]["correct"],
-                "true_entities_count": len(result["true_entities"]),
-                "predicted_entities_count": len(result["predicted_entities"]),
-                "precision": result["metrics"]["precision"],
-                "recall": result["metrics"]["recall"],
-                "f1": result["metrics"]["f1"],
+                "entity_correct": result["metrics"]["entity_level"]["correct"],
+                "entity_true_count": result["metrics"]["entity_level"]["total"],
+                "entity_pred_count": result["metrics"]["entity_level"]["predicted"],
+                "entity_precision": result["metrics"]["entity_level"]["precision"],
+                "entity_recall": result["metrics"]["entity_level"]["recall"],
+                "entity_f1": result["metrics"]["entity_level"]["f1"],
+                "char_correct": result["metrics"]["character_level"]["correct_chars"],
+                "char_true_count": result["metrics"]["character_level"]["total_chars"],
+                "char_pred_count": result["metrics"]["character_level"]["predicted_chars"],
+                "char_precision": result["metrics"]["character_level"]["precision"],
+                "char_recall": result["metrics"]["character_level"]["recall"],
+                "char_f1": result["metrics"]["character_level"]["f1"],
                 "text": result["text"],
                 "error": result.get("error", "")
             })
@@ -588,12 +710,18 @@ class KLUENamedEntityRecognitionBenchmark:
             csv_data.append({
                 "id": result["id"],
                 "success": result["success"],
-                "correct_entities": result["metrics"]["correct"],
-                "true_entities_count": len(result["true_entities"]),
-                "predicted_entities_count": len(result["predicted_entities"]),
-                "precision": result["metrics"]["precision"],
-                "recall": result["metrics"]["recall"],
-                "f1": result["metrics"]["f1"],
+                "entity_correct": result["metrics"]["entity_level"]["correct"],
+                "entity_true_count": result["metrics"]["entity_level"]["total"],
+                "entity_pred_count": result["metrics"]["entity_level"]["predicted"],
+                "entity_precision": result["metrics"]["entity_level"]["precision"],
+                "entity_recall": result["metrics"]["entity_level"]["recall"],
+                "entity_f1": result["metrics"]["entity_level"]["f1"],
+                "char_correct": result["metrics"]["character_level"]["correct_chars"],
+                "char_true_count": result["metrics"]["character_level"]["total_chars"],
+                "char_pred_count": result["metrics"]["character_level"]["predicted_chars"],
+                "char_precision": result["metrics"]["character_level"]["precision"],
+                "char_recall": result["metrics"]["character_level"]["recall"],
+                "char_f1": result["metrics"]["character_level"]["f1"],
                 "text": result["text"],
                 "error": result.get("error", "")
             })

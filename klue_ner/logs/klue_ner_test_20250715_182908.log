@@ -1,0 +1,85 @@
+./run test 10
+Timestamp: 2025. 07. 15. (화) 18:29:08 UTC
+Working Directory: /usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner
+========================================
+
+2025-07-15 18:29:10,918 - INFO - Initialized Vertex AI with project: vertex-workbench-notebook, location: us-central1
+2025-07-15 18:29:10,918 - INFO - Model name set to: gemini-2.5-flash
+2025-07-15 18:29:10,918 - INFO - Loading KLUE NER dataset for named entity recognition...
+2025-07-15 18:29:21,049 - INFO - Preparing to load a subset of 10 samples.
+2025-07-15 18:29:21,051 - INFO - Reached sample limit of 10. Halting data loading.
+2025-07-15 18:29:21,051 - INFO - ✅ Successfully loaded 10 samples.
+2025-07-15 18:29:21,051 - INFO - Starting benchmark...
+project_id: vertex-workbench-notebook
+Processing samples:   0%|          | 0/102025-07-15 18:29:21,052 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:29:26,750 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:29:26,751 - INFO - AFC remote call 1 is done.
+/usr/local/google/home/thekim/anaconda3/envs/klue/lib/python3.11/site-packages/seqeval/metrics/sequence_labeling.py:171: UserWarning: OG seems not to be NE tag.
+  warnings.warn('{} seems not to be NE tag.'.format(chunk))
+/usr/local/google/home/thekim/anaconda3/envs/klue/lib/python3.11/site-packages/seqeval/metrics/sequence_labeling.py:171: UserWarning: PS seems not to be NE tag.
+  warnings.warn('{} seems not to be NE tag.'.format(chunk))
+/usr/local/google/home/thekim/anaconda3/envs/klue/lib/python3.11/site-packages/seqeval/metrics/sequence_labeling.py:171: UserWarning: QT seems not to be NE tag.
+  warnings.warn('{} seems not to be NE tag.'.format(chunk))
+2025-07-15 18:29:26,794 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:29:31,792 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:29:31,793 - INFO - AFC remote call 1 is done.
+2025-07-15 18:29:31,793 - ERROR - Error processing sample 1: list index out of range
+Processing samples:  20%|██        | 2/102025-07-15 18:29:31,794 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:29:36,341 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:29:36,342 - INFO - AFC remote call 1 is done.
+2025-07-15 18:29:36,342 - ERROR - Error processing sample 2: list index out of range
+2025-07-15 18:29:36,343 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:29:46,170 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:29:46,171 - INFO - AFC remote call 1 is done.
+2025-07-15 18:29:46,172 - ERROR - Error processing sample 3: list index out of range
+Processing samples:  40%|████      | 4/102025-07-15 18:29:46,172 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:29:49,812 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:29:49,813 - INFO - AFC remote call 1 is done.
+2025-07-15 18:29:49,855 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:29:57,471 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:29:57,472 - INFO - AFC remote call 1 is done.
+2025-07-15 18:29:57,472 - ERROR - Error processing sample 5: list index out of range
+Processing samples:  60%|██████    | 6/102025-07-15 18:29:57,473 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:30:03,233 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:30:03,234 - INFO - AFC remote call 1 is done.
+2025-07-15 18:30:03,276 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:30:06,876 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:30:06,877 - INFO - AFC remote call 1 is done.
+/usr/local/google/home/thekim/anaconda3/envs/klue/lib/python3.11/site-packages/seqeval/metrics/sequence_labeling.py:171: UserWarning: LC seems not to be NE tag.
+  warnings.warn('{} seems not to be NE tag.'.format(chunk))
+2025-07-15 18:30:06,918 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:30:13,003 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:30:13,004 - INFO - AFC remote call 1 is done.
+Processing samples:  90%|█████████ | 9/102025-07-15 18:30:13,046 - INFO - AFC is enabled with max remote calls: 10.
+2025-07-15 18:30:16,164 - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1beta1/projects/vertex-workbench-notebook/locations/us-central1/publishers/google/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-15 18:30:16,165 - INFO - AFC remote call 1 is done.
+                                         2025-07-15 18:30:16,206 - INFO - Benchmark completed!
+2025-07-15 18:30:16,206 - INFO - Entity-level F1: 0.0000 (0/19)
+2025-07-15 18:30:16,206 - INFO - Entity-level Precision: 0.0000
+2025-07-15 18:30:16,206 - INFO - Entity-level Recall: 0.0000
+2025-07-15 18:30:16,206 - INFO - Character-level F1: 0.0000 (0/102)
+2025-07-15 18:30:16,206 - INFO - Character-level Precision: 0.0000
+2025-07-15 18:30:16,206 - INFO - Character-level Recall: 0.0000
+2025-07-15 18:30:16,206 - INFO - Total time: 55.15 seconds
+2025-07-15 18:30:16,206 - INFO - Average time per sample: 5.515 seconds
+2025-07-15 18:30:16,207 - INFO - Metrics saved to: benchmark_results/klue_ner_metrics_20250715_183016.json
+2025-07-15 18:30:16,208 - INFO - Detailed results saved to: benchmark_results/klue_ner_results_20250715_183016.json
+2025-07-15 18:30:16,211 - INFO - Results saved as CSV: benchmark_results/klue_ner_results_20250715_183016.csv
+2025-07-15 18:30:16,211 - INFO - Error analysis saved to: benchmark_results/klue_ner_error_analysis_20250715_183016.txt
+============================================================
+KLUE Named Entity Recognition Benchmark Results
+============================================================
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Traceback (most recent call last):
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 858, in <module>
+    main() 
+    ^^^^^^
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 855, in main
+    benchmark.print_detailed_metrics()
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_ner/klue_ner-gemini2_5flash.py", line 769, in print_detailed_metrics
+    print(f"F1 Score: {self.metrics['f1']:.4f} ({self.metrics['correct_entities']}/{self.metrics['total_entities']})")
+                       ~~~~~~~~~~~~^^^^^^
+KeyError: 'f1'
