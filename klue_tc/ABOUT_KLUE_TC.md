@@ -263,9 +263,36 @@ You can download the newly created file using the link below:
 ynat-v1.1_dev_extracted.csv
 ```
 
-## Evaluation Metric: Macro F1 Score
+## Evaluation Metrics
+
+### Primary Metric: Macro F1 Score
 
 The primary evaluation metric for the KLUE Topic Classification task is the **Macro F1 Score**. This metric is the unweighted mean of the F1 scores for each of the seven topic categories. The choice of Macro F1 ensures that the performance on less frequent categories is given equal importance as the performance on more common ones, providing a more balanced assessment of the model's capabilities across all topics.
+
+**Formula:**
+```
+Macro F1 = (F1_IT과학 + F1_경제 + F1_사회 + F1_생활문화 + F1_세계 + F1_스포츠 + F1_정치) / 7
+```
+
+Where each class F1 score is calculated as:
+```
+F1 = 2 * (Precision * Recall) / (Precision + Recall)
+```
+
+### Secondary Metrics
+
+- **Macro Precision**: Unweighted mean of precision scores across all classes
+- **Macro Recall**: Unweighted mean of recall scores across all classes  
+- **Accuracy**: Overall accuracy (kept for backward compatibility)
+- **Per-class Metrics**: Individual F1, Precision, and Recall scores for each topic category
+
+### Rationale for Macro F1
+
+Macro F1 is particularly important for topic classification tasks because:
+
+1. **Class Imbalance Handling**: News topics often have imbalanced distributions, and Macro F1 ensures that performance on minority classes is not overlooked
+2. **Balanced Evaluation**: Each class contributes equally to the final score, regardless of its frequency in the dataset
+3. **Comprehensive Assessment**: Combines both precision and recall, providing a more complete picture of model performance than accuracy alone
 
 ## Prominent Models and Techniques
 

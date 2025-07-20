@@ -1,0 +1,16 @@
+2025-07-16 06:30:27,790 - ERROR - Failed to initialize Vertex AI: module 'google.genai' has no attribute 'GenerativeModel'
+2025-07-16 06:30:27,790 - ERROR - Benchmark failed: module 'google.genai' has no attribute 'GenerativeModel'
+project_id: vertex-workbench-notebook
+Traceback (most recent call last):
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_sts/klue_sts-gemini2_5flash.py", line 616, in <module>
+    main()
+    ~~~~^^
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_sts/klue_sts-gemini2_5flash.py", line 597, in main
+    benchmark = KLUESentenceTextualSimilarityBenchmark(config)
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_sts/klue_sts-gemini2_5flash.py", line 60, in __init__
+    self._initialize_vertex_ai()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_sts/klue_sts-gemini2_5flash.py", line 78, in _initialize_vertex_ai
+    self.client = genai.GenerativeModel(
+                  ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'google.genai' has no attribute 'GenerativeModel'

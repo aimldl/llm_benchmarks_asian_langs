@@ -1,0 +1,88 @@
+KLUE Topic Classification Intermediate Error Analysis
+======================================================================
+
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Current Sample Count: 50
+Total Errors: 15
+Error Rate: 30.00%
+
+Error Analysis:
+----------------------------------------
+1. True: 사회 | Predicted: 경제
+   Text: 5억원 무이자 융자는 되고 7천만원 이사비는 안된다...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+2. True: 사회 | Predicted: 정치
+   Text: 왜 수소충전소만 더 멀리 떨어져야 하나 한경연 규제개혁 건의...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+3. True: 사회 | Predicted: 정치
+   Text: 모의선거 교육 불허 선관위·교육부 각성하라...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+4. True: 사회 | Predicted: 정치
+   Text: 가짜뉴스 징벌적 손해배상제도 도입 변협 토론회...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+5. True: 사회 | Predicted: 경제
+   Text: MBN 노조 부동산 물적분할 중단하고 소유경영 분리해야...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+6. True: 사회 | Predicted: 경제
+   Text: 실업급여 신청은 늘고 채용은 중단…현실화하는 고용 위기...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+7. True: 사회 | Predicted: 정치
+   Text: 구례군 보조금 불법 지원에 음주운전 공무원 봐주기 징계...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+8. True: 사회 | Predicted: None
+   Text: 최저임금 인상에 작년 저임금 노동자 비중 17%로 줄어...
+   Prediction: 
+   Finish Reason: SAFETY
+
+9. True: 사회 | Predicted: 경제
+   Text: 두산밥캣 스캇성철박 단독 대표이사로 변경...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+10. True: 사회 | Predicted: 경제
+   Text: 2021년 삼성디스플레이 정기 임원 인사...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+11. True: 사회 | Predicted: 정치
+   Text: 광주소식 고삼석 전 방통위 상임위원 지역방송 신년 특강...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+12. True: 사회 | Predicted: None
+   Text: 동정 아시아뉴스네트워크 회장에 천시영씨...
+   Prediction: 
+   Finish Reason: SAFETY
+
+13. True: 사회 | Predicted: 정치
+   Text: 교육부·전국 시도교육청 국가교육위 조속 설치 결의안 채택...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+14. True: 사회 | Predicted: 경제
+   Text: 한국 수출 회복 신호…코로나 재확산·미중 갈등은 변수...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+15. True: IT과학 | Predicted: None
+   Text: LG헬로 중소기업에 클라우드PC 서비스 체험기회 제공...
+   Prediction: 
+   Finish Reason: SAFETY
+

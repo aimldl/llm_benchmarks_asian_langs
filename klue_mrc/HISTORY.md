@@ -3,6 +3,16 @@
 - This is the summary of changes made to KLUE MRC.
 - Note: The history captures only a small part of changes.
 
+## TODO?
+Include the specification for MRC in the prompt?
+
+```
+The KLUE-MRC task typically involves extractive question answering, where the model's objective is to extract a precise span of text from a given passage to answer a question. For such tasks, the following aspects are critical:
+
+Exact wording and order: For an extracted answer to be correct, the words must be present in the correct order to form a coherent and accurate span.
+Long, precise matches: A longer, perfectly matching span is considerably more desirable than several scattered matching words.
+Penalty for extraneous words: While recall (capturing all necessary words) is important, precision also plays a vital role in preventing the inclusion of irrelevant words within the extracted answer.
+```
 
 ## Added Perf Metric Changed from ROUGE (-1, -2, -L) to ROUGE-W & LCCS-based F1
 See the perf metric is both:

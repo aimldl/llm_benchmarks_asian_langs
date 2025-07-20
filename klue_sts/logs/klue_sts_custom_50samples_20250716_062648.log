@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/usr/local/google/home/thekim/github/aimldl/llm_benchmarks_asian_langs/klue_sts/klue_sts-gemini2_5flash.py", line 26, in <module>
+    from sklearn.metrics import pearsonr, spearmanr, mean_squared_error, mean_absolute_error
+ImportError: cannot import name 'pearsonr' from 'sklearn.metrics' (/usr/local/google/home/thekim/anaconda3/envs/klue/lib/python3.11/site-packages/sklearn/metrics/__init__.py)

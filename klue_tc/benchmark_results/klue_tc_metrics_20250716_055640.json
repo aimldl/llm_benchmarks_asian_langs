@@ -1,0 +1,48 @@
+{
+  "accuracy": 0.5,
+  "macro_f1": 0.5904761904761904,
+  "macro_precision": 0.7,
+  "macro_recall": 0.6333333333333333,
+  "per_class_metrics": {
+    "IT과학": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "경제": {
+      "f1": 0.6666666666666666,
+      "precision": 0.5,
+      "recall": 1.0
+    },
+    "사회": {
+      "f1": 0.2857142857142857,
+      "precision": 1.0,
+      "recall": 0.16666666666666666
+    },
+    "생활문화": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "세계": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0
+    },
+    "스포츠": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0
+    },
+    "정치": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0
+    }
+  },
+  "correct_predictions": 5,
+  "total_samples": 10,
+  "total_time_seconds": 49.254706621170044,
+  "average_time_per_sample": 4.925470662117005,
+  "samples_per_second": 0.20302628288728705
+}
