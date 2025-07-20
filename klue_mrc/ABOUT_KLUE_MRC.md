@@ -46,16 +46,28 @@ The MRC task includes various types of questions:
    - Measures whether the predicted answer exactly matches any of the ground truth answers
    - Binary metric: 1 if exact match, 0 otherwise
    - Formula: `EM = (Number of exact matches) / (Total questions)`
+   - Provides a stringent evaluation of the model's ability to precisely reproduce correct text spans
 
-2. **F1 Score**
-   - Harmonic mean of precision and recall for answer prediction
-   - Accounts for partial matches and different answer formulations
-   - Formula: `F1 = 2 * (Precision * Recall) / (Precision + Recall)`
+2. **ROUGE-W (Weighted Longest Common Subsequence-based F1)**
+   - Evaluates the quality of generated answers by comparing them against reference answers
+   - Assigns higher weights to consecutive matches compared to non-consecutive matches
+   - Prioritizes longer, unbroken common sequences while considering the Longest Common Subsequence (LCS)
+   - Formula: 
+   
+   `ROUGE-W F1 = 2 * (ROUGE-W Precision * ROUGE-W Recall) / (ROUGE-W Precision + ROUGE-W Recall)`
+
+   
    - Where:
-     - Precision = (Common words between prediction and ground truth) / (Words in prediction)
-     - Recall = (Common words between prediction and ground truth) / (Words in ground truth)
+     - ROUGE-W Precision = (Weighted overlapping units) / (Number of units in generated text)
+     - ROUGE-W Recall = (Weighted overlapping units) / (Number of units in reference text)
 
-3. **Impossible Accuracy**
+3. **LCCS-based F1 (Longest Common Consecutive Subsequence-based F1)**
+   - Directly related to ROUGE-W, emphasizing consecutive matches
+   - Measures the longest common consecutive subsequence between prediction and reference
+   - Particularly suitable for extractive question answering where exact wording and order matter
+   - Rewards accurate and unbroken sequences of words
+
+4. **Impossible Accuracy**
    - Accuracy on questions marked as "impossible"
    - Measures how well the model recognizes unanswerable questions
    - Formula: `Impossible Accuracy = (Correct impossible predictions) / (Total impossible questions)`
@@ -65,6 +77,18 @@ The MRC task includes various types of questions:
 - **Processing Time**: Total time and average time per sample
 - **Throughput**: Samples processed per second
 - **Per-Type Analysis**: Separate metrics for answerable vs impossible questions
+
+### Rationale for Metric Selection
+
+The combination of **Exact Match (EM)** and **ROUGE-W/LCCS-based F1** provides a comprehensive evaluation framework:
+
+1. **Exact Match (EM)** offers a stringent assessment of the model's ability to precisely reproduce correct text spans, ensuring high-quality extractive answers.
+
+2. **ROUGE-W** provides flexibility for minor variations while heavily rewarding consecutive, accurate text spans that define effective answers in extractive MRC.
+
+3. **LCCS-based F1** emphasizes the importance of maintaining exact wording and order, which is crucial for extractive question answering in Korean.
+
+This metric combination balances the need for precise reproduction (EM) with flexibility for minor variations (ROUGE-W), making it particularly suitable for Korean MRC tasks where both accuracy and natural language variations are important.
 
 ## Task Challenges
 
@@ -82,6 +106,7 @@ The MRC task includes various types of questions:
 - **Impossible Question Detection**: Distinguishing between answerable and unanswerable questions
 - **Answer Boundary Detection**: Identifying the exact span of text that constitutes the answer
 - **Multiple Valid Answers**: Handling cases where different answer formulations are equally correct
+- **Precise Text Extraction**: Ensuring extracted answers maintain exact wording and order from the source text
 
 ## Model Requirements
 
@@ -99,8 +124,9 @@ To perform well on this task, a model must:
 
 3. **Question Answering**
    - Understand different question types and intents
-   - Generate or extract appropriate answers
-   - Handle multiple valid answer formulations
+   - Generate or extract appropriate answers with precise wording
+   - Handle multiple valid answer formulations while maintaining accuracy
+   - Ensure extracted answers maintain exact text boundaries and order
 
 4. **Reasoning Capabilities**
    - Make logical inferences from the text
@@ -142,8 +168,8 @@ The KLUE MRC benchmark is particularly important because:
 1. **Korean Language Focus**: Provides evaluation for Korean language understanding
 2. **Real-world Relevance**: Uses authentic Korean text from various domains
 3. **Comprehensive Evaluation**: Tests both answerable and unanswerable questions
-4. **Multiple Metrics**: Provides detailed performance analysis across different aspects
-5. **Standardized Evaluation**: Enables fair comparison between different models
+4. **Advanced Metrics**: Uses ROUGE-W and LCCS-based F1 for comprehensive evaluation of extractive answers
+5. **Standardized Evaluation**: Enables fair comparison between different models using industry-standard metrics
 
 ## References
 

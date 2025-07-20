@@ -1,0 +1,14 @@
+{
+  "accuracy": 0.7,
+  "macro_f1": 0.0,
+  "macro_precision": 0.0,
+  "macro_recall": 0.0,
+  "per_class_metrics": {},
+  "correct_predictions": 35,
+  "total_samples": 50,
+  "total_time_seconds": 214.6096956729889,
+  "average_time_per_sample": 4.292193913459778,
+  "samples_per_second": 0.23298108616764177,
+  "is_intermediate": true,
+  "timestamp": "20250716_042327"
+}

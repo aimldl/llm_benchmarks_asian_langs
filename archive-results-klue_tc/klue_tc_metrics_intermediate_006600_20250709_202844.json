@@ -1,0 +1,10 @@
+{
+  "accuracy": 0.6686363636363636,
+  "correct_predictions": 4413,
+  "total_samples": 6600,
+  "total_time_seconds": 31158.417946100235,
+  "average_time_per_sample": 4.720972416075793,
+  "samples_per_second": 0.2118207673899583,
+  "is_intermediate": true,
+  "timestamp": "20250709_202844"
+}

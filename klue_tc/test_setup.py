@@ -17,7 +17,8 @@ def test_imports():
         'pandas',
         'tqdm',
         'huggingface_hub',
-        'google.auth'
+        'google.auth',
+        'sklearn'
     ]
     
     print("Testing package imports...")

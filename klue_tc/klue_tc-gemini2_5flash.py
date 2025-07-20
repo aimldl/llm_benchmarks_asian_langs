@@ -22,6 +22,7 @@ from datasets import load_dataset
 import pandas as pd
 from tqdm import tqdm
 import logging
+from sklearn.metrics import f1_score, precision_score, recall_score, classification_report
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -308,6 +309,10 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
         total = len(test_data)
         start_time = time.time()
         
+        # Lists to store true and predicted labels for macro F1 calculation
+        y_true = []
+        y_pred = []
+        
         for i, item in enumerate(tqdm(test_data, desc="Processing samples")):
             # Make prediction
             prediction = self.predict_single(item["text"])
@@ -316,6 +321,10 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
             is_correct = (prediction["predicted_label_id"] == item["label"])
             if is_correct:
                 correct += 1
+            
+            # Store labels for macro F1 calculation
+            y_true.append(item["label"])
+            y_pred.append(prediction["predicted_label_id"])
             
             # Store result
             result = {
@@ -342,11 +351,18 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
         end_time = time.time()
         total_time = end_time - start_time
         
-        # Calculate metrics
+        # Calculate accuracy (kept for backward compatibility)
         accuracy = correct / total if total > 0 else 0
         
+        # Calculate macro F1 metrics
+        macro_metrics = self.calculate_macro_f1_metrics(y_true, y_pred)
+        
         self.metrics = {
-            "accuracy": accuracy,
+            "accuracy": accuracy,  # Keep for backward compatibility
+            "macro_f1": macro_metrics["macro_f1"],
+            "macro_precision": macro_metrics["macro_precision"],
+            "macro_recall": macro_metrics["macro_recall"],
+            "per_class_metrics": macro_metrics["per_class"],
             "correct_predictions": correct,
             "total_samples": total,
             "total_time_seconds": total_time,
@@ -355,11 +371,86 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
         }
         
         logger.info(f"Benchmark completed!")
+        logger.info(f"Macro F1: {macro_metrics['macro_f1']:.4f}")
+        logger.info(f"Macro Precision: {macro_metrics['macro_precision']:.4f}")
+        logger.info(f"Macro Recall: {macro_metrics['macro_recall']:.4f}")
         logger.info(f"Accuracy: {accuracy:.4f} ({correct}/{total})")
         logger.info(f"Total time: {total_time:.2f} seconds")
         logger.info(f"Average time per sample: {self.metrics['average_time_per_sample']:.3f} seconds")
         
         return self.metrics
+    
+    def calculate_macro_f1_metrics(self, y_true: List[int], y_pred: List[int]) -> Dict[str, Any]:
+        """Calculate Macro F1, Precision, and Recall metrics."""
+        try:
+            # Debug: Check for None or invalid values
+            none_in_true = any(x is None for x in y_true)
+            none_in_pred = any(x is None for x in y_pred)
+            if none_in_true or none_in_pred:
+                none_count_true = sum(1 for x in y_true if x is None)
+                none_count_pred = sum(1 for x in y_pred if x is None)
+                logger.warning(f"Found None values in labels. y_true: {none_count_true} None values, y_pred: {none_count_pred} None values")
+                # Filter out None values
+                valid_pairs = [(t, p) for t, p in zip(y_true, y_pred) if t is not None and p is not None]
+                if not valid_pairs:
+                    logger.error("No valid label pairs found after filtering None values")
+                    return {
+                        "macro_f1": 0.0,
+                        "macro_precision": 0.0,
+                        "macro_recall": 0.0,
+                        "per_class": {}
+                    }
+                y_true_clean, y_pred_clean = zip(*valid_pairs)
+            else:
+                y_true_clean, y_pred_clean = y_true, y_pred
+            
+            # Debug: Check label ranges
+            min_true, max_true = min(y_true_clean), max(y_true_clean)
+            min_pred, max_pred = min(y_pred_clean), max(y_pred_clean)
+            logger.info(f"Label ranges - True: [{min_true}, {max_true}], Predicted: [{min_pred}, {max_pred}]")
+            
+            # Check if labels are within expected range (0-6 for 7 classes)
+            if min_true < 0 or max_true > 6 or min_pred < 0 or max_pred > 6:
+                logger.warning(f"Labels outside expected range [0,6]: True [{min_true}, {max_true}], Pred [{min_pred}, {max_pred}]")
+            
+            # Calculate macro-averaged metrics
+            macro_f1 = f1_score(y_true_clean, y_pred_clean, average='macro', zero_division=0)
+            macro_precision = precision_score(y_true_clean, y_pred_clean, average='macro', zero_division=0)
+            macro_recall = recall_score(y_true_clean, y_pred_clean, average='macro', zero_division=0)
+            
+            # Calculate per-class metrics with labels parameter to ensure all 7 classes are included
+            labels = list(range(7))  # All 7 classes: 0, 1, 2, 3, 4, 5, 6
+            per_class_f1 = f1_score(y_true_clean, y_pred_clean, average=None, labels=labels, zero_division=0)
+            per_class_precision = precision_score(y_true_clean, y_pred_clean, average=None, labels=labels, zero_division=0)
+            per_class_recall = recall_score(y_true_clean, y_pred_clean, average=None, labels=labels, zero_division=0)
+            
+            # Create per-class metrics dictionary
+            per_class_metrics = {}
+            for i, label_name in self.LABEL_MAP.items():
+                per_class_metrics[label_name] = {
+                    "f1": per_class_f1[i],
+                    "precision": per_class_precision[i],
+                    "recall": per_class_recall[i]
+                }
+            
+            logger.info(f"Calculated metrics - Macro F1: {macro_f1:.4f}, Precision: {macro_precision:.4f}, Recall: {macro_recall:.4f}")
+            
+            return {
+                "macro_f1": macro_f1,
+                "macro_precision": macro_precision,
+                "macro_recall": macro_recall,
+                "per_class": per_class_metrics
+            }
+        except Exception as e:
+            logger.warning(f"Error calculating macro F1 metrics: {e}")
+            logger.warning(f"y_true sample: {y_true[:10] if y_true else 'empty'}")
+            logger.warning(f"y_pred sample: {y_pred[:10] if y_pred else 'empty'}")
+            return {
+                "macro_f1": 0.0,
+                "macro_precision": 0.0,
+                "macro_recall": 0.0,
+                "per_class": {}
+            }
     
     def save_results(self):
         """Save benchmark results to files."""
@@ -402,8 +493,18 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
         
         # Calculate intermediate metrics
         intermediate_accuracy = correct_count / current_count if current_count > 0 else 0
+        
+        # Calculate intermediate macro F1 metrics
+        y_true_intermediate = [r["true_label"] for r in self.results]
+        y_pred_intermediate = [r["predicted_label_id"] for r in self.results]
+        intermediate_macro_metrics = self.calculate_macro_f1_metrics(y_true_intermediate, y_pred_intermediate)
+        
         intermediate_metrics = {
             "accuracy": intermediate_accuracy,
+            "macro_f1": intermediate_macro_metrics["macro_f1"],
+            "macro_precision": intermediate_macro_metrics["macro_precision"],
+            "macro_recall": intermediate_macro_metrics["macro_recall"],
+            "per_class_metrics": intermediate_macro_metrics["per_class"],
             "correct_predictions": correct_count,
             "total_samples": current_count,
             "total_time_seconds": elapsed_time,
@@ -440,7 +541,7 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
             # Save intermediate error analysis
             self.save_intermediate_error_analysis(current_count, timestamp)
         
-        logger.info(f"Intermediate results saved at sample {current_count} (accuracy: {intermediate_accuracy:.4f})")
+        logger.info(f"Intermediate results saved at sample {current_count} (macro F1: {intermediate_macro_metrics['macro_f1']:.4f}, accuracy: {intermediate_accuracy:.4f})")
     
     def save_intermediate_error_analysis(self, current_count: int, timestamp: str):
         """Save intermediate error analysis."""
@@ -526,12 +627,31 @@ IT과학: 정보 기술(IT), 인공지능(AI), 반도체, 인터넷, 소프트�
         print(f"Platform: Google Cloud Vertex AI")
         print(f"Project: {self.config.project_id or os.getenv('GOOGLE_CLOUD_PROJECT')}")
         print(f"Location: {self.config.location}")
-        print(f"Accuracy: {self.metrics['accuracy']:.4f} ({self.metrics['correct_predictions']}/{self.metrics['total_samples']})")
-        print(f"Total Time: {self.metrics['total_time_seconds']:.2f} seconds")
-        print(f"Average Time per Sample: {self.metrics['average_time_per_sample']:.3f} seconds")
-        print(f"Samples per Second: {self.metrics['samples_per_second']:.2f}")
         
-        # Per-label accuracy
+        # Primary metrics (Macro F1 is now the main metric)
+        print(f"\nPrimary Metrics:")
+        print(f"  Macro F1: {self.metrics['macro_f1']:.4f}")
+        print(f"  Macro Precision: {self.metrics['macro_precision']:.4f}")
+        print(f"  Macro Recall: {self.metrics['macro_recall']:.4f}")
+        print(f"  Accuracy: {self.metrics['accuracy']:.4f} ({self.metrics['correct_predictions']}/{self.metrics['total_samples']})")
+        
+        print(f"\nPerformance Metrics:")
+        print(f"  Total Time: {self.metrics['total_time_seconds']:.2f} seconds")
+        print(f"  Average Time per Sample: {self.metrics['average_time_per_sample']:.3f} seconds")
+        print(f"  Samples per Second: {self.metrics['samples_per_second']:.2f}")
+        
+        # Per-class metrics
+        print("\nPer-class Metrics:")
+        per_class_metrics = self.metrics.get('per_class_metrics', {})
+        for label in self.LABEL_MAP.values():
+            if label in per_class_metrics:
+                metrics = per_class_metrics[label]
+                print(f"  {label}:")
+                print(f"    F1: {metrics['f1']:.4f}")
+                print(f"    Precision: {metrics['precision']:.4f}")
+                print(f"    Recall: {metrics['recall']:.4f}")
+        
+        # Per-label accuracy (kept for backward compatibility)
         print("\nPer-label Accuracy:")
         label_correct = {label: 0 for label in self.LABEL_MAP.values()}
         label_total = {label: 0 for label in self.LABEL_MAP.values()}

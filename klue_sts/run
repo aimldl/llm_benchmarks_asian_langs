@@ -1,0 +1,196 @@
+#!/bin/bash
+
+# KLUE STS Benchmark Runner Script
+# This script runs KLUE STS benchmarks with Gemini 2.5 Flash on Vertex AI
+
+set -e  # Exit on any error
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Function to print colored output
+print_info() {
+    echo -e "${BLUE}[INFO]${NC} $1"
+}
+
+print_success() {
+    echo -e "${GREEN}[SUCCESS]${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}[WARNING]${NC} $1"
+}
+
+print_error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+# Function to check if setup is complete
+check_setup() {
+    if [ ! -f "klue_sts-gemini2_5flash.py" ]; then
+        print_error "Benchmark script not found. Please run setup first: ./setup.sh"
+        exit 1
+    fi
+    
+    if [ ! -f "requirements.txt" ]; then
+        print_error "Requirements file not found. Please run setup first: ./setup.sh"
+        exit 1
+    fi
+    
+    # Check if required packages are installed
+    if ! python3 -c "import google.genai, datasets, pandas, tqdm, sklearn, numpy" 2>/dev/null; then
+        print_warning "Some required packages are missing. Installing dependencies..."
+        pip install -r requirements.txt > /dev/null 2>&1
+    fi
+}
+
+# Function to run test benchmark
+run_test() {
+    print_info "Running test benchmark with 10 samples..."
+    
+    # Create logs directory if it doesn't exist
+    mkdir -p logs
+    
+    # Generate timestamp
+    timestamp=$(date +"%Y%m%d_%H%M%S")
+    
+    # Run benchmark with logging
+    python3 klue_sts-gemini2_5flash.py \
+        --max-samples 10 \
+        --project-id "${GOOGLE_CLOUD_PROJECT:-$(gcloud config get-value project 2>/dev/null || echo '')}" \
+        --output-dir benchmark_results \
+        --save-interval 5 \
+        2>&1 | tee "logs/klue_sts_test_${timestamp}.log"
+    
+    print_success "Test benchmark completed!"
+}
+
+# Function to run custom benchmark
+run_custom() {
+    local samples=$1
+    if [ -z "$samples" ]; then
+        print_error "Please specify number of samples for custom benchmark"
+        echo "Usage: $0 custom <number_of_samples>"
+        exit 1
+    fi
+    
+    print_info "Running custom benchmark with $samples samples..."
+    
+    # Create logs directory if it doesn't exist
+    mkdir -p logs
+    
+    # Generate timestamp
+    timestamp=$(date +"%Y%m%d_%H%M%S")
+    
+    # Run benchmark with logging
+    python3 klue_sts-gemini2_5flash.py \
+        --max-samples "$samples" \
+        --project-id "${GOOGLE_CLOUD_PROJECT:-$(gcloud config get-value project 2>/dev/null || echo '')}" \
+        --output-dir benchmark_results \
+        --save-interval 50 \
+        2>&1 | tee "logs/klue_sts_custom_${samples}samples_${timestamp}.log"
+    
+    print_success "Custom benchmark completed!"
+}
+
+# Function to run full benchmark
+run_full() {
+    print_warning "Running full benchmark on entire dataset..."
+    print_warning "This may take several hours. Consider using tmux for long-running sessions."
+    print_info "To run in background: tmux new -s klue_sts -d './run full'"
+    print_info "To monitor: tmux attach -t klue_sts"
+    
+    # Create logs directory if it doesn't exist
+    mkdir -p logs
+    
+    # Generate timestamp
+    timestamp=$(date +"%Y%m%d_%H%M%S")
+    
+    # Run benchmark with logging
+    python3 klue_sts-gemini2_5flash.py \
+        --project-id "${GOOGLE_CLOUD_PROJECT:-$(gcloud config get-value project 2>/dev/null || echo '')}" \
+        --output-dir benchmark_results \
+        --save-interval 100 \
+        2>&1 | tee "logs/klue_sts_full_${timestamp}.log"
+    
+    print_success "Full benchmark completed!"
+}
+
+# Function to show help
+show_help() {
+    echo "KLUE STS Benchmark Runner"
+    echo ""
+    echo "Usage: $0 [COMMAND] [OPTIONS]"
+    echo ""
+    echo "Commands:"
+    echo "  test                    Run test benchmark (10 samples)"
+    echo "  custom <samples>        Run custom benchmark with specified number of samples"
+    echo "  full                    Run full benchmark on entire dataset"
+    echo "  help                    Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $0 test                 # Run test benchmark"
+    echo "  $0 custom 50            # Run benchmark with 50 samples"
+    echo "  $0 custom 100           # Run benchmark with 100 samples"
+    echo "  $0 full                 # Run full benchmark"
+    echo ""
+    echo "Environment Variables:"
+    echo "  GOOGLE_CLOUD_PROJECT    Google Cloud project ID"
+    echo ""
+    echo "Notes:"
+    echo "  - For long-running benchmarks, consider using tmux:"
+    echo "    tmux new -s klue_sts -d './run full'"
+    echo "    tmux attach -t klue_sts"
+    echo "  - Logs are saved to the logs/ directory"
+    echo "  - Results are saved to the benchmark_results/ directory"
+}
+
+# Function to check Google Cloud project
+check_project() {
+    local project_id="${GOOGLE_CLOUD_PROJECT:-$(gcloud config get-value project 2>/dev/null || echo '')}"
+    
+    if [ -z "$project_id" ]; then
+        print_warning "No Google Cloud project ID found"
+        print_info "Set GOOGLE_CLOUD_PROJECT environment variable or run:"
+        print_info "  gcloud config set project YOUR_PROJECT_ID"
+        print_info "  export GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID"
+    else
+        print_info "Using Google Cloud project: $project_id"
+    fi
+}
+
+# Main execution
+main() {
+    # Check setup first
+    check_setup
+    
+    # Check project configuration
+    check_project
+    
+    case "${1:-help}" in
+        "test")
+            run_test
+            ;;
+        "custom")
+            run_custom "$2"
+            ;;
+        "full")
+            run_full
+            ;;
+        "help"|"-h"|"--help")
+            show_help
+            ;;
+        *)
+            print_error "Unknown command: $1"
+            show_help
+            exit 1
+            ;;
+    esac
+}
+
+# Run main function with all arguments
+main "$@" 

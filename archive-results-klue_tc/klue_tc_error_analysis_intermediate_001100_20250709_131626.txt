@@ -1,0 +1,164 @@
+KLUE Topic Classification Intermediate Error Analysis
+======================================================================
+
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Current Sample Count: 1100
+Total Errors: 379
+Error Rate: 34.45%
+
+Error Analysis:
+----------------------------------------
+1. True: 사회 | Predicted: 경제
+   Text: 5억원 무이자 융자는 되고 7천만원 이사비는 안된다...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+2. True: 사회 | Predicted: 정치
+   Text: 왜 수소충전소만 더 멀리 떨어져야 하나 한경연 규제개혁 건의...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+3. True: 사회 | Predicted: 정치
+   Text: 모의선거 교육 불허 선관위·교육부 각성하라...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+4. True: 사회 | Predicted: 정치
+   Text: 가짜뉴스 징벌적 손해배상제도 도입 변협 토론회...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+5. True: 사회 | Predicted: 경제
+   Text: MBN 노조 부동산 물적분할 중단하고 소유경영 분리해야...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+6. True: 사회 | Predicted: 경제
+   Text: 실업급여 신청은 늘고 채용은 중단…현실화하는 고용 위기...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+7. True: 사회 | Predicted: 정치
+   Text: 구례군 보조금 불법 지원에 음주운전 공무원 봐주기 징계...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+8. True: 사회 | Predicted: None
+   Text: 최저임금 인상에 작년 저임금 노동자 비중 17%로 줄어...
+   Prediction: 
+   Finish Reason: SAFETY
+
+9. True: 사회 | Predicted: 경제
+   Text: 두산밥캣 스캇성철박 단독 대표이사로 변경...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+10. True: 사회 | Predicted: 경제
+   Text: 2021년 삼성디스플레이 정기 임원 인사...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+11. True: 사회 | Predicted: 정치
+   Text: 광주소식 고삼석 전 방통위 상임위원 지역방송 신년 특강...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+12. True: 사회 | Predicted: None
+   Text: 동정 아시아뉴스네트워크 회장에 천시영씨...
+   Prediction: 
+   Finish Reason: SAFETY
+
+13. True: 사회 | Predicted: 정치
+   Text: 교육부·전국 시도교육청 국가교육위 조속 설치 결의안 채택...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+14. True: 사회 | Predicted: 경제
+   Text: 한국 수출 회복 신호…코로나 재확산·미중 갈등은 변수...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+15. True: IT과학 | Predicted: None
+   Text: LG헬로 중소기업에 클라우드PC 서비스 체험기회 제공...
+   Prediction: 
+   Finish Reason: SAFETY
+
+16. True: 정치 | Predicted: 세계
+   Text: 남수단 대통령·야권 지도자 교황 초청으로 교황청서 피정 돌입...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+17. True: 세계 | Predicted: 사회
+   Text: 입국 중국 유학생 학교 버스 탑승 전 발열 체크...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+18. True: 사회 | Predicted: 정치
+   Text: 중소기업도 재택근무 확산…2월말부터 1만6천명 지원금 신청...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+19. True: 정치 | Predicted: 사회
+   Text: 北에도 사교육 열풍…특권층 자녀에 월 1천 위안...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+20. True: 사회 | Predicted: 경제
+   Text: 그래픽 사업체 종사자 증감률...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+21. True: 정치 | Predicted: 세계
+   Text: 北매체 박 대통령에 독단·전횡으로 망조 또 막말...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+22. True: 사회 | Predicted: 정치
+   Text: 정부 싱가포르·일본·태국 등 6개국 여행 자제해달라...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+23. True: 사회 | Predicted: 경제
+   Text: 구직 열기...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+24. True: 세계 | Predicted: None
+   Text: 日 장애인 불임수술 정책 피해자 구제법 제정종합...
+   Prediction: 
+   Finish Reason: SAFETY
+
+25. True: 경제 | Predicted: 사회
+   Text: 관광주간 지출 5조원 달하지만…국민 여가없어 여행 못가...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+26. True: 사회 | Predicted: 정치
+   Text: 속보 홍남기 중기 화학물질 시설 검사유예 연말까지 연장...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+27. True: 사회 | Predicted: 경제
+   Text: 시노펙스 손경익·이진희 대표이사 체제로 변경...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+28. True: 경제 | Predicted: 정치
+   Text: 금융당국 은행 유동성 비율 규제 완화 연장할듯...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+29. True: 세계 | Predicted: None
+   Text: 마야 뱀왕조 비밀 풀 왕실 무덤 벨리즈서 발굴...
+   Prediction: 
+   Finish Reason: SAFETY
+
+30. True: 정치 | Predicted: 세계
+   Text: 북핵 극도로 우려…아태지역의 가장 위험하고 예측불가한 나라...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+... and 349 more errors

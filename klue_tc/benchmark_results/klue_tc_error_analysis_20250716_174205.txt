@@ -1,0 +1,264 @@
+KLUE Topic Classification Error Analysis
+============================================================
+
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Total Errors: 2829
+Total Samples: 9107
+Error Rate: 31.06%
+
+Error Analysis:
+----------------------------------------
+1. True: 사회 | Predicted: 경제
+   Text: 5억원 무이자 융자는 되고 7천만원 이사비는 안된다...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+2. True: 사회 | Predicted: 정치
+   Text: 왜 수소충전소만 더 멀리 떨어져야 하나 한경연 규제개혁 건의...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+3. True: 사회 | Predicted: 정치
+   Text: 모의선거 교육 불허 선관위·교육부 각성하라...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+4. True: 사회 | Predicted: 정치
+   Text: 가짜뉴스 징벌적 손해배상제도 도입 변협 토론회...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+5. True: 사회 | Predicted: 경제
+   Text: MBN 노조 부동산 물적분할 중단하고 소유경영 분리해야...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+6. True: 사회 | Predicted: 경제
+   Text: 실업급여 신청은 늘고 채용은 중단…현실화하는 고용 위기...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+7. True: 사회 | Predicted: 정치
+   Text: 구례군 보조금 불법 지원에 음주운전 공무원 봐주기 징계...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+8. True: 사회 | Predicted: None
+   Text: 최저임금 인상에 작년 저임금 노동자 비중 17%로 줄어...
+   Prediction: 
+   Finish Reason: SAFETY
+
+9. True: 사회 | Predicted: 경제
+   Text: 두산밥캣 스캇성철박 단독 대표이사로 변경...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+10. True: 사회 | Predicted: 경제
+   Text: 2021년 삼성디스플레이 정기 임원 인사...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+11. True: 사회 | Predicted: 정치
+   Text: 광주소식 고삼석 전 방통위 상임위원 지역방송 신년 특강...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+12. True: 사회 | Predicted: None
+   Text: 동정 아시아뉴스네트워크 회장에 천시영씨...
+   Prediction: 
+   Finish Reason: SAFETY
+
+13. True: 사회 | Predicted: 정치
+   Text: 교육부·전국 시도교육청 국가교육위 조속 설치 결의안 채택...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+14. True: 사회 | Predicted: 경제
+   Text: 한국 수출 회복 신호…코로나 재확산·미중 갈등은 변수...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+15. True: IT과학 | Predicted: None
+   Text: LG헬로 중소기업에 클라우드PC 서비스 체험기회 제공...
+   Prediction: 
+   Finish Reason: SAFETY
+
+16. True: 정치 | Predicted: 세계
+   Text: 남수단 대통령·야권 지도자 교황 초청으로 교황청서 피정 돌입...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+17. True: 세계 | Predicted: 사회
+   Text: 입국 중국 유학생 학교 버스 탑승 전 발열 체크...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+18. True: 사회 | Predicted: 정치
+   Text: 중소기업도 재택근무 확산…2월말부터 1만6천명 지원금 신청...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+19. True: 정치 | Predicted: 사회
+   Text: 北에도 사교육 열풍…특권층 자녀에 월 1천 위안...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+20. True: 사회 | Predicted: 경제
+   Text: 그래픽 사업체 종사자 증감률...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+21. True: 정치 | Predicted: 세계
+   Text: 北매체 박 대통령에 독단·전횡으로 망조 또 막말...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+22. True: 사회 | Predicted: 정치
+   Text: 정부 싱가포르·일본·태국 등 6개국 여행 자제해달라...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+23. True: 사회 | Predicted: 경제
+   Text: 구직 열기...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+24. True: 세계 | Predicted: None
+   Text: 日 장애인 불임수술 정책 피해자 구제법 제정종합...
+   Prediction: 
+   Finish Reason: SAFETY
+
+25. True: 경제 | Predicted: 사회
+   Text: 관광주간 지출 5조원 달하지만…국민 여가없어 여행 못가...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+26. True: 사회 | Predicted: 정치
+   Text: 속보 홍남기 중기 화학물질 시설 검사유예 연말까지 연장...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+27. True: 사회 | Predicted: 경제
+   Text: 시노펙스 손경익·이진희 대표이사 체제로 변경...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+28. True: 경제 | Predicted: 정치
+   Text: 금융당국 은행 유동성 비율 규제 완화 연장할듯...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+29. True: 세계 | Predicted: None
+   Text: 마야 뱀왕조 비밀 풀 왕실 무덤 벨리즈서 발굴...
+   Prediction: 
+   Finish Reason: SAFETY
+
+30. True: 정치 | Predicted: 세계
+   Text: 북핵 극도로 우려…아태지역의 가장 위험하고 예측불가한 나라...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+31. True: 사회 | Predicted: 정치
+   Text: 동정 교육차관 내일 경남지역 학교 디지털 활용 수업 참관...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+32. True: 경제 | Predicted: 사회
+   Text: 270억대 소송사기 허수영 영장 기각…롯데 수사 제동...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+33. True: 사회 | Predicted: 경제
+   Text: 이변의 주인공 김병원…삼수 끝에 농협회장 올라...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+34. True: 사회 | Predicted: 경제
+   Text: 대우조선해양 송가 반잠수식시추선 4호선 인도 완료...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+35. True: IT과학 | Predicted: 생활문화
+   Text: 모바일 개그 콘테스트 개최…총상금 1천만원...
+   Prediction: 생활문화
+   Finish Reason: FinishReason.STOP
+
+36. True: 정치 | Predicted: 세계
+   Text: 시종 미소 띤 김여정…국가수반 김영남과 서로 먼저 앉으시라종합...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+37. True: 세계 | Predicted: None
+   Text: 伊 경찰 오인으로 억울한 옥살이 아프리카 남성에 망명 허용...
+   Prediction: 
+   Finish Reason: SAFETY
+
+38. True: 스포츠 | Predicted: None
+   Text: 伊축구협 反유대 논란에 프로축구장서 안네의 일기 낭독...
+   Prediction: 
+   Finish Reason: SAFETY
+
+39. True: 사회 | Predicted: 세계
+   Text: OANA 사무국장 이동민 선임기자 지명...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+40. True: 정치 | Predicted: None
+   Text: 나경원 지인 자녀 부정채용 고발사건 무혐의로 종결...
+   Prediction: 
+   Finish Reason: SAFETY
+
+41. True: 사회 | Predicted: 생활문화
+   Text: 낙동강 구포나루축제 부산시 최우수축제에 선정...
+   Prediction: 생활문화
+   Finish Reason: FinishReason.STOP
+
+42. True: 사회 | Predicted: None
+   Text: 성범죄자 죄질 따라 취업제한 기간 차등화종합...
+   Prediction: 
+   Finish Reason: SAFETY
+
+43. True: 스포츠 | Predicted: 사회
+   Text: 아스널맨시티 서포터스 FA컵 끝나고 난투극...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+44. True: 경제 | Predicted: 정치
+   Text: 내달부터 중기 수출입 세관검사 비용 90% 정부가 부담...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+45. True: 사회 | Predicted: 정치
+   Text: 서울 송파구 1인당 540만원 지원하는 청년취업인턴제...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+46. True: 생활문화 | Predicted: IT과학
+   Text: 그래픽 서울 11월 일강수량 추이...
+   Prediction: IT과학
+   Finish Reason: FinishReason.STOP
+
+47. True: 정치 | Predicted: 세계
+   Text: 北 35년만의 직업총동맹 대회 10월 하순 개최...
+   Prediction: 세계
+   Finish Reason: FinishReason.STOP
+
+48. True: 생활문화 | Predicted: 사회
+   Text: 경기북부 강추위 여전…포천시 일동면 영하 17.3도...
+   Prediction: 사회
+   Finish Reason: FinishReason.STOP
+
+49. True: 경제 | Predicted: None
+   Text: 1인당 2천만원 생활안정자금 융자 모든 특수고용직으로 확대...
+   Prediction: 
+   Finish Reason: SAFETY
+
+50. True: 경제 | Predicted: None
+   Text: 전세형 매입임대주택 입주자 첫 모집…서울 174가구...
+   Prediction: 
+   Finish Reason: SAFETY
+
+... and 2779 more errors

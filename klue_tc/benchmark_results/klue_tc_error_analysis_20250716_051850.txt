@@ -1,0 +1,38 @@
+KLUE Topic Classification Error Analysis
+============================================================
+
+Model: gemini-2.5-flash
+Platform: Google Cloud Vertex AI
+Project: vertex-workbench-notebook
+Location: us-central1
+Total Errors: 5
+Total Samples: 10
+Error Rate: 50.00%
+
+Error Analysis:
+----------------------------------------
+1. True: 사회 | Predicted: 경제
+   Text: 5억원 무이자 융자는 되고 7천만원 이사비는 안된다...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+
+2. True: 사회 | Predicted: 정치
+   Text: 왜 수소충전소만 더 멀리 떨어져야 하나 한경연 규제개혁 건의...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+3. True: 사회 | Predicted: 정치
+   Text: 모의선거 교육 불허 선관위·교육부 각성하라...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+4. True: 사회 | Predicted: 정치
+   Text: 가짜뉴스 징벌적 손해배상제도 도입 변협 토론회...
+   Prediction: 정치
+   Finish Reason: FinishReason.STOP
+
+5. True: 사회 | Predicted: 경제
+   Text: MBN 노조 부동산 물적분할 중단하고 소유경영 분리해야...
+   Prediction: 경제
+   Finish Reason: FinishReason.STOP
+

@@ -52,6 +52,8 @@ Each task directory contains:
 - **`benchmark_results/`**: Generated metrics and analysis
 - **`logs/`**: Execution logs and error analysis
 
+For more details, refer to [Directory and File Structure](files/directory_structure.md)
+
 ## Quick Setup
 
 ### 1. Environment Setup
@@ -216,4 +218,8 @@ Apache License Version 2.0 - see LICENSE file for details.
 
 - [KLUE Paper](https://arxiv.org/abs/2105.09680)
 - [KLUE GitHub Repository](https://github.com/KLUE-benchmark/KLUE)
+  - [KLUE dataset description](https://github.com/KLUE-benchmark/KLUE/wiki): [TC (YNAT)](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-TC-(YNAT)-dataset-description), [STS](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-STS-dataset-description), [NLI](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-NLI-dataset-description), [NER](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-NER-dataset-description), [RE](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-RE-dataset-description), [DP](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-DP-dataset-description), [MRC](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-MRC-dataset-descripton), [DST (WoS)](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-DST-(WoS)-dataset-description),
+  - [KLUE-baseline GitHub Repository](https://github.com/KLUE-benchmark/KLUE-baseline)
+- [KLUE HuggingFace Repository](https://huggingface.https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-NER-dataset-descriptionco/klue)
+  - [klue/Dataset card](https://huggingface.co/datasets/klue/klue)
 - [Google Cloud Vertex AI Documentation](https://cloud.google.com/vertex-ai)

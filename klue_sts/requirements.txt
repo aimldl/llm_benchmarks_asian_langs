@@ -1,0 +1,11 @@
+google-genai
+google-cloud-aiplatform>=1.38.0
+vertexai>=0.0.1
+datasets>=2.14.0
+pandas>=2.0.0
+tqdm>=4.65.0
+huggingface-hub>=0.16.0
+google-auth>=2.17.0
+scikit-learn>=1.0.0
+scipy>=1.7.0
+numpy>=1.20.0 

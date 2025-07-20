@@ -1,0 +1,12 @@
+{
+  "accuracy": 0.5,
+  "macro_f1": 0.0,
+  "macro_precision": 0.0,
+  "macro_recall": 0.0,
+  "per_class_metrics": {},
+  "correct_predictions": 5,
+  "total_samples": 10,
+  "total_time_seconds": 48.355640172958374,
+  "average_time_per_sample": 4.835564017295837,
+  "samples_per_second": 0.2068011087069061
+}
