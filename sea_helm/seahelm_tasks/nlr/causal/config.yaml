@@ -1,0 +1,176 @@
+causal:
+  metadata:
+    version: 1
+  name: causal_reasoning
+  competency: nlr
+  metric_file: seahelm_tasks/nlr/causal/causal_reasoning.py
+  metric_class: CausalReasoningMetric
+  metric: normalized_accuracy
+  null_label: 2
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/nlr/causal/data/id_xcopa.jsonl
+      example_filepath: seahelm_tasks/nlr/causal/data/id_xcopa_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Jawaban: $OPTION
+          Ganti $OPTION dengan pilihan yang telah dipilih. Gunakan huruf A atau B saja sebagai jawabannya.{fewshot_examples}
+
+          Berdasarkan situasi yang diberikan, manakah dari pilihan berikut ini yang lebih mungkin menjadi {question_translated}?
+
+          Situasi:
+          ```
+          {premise}
+          ```
+          Pilihlah jawaban yang terbaik dari pilihan di bawah ini:
+          A: {choice1}
+          B: {choice2}
+        fewshot_example: |2-
+
+
+          Berdasarkan situasi yang diberikan, manakah dari pilihan berikut ini yang lebih mungkin menjadi {question_translated}?
+
+          Situasi:
+          ```
+          {premise}
+          ```
+          Pilihlah jawaban terbaik dari pilihan di bawah ini:
+          A: {choice1}
+          B: {choice2}
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    vi:
+      filepath: seahelm_tasks/nlr/causal/data/vi_xcopa.jsonl
+      example_filepath: seahelm_tasks/nlr/causal/data/vi_xcopa_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          Chỉ trả lời bằng cách sử dụng định dạng sau:
+          Câu trả lời: $OPTION
+          Thay thế $OPTION bằng câu trả lời được chọn. Chỉ sử dụng chữ cái A hoặc B làm câu trả lời của bạn.{fewshot_examples}
+
+          Với tình huống trên, lựa chọn nào dưới đây có khả năng cao là {question_translated} của nó hơn?
+
+          Tình huống:
+          ```
+          {premise}
+          ```
+          Chọn đáp án tốt nhất trong các lựa chọn sau:
+          A: {choice1}
+          B: {choice2}
+        fewshot_example: |2-
+
+
+          Với tình huống trên, lựa chọn nào dưới đây có khả năng cao là {question_translated} của nó hơn?
+
+          Tình huống:
+          ```
+          {premise}
+          ```
+          Chọn đáp án tốt nhất trong các lựa chọn sau:
+          A: {choice1}
+          B: {choice2}
+          Câu trả lời: {label}
+        fewshot_label: 'Câu trả lời: {label}'
+    th:
+      filepath: seahelm_tasks/nlr/causal/data/th_xcopa.jsonl
+      example_filepath: seahelm_tasks/nlr/causal/data/th_xcopa_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          จงตอบตามรูปแบบดังต่อไปนี้:
+          คำตอบ: $OPTION
+          โดยจะต้องแทนที่ $OPTION ด้วยคำตอบของคุณด้วยตัวอักษร A หรือ B เท่านั้น{fewshot_examples}
+
+          จากสถานการณ์ที่กำลังจะยกให้ ตัวเลือกใดต่อไปนี้ตรงกับ{question_translated}มากที่สุด?
+
+          สถานการณ์:
+          ```
+          {premise}
+          ```
+          จงเลือกคำตอบที่ดีที่สุดจากตัวเลือกต่อไปนี้:
+          A: {choice1}
+          B: {choice2}
+        fewshot_example: |2-
+
+
+          จากสถานการณ์ที่กำลังจะยกให้ ตัวเลือกใดต่อไปนี้ตรงกับ{question_translated}มากที่สุด?
+
+          สถานการณ์:
+          ```
+          {premise}
+          ```
+          จงเลือกคำตอบที่ดีที่สุดจากตัวเลือกต่อไปนี้:
+          A: {choice1}
+          B: {choice2}
+          คำตอบ: {label}
+        fewshot_label: 'คำตอบ: {label}'
+    ta:
+      filepath: seahelm_tasks/nlr/causal/data/ta_xcopa.jsonl
+      example_filepath: seahelm_tasks/nlr/causal/data/ta_xcopa_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          பதில்: $OPTION
+          தேர்ந்தெடுக்கப்பட்ட பதிலுடன் $OPTION ஐ மாற்றவும். A அல்லது B என்ற எழுத்துக்களில் மட்டும் பதிலளிக்கவும்.{fewshot_examples}
+
+          கொடுக்கப்பட்ட சூழ்நிலையின் அடிப்படையில், பின்வரும் வாக்கியங்களில் பெரும்பாலும் எது {question_translated} இருக்கும்?
+
+          சூழ்நிலை:
+          ```
+          {premise}
+          ```
+          பின்வரும் வாக்கியங்களிலிருந்து சிறந்த பதிலைத் தேர்ந்தெடுக்கவும்:
+          A: {choice1}
+          B: {choice2}
+        fewshot_example: |2-
+
+
+          கொடுக்கப்பட்ட சூழ்நிலையின் அடிப்படையில், பின்வரும் வாக்கியங்களில் பெரும்பாலும் எது {question_translated} இருக்கும்?
+
+          சூழ்நிலை:
+          ```
+          {premise}
+          ```
+          பின்வரும் வாக்கியங்களிலிருந்து சிறந்த பதிலைத் தேர்ந்தெடுக்கவும்:
+          A: {choice1}
+          B: {choice2}
+          பதில்: {label}
+        fewshot_label: 'பதில்: {label}'
+    tl:
+      filepath: seahelm_tasks/nlr/causal/data/tl_balanced_copa.jsonl
+      example_filepath: seahelm_tasks/nlr/causal/data/tl_balanced_copa_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          Sumagot gamit ang sumusunod na format:
+          Sagot: $OPTION
+          Palitan ang $OPTION gamit ang napiling sagot. Gumamit lang ng letrang A or B sa sagot mo.{fewshot_examples}
+
+          Batay sa ibibigay na sitwasyon, alin sa sumusunod na pagpipilian ang mas maaari na {question_translated}?
+
+          Sitwasyon:
+          ```
+          {premise}
+          ```
+          Piliin ang pinaka-angkop na sagot mula sa sumusunod na pagpipilian:
+          A: {choice1}
+          B: {choice2}
+        fewshot_example: |2-
+
+
+          Batay sa ibibigay na sitwasyon, alin sa sumusunod na pagpipilian ang mas maaari na {question_translated}?
+
+          Sitwasyon:
+          ```
+          {premise}
+          ```
+          Piliin ang pinaka-angkop na sagot mula sa sumusunod na pagpipilian:
+          A: {choice1}
+          B: {choice2}
+          Sagot: {label}
+        fewshot_label: 'Sagot: {label}'

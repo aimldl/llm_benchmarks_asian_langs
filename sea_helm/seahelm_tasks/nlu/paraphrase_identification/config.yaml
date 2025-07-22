@@ -1,0 +1,46 @@
+paraphrase:
+  metadata:
+    version: 1
+  name: paraphrase_identification
+  competency: nlu
+  metric_file: seahelm_tasks/nlu/paraphrase_identification/paraphrase_identification.py
+  metric_class: ParaphraseIdentificationMetric
+  metric: normalized_accuracy
+  null_label: none
+  temperature: 0
+  languages:
+    tl:
+      filepath: seahelm_tasks/nlu/paraphrase_identification/data/tl_paws.jsonl
+      example_filepath: seahelm_tasks/nlu/paraphrase_identification/data/tl_paws_examples.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          Bibigyan ka ng dalawang pangungusap, SENTENCE_1 at SENTENCE_2. Tukuyin kung alin sa sumusunod na pahayag ang pinaka-angkop para sa SENTENCE_1 at SENTENCE_2.
+          A: Paraprase ang SENTENCE_2 ng SENTENCE_1.
+          B: Hindi paraprase ang SENTENCE_2 ng SENTENCE_1.
+
+          Sumagot gamit ang sumusunod na format.
+          Sagot: $OPTION
+          Palitan ang $OPTION ng napiling sagot. Gumamit lang ng titik A o B sa sagot mo.{fewshot_examples}
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+        fewshot_example: |2-
+
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+          Sagot: {label}
+        fewshot_label: 'Sagot: {label}'

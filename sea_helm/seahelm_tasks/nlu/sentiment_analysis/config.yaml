@@ -1,0 +1,186 @@
+sentiment:
+  metadata:
+    version: 1
+  name: sentiment_analysis
+  competency: nlu
+  metric_file: seahelm_tasks/nlu/sentiment_analysis/sentiment_analysis.py
+  metric_class: SentimentAnalysisMetric
+  metric: normalized_accuracy
+  null_label: none
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/nlu/sentiment_analysis/data/id_nusax.jsonl
+      example_filepath: seahelm_tasks/nlu/sentiment_analysis/data/id_nusax_examples.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          Apa sentimen dari kalimat berikut ini? Gunakan salah satu dari pilihan di bawah ini: Positif, Negatif, atau Netral.
+
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Jawaban: $OPTION
+          Ganti $OPTION dengan jawaban yang telah dipilih.{fewshot_examples}
+
+          Kalimat:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Kalimat:
+          ```
+          {text}
+          ```
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    vi:
+      filepath: seahelm_tasks/nlu/sentiment_analysis/data/vi_uit-vsfc_1000sample.jsonl
+      example_filepath: seahelm_tasks/nlu/sentiment_analysis/data/vi_uit-vsfc_examples.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          Sắc thái của câu sau đây là gì? Trả lời bằng cách sử dụng một trong những lựa chọn sau: Tích cực, Tiêu cực, hoặc Trung lập.
+
+          Chỉ trả lời bằng cách sử dụng định dạng sau:
+          Câu trả lời: $OPTION
+          Thay thế $OPTION bằng câu trả lời được chọn.{fewshot_examples}
+
+          Câu văn:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Câu văn:
+          ```
+          {text}
+          ```
+          Câu trả lời: {label}
+        fewshot_label: 'Câu trả lời: {label}'
+    th:
+      filepath: seahelm_tasks/nlu/sentiment_analysis/data/th_wisesight_no_q_1000sample.jsonl
+      example_filepath: seahelm_tasks/nlu/sentiment_analysis/data/th_wisesight_examples.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          ประโยคดังต่อไปนี้มีความรู้สึกอย่างไร? ตอบได้แค่ตัวเลือกดังต่อไปนี้: แง่บวก, แง่ลบ, หรือเฉยๆ
+
+          จงตอบตามรูปแบบดังต่อไปนี้:
+          คำตอบ: $OPTION
+          โดยแค่แทนที่ $OPTION ด้วยตัวเลือกของคุณ{fewshot_examples}
+
+          ประโยค:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          ประโยค:
+          ```
+          {text}
+          ```
+          คำตอบ: {label}
+        fewshot_label: 'คำตอบ: {label}'
+    ta:
+      filepath: seahelm_tasks/nlu/sentiment_analysis/data/ta_indicsentiment.jsonl
+      example_filepath: seahelm_tasks/nlu/sentiment_analysis/data/ta_indicsentiment_examples.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          பின்வரும் வாக்கியத்தில் வெளிப்படுத்தப்படும் உணர்வு எது? இந்த சொற்களில் ஒன்றைப் பயன்படுத்தி பதிலளிக்கவும்: நேர்மறை அல்லது எதிர்மறை.
+
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          பதில்: $OPTION
+          தேர்ந்தெடுக்கப்பட்ட பதிலுடன் $OPTION ஐ மாற்றவும்.{fewshot_examples}
+
+          வாக்கியம்:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          வாக்கியம்:
+          ```
+          {text}
+          ```
+          பதில்: {label}
+        fewshot_label: 'பதில்: {label}'
+    tl:
+      filepath: seahelm_tasks/nlu/sentiment_analysis/data/tl_elections_sentiment.jsonl
+      example_filepath: seahelm_tasks/nlu/sentiment_analysis/data/tl_elections_sentiment_examples.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          Ano ang sentimyento sa sumusunod na pangungusap? Sumagot gamit ng isa sa mga sumusunod na pagpipilian: positibo, negatibo, o neutral.
+
+          Sumagot gamit ang sumusunod na format:
+          Sagot: $OPTION
+          Palitan ang $OPTION ng napiling sagot.{fewshot_examples}
+
+          Pangungusap:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Pangungusap:
+          ```
+          {text}
+          ```
+          Sagot: {label}
+        fewshot_label: 'Sagot: {label}'
+    jv:
+      filepath: seahelm_tasks/nlu/sentiment_analysis/data/jv_nusax.jsonl
+      example_filepath: seahelm_tasks/nlu/sentiment_analysis/data/jv_nusax_examples.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          Apa sentimen saka ukara ing ngisor iki? Pilih salah siji saka pilihan iki: Positif, Negatif, utawa Netral.
+
+          Jawaban mung nganggo format iki:
+          Jawaban: $OPTION
+          Ganti $OPTION karo jawaban sing dipilih.{fewshot_examples}
+
+          Ukara:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Ukara:
+          ```
+          {text}
+          ```
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    su:
+      filepath: seahelm_tasks/nlu/sentiment_analysis/data/su_nusax.jsonl
+      example_filepath: seahelm_tasks/nlu/sentiment_analysis/data/su_nusax_examples.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          Naon sentimen tina kalimah di handap ieu? Gunakeun salah sahiji pilihan di handap: Positip, Negatip, atawa Netral.
+
+          Jawap ngan ngagunakeun format di handap ieu:
+          Jawaban: $OPTION
+          Ganti $OPTION ku jawapan nu geus dipilih.{fewshot_examples}
+
+          Kalimah:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Kalimah:
+          ```
+          {text}
+          ```
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'

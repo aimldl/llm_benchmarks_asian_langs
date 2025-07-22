@@ -1,0 +1,37 @@
+# Choose tasks to be run for each language.
+# Current list of tasks:
+# [sentiment, qa, qa-mc, metaphor, toxicity, paraphrase, translation-en-xx, translation-xx-en, translation-id-xx, translation-xx-id, abssum, causal, nli, mp-r, pragmatic-single, pragmatic-pair, if-eval, mt-bench, kalahi-mc]
+# Supported languages:
+# [en, id, vi, th, ta, tl, jv, su]
+# Instead of a list, use <language>: "all" to specify all tasks to be run.
+
+seahelm:
+  id: ["sentiment", "qa", "metaphor", "toxicity", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "mp-r", "pragmatic-single", "pragmatic-pair", "if-eval", "mt-bench"]
+  vi: ["sentiment", "qa", "toxicity", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "if-eval", "mt-bench"]
+  th: ["sentiment", "qa", "toxicity", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "if-eval", "mt-bench"]
+  ta: ["sentiment", "qa", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "mp-r", "pragmatic-single", "pragmatic-pair"]
+  tl: ["sentiment", "belebele-qa-mc", "toxicity", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "if-eval", "mt-bench", "kalahi-mc"]
+
+seahelm_plus:
+  id: ["sentiment", "qa", "metaphor", "toxicity", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "mp-r", "pragmatic-single", "pragmatic-pair", "if-eval", "mt-bench"]
+  vi: ["sentiment", "qa", "toxicity", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "if-eval", "mt-bench"]
+  th: ["sentiment", "qa", "toxicity", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "if-eval", "mt-bench"]
+  ta: ["sentiment", "qa", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "mp-r", "pragmatic-single", "pragmatic-pair"]
+  tl: ["sentiment", "belebele-qa-mc", "toxicity", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli", "if-eval", "mt-bench", "kalahi-mc"]
+  jv: ["sentiment", "qa-mc", "metaphor", "translation-id-xx", "translation-xx-id", "if-eval", "mt-bench"]
+  su: ["sentiment", "qa-mc", "metaphor", "translation-id-xx", "translation-xx-id", "if-eval", "mt-bench"]
+  
+all_tasks:
+  id: "all"
+  vi: "all"
+  th: "all"
+  ta: "all"
+  tl: "all"
+  jv: "all"
+  su: "all"
+
+kalahi:
+  tl: ["kalahi-mc"]
+
+batayan:
+  tl: ["sentiment", "belebele-qa-mc", "toxicity", "paraphrase", "translation-en-xx", "translation-xx-en", "abssum", "causal", "nli"]

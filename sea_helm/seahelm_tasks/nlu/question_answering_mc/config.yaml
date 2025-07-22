@@ -1,0 +1,82 @@
+qa-mc:
+  metadata:
+    version: 1
+  name: question_answering_multiple_choice
+  competency: nlu
+  metric_file: seahelm_tasks/nlu/question_answering_mc/question_answering_mc.py
+  metric_class: QuestionAnsweringMultipleChoiceMetric
+  metric: normalized_accuracy
+  null_label: 4
+  temperature: 0
+  languages:
+    jv:
+      filepath: seahelm_tasks/nlu/question_answering_mc/data/jv_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/question_answering_mc/data/jv_belebele_examples.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          Sampeyan bakal diwenehi paragraf, pitakonan, lan papat pilihan jawaban. Jawaben pitakonan iku miturut paragraf kanthi milih salah siji saka pilihan sing diwenehake.
+
+          Jawaban mung nganggo format iki:
+          Jawaban: $OPTION
+          Ganti $OPTION karo pilihan sing dipilih. Gunakake mung huruf A, B, C, utawa D kanggo jawabane.{fewshot_examples}
+
+          Paragraf:
+          ```
+          {text}
+          ```
+          Pitakonan: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          Paragraf:
+          ```
+          {text}
+          ```
+          Pitakonan: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    su:
+      filepath: seahelm_tasks/nlu/question_answering_mc/data/su_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/question_answering_mc/data/su_belebele_examples.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          Anjeun bade dipasihan hiji paragrap, hiji patarosan sareng opat pilihan jawapan. Jawapana dumasar kana paragraf ku milih salah sahiji pilihan anu dipasihkeun.
+
+          Jawap ngan ngagunakeun format di handap ieu:
+          Jawaban: $OPTION
+          Ganti $OPTION ku jawapan nu geus dipilih. Gunakeun hurup A, B, C, atawa D salaku jawapan.{fewshot_examples}
+
+          Paragrap:
+          ```
+          {text}
+          ```
+          Patarosan: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          Paragrap:
+          ```
+          {text}
+          ```
+          Patarosan: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+

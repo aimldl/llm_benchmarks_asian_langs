@@ -1,0 +1,396 @@
+belebele-qa-mc:
+  metadata:
+    version: 1
+  name: belebele_question_answering_multiple_choice
+  competency: nlu
+  metric_file: seahelm_tasks/nlu/belebele_mcqa/belebele_question_answering_mc.py
+  metric_class: QuestionAnsweringMultipleChoiceMetric
+  metric: normalized_accuracy
+  null_label: 4
+  temperature: 0
+  languages:
+    en:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/en_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/en_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          You will be given one paragraph, one question and four answer options. Based on the paragraph, answer by choosing one of the options given.
+
+          Answer only using the following format:
+          Answer: $OPTION
+          Replace $OPTION with the selected option. Use the letter A, B, C, or D as the answer.{fewshot_examples}
+
+          Paragraph:
+          ```
+          {text}
+          ```
+          Question: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          Paragraph:
+          ```
+          {text}
+          ```
+          Question: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          Answer: {label}
+        fewshot_label: 'Answer: {label}'
+    id:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/id_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/id_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          Anda akan diberikan sebuah paragraf, sebuah pertanyaan dan empat pilihan jawaban. Jawablah pertanyaannya berdasarkan paragraf tersebut dengan menggunakan salah satu dari pilihan yang diberikan.
+
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Jawaban: $OPTION
+          Ganti $OPTION dengan pilihan yang telah dipilih. Gunakan huruf A, B, C, atau D saja sebagai jawabannya.{fewshot_examples}
+
+          Paragraf:
+          ```
+          {text}
+          ```
+          Pertanyaan: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          Paragraf:
+          ```
+          {text}
+          ```
+          Pertanyaan: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    km:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/km_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/km_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          អ្នកនឹងត្រូវបានផ្តល់ឱ្យមួយកថាខណ្ឌ សំណួរមួយ និងជម្រើសចម្លើយចំនួនបួន។ ចូរជ្រើសរើសទម្រង់ចម្លើយខាងក្រោមតាមកថាខណ្ឌ។
+
+          ឆ្លើយតែដោយប្រើទម្រង់ខាងក្រោម៖
+          ចម្លើយ៖ $OPTION
+          ជំនួស $OPTION ជាមួយនឹងចម្លើយដែលអ្នកបានជ្រើសរើស។ ជ្រើសរើសអក្សរ A, B, C, ឬ D ជាចម្លើយ។{fewshot_examples}
+
+          កថាខណ្ឌ៖
+          ```
+          {text}
+          ```
+          សំណួរ៖ {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          កថាខណ្ឌ៖
+          ```
+          {text}
+          ```
+          សំណួរ៖ {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          ចម្លើយ៖ {label}
+        fewshot_label: ចម្លើយ៖ {label}
+    lo:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/lo_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/lo_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          ເຈົ້າຈະໄດ້ຮັບຫນຶ່ງຂໍ້ຄວາມ, ຫນຶ່ງຄໍາຖາມ, ແລະສີ່ທາງເລືອກ. ຄໍາຕອບໂດຍອີງໃສ່ວັກໂດຍເລືອກຫນຶ່ງໃນທາງເລືອກທີ່ໃຫ້.
+
+          ຕອບພຽງແຕ່ໂດຍໃຊ້ຮູບແບບຕໍ່ໄປນີ້:
+          ຄຳຕອບ: $OPTION
+          ແທນທີ່ $OPTION ດ້ວຍຄຳຕອບທີ່ທ່ານເລືອກ. ໃຊ້ຕົວອັກສອນ A, B, C, ຫຼື D ເປັນຄໍາຕອບ.{fewshot_examples}
+
+          ຂໍ້ຄວາມ:
+          ```
+          {text}
+          ```
+          ຄຳຖາມ: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          ຂໍ້ຄວາມ:
+          ```
+          {text}
+          ```
+          ຄຳຖາມ: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          ຄຳຕອບ: {label}
+        fewshot_label: 'ຄຳຕອບ: {label}'
+    my:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/my_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/my_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          သင့်အား စာပိုဒ်တစ်ပိုဒ်၊ မေးခွန်းတစ်ခုနှင့် အဖြေရွေးချယ်မှု လေးခုကို ပေးအပ်မည်ဖြစ်သည်။ ပေးထားသော ရွေးချယ်စရာများထဲမှ တစ်ခုကို ရွေးချယ်ခြင်းဖြင့် စာပိုဒ်ကို ဖြေဆိုပါ။
+
+          အောက်ပါဖော်မတ်ကိုသာ အသုံးပြု၍ ဖြေဆိုပါ:
+          အဖြေ: $OPTION
+          သင်ရွေးချယ်ထားသော အဖြေဖြင့် $OPTION ကို အစားထိုးပါ။ သင့်အဖြေအဖြစ် A, B, C သို့မဟုတ် D စာလုံးများကို အသုံးပြုပါ။{fewshot_examples}
+
+          စာပိုဒ်:
+          ```
+          {text}
+          ```
+          မေးခွန်း: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          စာပိုဒ်:
+          ```
+          {text}
+          ```
+          မေးခွန်း: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          အဖြေ: {label}
+        fewshot_label: 'အဖြေ: {label}'
+    ta:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/ta_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/ta_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          உங்களுக்கு ஒரு பத்தியும், ஒரு கெள்வியும் மற்றும் நான்கு தேர்வுகளும் கொடுக்கப்படும். பத்தியின் அடிப்படையில், கொடுக்கப்பட்ட தேர்வுகளில் ஒன்றைத் தேர்ந்தெடுத்து பதிலளிக்கவும்.
+
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          பதில்: $OPTION
+          தேர்ந்தெடுக்கப்பட்ட பதிலுடன் $OPTION ஐ மாற்றவும். A, B, C அல்லது D என்ற எழுத்துக்களில் மட்டும் பதிலளிக்கவும்.{fewshot_examples}
+
+          பத்தி:
+          ```
+          {text}
+          ```
+          கேள்வி: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          பத்தி:
+          ```
+          {text}
+          ```
+          கேள்வி: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          பதில்: {label}
+        fewshot_label: 'பதில்: {label}'
+    tl:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/tl_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/tl_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          Bibigyan ka ng isang talata, isang tanong, at apat na pagpipiliang sagot. Sumagot base sa talata sa pamamagitan ng pagpili ng isa sa mga opsiyong ibinigay.
+
+          Sumagot gamit ang sumusunod na format:
+          Sagot: $OPTION
+          Palitan ang $OPTION ng napiling sagot. Gumamit lang ng titik A, B, C, o D sa sagot mo.{fewshot_examples}
+
+          Talata:
+          ```
+          {text}
+          ```
+          Tanong: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          Talata:
+          ```
+          {text}
+          ```
+          Tanong: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          Sagot: {label}
+        fewshot_label: 'Sagot: {label}'
+    th:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/th_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/th_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          คุณจะได้รับหนึ่งข้อความ, หนึ่งคำถาม, และสี่ตัวเลือก ตอบคำถามโดยเลือกหนึ่งในตัวเลือกที่ให้ไป
+
+          จงตอบตามรูปแบบดังต่อไปนี้:
+          คำตอบ: $OPTION
+          โดยจะต้องแทนที่ $OPTION ด้วยคำตอบของคุณด้วยตัวอักษร A, B, C หรือ D เท่านั้น{fewshot_examples}
+
+          ข้อความ:
+          ```
+          {text}
+          ```
+          คำถาม: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          ข้อความ:
+          ```
+          {text}
+          ```
+          คำถาม: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          คำตอบ: {label}
+        fewshot_label: 'คำตอบ: {label}'
+    vi:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/vi_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/vi_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          Bạn sẽ được cho một đoạn văn, một câu hỏi và bốn phương án trả lời. Dựa vào đoạn văn, trả lời bằng cách chọn một trong các phương án được đưa ra.
+
+          Chỉ trả lời bằng cách sử dụng định dạng sau:
+          Câu trả lời: $OPTION
+          Thay thế $OPTION bằng câu trả lời được chọn. Chỉ sử dụng chữ cái A, B, C hoặc D làm câu trả lời của bạn.{fewshot_examples}
+
+          Đoạn văn:
+          ```
+          {text}
+          ```
+          Câu hỏi: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          Đoạn văn:
+          ```
+          {text}
+          ```
+          Câu hỏi: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          Câu trả lời: {label}
+        fewshot_label: 'Câu trả lời: {label}'
+    zh-s:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/zh-s_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/zh-s_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          您将获得一个段落、一个问题和四个答案选项。根据段落选择给出的选项之一进行回答。
+
+          仅使用以下格式回答:
+          答案: $OPTION
+          将 $OPTION 替换为您选择的答案。使用字母 A、B、C 或 D 作为答案。{fewshot_examples}
+
+          段落:
+          ```
+          {text}
+          ```
+          问题: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          段落:
+          ```
+          {text}
+          ```
+          问题: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          答案: {label}
+        fewshot_label: '答案: {label}'
+    zh-t:
+      filepath: seahelm_tasks/nlu/belebele_mcqa/data/eval/zh-t_belebele.jsonl
+      example_filepath: seahelm_tasks/nlu/belebele_mcqa/data/examples/zh-t_belebele.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          您將獲得一段、一個問題和四個答案選項。根據段落選擇給出的選項之一進行回答。
+
+          僅使用以下格式回答:
+          答案: $OPTION
+          將 $OPTION 替換為您選擇的答案。使用字母 A、B、C 或 D 作為答案。{fewshot_examples}
+
+          段落:
+          ````
+          {text}
+          ````
+          問題: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+        fewshot_example: |2-
+
+
+          段落:
+          ```
+          {text}
+          ```
+          問題: {question}
+          A: {choice1}
+          B: {choice2}
+          C: {choice3}
+          D: {choice4}
+          答案: {label}
+        fewshot_label: '答案: {label}'

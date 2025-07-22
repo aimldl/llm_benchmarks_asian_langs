@@ -1,0 +1,24 @@
+
+@/sea_helm is a new repository added to this project LLM_BENCHMARKS_ASIAN_LANGS. I have successfully tested to run the code in @/sea_helm in Vertex AI Workbench Instance with an NVIDIA A100 GPU with 80GB GPU memory. 
+
+Now I want to add a feature to use Gemini 2.5 Flash just like I did in other sub-directories klue_* and evaluate the performance of Gemini 2.5 Flash. My  local machine doesn't have GPU suitable for running sea_helm. Instead, I have set up a remote environment with GPU. Use the remote environment on Google Cloud. 
+
+
+---
+
+@/sea_helm I followed your "Usage:" and executed "run_gemini_benchmark.sh". And I had the following error.
+---
+$ chmod +x run_gemini_benchmark.sh
+$ ./run_gemini_benchmark.sh
+[INFO] Running SEA-HELM benchmark with Gemini 2.5 Flash...
+[INFO] Executing: python3 seahelm_gemini2_5flash.py --project-id vertex-workbench-notebook
+Unable to get list of OpenAI models. Please check your OpenAI API key.
+No valid OpenAI models found. Skipping task: mt-bench
+fatal: not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+Failed to initialize benchmark: 'GeminiServing' object has no attribute 'get_run_env'
+Error in main: 'GeminiServing' object has no attribute 'get_run_env'
+$
+---
+
+I've changed the computing environment. Previously, no GPU on the local environment. Now, I'm running this script on Vertex AI Workbench Instance with two NVIDIA A100 GPUs (80GB memory). Fix this problem with the new changes in mind.

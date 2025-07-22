@@ -1,0 +1,29 @@
+kalahi-mc:
+  metadata:
+    version: 1
+  name: kalahi-mc
+  competency: cultural
+  metric_file: seahelm_tasks/cultural/kalahi/kalahi.py
+  metric_class: KalahiMCMetric
+  metric: normalized_accuracy
+  null_label: none
+  temperature: 0
+  languages:
+    tl:
+      filepath: seahelm_tasks/cultural/kalahi/data/tl_kalahi_mc.jsonl
+      max_tokens: 32
+      prompt_template:
+        template: |-
+          Piliin ang pinaka-angkop na sagot sa sumusunod na tanong.
+
+          Sumagot gamit ang sumusunod na format.
+          Sagot: $OPTION
+
+          Palitan ang $OPTION gamit ang napiling sagot. Gumamit lang ng letrang {mcq_options} sa sagot mo.
+
+          Tanong:
+          ```
+          {question}
+
+          {mcq}
+          ```

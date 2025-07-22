@@ -1,0 +1,45 @@
+if-eval:
+  metadata:
+    version: 1
+  name: "if-eval"
+  competency: "instruction-following"
+  metric_file: "seahelm_tasks/instruction_following/ifeval/if_eval.py"
+  metric_class: "IFEvalMetric"
+  metric: "overall_lang_normalized_acc"
+  temperature: 0
+  languages:
+    en:
+      filepath: "seahelm_tasks/instruction_following/ifeval/data/en_sea_ifeval.jsonl"
+      max_tokens: 1024
+      prompt_template:
+        template: "{text}"
+    id:
+      filepath: "seahelm_tasks/instruction_following/ifeval/data/id_sea_ifeval.jsonl"
+      max_tokens: 1024
+      prompt_template:
+        template: "{text}"
+    vi:
+      filepath: "seahelm_tasks/instruction_following/ifeval/data/vi_sea_ifeval.jsonl"
+      max_tokens: 1024
+      prompt_template:
+        template: "{text}"
+    th:
+      filepath: "seahelm_tasks/instruction_following/ifeval/data/th_sea_ifeval.jsonl"
+      max_tokens: 1024
+      prompt_template:
+        template: "{text}"
+    tl:
+      filepath: "seahelm_tasks/instruction_following/ifeval/data/tl_sea_ifeval.jsonl"
+      max_tokens: 1024
+      prompt_template:
+        template: "{text}"
+    jv:
+      filepath: "seahelm_tasks/instruction_following/ifeval/data/jv_sea_ifeval.jsonl"
+      max_tokens: 1024
+      prompt_template:
+        template: "{text}"
+    su:
+      filepath: "seahelm_tasks/instruction_following/ifeval/data/su_sea_ifeval.jsonl"
+      max_tokens: 1024
+      prompt_template:
+        template: "{text}"
