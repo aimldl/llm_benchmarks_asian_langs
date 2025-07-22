@@ -1,0 +1,145 @@
+pragmatic-single:
+  metadata:
+    version: 1
+  name: pragmatic_reasoning_single_sentence
+  competency: linguistic-diagnostics
+  metric_file: seahelm_tasks/lindsea/pragmatics/pragmatic_reasoning.py
+  metric_class: PragmaticReasoningSingleSentenceMetric
+  metric: normalized_accuracy
+  null_label: 2
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/lindsea/pragmatics/data/id_pragmatic_reasoning_single.jsonl
+      example_filepath: seahelm_tasks/lindsea/pragmatics/data/id_pragmatic_reasoning_single_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          Anda adalah seorang ahli bahasa Indonesia.
+
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Jawaban: $OPTION{fewshot_examples}
+
+          Apakah pernyataan berikut ini {question_translated}? Ganti $OPTION dengan {choices_translated}.
+          Pernyataan:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Apakah pernyataan berikut ini {question_translated}? Ganti $OPTION dengan {choices_translated}.
+          Pernyataan:
+          ```
+          {text}
+          ```
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    ta:
+      filepath: seahelm_tasks/lindsea/pragmatics/data/ta_pragmatic_reasoning_single.jsonl
+      example_filepath: seahelm_tasks/lindsea/pragmatics/data/ta_pragmatic_reasoning_single_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          நீங்கள் ஒரு தமிழ் மொழியியல் நிபுணர்.
+
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          பதில்: $OPTION{fewshot_examples}
+
+          பின்வரும் கூற்று {question_translated}? {choices_translated} என்ற சொற்களுடன் $OPTION ஐ மாற்றவும்.
+          கூற்று:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          பின்வரும் கூற்று {question_translated}? {choices_translated} என்ற சொற்களுடன் $OPTION ஐ மாற்றவும்.
+          கூற்று:
+          ```
+          {text}
+          ```
+          பதில்: {label}
+        fewshot_label: 'பதில்: {label}'
+
+pragmatic-pair:
+  metadata:
+    version: 1
+  name: pragmatic_reasoning_sentence_pair
+  competency: linguistic-diagnostics
+  metric_file: seahelm_tasks/lindsea/pragmatics/pragmatic_reasoning.py
+  metric_class: PragmaticReasoningSentencePairMetric
+  metric: normalized_accuracy
+  null_label: 2
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/lindsea/pragmatics/data/id_pragmatic_reasoning_pair.jsonl
+      example_filepath: seahelm_tasks/lindsea/pragmatics/data/id_pragmatic_reasoning_pair_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          Anda adalah seorang ahli bahasa Indonesia
+
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Jawaban: $OPTION
+          Ganti $OPTION dengan Benar atau Salah.{fewshot_examples}
+
+          Berdasarkan situasi ini, apakah pernyataan berikut ini Benar atau Salah?
+          Situasi:
+          ```
+          {text}
+          ```
+          Pernyataan:
+          ```
+          {conclusion}
+          ```
+        fewshot_example: |2-
+
+
+          Berdasarkan situasi ini, apakah pernyataan berikut ini Benar atau Salah?
+          Situasi:
+          ```
+          {text}
+          ```
+          Pernyataan:
+          ```
+          {conclusion}
+          ```
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    ta:
+      filepath: seahelm_tasks/lindsea/pragmatics/data/ta_pragmatic_reasoning_pair.jsonl
+      example_filepath: seahelm_tasks/lindsea/pragmatics/data/ta_pragmatic_reasoning_pair_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          நீங்கள் ஒரு தமிழ் மொழியியல் நிபுணர்.
+
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          பதில்: $OPTION
+          உண்மை அல்லது பொய் என்ற சொற்களுடன் $OPTION ஐ மாற்றவும்.{fewshot_examples}
+
+          இந்த சூழ்நிலையில், பின்வரும் கூற்று உண்மையா அல்லது பொய்யா?
+          சூழ்நிலை:
+          ```
+          {text}
+          ```
+          கூற்று:
+          ```
+          {conclusion}
+          ```
+        fewshot_example: |2-
+
+
+          இந்த சூழ்நிலையில், பின்வரும் கூற்று உண்மையா அல்லது பொய்யா?
+          சூழ்நிலை:
+          ```
+          {text}
+          ```
+          கூற்று:
+          ```
+          {conclusion}
+          ```
+          பதில்: {label}
+        fewshot_label: 'பதில்: {label}'

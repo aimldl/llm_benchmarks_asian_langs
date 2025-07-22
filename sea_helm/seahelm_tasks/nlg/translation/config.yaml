@@ -1,0 +1,413 @@
+translation-en-xx:
+  metadata:
+    version: 1
+  name: machine_translation_from_english
+  competency: nlg
+  metric_file: seahelm_tasks/nlg/translation/translation.py
+  metric_class: TranslationMetric
+  use_comet_metric: false
+  use_metricx_metric: true
+  use_chrf_metric: false
+  metricx_batch_size: 32
+  metric: normalized_metricx_wmt24_scores
+  aggregation_group: translations
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/en_to_ind_Latn.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/en_to_ind_Latn_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Terjemahkan teks berikut ini ke dalam bahasa Indonesia.
+
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Terjemahan: $TRANSLATION
+          Ganti $TRANSLATION dengan teks yang telah diterjemahkan.{fewshot_examples}
+
+          Teks:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Teks:
+          ```
+          {text}
+          ```
+          Terjemahan: {label}
+        fewshot_label: 'Terjemahan: {label}'
+    vi:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/en_to_vie_Latn.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/en_to_vie_Latn_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Dịch văn bản dưới đây sang Tiếng Việt.
+
+          Chỉ trả lời bằng cách sử dụng định dạng sau:
+          Bản dịch: $TRANSLATION
+          Thay thế $TRANSLATION bằng văn bản đã dịch.{fewshot_examples}
+
+          Văn bản:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Văn bản:
+          ```
+          {text}
+          ```
+          Bản dịch: {label}
+        fewshot_label: 'Bản dịch: {label}'
+    th:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/en_to_tha_Thai.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/en_to_tha_Thai_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          แปลข้อความต่อไปนี้เป็นภาษาไทย
+
+          จงตอบตามรูปแบบดังต่อไปนี้:
+          คำแปล: $TRANSLATION
+          โดยจะต้องแทนที่ $TRANSLATION ด้วยข้อความที่แปลแล้ว{fewshot_examples}
+
+          ข้อความ:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          ข้อความ:
+          ```
+          {text}
+          ```
+          คำแปล: {label}
+        fewshot_label: 'คำแปล: {label}'
+    ta:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/en_to_tam_Taml.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/en_to_tam_Taml_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          பின்வரும் உரையைத் தமிழ் மொழிக்கு மொழிபெயர்க்கவும்.
+
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          மொழிபெயர்ப்பு: $TRANSLATION
+          மொழிபெயர்த்த உரையுடன் $TRANSLATION ஐ மாற்றவும்.{fewshot_examples}
+
+          உரை:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          உரை:
+          ```
+          {text}
+          ```
+          மொழிபெயர்ப்பு: {label}
+        fewshot_label: 'மொழிபெயர்ப்பு: {label}'
+    tl:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/en_to_tgl_Latn.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/en_to_tgl_Latn_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Isalin ang sumusunod na teksto sa Filipino.
+
+          Tumugon gamit ang sumusunod na format:
+          Salin: $TRANSLATION
+          Palitan ang $TRANSLATION gamit ng isinalin na teksto.{fewshot_examples}
+
+          Teksto:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Teksto:
+          ```
+          {text}
+          ```
+          Salin: {label}
+        fewshot_label: 'Salin: {label}'
+
+translation-xx-en:
+  metadata:
+    version: 1
+  name: machine_translation_to_english
+  competency: nlg
+  metric_file: seahelm_tasks/nlg/translation/translation.py
+  metric_class: TranslationMetric
+  use_comet_metric: false
+  use_metricx_metric: true
+  use_chrf_metric: false
+  metricx_batch_size: 32
+  metric: normalized_metricx_wmt24_scores
+  aggregation_group: translations
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/ind_Latn_to_en.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/ind_Latn_to_en_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Terjemahkan teks berikut ini ke dalam bahasa Inggris.
+
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Terjemahan: $TRANSLATION
+          Ganti $TRANSLATION dengan teks yang telah diterjemahkan.{fewshot_examples}
+
+          Teks:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Teks:
+          ```
+          {text}
+          ```
+          Terjemahan: {label}
+        fewshot_label: 'Terjemahan: {label}'
+    vi:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/vie_Latn_to_en.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/vie_Latn_to_en_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Dịch văn bản dưới đây sang Tiếng Anh.
+
+          Chỉ trả lời bằng cách sử dụng định dạng sau:
+          Bản dịch: $TRANSLATION
+          Thay thế $TRANSLATION bằng văn bản đã dịch.{fewshot_examples}
+
+          Văn bản:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Văn bản:
+          ```
+          {text}
+          ```
+          Bản dịch: {label}
+        fewshot_label: 'Bản dịch: {label}'
+    th:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/tha_Thai_to_en.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/tha_Thai_to_en_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          แปลข้อความต่อไปนี้เป็นภาษาอังกฤษ
+
+          จงตอบตามรูปแบบดังต่อไปนี้:
+          คำแปล: $TRANSLATION
+          โดยจะต้องแทนที่ $TRANSLATION ด้วยข้อความที่แปลแล้ว{fewshot_examples}
+
+          ข้อความ:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          ข้อความ:
+          ```
+          {text}
+          ```
+          คำแปล: {label}
+        fewshot_label: 'คำแปล: {label}'
+    ta:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/tam_Taml_to_en.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/tam_Taml_to_en_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          பின்வரும் உரையை ஆங்கில மொழிக்கு மொழிபெயர்க்கவும்.
+
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          மொழிபெயர்ப்பு: $TRANSLATION
+          மொழிபெயர்த்த உரையுடன் $TRANSLATION ஐ மாற்றவும்.{fewshot_examples}
+
+          உரை:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          உரை:
+          ```
+          {text}
+          ```
+          மொழிபெயர்ப்பு: {label}
+        fewshot_label: 'மொழிபெயர்ப்பு: {label}'
+    tl:
+      filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/devtest/tgl_Latn_to_en.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/flores200_dataset/dev/tgl_Latn_to_en_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Isalin ang sumusunod na teksto sa English.
+
+          Tumugon gamit ang sumusunod na format:
+          Salin: $TRANSLATION
+          Palitan ang $TRANSLATION gamit ng isinalin na teksto.{fewshot_examples}
+
+          Teksto:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Teksto:
+          ```
+          {text}
+          ```
+          Salin: {label}
+        fewshot_label: 'Salin: {label}'
+
+translation-id-xx:
+  metadata:
+    version: 1
+  name: machine_translation_from_indonesian
+  competency: nlg
+  metric_file: seahelm_tasks/nlg/translation/translation.py
+  metric_class: TranslationMetric
+  use_comet_metric: false
+  use_metricx_metric: true
+  use_chrf_metric: false
+  metricx_batch_size: 32
+  metric: normalized_metricx_wmt24_scores
+  aggregation_group: translations
+  temperature: 0
+  languages:
+    jv:
+      filepath: seahelm_tasks/nlg/translation/data/nusax/devtest/id_to_jv.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/nusax/dev/id_to_jv_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Terjemahna teks ing ngisor iki menyang basa Jawa.
+
+          Jawaban mung nganggo format iki:
+          Terjemahan: $TRANSLATION
+          Ganti $TRANSLATION karo teks sing wis diterjemahake.{fewshot_examples}
+
+          Teks:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Teks:
+          ```
+          {text}
+          ```
+          Terjemahan: {label}
+        fewshot_label: 'Terjemahan: {label}'
+    su:
+      filepath: seahelm_tasks/nlg/translation/data/nusax/devtest/id_to_su.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/nusax/dev/id_to_su_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Tarjamahkeun teks di handap kana teks basa Sunda.
+
+          Jawap ngan ngagunakeun format di handap ieu:
+          Tarjamahan: $TRANSLATION
+          Ganti $TRANSLATION ku teks tarjamah.{fewshot_examples}
+
+          Teks:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Teks:
+          ```
+          {text}
+          ```
+          Tarjamahan: {label}
+        fewshot_label: 'Tarjamahan: {label}'
+
+translation-xx-id:
+  metadata:
+    version: 1
+  name: machine_translation_to_indonesian
+  competency: nlg
+  metric_file: seahelm_tasks/nlg/translation/translation.py
+  metric_class: TranslationMetric
+  use_comet_metric: false
+  use_metricx_metric: true
+  use_chrf_metric: false
+  metricx_batch_size: 32
+  metric: normalized_metricx_wmt24_scores
+  aggregation_group: translations
+  temperature: 0
+  languages:
+    jv:
+      filepath: seahelm_tasks/nlg/translation/data/nusax/devtest/jv_to_id.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/nusax/dev/jv_to_id_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Terjemahna teks ing ngisor iki menyang basa Indonesia.
+
+          Jawaban mung nganggo format iki:
+          Terjemahan: $TRANSLATION
+          Ganti $TRANSLATION karo teks sing wis diterjemahake.{fewshot_examples}
+
+          Teks:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Teks:
+          ```
+          {text}
+          ```
+          Terjemahan: {label}
+        fewshot_label: 'Terjemahan: {label}'
+    su:
+      filepath: seahelm_tasks/nlg/translation/data/nusax/devtest/su_to_id.jsonl
+      example_filepath: seahelm_tasks/nlg/translation/data/nusax/dev/su_to_id_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Tarjamahkeun teks di handap kana teks basa Indonesia.
+
+          Jawap ngan ngagunakeun format di handap ieu:
+          Tarjamahan: $TRANSLATION
+          Ganti $TRANSLATION ku teks tarjamah.{fewshot_examples}
+
+          Teks:
+          ```
+          {text}
+          ```
+        fewshot_example: |2-
+
+
+          Teks:
+          ```
+          {text}
+          ```
+          Tarjamahan: {label}
+        fewshot_label: 'Tarjamahan: {label}'

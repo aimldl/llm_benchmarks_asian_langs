@@ -1,0 +1,193 @@
+nli:
+  metadata:
+    version: 1
+  name: natural_language_inference
+  competency: nlr
+  metric_file: seahelm_tasks/nlr/nli/nli.py
+  metric_class: NLIMetric
+  metric: normalized_accuracy
+  null_label: none
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/nlr/nli/data/id_indonli_lay_1000sample.jsonl
+      example_filepath: seahelm_tasks/nlr/nli/data/id_indonli_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          Anda akan diberikan dua kalimat, SENTENCE_1 dan SENTENCE_2. Tentukan mana dari pernyataan berikut ini yang paling sesuai untuk kalimat SENTENCE_1 dan SENTENCE_2.
+          A: Jika SENTENCE_1 benar, maka SENTENCE_2 juga harus benar.
+          B: SENTENCE_1 bertentangan dengan SENTENCE_2.
+          C: Ketika SENTENCE_1 benar, SENTENCE_2 mungkin saja benar atau tidak benar.
+
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Jawaban: $OPTION
+          Ganti $OPTION dengan pilihan yang telah dipilih. Gunakan huruf A, B, atau C saja sebagai jawabannya.{fewshot_examples}
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+        fewshot_example: |2-
+
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    vi:
+      filepath: seahelm_tasks/nlr/nli/data/vi_xnli_1000sample.jsonl
+      example_filepath: seahelm_tasks/nlr/nli/data/vi_xnli_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          Bạn sẽ được cho hai câu, SENTENCE_1 và SENTENCE_2.
+          Xác định mệnh đề nào sau đây là phù hợp nhất cho câu SENTENCE_1 và SENTENCE_2.
+          A: Nếu SENTENCE_1 đúng thì SENTENCE_2 phải đúng.
+          B: SENTENCE_1 mâu thuẫn với SENTENCE_2.
+          C: Khi SENTENCE_1 đúng, SENTENCE_2 có thể đúng hoặc không đúng.
+
+          Chỉ trả lời bằng cách sử dụng định dạng sau:
+          Câu trả lời: $OPTION
+          Thay thế $OPTION bằng câu trả lời được chọn. Chỉ sử dụng chữ cái A, B hoặc C làm câu trả lời của bạn.{fewshot_examples}
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+        fewshot_example: |2-
+
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+          Câu trả lời: {label}
+        fewshot_label: 'Câu trả lời: {label}'
+    th:
+      filepath: seahelm_tasks/nlr/nli/data/th_xnli_1000sample.jsonl
+      example_filepath: seahelm_tasks/nlr/nli/data/th_xnli_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          คุณจะได้รับประโยค 2 ประโยค ได้แก่ SENTENCE_1 และ SENTENCE_2 จงพิจารณาว่า ข้อความใดต่อไปนี้เหมาะสมกับ SENTENCE_1 และ SENTENCE_2 มากที่สุด
+          A: ถ้า SENTENCE_1 เป็นจริง งั้น SENTENCE_2 ก็ต้องเป็นจริง
+          B: SENTENCE_1 ขัดแย้งกับ SENTENCE_2
+          C: เมื่อ SENTENCE_1 เป็นจริง งั้น SENTENCE_2 อาจะเป็นจริงหรือไม่เป็นจริงก็ได้
+
+          จงตอบตามรูปแบบดังต่อไปนี้:
+          คำตอบ: $OPTION
+          โดยแทนที่ $OPTION ด้วยตัวเลือกของคุณด้วยตัวอักษร A, B, หรือ C เท่านั้น{fewshot_examples}
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+        fewshot_example: |2-
+
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+          คำตอบ: {label}
+        fewshot_label: 'คำตอบ: {label}'
+    ta:
+      filepath: seahelm_tasks/nlr/nli/data/ta_xnli_1000sample.jsonl
+      example_filepath: seahelm_tasks/nlr/nli/data/ta_xnli_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          உங்களுக்கு இரண்டு வாக்கியங்கள், SENTENCE_1 மற்றும் SENTENCE_2 கொடுக்கப்படும்.
+          பின்வரும் கூற்றுகளில் எது SENTENCE_1 மற்றும் SENTENCE_2 வாக்கியங்களுடன் மிகப் பொருந்துகிறது எனக் கண்டறியவும்.
+          A: SENTENCE_1 உண்மை என்றால் SENTENCE_2 உம் உண்மையாக இருக்க வேண்டும்.
+          B: SENTENCE_1 உம் SENTENCE_2 உம் முரண்படுகின்றன.
+          C: SENTENCE_1 உண்மையாக இருக்கும்போது SENTENCE_2 உண்மையாக இருக்கலாம் அல்லது இல்லாமல் இருக்கலாம்.
+
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          பதில்: $OPTION
+          தேர்ந்தெடுக்கப்பட்ட பதிலுடன் $OPTION ஐ மாற்றவும். A அல்லது B அல்லது C என்ற எழுத்துக்களில் மட்டும் பதிலளிக்கவும்.{fewshot_examples}
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+        fewshot_example: |2-
+
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+          பதில்: {label}
+        fewshot_label: 'பதில்: {label}'
+    tl:
+      filepath: seahelm_tasks/nlr/nli/data/tl_xnli.jsonl
+      example_filepath: seahelm_tasks/nlr/nli/data/tl_xnli_examples.jsonl
+      max_tokens: 128
+      prompt_template:
+        template: |-
+          Bibigyan ka ng dalawang pangungusap, SENTENCE_1 at SENTENCE_2. Tukuyin kung alin sa sumusunod na pahayag ang pinaka-angkop para sa SENTENCE_1 at SENTENCE_2.
+          A: Kung totoo ang SENTENCE_1, dapat totoo din ang SENTENCE_2.
+          B: Sumasalungat ang SENTENCE_1 sa SENTENCE_2.
+          C: Kapag totoo ang SENTENCE_1, pwedeng totoo o hindi totoo ang SENTENCE_2.
+
+          Sumagot gamit ang sumusunod na format.
+          Sagot: $OPTION
+          Palitan ang $OPTION ng napiling sagot. Gumamit lang ng titik A, B, o C sa sagot mo.{fewshot_examples}
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+        fewshot_example: |2-
+
+
+          SENTENCE_1:
+          ```
+          {sentence1}
+          ```
+          SENTENCE_2:
+          ```
+          {sentence2}
+          ```
+          Sagot: {label}
+        fewshot_label: 'Sagot: {label}'

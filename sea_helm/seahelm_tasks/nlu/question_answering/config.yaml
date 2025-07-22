@@ -1,0 +1,118 @@
+qa:
+  metadata:
+    version: 1
+  name: question_answering
+  competency: nlu
+  metric_file: seahelm_tasks/nlu/question_answering/question_answering.py
+  metric_class: QuestionAnsweringMetric
+  metric: normalized_f1
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/nlu/question_answering/data/id_tydiqa_100sample.jsonl
+      example_filepath: seahelm_tasks/nlu/question_answering/data/id_tydiqa_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Anda akan diberikan sebuah paragraf dan sebuah pertanyaan. Jawablah pertanyaannya dengan mengambil jawabannya dari paragraf tersebut.
+
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Jawaban: $ANSWER
+          Ganti $ANSWER dengan jawaban yang telah ditentukan.{fewshot_examples}
+
+          Paragraf:
+          ```
+          {text}
+          ```
+          Pertanyaan: {question}
+        fewshot_example: |2-
+
+
+          Paragraf:
+          ```
+          {text}
+          ```
+          Pertanyaan: {question}
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    vi:
+      filepath: seahelm_tasks/nlu/question_answering/data/vi_xquad_100sample.jsonl
+      example_filepath: seahelm_tasks/nlu/question_answering/data/vi_xquad_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          Bạn sẽ được cho một đoạn văn và một câu hỏi. Trả lời câu hỏi bằng cách trích xuất câu trả lời từ đoạn văn.
+
+          Chỉ trả lời bằng cách sử dụng định dạng sau:
+          Câu trả lời: $ANSWER
+          Thay thế $ANSWER bằng câu trả lời được trích xuất.{fewshot_examples}
+
+          Đoạn văn:
+          ```
+          {text}
+          ```
+          Câu hỏi: {question}
+        fewshot_example: |2-
+
+
+          Đoạn văn:
+          ```
+          {text}
+          ```
+          Câu hỏi: {question}
+          Câu trả lời: {label}
+        fewshot_label: 'Câu trả lời: {label}'
+    th:
+      filepath: seahelm_tasks/nlu/question_answering/data/th_xquad_100sample.jsonl
+      example_filepath: seahelm_tasks/nlu/question_answering/data/th_xquad_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          คุณจะได้รับข้อความและคำถาม จงตอบคำถามโดยการสกัดคำตอบออกมาจากข้อความที่กำหนดให้
+
+          จงตอบตามรูปแบบดังต่อไปนี้:
+          คำตอบ: $ANSWER
+          โดยแค่แทนที่ $ANSWER ด้วยคำตอบที่สกัดออกมา{fewshot_examples}
+
+          ข้อความ:
+          ```
+          {text}
+          ```
+          คำถาม: {question}
+        fewshot_example: |2-
+
+
+          ข้อความ:
+          ```
+          {text}
+          ```
+          คำถาม: {question}
+          คำตอบ: {label}
+        fewshot_label: 'คำตอบ: {label}'
+    ta:
+      filepath: seahelm_tasks/nlu/question_answering/data/ta_indicqa_100sample.jsonl
+      example_filepath: seahelm_tasks/nlu/question_answering/data/ta_indicqa_examples.jsonl
+      max_tokens: 256
+      prompt_template:
+        template: |-
+          உங்களுக்கு ஒரு பத்தியும் ஒரு கேள்வியும் கொடுக்கப்படும். பத்தியிலிருந்து கேள்விக்கான பதிலைக் கண்டறியவும்.
+
+          பின்வரும் பதில் வடிவமைப்பை மட்டும் பயன்படுத்தி பதிலளிக்கவும்:
+          பதில்: $ANSWER
+          கண்டறிந்த பதிலுடன் $ANSWER ஐ மாற்றவும்.{fewshot_examples}
+
+          பத்தி:
+          ```
+          {text}
+          ```
+          கேள்வி: {question}
+        fewshot_example: |2-
+
+
+          பத்தி:
+          ```
+          {text}
+          ```
+          கேள்வி: {question}
+          பதில்: {label}
+        fewshot_label: 'பதில்: {label}'

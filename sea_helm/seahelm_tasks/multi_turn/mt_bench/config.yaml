@@ -1,0 +1,51 @@
+mt-bench:
+  metadata:
+    version: 1
+  name: mt-bench
+  competency: multi-turn
+  metric_file: seahelm_tasks/multi_turn/mt_bench/mt_bench.py
+  metric_class: MTBenchMetric
+  metric: weighted_win_rate
+  batch_openai_calls: True
+  judge_model: gpt-4-1106-preview
+  judge_seed: 1234
+  judge_temperature: 0
+  judge_max_tokens: 2048
+  baseline_model: gpt-3.5-turbo-0125
+  temperature: 0
+  languages:
+    en:
+      filepath: seahelm_tasks/multi_turn/mt_bench/data/en_sea_mt_bench.jsonl
+      max_tokens: 1024
+      prompt_template:
+        template: '{text}'
+    id:
+      filepath: seahelm_tasks/multi_turn/mt_bench/data/id_sea_mt_bench.jsonl
+      max_tokens: 1024
+      prompt_template:
+        template: '{text}'
+    vi:
+      filepath: seahelm_tasks/multi_turn/mt_bench/data/vi_sea_mt_bench.jsonl
+      max_tokens: 1024
+      prompt_template:
+        template: '{text}'
+    th:
+      filepath: seahelm_tasks/multi_turn/mt_bench/data/mt_bench_thai_full.jsonl
+      max_tokens: 1024
+      prompt_template:
+        template: '{text}'
+    tl:
+      filepath: seahelm_tasks/multi_turn/mt_bench/data/mt_bench_tagalog_full.jsonl
+      max_tokens: 1024
+      prompt_template:
+        template: '{text}'
+    jv:
+      filepath: seahelm_tasks/multi_turn/mt_bench/data/mt_bench_javanese_full.jsonl
+      max_tokens: 1024
+      prompt_template:
+        template: '{text}'
+    su:
+      filepath: seahelm_tasks/multi_turn/mt_bench/data/mt_bench_sundanese_full.jsonl
+      max_tokens: 1024
+      prompt_template:
+        template: '{text}'

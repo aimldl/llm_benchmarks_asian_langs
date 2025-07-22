@@ -1,0 +1,104 @@
+metaphor:
+  metadata:
+    version: 1
+  name: metaphor_understanding
+  competency: nlu
+  metric_file: seahelm_tasks/nlu/metaphor/metaphor_understanding.py
+  metric_class: MetaphorUnderstandingMetric
+  metric: normalized_accuracy
+  null_label: 2
+  temperature: 0
+  languages:
+    id:
+      filepath: seahelm_tasks/nlu/metaphor/data/id_multilingual_fig_qa.jsonl
+      example_filepath: seahelm_tasks/nlu/metaphor/data/id_multilingual_fig_qa_examples.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          Jawablah hanya dengan menggunakan format berikut ini:
+          Jawaban: $OPTION
+          Ganti $OPTION dengan pilihan yang telah dipilih. Gunakan huruf A atau B saja sebagai jawabannya.
+
+          Berdasarkan kalimat yang diberikan, manakah dari pilihan berikut ini yang memiliki arti yang sama?{fewshot_examples}
+
+          Kalimat:
+          ```
+          {phrase}
+          ```
+          Pilihlah jawaban terbaik dari pilihan di bawah ini:
+          A: {choice1}
+          B: {choice2}
+        fewshot_example: |2-
+
+
+          Kalimat:
+          ```
+          {phrase}
+          ```
+          Pilihlah jawaban terbaik dari pilihan di bawah ini:
+          A: {choice1}
+          B: {choice2}
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    jv:
+      filepath: seahelm_tasks/nlu/metaphor/data/jv_multilingual_fig_qa.jsonl
+      example_filepath: seahelm_tasks/nlu/metaphor/data/jv_multilingual_fig_qa_examples.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          Jawaben mung nganggo format iki:
+          Jawaban: $OPTION
+          Ganti $OPTION karo pilihan sing dipilih. Cukup nganggo huruf A utawa B kanggo jawabane.
+
+          Miturut ukara sing diwenehi iki, pilihan ing ngisor iki endi sing nduweni teges padha?{fewshot_examples}
+
+          Ukara:
+          ```
+          {phrase}
+          ```
+          Pilihen jawaban sing paling cocok saka pilihan iki:
+          A: {choice1}
+          B: {choice2}
+        fewshot_example: |2-
+
+
+          Ukara:
+          ```
+          {phrase}
+          ```
+          Pilihen jawaban sing paling cocok saka pilihan iki:
+          A: {choice1}
+          B: {choice2}
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
+    su:
+      filepath: seahelm_tasks/nlu/metaphor/data/su_multilingual_fig_qa.jsonl
+      example_filepath: seahelm_tasks/nlu/metaphor/data/su_multilingual_fig_qa_examples.jsonl
+      max_tokens: 16
+      prompt_template:
+        template: |-
+          Jawap ngan ngagunakeun format di handap ieu:
+          Jawaban: $OPTION
+          Ganti $OPTION ku jawapan nu geus dipilih. Gunakeun hurup A atawa B salaku jawapan.
+
+          Dumasar kana kalimah anu dipasihkeun, pilihan mana anu sarua hartina?{fewshot_examples}
+
+          Kalimah:
+          ```
+          {phrase}
+          ```
+          Pilih jawapan anu pangsaena tina pilihan di handap ieu:
+          A: {choice1}
+          B: {choice2}
+        fewshot_example: |2-
+
+
+          Kalimah:
+          ```
+          {phrase}
+          ```
+          Pilih jawapan anu pangsaena tina pilihan di handap ieu:
+          A: {choice1}
+          B: {choice2}
+          Jawaban: {label}
+        fewshot_label: 'Jawaban: {label}'
