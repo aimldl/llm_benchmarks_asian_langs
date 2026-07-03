@@ -1,0 +1,268 @@
+{
+  "id": {
+    "nlu": {
+      "sentiment": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "qa": {
+        "normalized_f1": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "metaphor": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "safety": {
+      "toxicity": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "normalized_rougel_f1": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-en-xx": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-xx-en": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlr": {
+      "causal": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "nli": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "linguistic-diagnostics": {
+      "mp-r": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "pragmatic-single": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "pragmatic-pair": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "instruction-following": {
+      "if-eval": {
+        "overall_lang_normalized_acc": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    }
+  },
+  "vi": {
+    "nlu": {
+      "sentiment": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "qa": {
+        "normalized_f1": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "safety": {
+      "toxicity": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "normalized_rougel_f1": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-en-xx": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-xx-en": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlr": {
+      "causal": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "nli": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "instruction-following": {
+      "if-eval": {
+        "overall_lang_normalized_acc": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    }
+  },
+  "th": {
+    "nlu": {
+      "sentiment": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "qa": {
+        "normalized_f1": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "safety": {
+      "toxicity": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "normalized_rougel_f1": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-en-xx": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-xx-en": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlr": {
+      "causal": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "nli": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "instruction-following": {
+      "if-eval": {
+        "overall_lang_normalized_acc": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    }
+  },
+  "ta": {
+    "nlu": {
+      "sentiment": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "qa": {
+        "normalized_f1": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "normalized_rougel_f1": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-en-xx": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-xx-en": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlr": {
+      "causal": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "nli": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "linguistic-diagnostics": {
+      "mp-r": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "pragmatic-single": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "pragmatic-pair": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    }
+  },
+  "tl": {
+    "nlu": {
+      "sentiment": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "belebele-qa-mc": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "safety": {
+      "toxicity": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "normalized_rougel_f1": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-en-xx": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "translation-xx-en": {
+        "normalized_metricx_wmt24_scores": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "nlr": {
+      "causal": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      },
+      "nli": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "instruction-following": {
+      "if-eval": {
+        "overall_lang_normalized_acc": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    },
+    "cultural": {
+      "kalahi-mc": {
+        "normalized_accuracy": 0,
+        "error": "Failed to run evaluation for task"
+      }
+    }
+  }
+}

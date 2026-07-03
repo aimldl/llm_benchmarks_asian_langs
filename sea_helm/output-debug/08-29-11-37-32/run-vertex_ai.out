@@ -1,0 +1,4 @@
+To view the log, run:
+  $ tail -f output-vertex_ai/08-29-11-37-32/run-vertex_ai.out
+
+python seahelm_evaluation.py --tasks seahelm --model_type litellm --output_dir output-vertex_ai/08-29-11-37-32 --model_name gemini-2.5-flash --model_args api_provider=vertex_ai --skip_tokenize_prompts

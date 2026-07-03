@@ -1,0 +1,78 @@
+#!/bin/bash
+# run-openai
+
+usage() {
+  echo "Usage: $(basename "$0") [-d | --dry-run | -t | --test | -h | --help]"
+  echo "  -d, --dry-run: Only displays the command without executing it."
+  echo "  -t, --test: Runs with testing options (--rerun_cached_results --limit 3) and skips certain tasks."
+  echo "  -h, --help: Displays this help message and exits."
+  exit 0
+}
+
+# Initialize flags
+DRY_RUN=false
+TEST_RUN=false
+
+# Process command-line arguments
+while (( "$#" )); do
+  case "$1" in
+    -d | --dry-run)
+      DRY_RUN=true
+      shift
+      ;;
+    -t | --test)
+      TEST_RUN=true
+      shift
+      ;;
+    -h | --help)
+      usage
+      ;;
+    *)
+      echo "Error: Unrecognized argument: $1" >&2
+      usage
+      ;;
+  esac
+done
+
+# Generate a timestamp for the output directory and log file
+NOW=$(date +"%m-%d-%H-%M-%S")
+
+# Create output directory if it doesn't exist
+DIR_NAME="output-openai"
+DIR_OUTPUT="$DIR_NAME/$NOW"
+mkdir -p "$DIR_OUTPUT"
+
+MODEL_NAME="gpt-4.1-nano"
+API_PROVIDER="openai"
+OUTPUT_LOG="$DIR_OUTPUT/$(basename "$0").out"
+#OUTPUT_LOG="$DIR_OUTPUT/$(basename "$0")-$NOW.out"
+
+# Define the command and its arguments
+CMD="python seahelm_evaluation.py"
+ARGS="--tasks seahelm --model_type litellm --output_dir $DIR_OUTPUT --model_name $MODEL_NAME --model_args api_provider=$API_PROVIDER,api_key=\$OPENAI_API_KEY"
+SKIP_TO_AVOID_ERROR="--skip_tokenize_prompts"
+OPTIONS_TESTING="--rerun_cached_results --limit 3"
+OPTIONS_SKIP_TASKS="--skip_tasks cultural,instruction_following,lindsea,multi_turn,nlg,nlr,safety"
+
+# Build the full command based on the test flag
+if [ "$TEST_RUN" = true ]; then
+  FULL_CMD="$CMD $ARGS $SKIP_TO_AVOID_ERROR $OPTIONS_TESTING $OPTIONS_SKIP_TASKS"
+else
+  #FULL_CMD="$CMD $ARGS $SKIP_TO_AVOID_ERROR"
+  FULL_CMD="$CMD $ARGS"
+fi
+
+# Write the starting messages to the log file using 'tee' to both display and write
+echo "To view the log, run:" | tee "$OUTPUT_LOG"
+echo "  $ tail -f $OUTPUT_LOG" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "$FULL_CMD" | tee -a "$OUTPUT_LOG"
+
+if [ "$DRY_RUN" = false ]; then
+  # Append the command output to the log file
+  eval "$FULL_CMD" >> "$OUTPUT_LOG" 2>&1
+
+  TIME_FINISHED=$(date +"%m-%d %H:%M:%S")
+  echo "" >> "$OUTPUT_LOG"
+  echo "Execution finished at $TIME_FINISHED" >> "$OUTPUT_LOG"
+fi

@@ -1,0 +1,15 @@
+#!/bin/bash
+# filter_output_log
+
+A="<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
+#B="LiteLLM completion() model="
+B="LiteLLM completion() model= gemini-2.5-flash; provider = vertex_ai"
+C="Wrapper: Completed Call, calling success_handler"
+
+Z="$A|$B|$C"
+
+LOG_FILE="output-run-vertex.log"
+
+CMD="grep -v -E \"$Z\" $LOG_FILE"
+echo $CMD
+eval $CMD

@@ -1,0 +1,66 @@
+#!/bin/bash
+# run-anthropic
+#   runs an evaluation 
+
+set -euo pipefail
+
+# https://docs.litellm.ai/docs/#basic-usage 
+# Select the Anthropic tab to see below:
+# from litellm import completion
+# import os
+
+# ## set ENV variables
+# os.environ["ANTHROPIC_API_KEY"] = "your-api-key"
+
+# response = completion(
+#   model="anthropic/claude-3-sonnet-20240229",
+#   messages=[{ "content": "Hello, how are you?","role": "user"}]
+# )
+
+# anthropic/claude-3-sonnet-20240229
+#   failed
+# anthropic/claude-3-5-sonnet-20240620
+#   may work from a unit testing.
+
+# Configure
+#MODEL_NAME="anthropic/claude-3-sonnet-20240229"
+MODEL_NAME="anthropic/claude-3-5-sonnet-20240620"
+OUTPUT_DIR="output_openai"
+MODEL_TYPE="litellm"
+
+# Examples of MODEL_ARGS
+#  OpenAI: --model_args "api_provider=openai,base_url=http://localhost:8000/v1,api_key=token-abc123"
+#  Ollama: --model_args "api_provider=ollama,base_url=http://localhost:11434"
+
+# Don't delete this part.
+# vertex_ai failed.
+#API_PROVIDER="vertex"  # TODO: Ensure this is correct 
+#PORT_NUMBER=""         # TODO: Find the correct port number for Vertex AI Gemini API. "http:///localpost:$PORT_NUMBER" 
+#API_KEY=`echo $GOOGLE_API_KEY`
+#MODEL_ARGS="api_provider=$API_PROVIDER,base_url=http://localhost:$PORT_NUMBER"
+#MODEL_ARGS="api_provider=$API_PROVIDER,base_url=http://localhost:$PORT_NUMBER,api_key=$API_KEY"
+#MODEL_ARGS="api_provider=$API_PROVIDER"
+#MODEL_ARGS="api_provider=$API_PROVIDER,api_key=$API_KEY"
+# Don't delete this part.
+
+# vertex_ai failed, but Gemini-CLI & 2.5 Flash said vertex_ai is correct (not vertex)
+API_PROVIDER="anthropic"
+#PORT_NUMBER="11434"
+API_KEY=`echo $OPENAI_API_KEY`
+MODEL_ARGS="api_provider=$API_PROVIDER,base_url=http://localhost:$PORT_NUMBER,api_key=$API_KEY"
+
+echo "MODEL_ARGS=${MODEL_ARGS}"
+
+# Ensure the main script exists and is executable.
+if [ ! -x "./run_evaluation.sh" ]; then
+    echo "Error: 'run_evaluation.sh' was not found or is not executable." >&2
+    echo "Ensure it exists in the current directory and has execute permissions." >&2
+    echo "  $ chmod +x run_evaluation.sh" >&2
+    exit 1
+fi
+
+# Run
+CMD="python seahelm_evaluation.py --tasks seahelm --output_dir $OUTPUT_DIR --model_type litellm --model_name $MODEL_NAME --model_args $MODEL_ARGS"
+echo $CMD
+eval $CMD 
+#./run_evaluation.sh "$MODEL_NAME" "$OUTPUT_DIR" "$MODEL_TYPE"

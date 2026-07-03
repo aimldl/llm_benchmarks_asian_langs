@@ -1,0 +1,412 @@
+[
+  {
+    "sha": "a8115e5bc995cc538f397c02711993f383348503",
+    "node_id": "C_kwDOAE3WVdoAKGE4MTE1ZTViYzk5NWNjNTM4ZjM5N2MwMjcxMTk5M2YzODMzNDg1MDM",
+    "commit": {
+      "author": {
+        "name": "dependabot[bot]",
+        "email": "49699333+dependabot[bot]@users.noreply.github.com",
+        "date": "2025-08-04T12:12:16Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2025-08-04T12:12:16Z"
+      },
+      "message": "build(deps): bump jsonschema from 4.24.0 to 4.25.0 in /docs (#3382)\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+      "tree": {
+        "sha": "8cb5ac0da5487d3c6ddb4954b6e6f05fa39c316a",
+        "url": "https://api.github.com/repos/jqlang/jq/git/trees/8cb5ac0da5487d3c6ddb4954b6e6f05fa39c316a"
+      },
+      "url": "https://api.github.com/repos/jqlang/jq/git/commits/a8115e5bc995cc538f397c02711993f383348503",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJokKOgCRC1aQ7uu5UhlAAAHu4QAC0zcaT62dIU2mO7ZKD7TVEm\nE1UMdNtoN4ihScX5iabA1xhxDzG1j4z2jHvP1V71W631aYeKAVupukXZ9pTxcTjK\n7a87H8B8eAqVA5vPl30bwCQpGb702dzb1YbLqDgET+cRLqg2phVAmwgNFdo0mZI+\nWnq3zJ8rSOc6V51to7NQrlRR2Xyhl6kKQh5/daLR1XVKYbjvI5mGA/3Q9xierjl1\nnOsveecxDvwB/V13YY7NFCOQWpyYPduyUj4tWtmdYxcKXvkW27ydr8CtkzkJ+REV\nipYiJw/PSOQcEDC7zde2RePXr010Y8jZVSXjYxUE/VjIyfFt9vMrg0GmLqZkRnJf\nPJtm36YAIhrzaB+AxHlid9PcU+9o5fwSYhlI4DakWxoE3bRuFwEes/rnapWAHTQd\n5taTHzM0n1Xdg/bcJfYIXtUfh6e70SvL5rKY5TnOuyTKZBQKIQuYcbyRTwkfmWl/\nndQEhv4wksyBwHSO/wCeYbz+jBbshHpNGHPvMPA+pDGODTWwX5DI4yFRcz5/RdoK\nfzp7RgJAWq6j3tLshk8nCWhGCu54q0f3tz5GVo2gR2WGmhXzlBhqkwAq4mE3c8Vk\nkx3TDOFaQNXucA+T12j6jSsPJ88pW1wr1QdktxXsBv3/ZXp2bPpP/JfhxbRj80/K\nSTCvEjeEQsQOylXnIvm2\n=wOqI\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 8cb5ac0da5487d3c6ddb4954b6e6f05fa39c316a\nparent 0ff997f7c4c07660ffc6ad2506d5f56b8136208b\nauthor dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> 1754309536 +0900\ncommitter GitHub <noreply@github.com> 1754309536 +0900\n\nbuild(deps): bump jsonschema from 4.24.0 to 4.25.0 in /docs (#3382)\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+        "verified_at": "2025-08-04T12:12:17Z"
+      }
+    },
+    "url": "https://api.github.com/repos/jqlang/jq/commits/a8115e5bc995cc538f397c02711993f383348503",
+    "html_url": "https://github.com/jqlang/jq/commit/a8115e5bc995cc538f397c02711993f383348503",
+    "comments_url": "https://api.github.com/repos/jqlang/jq/commits/a8115e5bc995cc538f397c02711993f383348503/comments",
+    "author": {
+      "login": "dependabot[bot]",
+      "id": 49699333,
+      "node_id": "MDM6Qm90NDk2OTkzMzM=",
+      "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/dependabot%5Bbot%5D",
+      "html_url": "https://github.com/apps/dependabot",
+      "followers_url": "https://api.github.com/users/dependabot%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/dependabot%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/dependabot%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/dependabot%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/dependabot%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/dependabot%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/dependabot%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/dependabot%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/dependabot%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0ff997f7c4c07660ffc6ad2506d5f56b8136208b",
+        "url": "https://api.github.com/repos/jqlang/jq/commits/0ff997f7c4c07660ffc6ad2506d5f56b8136208b",
+        "html_url": "https://github.com/jqlang/jq/commit/0ff997f7c4c07660ffc6ad2506d5f56b8136208b"
+      }
+    ]
+  },
+  {
+    "sha": "0ff997f7c4c07660ffc6ad2506d5f56b8136208b",
+    "node_id": "C_kwDOAE3WVdoAKDBmZjk5N2Y3YzRjMDc2NjBmZmM2YWQyNTA2ZDVmNTZiODEzNjIwOGI",
+    "commit": {
+      "author": {
+        "name": "itchyny",
+        "email": "itchyny@cybozu.co.jp",
+        "date": "2025-07-31T14:00:24Z"
+      },
+      "committer": {
+        "name": "itchyny",
+        "email": "itchyny@cybozu.co.jp",
+        "date": "2025-07-31T14:00:24Z"
+      },
+      "message": "Update GPG signing key (fix #3381)",
+      "tree": {
+        "sha": "a241354707dd5b26ecfb3dbce515c9cb51672093",
+        "url": "https://api.github.com/repos/jqlang/jq/git/trees/a241354707dd5b26ecfb3dbce515c9cb51672093"
+      },
+      "url": "https://api.github.com/repos/jqlang/jq/git/commits/0ff997f7c4c07660ffc6ad2506d5f56b8136208b",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/jqlang/jq/commits/0ff997f7c4c07660ffc6ad2506d5f56b8136208b",
+    "html_url": "https://github.com/jqlang/jq/commit/0ff997f7c4c07660ffc6ad2506d5f56b8136208b",
+    "comments_url": "https://api.github.com/repos/jqlang/jq/commits/0ff997f7c4c07660ffc6ad2506d5f56b8136208b/comments",
+    "author": {
+      "login": "itchyny",
+      "id": 375258,
+      "node_id": "MDQ6VXNlcjM3NTI1OA==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/375258?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/itchyny",
+      "html_url": "https://github.com/itchyny",
+      "followers_url": "https://api.github.com/users/itchyny/followers",
+      "following_url": "https://api.github.com/users/itchyny/following{/other_user}",
+      "gists_url": "https://api.github.com/users/itchyny/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/itchyny/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/itchyny/subscriptions",
+      "organizations_url": "https://api.github.com/users/itchyny/orgs",
+      "repos_url": "https://api.github.com/users/itchyny/repos",
+      "events_url": "https://api.github.com/users/itchyny/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/itchyny/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "itchyny",
+      "id": 375258,
+      "node_id": "MDQ6VXNlcjM3NTI1OA==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/375258?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/itchyny",
+      "html_url": "https://github.com/itchyny",
+      "followers_url": "https://api.github.com/users/itchyny/followers",
+      "following_url": "https://api.github.com/users/itchyny/following{/other_user}",
+      "gists_url": "https://api.github.com/users/itchyny/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/itchyny/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/itchyny/subscriptions",
+      "organizations_url": "https://api.github.com/users/itchyny/orgs",
+      "repos_url": "https://api.github.com/users/itchyny/repos",
+      "events_url": "https://api.github.com/users/itchyny/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/itchyny/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "4357b6154e35a9984152f3eef2759c9b118db719",
+        "url": "https://api.github.com/repos/jqlang/jq/commits/4357b6154e35a9984152f3eef2759c9b118db719",
+        "html_url": "https://github.com/jqlang/jq/commit/4357b6154e35a9984152f3eef2759c9b118db719"
+      }
+    ]
+  },
+  {
+    "sha": "4357b6154e35a9984152f3eef2759c9b118db719",
+    "node_id": "C_kwDOAE3WVdoAKDQzNTdiNjE1NGUzNWE5OTg0MTUyZjNlZWYyNzU5YzliMTE4ZGI3MTk",
+    "commit": {
+      "author": {
+        "name": "Dennis Ameling",
+        "email": "dennis@dennisameling.com",
+        "date": "2025-07-26T23:23:57Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2025-07-26T23:23:57Z"
+      },
+      "message": "CI: add builds for Windows arm64 (#3376)",
+      "tree": {
+        "sha": "ecd73e3ed542bb2fe015c475387412c16a9e47e3",
+        "url": "https://api.github.com/repos/jqlang/jq/git/trees/ecd73e3ed542bb2fe015c475387412c16a9e47e3"
+      },
+      "url": "https://api.github.com/repos/jqlang/jq/git/commits/4357b6154e35a9984152f3eef2759c9b118db719",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJohWOOCRC1aQ7uu5UhlAAA7WcQACO1yRIjP0tPD0SmP3zbr909\nSY5jqcYM4RhYNDgLq0MIP6Sq9TlnnlZbVEdQDQrNFwvTd4yaaMzZ2eA0T/ccuYOB\n0afPwbLuC9gUXmMACzaGPy/f8wMlt28NXpH4memt1lXEZBEArcKZc/QUi0vvOLj8\n/Db+3XZm7o8bPErEjdpoxKCGObzTtLuU6aRTFFU/3URlsx8JtxI52Am3Q9+bc/7M\n+Zm1vrLg2qm42HqAX7BK6kPg0EyzQwvTNZDp8Vwm4D2p+2lTS5AgdmJ28WSJRIRf\npajL1mE4TZHCp60jyFrFbIB5Od8opK5JLHH8B9msZ1fLa6He2Jl5jhdB8cn64mFO\nPxdSWLYow0NsoNScTwbb94wWVTWw5mHm0neLsCT8iL9fbrYwjzOpbGf7qkbV1lUF\nVZj3atpCy4hY5KHfXiYTDu294cE2HGK8VL7KFwKKxZOB9OMIaGVJV/6ut4/ri8uH\n7n8gsqQ/Dsm0mIYJ+nYwUDp9K2I78pwxuuAryDV/sEPdHCEhqDI0Z2v+d/LymX6/\nk7agsFWgVdT82PGeD9oKKbfblYw0B6KtDYIr2uQk+q2khmWUiECa+8KnRaWThwzy\nh9moe+fU6dxLYq7X4dHs1ezwVhhyOa4TW/7murV9uemi8abKx1AGamrI2WOSq3zC\nGQe7pTJ8VzjVw8bl/O4b\n=pmmV\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree ecd73e3ed542bb2fe015c475387412c16a9e47e3\nparent 3c5ceac8e7df14e2bd236aa4031c83e46b82e010\nauthor Dennis Ameling <dennis@dennisameling.com> 1753572237 +0200\ncommitter GitHub <noreply@github.com> 1753572237 +0900\n\nCI: add builds for Windows arm64 (#3376)\n\n",
+        "verified_at": "2025-07-26T23:23:58Z"
+      }
+    },
+    "url": "https://api.github.com/repos/jqlang/jq/commits/4357b6154e35a9984152f3eef2759c9b118db719",
+    "html_url": "https://github.com/jqlang/jq/commit/4357b6154e35a9984152f3eef2759c9b118db719",
+    "comments_url": "https://api.github.com/repos/jqlang/jq/commits/4357b6154e35a9984152f3eef2759c9b118db719/comments",
+    "author": {
+      "login": "dennisameling",
+      "id": 17739158,
+      "node_id": "MDQ6VXNlcjE3NzM5MTU4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17739158?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/dennisameling",
+      "html_url": "https://github.com/dennisameling",
+      "followers_url": "https://api.github.com/users/dennisameling/followers",
+      "following_url": "https://api.github.com/users/dennisameling/following{/other_user}",
+      "gists_url": "https://api.github.com/users/dennisameling/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/dennisameling/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/dennisameling/subscriptions",
+      "organizations_url": "https://api.github.com/users/dennisameling/orgs",
+      "repos_url": "https://api.github.com/users/dennisameling/repos",
+      "events_url": "https://api.github.com/users/dennisameling/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/dennisameling/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "3c5ceac8e7df14e2bd236aa4031c83e46b82e010",
+        "url": "https://api.github.com/repos/jqlang/jq/commits/3c5ceac8e7df14e2bd236aa4031c83e46b82e010",
+        "html_url": "https://github.com/jqlang/jq/commit/3c5ceac8e7df14e2bd236aa4031c83e46b82e010"
+      }
+    ]
+  },
+  {
+    "sha": "3c5ceac8e7df14e2bd236aa4031c83e46b82e010",
+    "node_id": "C_kwDOAE3WVdoAKDNjNWNlYWM4ZTdkZjE0ZTJiZDIzNmFhNDAzMWM4M2U0NmI4MmUwMTA",
+    "commit": {
+      "author": {
+        "name": "Alyssa Ross",
+        "email": "hi@alyssa.is",
+        "date": "2025-07-04T16:25:28Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2025-07-04T16:25:28Z"
+      },
+      "message": "jq.test: drop non-portable %F test (#3365)\n\n%F is a non-portable GNU extension, not supported by all strptime\nimplementations (for example musl's).",
+      "tree": {
+        "sha": "c84b2cc87b94d01b09fa069f7f213cf04bdfde5a",
+        "url": "https://api.github.com/repos/jqlang/jq/git/trees/c84b2cc87b94d01b09fa069f7f213cf04bdfde5a"
+      },
+      "url": "https://api.github.com/repos/jqlang/jq/git/commits/3c5ceac8e7df14e2bd236aa4031c83e46b82e010",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJoaAB4CRC1aQ7uu5UhlAAAml8QAFmBkpwPPZ05vfQG131deeGa\nr2AG+rs83huMa8L4Gcy46ZqBTvqKl/560jQj/WzpMPhxVKIeRRBUSKMaXK6rpJzz\n+zbIMaUoEN1huxfJjXvVTMld37xUyENSAME90kYEkjFbx3ZXsj5hlD5U7Cz8RYVE\nLaTGhisxTtHDdVmDVXUEAN9OAl7f6PFwVED+jfRTZfm7VYFPpib7KHdgmJ1uMBbi\nHk2tqs8jittbB65X6lK1si131T5f33jLGjQDCte314jxeMp11G06x4NKIedVXjJD\nGMdfrS2fysGctJSxbHukoG3muQseQm9/KT2CB51HX9Amrdr43b83CSH2A57SAUl8\ne26YW1/XqczXI2CJxEOIYQjYRQnGWIQT5vSfd+aRx1F9SJGrltoAi+4orDLFG7Da\n1ZsVPuADjAs1TBSIlBSW/3eF0GBG9IX5+4ypEFwlxLrbxcq2JM+gqHe+vXgB7aAm\niXHh1FnGXkRQFghqyelEA2lE7CaC7xwg2cslTl/dJeOYCU6iSxlbe6p02UlE4dBJ\nkcD6jDna3t5OlitQbK+CzJ10lx0myp9SQ1FahUWm/lvTbHv3MJIIuXW3Yxolp7ce\nEFUjcJNpltOG2ozsEbgmuEX2qjkKuZV2JDZeAvGsrz4oRZzPRzzYzXuHZuQTfWL+\nn+81Vh8kMzXExWZAPPN0\n=nRTR\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree c84b2cc87b94d01b09fa069f7f213cf04bdfde5a\nparent b9e19de76e6e19d044007ead65d164710dc98877\nauthor Alyssa Ross <hi@alyssa.is> 1751646328 +0200\ncommitter GitHub <noreply@github.com> 1751646328 +0900\n\njq.test: drop non-portable %F test (#3365)\n\n%F is a non-portable GNU extension, not supported by all strptime\nimplementations (for example musl's).",
+        "verified_at": "2025-07-04T16:25:29Z"
+      }
+    },
+    "url": "https://api.github.com/repos/jqlang/jq/commits/3c5ceac8e7df14e2bd236aa4031c83e46b82e010",
+    "html_url": "https://github.com/jqlang/jq/commit/3c5ceac8e7df14e2bd236aa4031c83e46b82e010",
+    "comments_url": "https://api.github.com/repos/jqlang/jq/commits/3c5ceac8e7df14e2bd236aa4031c83e46b82e010/comments",
+    "author": {
+      "login": "alyssais",
+      "id": 2768870,
+      "node_id": "MDQ6VXNlcjI3Njg4NzA=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2768870?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alyssais",
+      "html_url": "https://github.com/alyssais",
+      "followers_url": "https://api.github.com/users/alyssais/followers",
+      "following_url": "https://api.github.com/users/alyssais/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alyssais/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alyssais/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alyssais/subscriptions",
+      "organizations_url": "https://api.github.com/users/alyssais/orgs",
+      "repos_url": "https://api.github.com/users/alyssais/repos",
+      "events_url": "https://api.github.com/users/alyssais/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alyssais/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "b9e19de76e6e19d044007ead65d164710dc98877",
+        "url": "https://api.github.com/repos/jqlang/jq/commits/b9e19de76e6e19d044007ead65d164710dc98877",
+        "html_url": "https://github.com/jqlang/jq/commit/b9e19de76e6e19d044007ead65d164710dc98877"
+      }
+    ]
+  },
+  {
+    "sha": "b9e19de76e6e19d044007ead65d164710dc98877",
+    "node_id": "C_kwDOAE3WVdoAKGI5ZTE5ZGU3NmU2ZTE5ZDA0NDAwN2VhZDY1ZDE2NDcxMGRjOTg4Nzc",
+    "commit": {
+      "author": {
+        "name": "itchyny",
+        "email": "itchyny@cybozu.co.jp",
+        "date": "2025-07-01T11:54:28Z"
+      },
+      "committer": {
+        "name": "itchyny",
+        "email": "itchyny@cybozu.co.jp",
+        "date": "2025-07-01T11:54:28Z"
+      },
+      "message": "Update jq documentation for jq 1.8.1 release",
+      "tree": {
+        "sha": "255fef9205c175ad890a5322b0e2e3897a5f47bd",
+        "url": "https://api.github.com/repos/jqlang/jq/git/trees/255fef9205c175ad890a5322b0e2e3897a5f47bd"
+      },
+      "url": "https://api.github.com/repos/jqlang/jq/git/commits/b9e19de76e6e19d044007ead65d164710dc98877",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/jqlang/jq/commits/b9e19de76e6e19d044007ead65d164710dc98877",
+    "html_url": "https://github.com/jqlang/jq/commit/b9e19de76e6e19d044007ead65d164710dc98877",
+    "comments_url": "https://api.github.com/repos/jqlang/jq/commits/b9e19de76e6e19d044007ead65d164710dc98877/comments",
+    "author": {
+      "login": "itchyny",
+      "id": 375258,
+      "node_id": "MDQ6VXNlcjM3NTI1OA==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/375258?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/itchyny",
+      "html_url": "https://github.com/itchyny",
+      "followers_url": "https://api.github.com/users/itchyny/followers",
+      "following_url": "https://api.github.com/users/itchyny/following{/other_user}",
+      "gists_url": "https://api.github.com/users/itchyny/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/itchyny/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/itchyny/subscriptions",
+      "organizations_url": "https://api.github.com/users/itchyny/orgs",
+      "repos_url": "https://api.github.com/users/itchyny/repos",
+      "events_url": "https://api.github.com/users/itchyny/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/itchyny/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "itchyny",
+      "id": 375258,
+      "node_id": "MDQ6VXNlcjM3NTI1OA==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/375258?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/itchyny",
+      "html_url": "https://github.com/itchyny",
+      "followers_url": "https://api.github.com/users/itchyny/followers",
+      "following_url": "https://api.github.com/users/itchyny/following{/other_user}",
+      "gists_url": "https://api.github.com/users/itchyny/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/itchyny/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/itchyny/subscriptions",
+      "organizations_url": "https://api.github.com/users/itchyny/orgs",
+      "repos_url": "https://api.github.com/users/itchyny/repos",
+      "events_url": "https://api.github.com/users/itchyny/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/itchyny/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "3db7b519bfd8f74434990f017f3245050c1e294c",
+        "url": "https://api.github.com/repos/jqlang/jq/commits/3db7b519bfd8f74434990f017f3245050c1e294c",
+        "html_url": "https://github.com/jqlang/jq/commit/3db7b519bfd8f74434990f017f3245050c1e294c"
+      }
+    ]
+  }
+]

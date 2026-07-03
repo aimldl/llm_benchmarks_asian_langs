@@ -1,0 +1,108 @@
+#!/bin/bash
+# parallel-run-with-tmux
+
+# HELP MESSAGE 
+usage() {
+  echo "Usage: $(basename "$0") [-m model_name] [-r num_runs] [-h]"
+  echo ""
+  echo "Runs multiple instances of the run-vertex_ai.sh script in parallel using tmux."
+  echo ""
+  echo "Options:"
+  echo "  -m, --model     The model to use. Defaults to 'gemini-2.5-flash'."
+  echo "  -r, --num_runs  The number of parallel runs to execute. Defaults to 8."
+  echo "  -h, --help      Displays this help message and exits."
+  exit 0
+}
+
+# ARGUMENT PARSING 
+# Default values
+MODEL_NAME="gemini-2.5-flash"
+NUM_RUNS=3
+
+# Parse command-line arguments
+while (( "$#" )); do
+  case "$1" in
+    -m | --model)
+      if [ -n "$2" ]; then
+        MODEL_NAME="$2"
+        shift 2
+      else
+        echo "Error: -m|--model requires a value." >&2
+        exit 1
+      fi
+      ;;
+    -r | --num_runs)
+      if [[ -n "$2" && "$2" =~ ^[0-9]+$ && "$2" -ge 1 ]]; then
+        NUM_RUNS="$2"
+        shift 2
+      else
+        echo "Error: -r|--num_runs requires a positive integer value." >&2
+        exit 1
+      fi
+      ;;
+    -h | --help)
+      usage
+      ;;
+    -*)
+      echo "Error: Unrecognized option: $1" >&2
+      exit 1
+      ;;
+    *)
+      echo "Error: Positional arguments are not supported. Use -m and -r flags." >&2
+      exit 1
+      ;;
+  esac
+done
+
+TMUX_SESSION_NAME="$NUM_RUNSx$MODEL_NAME"
+# If the model name contains a dot, notify the user and convert it for tmux.
+if [[ "$MODEL_NAME" =~ "." ]]; then
+  echo "A dot is found in the model name. Converting it to an underscore for tmux..."
+  MODEL_NAME_TMUX=$(echo "$MODEL_NAME" | tr '.' '_')
+  echo "$MODEL_NAME --> $MODEL_NAME_TMUX"
+
+  TMUX_SESSION_NAME="$NUM_RUNSx$MODEL_NAME_TMUX"
+fi
+
+
+# Function to display and execute a command
+run() {
+  local cmd="$1"
+  echo "$cmd"
+  eval "$cmd"
+}
+
+echo "Checking for tmux..."
+if ! command -v tmux &> /dev/null
+then
+    echo "tmux could not be found. Please install it to run this script."
+    exit 1
+fi
+
+echo "Running $MODEL_NAME for $NUM_RUNS iterations in a new tmux session $TMUX_SESSION_NAME ..."
+echo "To exit the tmux session without stopping the runs, press Ctrl+b then d."
+echo "To reattach to the session, run:"
+echo "   $ tmux attach -t $TMUX_SESSION_NAME"
+echo "To kill a session, run:"
+echo "   $ tmux kill-session -t $TMUX_SESSION_NAME"
+
+# Create a new tmux session and run the first command in the initial pane.
+# Note the careful use of escaping to handle the nested quotes correctly.
+run "./run-vertex_ai $MODEL_NAME -i 1"
+run "tmux new -s $TMUX_SESSION_NAME \"$CMD\""
+#run "tmux ls"
+
+# Create a new pane for each remaining run and execute the command.
+for i in $(seq 2 $NUM_RUNS); do
+    # Split the window to create a new pane and execute the command
+    CMD="./run-vertex_ai $MODEL_NAME -i $i"
+    run "tmux split-window -t $TMUX_SESSION_NAME \"$CMD\""
+    # Select the last pane to ensure the next split command works as expected
+    run "tmux select-pane -t $TMUX_SESSION_NAME -L"
+done
+
+# Set the layout to a grid to see all runs at once.
+run "tmux select-layout tiled"
+
+# Attach to the tmux session to view the progress.
+run "tmux attach -t $TMUX_SESSION_NAME"

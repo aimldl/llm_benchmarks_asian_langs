@@ -95,15 +95,50 @@ class LiteLLMServing(BaseServing):
         logprobs: bool = False,
         **generation_kwargs,
     ):
-        batch_response = litellm.batch_completion(
-            model=self.model,
-            messages=batch_messages,
-            base_url=self.base_url,
-            api_key=self.api_key,
-            logprobs=logprobs,
-            max_workers=self.max_workers,
-            **generation_kwargs,
-        )
+        # The 'model' parameter is expected to be in the format 'api_provider/model_name'.
+        # This code splits it into its components.
+        model_parts = self.model.split("/", 1)
+        if len(model_parts) == 1:
+           # Fallback for models without an explicit provider
+            api_provider = kwargs.get("api_provider")
+            model = self.model
+        elif len(model_parts) == 2:
+            api_provider = model_parts[0]
+            model = model_parts[1]
+        else:
+            print(f"len(model_parts)={len(model_parts)} is not expected")
+
+        if api_provider == "vertex_ai":
+            # logprobs is specific to OpenAI, so drop it
+
+            temperature = generation_kwargs.get("temperature")
+            max_tokens  = generation_kwargs.get("max_tokens")
+            max_tokens  = max_tokens*2
+            top_p       = generation_kwargs.get("top_p")
+            seed        = generation_kwargs.get("seed")            
+
+            batch_response = litellm.batch_completion(
+                model=model,
+                messages=batch_messages,
+                max_workers=self.max_workers,
+                temperature=temperature,
+                #max_tokens=max_tokens,
+                top_p=top_p,
+                seed = seed
+                #candidate_count=candidate_count,                
+                #**,
+                #drop_params=True
+            )                
+        else:
+            batch_response = litellm.batch_completion(
+                model=self.model,
+                messages=batch_messages,
+                base_url=self.base_url,
+                api_key=self.api_key,
+                logprobs=logprobs,
+                max_workers=self.max_workers,
+                **generation_kwargs,
+            )
         return batch_response
 
     async def agenerate(

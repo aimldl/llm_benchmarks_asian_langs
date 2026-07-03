@@ -1,0 +1,29 @@
+#!/bin/bash
+# tmux_3x3
+
+#!/bin/bash
+# Create a new session
+tmux new-session -d -s my_session
+
+# Split the first pane into 3 vertical columns
+tmux split-window -t my_session -h
+tmux split-window -t my_session -h
+
+# Now, split each of those columns into 3 horizontal panes
+tmux select-pane -t my_session:0.0
+tmux split-window -t my_session:0.0 -v
+tmux split-window -t my_session:0.0 -v
+
+tmux select-pane -t my_session:0.3
+tmux split-window -t my_session:0.3 -v
+tmux split-window -t my_session:0.3 -v
+
+tmux select-pane -t my_session:0.6
+tmux split-window -t my_session:0.6 -v
+tmux split-window -t my_session:0.6 -v
+
+# Finally, apply the tiled layout to the window
+tmux select-layout tiled
+
+# Attach to the session
+tmux attach-session -t my_session

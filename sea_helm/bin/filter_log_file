@@ -1,0 +1,39 @@
+#!/bin/bash
+# filter_log_file
+#   removes the repeated lines in run-vertex_ai.out to increase the readability.
+#   This script was created because the log file is too long to be fed to Gemini-CLI.
+# Usage:
+#  $ chmod +x filter_log_file
+#  $ 
+
+# Define the log file to be processed.
+LOG_FILE="${1:-run-vertex_ai.out}"
+
+# Check if the provided log file exists.
+if [ ! -f "$LOG_FILE" ]; then
+    echo "Error: Log file '$LOG_FILE' not found."
+    exit 1
+fi
+
+# Define the regular expression pattern to be filtered out.
+# This pattern excludes lines containing the specified strings.
+# The '\|' is the OR operator in extended regex.
+PATTERN="LiteLLM completion\(\) model= gemini-2.5|Wrapper: Completed Call, calling success_handler|INFO\s+\|\s+utils|LiteLLM:INFO.*utils.py:"
+
+# Define the output file name.
+OUTPUT_FILE="filtered-$(basename "$LOG_FILE")"
+
+# Print the command that will be executed for transparency.
+CMD="grep -vE \"$PATTERN\" \"$LOG_FILE\" > \"$OUTPUT_FILE\""
+echo $CMD
+eval $CMD
+
+# Provide feedback to the user upon successful execution.
+if [ $? -eq 0 ]; then
+    echo "Successfully filtered '$LOG_FILE'."
+    echo "Filtered output saved to '$OUTPUT_FILE'."
+else
+    echo "An error occurred during filtering."
+fi
+
+exit 0

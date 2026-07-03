@@ -1,0 +1,817 @@
+{
+  "id": {
+    "nlu": {
+      "sentiment": {
+        "accuracy": 85.5891731232596,
+        "macro_f1": 86.24993080236047,
+        "null_weighted_f1": 86.24993080236047,
+        "normalized_accuracy": 78.3837596848894,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          38.50733134099937
+        ],
+        "is_cached": false
+      },
+      "qa": {
+        "exact_match": 64.0,
+        "f1": 81.80016006228468,
+        "normalized_f1": 81.80016006228468,
+        "found_in_prediction": 87.0,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          19.807531122998626
+        ],
+        "is_cached": false
+      },
+      "metaphor": {
+        "accuracy": 93.8867438867439,
+        "macro_f1": 62.70352664033811,
+        "null_weighted_f1": 93.73645846911562,
+        "normalized_accuracy": 87.77348777348779,
+        "null_count": 1,
+        "errors": {
+          "RateLimitError": 1
+        },
+        "inference_time_taken": [
+          38.246204155999294
+        ],
+        "is_cached": false
+      }
+    },
+    "safety": {
+      "toxicity": {
+        "accuracy": 69.00961600443945,
+        "macro_f1": 53.51832425298636,
+        "null_weighted_f1": 71.14369237363654,
+        "normalized_accuracy": 53.514424006659176,
+        "null_count": 3,
+        "errors": {
+          "RateLimitError": 1
+        },
+        "inference_time_taken": [
+          99.01360658999874
+        ],
+        "is_cached": false
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "null_count": 0,
+        "rougel_precision": 16.699599432934324,
+        "rougel_recall": 24.665289235678358,
+        "rougel_f1": 19.6215791690257,
+        "normalized_rougel_f1": 19.6215791690257,
+        "errors": {},
+        "inference_time_taken": [
+          26.275653090999185
+        ],
+        "is_cached": false
+      },
+      "translation-en-xx": {
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          216.861622806
+        ],
+        "is_cached": false
+      },
+      "translation-xx-en": {
+        "null_count": 1,
+        "errors": {
+          "ServiceUnavailableError": 1
+        },
+        "inference_time_taken": [
+          715.1770487740014
+        ],
+        "is_cached": false
+      }
+    },
+    "nlr": {
+      "causal": {
+        "accuracy": 98.4,
+        "macro_f1": 65.66545623612214,
+        "null_weighted_f1": 98.30118798547484,
+        "normalized_accuracy": 96.8,
+        "null_count": 1,
+        "errors": {
+          "RateLimitError": 1
+        },
+        "inference_time_taken": [
+          51.79513430500083
+        ],
+        "is_cached": false
+      },
+      "nli": {
+        "accuracy": 84.67261588526775,
+        "macro_f1": 63.411616583119425,
+        "null_weighted_f1": 84.46427328871506,
+        "normalized_accuracy": 77.0089238279016,
+        "null_count": 1,
+        "errors": {
+          "RateLimitError": 1
+        },
+        "inference_time_taken": [
+          108.84102313400035
+        ],
+        "is_cached": false
+      }
+    },
+    "linguistic-diagnostics": {
+      "mp-r": {
+        "accuracy": 87.38839285714286,
+        "subcategories": {
+          "NPIs_and_negation": 85.0,
+          "argument_structure": 83.125,
+          "filler-gap_dependencies": 95.0,
+          "morphology": 86.42857142857143
+        },
+        "normalized_accuracy": 74.77678571428572,
+        "errors": {
+          "RateLimitError": 2
+        },
+        "inference_time_taken": [
+          67.86630567999964
+        ],
+        "is_cached": false
+      },
+      "pragmatic-single": {
+        "subcategories": {
+          "scalar_implicatures": [
+            76.0,
+            80
+          ],
+          "presuppositions": [
+            11.0,
+            20
+          ]
+        },
+        "errors": {},
+        "inference_time_taken": [
+          67.60432025599948
+        ],
+        "is_cached": false
+      },
+      "pragmatic-pair": {
+        "subcategories": {
+          "scalar_implicatures": [
+            20.0,
+            24
+          ],
+          "presuppositions": [
+            58.0,
+            60
+          ]
+        },
+        "errors": {},
+        "inference_time_taken": [
+          42.62840640899958
+        ],
+        "is_cached": false
+      }
+    },
+    "instruction-following": {
+      "if-eval": {
+        "overall_count": 105,
+        "overall_pass": 92,
+        "overall_acc": 87.61904761904762,
+        "correct_language_rate": 1.0,
+        "overall_lang_normalized_acc": 87.61904761904762,
+        "subcategories": {
+          "combination:repeat_prompt": 1.0,
+          "combination:two_responses": 1.0,
+          "detectable_content:number_placeholders": 1.0,
+          "detectable_content:postscript": 1.0,
+          "detectable_format:constrained_response": 1.0,
+          "detectable_format:json_format": 0.6,
+          "detectable_format:multiple_sections": 1.0,
+          "detectable_format:number_bullet_lists": 0.2,
+          "detectable_format:number_highlighted_sections": 1.0,
+          "detectable_format:title": 1.0,
+          "keywords:existence": 1.0,
+          "keywords:forbidden_words": 0.8,
+          "keywords:frequency": 1.0,
+          "keywords:number_frequency": 0.8,
+          "language:response_language": 1.0,
+          "length_constraints:number_paragraphs": 0.4,
+          "length_constraints:number_sentences": 1.0,
+          "length_constraints:number_words": 1.0,
+          "startend:end_checker": 1.0,
+          "startend:first_word": 0.8,
+          "startend:quotation": 0.8
+        },
+        "errors": {},
+        "inference_time_taken": [
+          46.46116822800104
+        ],
+        "is_cached": false
+      }
+    }
+  },
+  "vi": {
+    "nlu": {
+      "sentiment": {
+        "accuracy": 73.10922235726729,
+        "macro_f1": 50.238747332067724,
+        "null_weighted_f1": 66.85102644987144,
+        "normalized_accuracy": 59.66383353590091,
+        "null_count": 2,
+        "errors": {
+          "RateLimitError": 2
+        },
+        "inference_time_taken": [
+          68.66118685699985
+        ],
+        "is_cached": false
+      },
+      "qa": {
+        "exact_match": 49.0,
+        "f1": 74.77445891089113,
+        "normalized_f1": 74.77445891089113,
+        "found_in_prediction": 88.0,
+        "null_count": 3,
+        "errors": {
+          "RateLimitError": 3
+        },
+        "inference_time_taken": [
+          16.41770460999942
+        ],
+        "is_cached": false
+      }
+    },
+    "safety": {
+      "toxicity": {
+        "accuracy": 68.75898588421809,
+        "macro_f1": 40.42303290553145,
+        "null_weighted_f1": 53.78958245296053,
+        "normalized_accuracy": 53.13847882632714,
+        "null_count": 2,
+        "errors": {
+          "RateLimitError": 1
+        },
+        "inference_time_taken": [
+          108.8329429559999
+        ],
+        "is_cached": false
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "null_count": 0,
+        "rougel_precision": 16.266489565663683,
+        "rougel_recall": 26.01642055111064,
+        "rougel_f1": 19.695536298274064,
+        "normalized_rougel_f1": 19.695536298274064,
+        "errors": {},
+        "inference_time_taken": [
+          21.475135018998117
+        ],
+        "is_cached": false
+      },
+      "translation-en-xx": {
+        "null_count": 12,
+        "errors": {
+          "RateLimitError": 11,
+          "ServiceUnavailableError": 1
+        },
+        "inference_time_taken": [
+          613.7346808309994
+        ],
+        "is_cached": false
+      },
+      "translation-xx-en": {
+        "null_count": 38,
+        "errors": {
+          "RateLimitError": 38
+        },
+        "inference_time_taken": [
+          180.46830319500077
+        ],
+        "is_cached": false
+      }
+    },
+    "nlr": {
+      "causal": {
+        "accuracy": 77.8,
+        "macro_f1": 57.566977118546625,
+        "null_weighted_f1": 69.25307347361161,
+        "normalized_accuracy": 55.60000000000001,
+        "null_count": 99,
+        "errors": {
+          "RateLimitError": 99
+        },
+        "inference_time_taken": [
+          70.76926416400238
+        ],
+        "is_cached": false
+      },
+      "nli": {
+        "accuracy": 64.11860962759167,
+        "macro_f1": 52.55245916100486,
+        "null_weighted_f1": 58.017914913749365,
+        "normalized_accuracy": 46.17791444138751,
+        "null_count": 172,
+        "errors": {
+          "RateLimitError": 167,
+          "InternalServerError": 5
+        },
+        "inference_time_taken": [
+          108.80253471499964
+        ],
+        "is_cached": false
+      }
+    },
+    "instruction-following": {
+      "if-eval": {
+        "overall_count": 105,
+        "overall_pass": 86,
+        "overall_acc": 81.9047619047619,
+        "correct_language_rate": 0.9333333333333333,
+        "overall_lang_normalized_acc": 81.9047619047619,
+        "subcategories": {
+          "combination:repeat_prompt": 1.0,
+          "combination:two_responses": 0.8,
+          "detectable_content:number_placeholders": 1.0,
+          "detectable_content:postscript": 0.8,
+          "detectable_format:constrained_response": 1.0,
+          "detectable_format:json_format": 1.0,
+          "detectable_format:multiple_sections": 0.6,
+          "detectable_format:number_bullet_lists": 0.6,
+          "detectable_format:number_highlighted_sections": 0.8,
+          "detectable_format:title": 1.0,
+          "keywords:existence": 1.0,
+          "keywords:forbidden_words": 1.0,
+          "keywords:frequency": 1.0,
+          "keywords:number_frequency": 0.4,
+          "language:response_language": 1.0,
+          "length_constraints:number_paragraphs": 0.4,
+          "length_constraints:number_sentences": 1.0,
+          "length_constraints:number_words": 1.0,
+          "startend:end_checker": 1.0,
+          "startend:first_word": 0.8,
+          "startend:quotation": 0.0
+        },
+        "errors": {
+          "RateLimitError": 7
+        },
+        "inference_time_taken": [
+          45.24296854700151
+        ],
+        "is_cached": false
+      }
+    }
+  },
+  "th": {
+    "nlu": {
+      "sentiment": {
+        "accuracy": 29.983625686599773,
+        "macro_f1": 27.384014324312833,
+        "null_weighted_f1": 10.150341309545292,
+        "normalized_accuracy": 0,
+        "null_count": 722,
+        "errors": {
+          "RateLimitError": 721
+        },
+        "inference_time_taken": [
+          43.322080170000845
+        ],
+        "is_cached": false
+      },
+      "qa": {
+        "exact_match": 64.0,
+        "f1": 83.64418272359448,
+        "normalized_f1": 83.64418272359448,
+        "found_in_prediction": 89.0,
+        "null_count": 3,
+        "errors": {
+          "RateLimitError": 3
+        },
+        "inference_time_taken": [
+          33.51576443399972
+        ],
+        "is_cached": false
+      }
+    },
+    "safety": {
+      "toxicity": {
+        "accuracy": 67.06564654205687,
+        "macro_f1": 45.6023720349563,
+        "null_weighted_f1": 66.62506554307116,
+        "normalized_accuracy": 34.131293084113736,
+        "null_count": 26,
+        "errors": {
+          "RateLimitError": 26
+        },
+        "inference_time_taken": [
+          462.4683450699995
+        ],
+        "is_cached": false
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "null_count": 8,
+        "rougel_precision": 23.45331620140896,
+        "rougel_recall": 23.674666178100516,
+        "rougel_f1": 22.950003377939254,
+        "normalized_rougel_f1": 22.950003377939254,
+        "errors": {
+          "RateLimitError": 8
+        },
+        "inference_time_taken": [
+          28.53060501899745
+        ],
+        "is_cached": false
+      },
+      "translation-en-xx": {
+        "null_count": 11,
+        "errors": {
+          "RateLimitError": 10
+        },
+        "inference_time_taken": [
+          498.9749119920016
+        ],
+        "is_cached": false
+      },
+      "translation-xx-en": {
+        "null_count": 4,
+        "errors": {
+          "RateLimitError": 4
+        },
+        "inference_time_taken": [
+          167.95078714199917
+        ],
+        "is_cached": false
+      }
+    },
+    "nlr": {
+      "causal": {
+        "accuracy": 98.4,
+        "macro_f1": 98.4,
+        "null_weighted_f1": 98.4,
+        "normalized_accuracy": 96.8,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          48.4203078999999
+        ],
+        "is_cached": false
+      },
+      "nli": {
+        "accuracy": 74.79305652958347,
+        "macro_f1": 56.404680483592394,
+        "null_weighted_f1": 74.9806219228555,
+        "normalized_accuracy": 62.18958479437519,
+        "null_count": 3,
+        "errors": {
+          "RateLimitError": 3
+        },
+        "inference_time_taken": [
+          137.43900102200132
+        ],
+        "is_cached": false
+      }
+    },
+    "instruction-following": {
+      "if-eval": {
+        "overall_count": 100,
+        "overall_pass": 80,
+        "overall_acc": 80.0,
+        "correct_language_rate": 1.0,
+        "overall_lang_normalized_acc": 80.0,
+        "subcategories": {
+          "combination:repeat_prompt": 0.8,
+          "combination:two_responses": 1.0,
+          "detectable_content:number_placeholders": 1.0,
+          "detectable_content:postscript": 1.0,
+          "detectable_format:constrained_response": 1.0,
+          "detectable_format:json_format": 0.4,
+          "detectable_format:multiple_sections": 0.4,
+          "detectable_format:number_bullet_lists": 0.0,
+          "detectable_format:number_highlighted_sections": 1.0,
+          "detectable_format:title": 1.0,
+          "keywords:existence": 1.0,
+          "keywords:forbidden_words": 0.6,
+          "keywords:frequency": 1.0,
+          "keywords:number_frequency": 0.4,
+          "language:response_language": 1.0,
+          "length_constraints:number_paragraphs": 1.0,
+          "length_constraints:number_sentences": 1.0,
+          "startend:end_checker": 1.0,
+          "startend:first_word": 0.6,
+          "startend:quotation": 0.8
+        },
+        "errors": {},
+        "inference_time_taken": [
+          52.53751927199846
+        ],
+        "is_cached": false
+      }
+    }
+  },
+  "ta": {
+    "nlu": {
+      "sentiment": {
+        "accuracy": 98.78688944369758,
+        "macro_f1": 98.79930840163935,
+        "null_weighted_f1": 98.79930840163935,
+        "normalized_accuracy": 97.57377888739515,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          71.46295019000172
+        ],
+        "is_cached": false
+      },
+      "qa": {
+        "exact_match": 52.0,
+        "f1": 68.47380397380395,
+        "normalized_f1": 68.47380397380395,
+        "found_in_prediction": 69.0,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          49.455532083000435
+        ],
+        "is_cached": false
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "null_count": 2,
+        "rougel_precision": 11.433604383373323,
+        "rougel_recall": 14.647112201184754,
+        "rougel_f1": 12.467145365281407,
+        "normalized_rougel_f1": 12.467145365281407,
+        "errors": {
+          "RateLimitError": 2
+        },
+        "inference_time_taken": [
+          22.27521611299744
+        ],
+        "is_cached": false
+      },
+      "translation-en-xx": {
+        "null_count": 3,
+        "errors": {
+          "InternalServerError": 2,
+          "Timeout": 1
+        },
+        "inference_time_taken": [
+          723.0765587480018
+        ],
+        "is_cached": false
+      },
+      "translation-xx-en": {
+        "null_count": 5,
+        "errors": {
+          "RateLimitError": 4,
+          "ServiceUnavailableError": 1
+        },
+        "inference_time_taken": [
+          675.6899179699976
+        ],
+        "is_cached": false
+      }
+    },
+    "nlr": {
+      "causal": {
+        "accuracy": 98.2,
+        "macro_f1": 65.53113817422839,
+        "null_weighted_f1": 98.10011384681991,
+        "normalized_accuracy": 96.39999999999999,
+        "null_count": 1,
+        "errors": {
+          "RateLimitError": 1
+        },
+        "inference_time_taken": [
+          69.67574521300048
+        ],
+        "is_cached": false
+      },
+      "nli": {
+        "accuracy": 73.29215442987899,
+        "macro_f1": 55.32690789604412,
+        "null_weighted_f1": 73.62167210700271,
+        "normalized_accuracy": 59.93823164481847,
+        "null_count": 2,
+        "errors": {
+          "RateLimitError": 2
+        },
+        "inference_time_taken": [
+          114.27495335500134
+        ],
+        "is_cached": false
+      }
+    },
+    "linguistic-diagnostics": {
+      "mp-r": {
+        "accuracy": 94.75274725274726,
+        "subcategories": {
+          "argument_structure": 97.85714285714285,
+          "morphology": 96.15384615384616,
+          "filler-gap_dependencies": 95.0,
+          "NPIs_and_negation": 90.0
+        },
+        "normalized_accuracy": 89.50549450549451,
+        "errors": {
+          "RateLimitError": 1
+        },
+        "inference_time_taken": [
+          78.24650115900295
+        ],
+        "is_cached": false
+      },
+      "pragmatic-single": {
+        "subcategories": {
+          "scalar_implicatures": [
+            76.0,
+            80
+          ]
+        },
+        "errors": {},
+        "inference_time_taken": [
+          14.160939920999226
+        ],
+        "is_cached": false
+      },
+      "pragmatic-pair": {
+        "subcategories": {
+          "scalar_implicatures": [
+            23.0,
+            24
+          ],
+          "presuppositions": [
+            49.0,
+            60
+          ]
+        },
+        "errors": {},
+        "inference_time_taken": [
+          23.592584960999375
+        ],
+        "is_cached": false
+      }
+    }
+  },
+  "tl": {
+    "nlu": {
+      "sentiment": {
+        "accuracy": 73.83333333333333,
+        "macro_f1": 52.955271752353504,
+        "null_weighted_f1": 70.25399385812233,
+        "normalized_accuracy": 60.74999999999999,
+        "null_count": 3,
+        "errors": {
+          "RateLimitError": 3
+        },
+        "inference_time_taken": [
+          55.93250315000114
+        ],
+        "is_cached": false
+      },
+      "belebele-qa-mc": {
+        "accuracy": 90.99999999999999,
+        "macro_f1": 91.06375946605057,
+        "null_weighted_f1": 91.06375946605057,
+        "normalized_accuracy": 87.99999999999999,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          89.62379618799969
+        ],
+        "is_cached": false
+      }
+    },
+    "safety": {
+      "toxicity": {
+        "accuracy": 81.5,
+        "macro_f1": 81.49953748843721,
+        "null_weighted_f1": 81.49953748843721,
+        "normalized_accuracy": 62.999999999999986,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          49.157541390002734
+        ],
+        "is_cached": false
+      }
+    },
+    "nlg": {
+      "abssum": {
+        "null_count": 0,
+        "rougel_precision": 21.289361462787806,
+        "rougel_recall": 42.06093018515114,
+        "rougel_f1": 27.72266085217938,
+        "normalized_rougel_f1": 27.72266085217938,
+        "errors": {},
+        "inference_time_taken": [
+          19.69014542199875
+        ],
+        "is_cached": false
+      },
+      "translation-en-xx": {
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          151.8832071350007
+        ],
+        "is_cached": false
+      },
+      "translation-xx-en": {
+        "metricx_wmt24_scores": 1.8694659423828126,
+        "normalized_metricx_wmt24_scores": 92.52213623046875,
+        "metricx_wmt24_wo_ref_scores": 2.988561197916667,
+        "normalized_metricx_wmt24_wo_ref_scores": 88.04575520833333,
+        "null_count": 2,
+        "errors": {
+          "RateLimitError": 2
+        },
+        "inference_time_taken": [
+          109.23166932099775
+        ],
+        "is_cached": false
+      }
+    },
+    "nlr": {
+      "causal": {
+        "accuracy": 98.25120628015699,
+        "macro_f1": 65.58187134502923,
+        "null_weighted_f1": 98.12687499999998,
+        "normalized_accuracy": 96.502412560314,
+        "null_count": 1,
+        "errors": {
+          "ServiceUnavailableError": 1
+        },
+        "inference_time_taken": [
+          622.7645164770001
+        ],
+        "is_cached": false
+      },
+      "nli": {
+        "accuracy": 79.66666666666667,
+        "macro_f1": 79.74151912693173,
+        "null_weighted_f1": 79.74151912693172,
+        "normalized_accuracy": 69.5,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          94.37416636700073
+        ],
+        "is_cached": false
+      }
+    },
+    "instruction-following": {
+      "if-eval": {
+        "overall_count": 105,
+        "overall_pass": 95,
+        "overall_acc": 90.47619047619048,
+        "correct_language_rate": 1.0,
+        "overall_lang_normalized_acc": 90.47619047619048,
+        "subcategories": {
+          "combination:repeat_prompt": 1.0,
+          "combination:two_responses": 1.0,
+          "detectable_content:number_placeholders": 1.0,
+          "detectable_content:postscript": 1.0,
+          "detectable_format:constrained_response": 1.0,
+          "detectable_format:json_format": 0.8,
+          "detectable_format:multiple_sections": 1.0,
+          "detectable_format:number_bullet_lists": 0.2,
+          "detectable_format:number_highlighted_sections": 1.0,
+          "detectable_format:title": 1.0,
+          "keywords:existence": 1.0,
+          "keywords:forbidden_words": 0.8,
+          "keywords:frequency": 1.0,
+          "keywords:number_frequency": 0.4,
+          "language:response_language": 1.0,
+          "length_constraints:number_paragraphs": 0.8,
+          "length_constraints:number_sentences": 1.0,
+          "length_constraints:number_words": 1.0,
+          "startend:end_checker": 1.0,
+          "startend:first_word": 1.0,
+          "startend:quotation": 1.0
+        },
+        "errors": {},
+        "inference_time_taken": [
+          49.955171367997536
+        ],
+        "is_cached": false
+      }
+    },
+    "cultural": {
+      "kalahi-mc": {
+        "accuracy": 96.01706970128023,
+        "macro_f1": 96.02595529920691,
+        "null_weighted_f1": 96.02595529920691,
+        "normalized_accuracy": 94.68942626837364,
+        "null_count": 0,
+        "errors": {},
+        "inference_time_taken": [
+          29.481902580999304
+        ],
+        "is_cached": false
+      }
+    }
+  }
+}

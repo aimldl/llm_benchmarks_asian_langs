@@ -1,0 +1,96 @@
+#!/bin/bash
+# run-vertex_ai
+
+usage() {
+  echo "Usage: $(basename "$0") [-d | --dry-run | -t | --test | -h | --help]"
+  echo "  -d, --dry-run: Only displays the command without executing it."
+  echo "  -t, --test: Runs with testing options (--rerun_cached_results --limit 3) and skips certain tasks."
+  echo "  -h, --help: Displays this help message and exits."
+  exit 0
+}
+
+# Initialize flags
+DRY_RUN=false
+TEST_RUN=false
+
+# Process command-line arguments
+while (( "$#" )); do
+  case "$1" in
+    -d | --dry-run)
+      DRY_RUN=true
+      shift
+      ;;
+    -t | --test)
+      TEST_RUN=true
+      shift
+      ;;
+    -h | --help)
+      usage
+      ;;
+    *)
+      echo "Error: Unrecognized argument: $1" >&2
+      usage
+      ;;
+  esac
+done
+
+# Generate a timestamp for the output directory and log file
+NOW=$(date +"%m-%d-%H-%M-%S")
+
+# Create output directory if it doesn't exist
+DIR_NAME="output-vertex_ai"
+DIR_OUTPUT="$DIR_NAME/$NOW"
+mkdir -p "$DIR_OUTPUT"
+
+#MODEL_NAME="gemini-2.5-flash"
+MODEL_NAME="${1:-"gemini-2.5-flash"}"
+
+API_PROVIDER="vertex_ai"
+OUTPUT_LOG="$DIR_OUTPUT/$(basename "$0").out"
+#OUTPUT_LOG="$DIR_OUTPUT/$(basename "$0")-$NOW.out"
+
+# Define the command and its arguments
+CMD="python seahelm_evaluation.py"
+ARGS="--tasks seahelm --model_type litellm --output_dir $DIR_OUTPUT --model_name $MODEL_NAME --model_args api_provider=$API_PROVIDER"
+SKIP_TO_AVOID_ERROR="--skip_tokenize_prompts"
+OPTIONS_TESTING="--limit 1"
+#OPTIONS_TESTING="--rerun_cached_results --limit 3"
+#OPTIONS_SKIP_TASKS="--skip_tasks cultural,instruction_following,lindsea,multi_turn,nlg,nlr,safety"
+
+# Build the full command based on the test flag
+if [ "$TEST_RUN" = true ]; then
+  FULL_CMD="$CMD $ARGS $SKIP_TO_AVOID_ERROR $OPTIONS_TESTING $OPTIONS_SKIP_TASKS"
+else
+  FULL_CMD="$CMD $ARGS $SKIP_TO_AVOID_ERROR"
+fi
+
+# Write the starting messages to the log file using 'tee' to both display and write
+# - `tee` splits the standard input to two directions: standard output and a file.
+# - `tee -a` appends.
+ 
+echo "Sign into Google Cloud first. Run:" | tee "$OUTPUT_LOG"
+echo "  $ gcloud auth application-default login" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+
+echo "To view the log, split terminal and run:" | tee -a "$OUTPUT_LOG"
+echo "  $ tail -f $OUTPUT_LOG" | tee -a "$OUTPUT_LOG"
+echo "    or" | tee -a "$OUTPUT_LOG"
+echo "  $ vi $OUTPUT_LOG" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "To filter out the errors, run:" | tee -a "$OUTPUT_LOG"
+echo "  $ grep ERROR $OUTPUT_LOG | cut -d '|' -f 3- | sort | uniq" | tee -a "$OUTPUT_LOG"
+echo "  To replace the delimiter from | to :, replace -d '|' with -d ':'" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "MODEL_NAME=$MODEL_NAME" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "$FULL_CMD" | tee -a "$OUTPUT_LOG"
+
+if [ "$DRY_RUN" = false ]; then
+  # Append the command output to the log file
+  # Don't use the tee command because there are too many lines in the output.
+  eval "$FULL_CMD" >> "$OUTPUT_LOG" 2>&1
+
+  TIME_FINISHED=$(date +"%m-%d %H:%M:%S")
+  echo "" | tee -a "$OUTPUT_LOG"
+  echo "Execution finished at $TIME_FINISHED" | tee -a "$OUTPUT_LOG"
+fi

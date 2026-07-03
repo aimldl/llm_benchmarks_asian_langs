@@ -1,0 +1,148 @@
+#!/bin/bash
+# run-vertex_ai
+
+# HELP MESSAGE
+usage() {
+  echo "Usage: $(basename "$0") [model_name] [-i iteration_index] [-d] [-t] [-h]"
+  echo ""
+  echo "Arguments:"
+  echo "  model_name      (Optional) The model to use. Defaults to 'gemini-2.5-flash'."
+  echo "                    gemini-2.5-flash, gemini-2.5-pro, gemini-2.5-flash-lite."
+  echo ""
+  echo "Options:"
+  echo "  -i, --iterate   A non-zero positive integer for the run index. Defaults to 1."
+  echo "  -d, --dry-run   Only displays the command without executing it."
+  echo "  -t, --test      Runs with testing options (--limit 1)."
+  echo "  -h, --help      Displays this help message and exits."
+  exit 0
+}
+
+
+# ARGUMENT PARSING
+# Initialize flags and the model name variable
+DRY_RUN=false
+TEST_RUN=false
+MODEL_ARG=""
+ITERATION_INDEX=1
+ITERATE_PROVIDED=false
+
+# This loop now correctly separates options (flags) from the main argument.
+# It processes all flags first.
+while (( "$#" )); do
+  case "$1" in
+    -d | --dry-run)
+      DRY_RUN=true
+      shift
+      ;;
+    -t | --test)
+      TEST_RUN=true
+      shift
+      ;;
+    -i | --iterate)
+      if [[ -n "$2" && "$2" =~ ^[0-9]+$ && "$2" -ge 1 ]]; then
+        ITERATION_INDEX="$2"
+        ITERATE_PROVIDED=true
+        shift 2
+      else
+        echo "Error: -i requires a non-zero positive integer." >&2
+        usage
+      fi
+      ;;
+    -h | --help)
+      usage
+      ;;
+    -*) # This will catch any unrecognized options that start with a hyphen.
+      echo "Error: Unrecognized option: $1" >&2
+      usage
+      ;;
+    *)  # If the argument does NOT start with a hyphen, assume it's the model name.
+      # We only accept one model name argument.
+      if [ -n "$MODEL_ARG" ]; then
+        echo "Error: Only one model name can be provided." >&2
+        usage
+      fi
+      MODEL_ARG="$1"
+      shift
+      ;;
+  esac
+done
+
+# SETTING AND VALIDATING THE MODEL NAME 
+# Set the final MODEL_NAME using the captured argument or the default value.
+MODEL_NAME="${MODEL_ARG:-"gemini-2.5-flash"}"
+
+# Defensive Coding: Check if the final MODEL_NAME is in the allowed list.
+case "$MODEL_NAME" in
+  "gemini-2.5-flash" | "gemini-2.5-pro" | "gemini-2.5-flash-lite")
+    # This is a valid model, so we do nothing and proceed.
+    ;;
+  *)
+    # If the model name is not in the list, print an error and exit.
+    echo "Error: Invalid model name '$MODEL_NAME'." >&2
+    echo "Please use one of the allowed models: gemini-2.5-flash, gemini-2.5-pro, gemini-2.5-flash-lite." >&2
+    exit 1
+    ;;
+esac
+
+# SCRIPT EXECUTION LOGIC
+# Generate a timestamp for the output directory and log file
+NOW=$(date +"%m-%d-%H-%M-%S")
+
+# Create output directory if it doesn't exist
+API_PROVIDER="vertex_ai"
+DIR_NAME="output-$API_PROVIDER"
+if [ "$ITERATE_PROVIDED" = true ]; then
+  DIR_OUTPUT="$DIR_NAME/$MODEL_NAME/$ITERATION_INDEX"  
+else
+  DIR_OUTPUT="$DIR_NAME/$MODEL_NAME/$NOW"
+fi
+mkdir -p "$DIR_OUTPUT"
+
+OUTPUT_LOG="$DIR_OUTPUT/$(basename "$0").out"
+
+# Define the command and its arguments
+CMD="python seahelm_evaluation.py"
+ARGS="--tasks seahelm --model_type litellm --output_dir $DIR_OUTPUT --model_name $MODEL_NAME --model_args api_provider=$API_PROVIDER"
+SKIP_TO_AVOID_ERROR="--skip_tokenize_prompts"
+OPTIONS_TESTING="--limit 1"
+
+# Build the full command based on the test flag
+if [ "$TEST_RUN" = true ]; then
+  FULL_CMD="$CMD $ARGS $SKIP_TO_AVOID_ERROR $OPTIONS_TESTING"
+else
+  FULL_CMD="$CMD $ARGS $SKIP_TO_AVOID_ERROR"
+fi
+
+# Write the starting messages to the log file using 'tee' to both display and write
+echo "Sign into Google Cloud first. Run:" | tee "$OUTPUT_LOG"
+echo "  $ gcloud auth application-default login" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "To view the log, split terminal and run:" | tee -a "$OUTPUT_LOG"
+echo "  $ tail -f $OUTPUT_LOG" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "To filter out the errors, run:" | tee -a "$OUTPUT_LOG"
+echo "  $ grep ERROR $OUTPUT_LOG | cut -d '|' -f 3- | sort | uniq" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "MODEL_NAME=$MODEL_NAME" | tee -a "$OUTPUT_LOG"
+echo "" | tee -a "$OUTPUT_LOG"
+echo "$FULL_CMD" | tee -a "$OUTPUT_LOG"
+
+if [ "$DRY_RUN" = false ]; then
+  # Record the start time
+  START_TIME=$(date +%s)
+
+  # Append the command output to the log file
+  eval "$FULL_CMD" >> "$OUTPUT_LOG" 2>&1
+
+  # Record the end time
+  END_TIME=$(date +%s)
+
+  # Calculate and print the elapsed time
+  ELAPSED_TIME=$((END_TIME - START_TIME))
+  
+  TIME_FINISHED=$(date +"%m-%d %H:%M:%S")
+  echo "" | tee -a "$OUTPUT_LOG"
+  echo "Execution finished at $TIME_FINISHED" | tee -a "$OUTPUT_LOG"
+  echo "Elapsed time: $((ELAPSED_TIME / 60)) minutes and $((ELAPSED_TIME % 60)) seconds." | tee -a "$OUTPUT_LOG"
+fi

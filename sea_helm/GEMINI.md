@@ -1,0 +1,19 @@
+"Please act as a senior DevOps engineer and analyze a log file.
+
+Task:
+
+Analyze and Summarize: Examine the contents of the file filtered-run-vertex_ai.out, which contains logs from a codebase run using the vertex_ai/gemini-2.5-flash-lite model.
+
+Generate a Report: Create a professional, markdown-formatted report titled run-vertex_ai.md.
+
+Report Content:
+
+Summary of Execution: Provide a high-level overview of the log file, including the purpose of the run, the model used, and the general outcome (e.g., successful completions, no major errors).
+
+Detailed Analysis: Break down the key log entries, explaining what they signify about the process's health and performance.
+
+Anomaly Reporting: Identify any errors, warnings, or unexpected patterns. For each anomaly found, provide a clear explanation of its likely cause.
+
+Proposed Solutions: For each identified anomaly, propose specific, actionable solutions to resolve the issue. If no anomalies are found, discuss potential issues that could arise in this type of log and how they would be addressed.
+
+Key Context: The log is from a LiteLLM and Vertex AI environment. Use this context to inform your analysis and proposed solutions.
